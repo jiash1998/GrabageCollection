@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-  // component: () => import("../views/About.vue");
+import Main from '../views/main'
 Vue.use(VueRouter)
 
 const routes = [
- 
+  {
+    path:'',
+    redirect: "/main"
+  },
+  {
+    component:Main,
+    name:'main',
+    path:'/main'
+  },
 ]
 
 const router = new VueRouter({
