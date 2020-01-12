@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-        <div class="tabbar"></div>
+        <div class="tabbar">main</div>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
 $AllWidth:100%;
 .tabbar{
     width: $AllWidth;
-    height: 49px;
-    background-color: pink;
+    height: 1009px;
+    background-color: gray;
 }
 </style>

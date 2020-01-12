@@ -1,0 +1,56 @@
+$headHeight:60px;
+body {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+.headFixed{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+} 
+  .head {
+    width: 100%;
+    display: flex;
+    .logo {
+      width: 6%;
+      height: $headHeight;
+      background-color: aquamarine;
+      // flex实现垂直水平居中
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 70px;
+      img {
+        background-size: 100% auto;
+        height: 50px;
+        width: 50px;
+      }
+    }
+
+    .head-center {
+      background-color: pink;
+      width: 47%;
+      height: $headHeight;
+      min-width: 200px;
+      span {
+        display: inline-block;
+        color: #2f495e;
+        font-size: 1.3em;
+        width: 230px;
+        line-height: $headHeight;
+      }
+    }
+
+    .head-contral {
+      // background-color: #F7FAFF;
+      display: flex;
+      background-color: bisque;
+      width: 47%;
+      height: $headHeight;
+      min-width: 250px;
+      align-items: center;
+    }
+  }
+}
