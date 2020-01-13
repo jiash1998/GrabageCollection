@@ -16,7 +16,7 @@
           ></video>
         </div>
       </div>
-      <div class="main_body">
+      <div class="main_body1">
         <div class="body_intro">
           <span>我们的定位</span>
         </div>
@@ -50,13 +50,69 @@
           <div class="body_main_fill3"></div>
         </div>
       </div>
+      <div class="main_body2">
+        <div class="body2_con">
+          <p id="p1">垃圾分类</p>
+          <span id="sp2">可回收垃圾</span>
+          <span id="sp2">干垃圾</span>
+          <span id="sp2">湿垃圾</span>
+          <span id="sp2">有害垃圾</span>
+          <div class="body2_con_son2">
+            <p>可回收物就是可以再生循环的垃圾。本身或材质可再利用的纸类、硬纸板、玻璃、塑料、金属、塑料包装，与这些材质有关的如：报纸、杂志、广告单及其它干净的纸类等皆可回收。可回收物就是可以再生循环的垃圾。本身或材质可再利用的纸类、硬纸板、玻璃、塑料、金属、塑料包装，与这些材质有关的如：报纸、杂志、广告单及其它干净的纸类等皆可回收。可回收物就是可以再生循环的垃圾。本身或材质可再利用的纸类、硬纸板、玻璃、塑料、金属、塑料包装，与这些材质有关的如：报纸、杂志、广告单及其它干净的纸类等皆可回收。</p>
+          </div>
+          <div class="body2_con_son1"></div>
+        </div>
+      </div>
+      <div class="main_insert">
+        <span id="insert_sp1">CHZU</span>
+        <span id="insert_sp2">新一代垃圾回收方案💚</span>
+        <p>CHZU 全新方案，家门口的可定制垃圾回收方案。得益于丰富的业务场景和用户需求挑战，CHZU 经历多年积累与不断打磨，已支撑全国2000+ 业务系统，通过了大量用户的严苛考验后方敢与君见。</p>
+      </div>
+      <div class="main_body3">
+        <span id="body3_span">选择我们</span>
+        <div class="body3_conall">
+          <div class="body3_con1">
+            <div id="imgCon">
+              <img src="../assets/img/test1.png" />
+            </div>
+            <div id="fontCon">
+              <p id="p1">定制服务</p>
+              <p id="p2">用户可以随时查看垃圾回收车辆的位置</p>
+            </div>
+          </div>
+          <div class="body3_con1">
+            <div id="imgCon">
+              <img src="../assets/img/test2-2.png" />
+            </div>
+            <div id="fontCon">
+              <p id="p1">经济实惠</p>
+              <p id="p2">用户可以随时查看垃圾回收车辆的位置</p>
+            </div>
+          </div>
+          <div class="body3_con1">
+            <div id="imgCon">
+              <img src="../assets/img/test3.png" />
+            </div>
+            <div id="fontCon">
+              <p id="p1">随时监控</p>
+              <p id="p2">用户可以随时查看垃圾回收车辆的位置</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main_body4"></div>
+      <public-food></public-food>
     </div>
   </div>
 </template>
 
 <script>
+import PublicFood from "../components/publicFood.vue";
 export default {
-  name: "main"
+  name: "main",
+   components: {
+    PublicFood
+  },
 };
 </script>
 

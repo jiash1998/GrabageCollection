@@ -4,21 +4,21 @@
     <div class="head" id="head" :class="{'headFixed':headFix}">
       <div class="logo">
         <router-link to="/main">
-          <img src="./assets/img/recycle.png" />
+          <img src="./assets/img/logo2.png" />
         </router-link>
       </div>
       <div class="head-center">
         <span>CHZU</span>
       </div>
       <div class="head-contral">
-        <div>
-          <router-link to="/main">首页</router-link>
+        <div class="contralItems">
+          <router-link tag="span" to="/main">首页</router-link>
         </div>
-        <div>
-          <router-link to="/contral">控制台</router-link>
+        <div class="contralItems">
+          <router-link tag="span" to="/contral">控制台</router-link>
         </div>
-        <div>
-          <router-link to="/contral">控制台</router-link>
+        <div class="contralItems">
+          <router-link tag="span" to="/contral">其他</router-link>
         </div>
       </div>
     </div>

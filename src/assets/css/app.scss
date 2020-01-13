@@ -47,11 +47,16 @@ body {
     .head-contral {
       // background-color: #F7FAFF;
       display: flex;
-      background-color: bisque;
+      background-color: #F8FAFF;
       width: 47%;
       height: $headHeight;
       min-width: 250px;
       align-items: center;
+      justify-content: space-evenly;
+      .contralItems{
+        // background-color: bisque;
+        font-size: 1em;
+      }
     }
   }
 }
