@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <div class="head-center">
-        <span>滁州市环保清洁公司</span>
+        <span>CHZU</span>
       </div>
       <div class="head-contral">
         <div>
