@@ -4,7 +4,7 @@
       <div class="main_head">
         <div class="head_intro">
           <span>让垃圾的回收分类更轻松</span>
-          <p>CHZU是全新一代的，为客户需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
+          <p>CHZU是全新一代的，为客户生活环境需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
           <p></p>
           <el-button type="success" round plain>了解更多</el-button>
         </div>
@@ -101,6 +101,18 @@
         </div>
       </div>
       <div class="main_body4"></div>
+      <div class="main_body5">
+        <div class="body5_con">
+          <p id="body5_p1">
+            你来选择，剩下的交给
+            <span id="body5_sp1">CHZU</span>
+          </p>
+          <p id="body5_p2">
+            这是为客户环境量身定做的垃圾回收方案
+            <el-button type="success" style="margin-left:10px" plain>前往定制</el-button>
+          </p>
+        </div>
+      </div>
       <public-food></public-food>
     </div>
   </div>
@@ -110,9 +122,9 @@
 import PublicFood from "../components/publicFood.vue";
 export default {
   name: "main",
-   components: {
+  components: {
     PublicFood
-  },
+  }
 };
 </script>
 

@@ -162,7 +162,7 @@ $AllWidth: 100%;
       width: 95%;
       background-color: #fff;
 
-      p{
+      p {
         font-size: 1.2em;
         width: 90%;
         padding: 50px 5% 0 5%;
@@ -255,12 +255,35 @@ $AllWidth: 100%;
   }
 
   .main_body4 {
-    height: 200px;
+    height: 150px;
     width: 100%;
-    background-color: #F0F5FA;
+    background-color: #f0f5fa;
   }
 
-  .main_food{
+  .main_body5 {
+    height: 350px;
+    width: 100%;
+    display: flex;
+    .body5_con {
+      padding: 40px 0 0 20%;
+      #body5_p1 {
+        font-size: 2em;
+      }
+      #body5_sp1 {
+        display: inline-block;
+        font-size: 2em;
+        border-bottom: 5px solid #67c23a;
+        margin-bottom: 20px;
+      }
+      #body5_p2 {
+        font-size: 2em;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .main_food {
     width: 100%;
     height: 400px;
     background-color: black;
