@@ -12,7 +12,8 @@ import "element-ui/lib/theme-chalk/display.css";
 //引入axios cnpm install axios/cnpm install vue-axios
 import axios from "axios";//axios
 import VueAxios from "vue-axios";//axios
-
+//引入querystring POST请求
+import qs from "querystring";
 
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);

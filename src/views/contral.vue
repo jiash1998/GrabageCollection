@@ -5,36 +5,42 @@
         <el-menu default-active="1" background-color="#f7faff" active-text-color="#67c23a">
           <el-menu-item index="1">
             <i class="el-icon-edit"></i>
-            <span slot="title"><router-link tag="span" to="/contral/Son1Manage">管理角色</router-link></span>
+            <span slot="title">
+              <router-link tag="span" to="/contral/Son1Manage">管理角色</router-link>
+            </span>
           </el-menu-item>
           <el-menu-item index="2">
             <i class="el-icon-truck"></i>
-            <span slot="title">车辆路径图</span>
+            <span slot="title">
+              <router-link tag="span" to="/contral/Son2CarMap">车辆路径图</router-link>
+            </span>
           </el-menu-item>
           <el-menu-item index="3">
             <i class="el-icon-menu"></i>
-            <span slot="title">商户分布图</span>
+            <span slot="title">
+              <router-link tag="span" to="/contral/Son3MerchartMap">商户分布图</router-link>
+            </span>
           </el-menu-item>
           <el-menu-item index="4">
             <i class="el-icon-setting"></i>
-            <span slot="title">桶分布及状态</span>
+            <router-link tag="span" to="/contral/Son4BucketStatus">桶分布及状态</router-link>
           </el-menu-item>
           <el-menu-item index="5">
             <i class="el-icon-view"></i>
-            <span slot="title">记录跟踪</span>
+            <router-link tag="span" to="/contral/Son5Record">记录跟踪</router-link>
           </el-menu-item>
           <el-menu-item index="6">
             <i class="el-icon-document"></i>
-            <span slot="title">发布公告</span>
+            <router-link tag="span" to="/contral/Son6Notice">发布公告</router-link>
           </el-menu-item>
           <el-menu-item index="7">
             <i class="el-icon-chat-line-round"></i>
-            <span slot="title">用户反馈</span>
+            <router-link tag="span" to="/contral/Son7Feedback">用户反馈</router-link>
           </el-menu-item>
         </el-menu>
       </div>
       <div class="body_right">
-        <router-view/>
+        <router-view />
       </div>
     </div>
     <public-food></public-food>

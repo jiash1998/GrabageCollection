@@ -28,6 +28,28 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    postData(){
+         this.axios
+          .post(
+            "http://"+self.$store.state.path+":8080/sourcecontroller/selectsourcefromsourcedrugid",
+            qs.stringify(data),
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          )
+          .then(res => {
+              //数据二次转格式
+            self.purchaseForm = JSON.parse(JSON.stringify(self.purchaseForm));
+            console.log(
+              this.$store.state.purchaseDrugInfo.data[0].sourcedrugspe
+            );
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
   }
 };
