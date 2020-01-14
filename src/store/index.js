@@ -5,11 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    path: "118.31.12.146"
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+  mutations: {},
+  actions: {},
+  modules: {}
+});

@@ -5,7 +5,7 @@
         <el-menu default-active="1" background-color="#f7faff" active-text-color="#67c23a">
           <el-menu-item index="1">
             <i class="el-icon-edit"></i>
-            <span slot="title">管理角色</span>
+            <span slot="title"><router-link tag="span" to="/contral/Son1Manage">管理角色</router-link></span>
           </el-menu-item>
           <el-menu-item index="2">
             <i class="el-icon-truck"></i>
@@ -33,7 +33,9 @@
           </el-menu-item>
         </el-menu>
       </div>
-      <div class="body_right"></div>
+      <div class="body_right">
+        <router-view/>
+      </div>
     </div>
     <public-food></public-food>
   </div>

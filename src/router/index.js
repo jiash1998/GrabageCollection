@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Main from '../views/main';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Main from "../views/main";
 import Contral from "../views/contral";
-import Signin from '../views/signin';
+import Signin from "../views/signin";
 import Register from "../views/Register";
-
-Vue.use(VueRouter)
+import Son1Manage from "../views/Contral/son1Manage";
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -20,7 +20,18 @@ const routes = [
   {
     component: Contral,
     name: "Contral",
-    path: "/contral"
+    path: "/contral",
+    children: [
+      {
+        path: "",
+        redirect: "/contral/Son1Manage"
+      },
+      {
+        component: Son1Manage,
+        name: "Son1Manage",
+        path: "/contral/Son1Manage"
+      }
+    ]
   },
   {
     component: Signin,
@@ -35,9 +46,9 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
