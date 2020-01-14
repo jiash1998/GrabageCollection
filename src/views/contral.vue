@@ -2,21 +2,16 @@
   <div id="contral">
     <div class="contralBody">
       <div class="body_left">
-        <el-menu
-          default-active="2"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-        >
+        <el-menu default-active="2" background-color="#f7faff" active-text-color="#67c23a">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-edit"></i>
               <span>管理角色</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">垃圾回收车辆</el-menu-item>
-              <el-menu-item index="1-2">车辆驾驶员</el-menu-item>
-              <el-menu-item index="1-3">普通用户</el-menu-item>
+              <el-menu-item index="1-1">沿街商户</el-menu-item>
+              <el-menu-item index="1-2">普通用户</el-menu-item>
+              <el-menu-item index="1-3">车辆驾驶员</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -25,8 +20,8 @@
               <span slot="title">地图</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1">路径图</el-menu-item>
-              <el-menu-item index="2-2">商户图</el-menu-item>
+              <el-menu-item index="2-1">车辆路径图</el-menu-item>
+              <el-menu-item index="2-2">商户分布图</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="3">
@@ -37,20 +32,25 @@
             <i class="el-icon-setting"></i>
             <span slot="title">查看桶状态</span>
           </el-menu-item>
-           <el-menu-item index="5">
-            <i class="el-icon-setting"></i>
+          <el-menu-item index="5">
+            <i class="el-icon-chat-line-round"></i>
             <span slot="title">用户反馈</span>
           </el-menu-item>
         </el-menu>
       </div>
       <div class="body_right"></div>
     </div>
+    <public-food></public-food>
   </div>
 </template>
 
 <script>
+import PublicFood from "../components/publicFood.vue";
 export default {
-  name: "contral"
+  name: "contral",
+  components: {
+    PublicFood
+  }
 };
 </script>
 

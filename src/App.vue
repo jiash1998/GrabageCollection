@@ -20,6 +20,18 @@
         <div class="contralItems">
           <router-link tag="span" to="/contral">其他</router-link>
         </div>
+        <div class="contralItems">
+          <el-dropdown>
+            <el-avatar>tset</el-avatar>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>
+                <router-link to="/signin" tag="span">登录/注册</router-link>
+              </el-dropdown-item>
+              <el-dropdown-item>编辑资料</el-dropdown-item>
+              <el-dropdown-item>退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </div>
     </div>
     <router-view />

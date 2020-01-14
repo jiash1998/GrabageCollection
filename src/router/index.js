@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/main';
 import Contral from "../views/contral";
+import Signin from '../views/signin';
+import Register from "../views/Register";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,6 +21,16 @@ const routes = [
     component: Contral,
     name: "Contral",
     path: "/contral"
+  },
+  {
+    component: Signin,
+    name: "Signin",
+    path: "/signin"
+  },
+  {
+    component: Register,
+    name: "Register",
+    path: "/register"
   }
 ];
 
