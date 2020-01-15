@@ -1,0 +1,19 @@
+#son1Manage {
+  width: 90%;
+  height: 680px;
+  margin-left: 5%;
+  overflow: auto;
+
+.el-button{
+    margin: 10px 0 0 4%;
+}
+  #elcard_Manage {
+    display: flex;
+    flex-wrap: wrap;
+    .el-card {
+      margin-left: 4%;
+      margin-bottom: 20px;
+      width: 20%;
+    }
+  }
+}
