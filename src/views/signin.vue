@@ -5,8 +5,9 @@
         <!-- 对齐方式label-position -->
         <el-form :model="signForm" ref="signForm" :label-position="labelposition" label-width="20%">
           <el-form-item label>
-            <el-radio-group v-model="signForm.radio" style="padding:10px 0 0 15%;">
+            <el-radio-group v-model="signForm.radio" style="padding:10px 0 0 6%;">
               <el-radio-button label="商户"></el-radio-button>
+              <el-radio-button label="站长"></el-radio-button>
               <el-radio-button label="用户"></el-radio-button>
             </el-radio-group>
           </el-form-item>

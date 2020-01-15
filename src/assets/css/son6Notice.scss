@@ -1,0 +1,32 @@
+#son6Notice {
+  width: 90%;
+  height: 680px;
+  min-width: 600px;
+  margin-left: 5%;
+
+  .el-tag {
+    margin-left: 10px;
+  }
+
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+
+  #tag_p{
+      display: inline;
+    font-size: .8em;
+    color: gray;
+    margin-left: 10px;
+    // background-color: red;
+  }
+
+}

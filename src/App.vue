@@ -15,10 +15,16 @@
           <router-link tag="span" to="/main">首页</router-link>
         </div>
         <div class="contralItems">
-          <router-link tag="span" to="/contral">控制台</router-link>
+          <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
         <div class="contralItems">
-          <router-link tag="span" to="/contral">其他</router-link>
+          <router-link tag="span" to="/contral">站长控制</router-link>
+        </div>
+        <div class="contralItems">
+          <router-link tag="span" to="/merchartContral">商户控制</router-link>
+        </div>
+        <div class="contralItems">
+          <router-link tag="span" to="/Custom">定制服务</router-link>
         </div>
         <div class="contralItems">
           <el-dropdown>

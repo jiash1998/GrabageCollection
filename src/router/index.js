@@ -3,7 +3,10 @@ import VueRouter from "vue-router";
 import Main from "../views/main";
 import Contral from "../views/contral";
 import Signin from "../views/signin";
-import Register from "../views/Register";
+import Register from "../views/register";
+import Notice from "../views/notice";
+import Custom from "../views/custom";
+import merchartContral from "../views/merchartContral";
 import Son1Manage from "../views/Contral/son1Manage";
 import Son2CarMap from "../views/Contral/son2CarMap";
 import Son3MerchartMap from "../views/Contral/son3MerchartMap";
@@ -22,6 +25,21 @@ const routes = [
     component: Main,
     name: "main",
     path: "/main"
+  },
+  {
+    component: Notice,
+    name: "Notice",
+    path: "/Notice"
+  },
+  {
+    component: Custom,
+    name: "Custom",
+    path: "/Custom"
+  },
+  {
+    component: merchartContral,
+    name: "merchartContral",
+    path: "/merchartContral"
   },
   {
     component: Contral,
