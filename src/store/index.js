@@ -6,11 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     path: "118.31.12.146",
+    //定制页面
     custom: true
   },
   mutations: {
     customModify(state) {
       return (state.custom = false);
+    },
+    customModifyToo(state) {
+      return (state.custom = true);
     }
   },
   actions: {},
