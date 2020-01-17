@@ -28,7 +28,7 @@
         </div>
         <div class="contralItems">
           <el-dropdown>
-            <el-avatar>tset</el-avatar>
+            <el-avatar>{{$store.state.username}}</el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <router-link to="/signin" tag="span">登录/注册</router-link>

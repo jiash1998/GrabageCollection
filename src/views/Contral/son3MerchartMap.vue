@@ -1,16 +1,15 @@
 <template>
   <div id="son3MerchartMap.vue">
-    <baidu-map class="bm-view" ak="faARwTpILZCsY9S5GUKe6LL2ILicSoDX" center="滁州"></baidu-map>
+    <baidu-map class="bm-view" ak="faARwTpILZCsY9S5GUKe6LL2ILicSoDX" center="滁州市">
+      <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
+    </baidu-map>
   </div>
 </template>
 
 <script>
-//引入charts
-// let echarts = require("echarts/lib/echarts");
-// require("echarts/lib/chart/pie");
-// require("echarts/lib/component/tooltip");
 //引入百度地图
 import BaiduMap from "vue-baidu-map/components/map/Map.vue";
+// import BmNavigation from 'vue-baidu-map/components/others'
 export default {
   name: "son3MerchartMap",
   components: {

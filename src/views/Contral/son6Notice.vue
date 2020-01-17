@@ -30,7 +30,7 @@
       </el-form-item>
       <el-form-item label="公告形式">
           <el-radio-group v-model="notice.type">
-            <el-radio label="全部通知"></el-radio>
+            <el-radio label="普通通知"></el-radio>
             <el-radio label="商户通知"></el-radio>
             <el-radio label="用户通知"></el-radio>
             <el-radio label="紧急通知"></el-radio>

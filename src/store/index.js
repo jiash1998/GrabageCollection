@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
     path: "118.31.12.146",
     //定制页面
-    custom: true
+    custom: true,
+    //登录姓名
+    username:"test"
   },
   mutations: {
     customModify(state) {
