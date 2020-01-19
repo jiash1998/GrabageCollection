@@ -8,12 +8,13 @@
       :zoom="map.zoom"
     >
       <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
-      <bm-marker :position="map.merchartPoint1" :dragging="false" @click="infoWindowOpen">
-        <bm-info-window :show="map.show" @close="infoWindowClose" @open="infoWindowOpen">我爱北京天安门</bm-info-window>
-      </bm-marker>
-      <bm-marker :position="map.merchartPoint2" :dragging="false" @click="infoWindowOpen">
-        <bm-info-window :show="map.show" @close="infoWindowClose" @open="infoWindowOpen">我爱北京天安门</bm-info-window>
-      </bm-marker>
+      <div v-for="(item,index) in map.merchartPoint1" :key="index">
+        <bm-marker
+          :position="{lng:item.lng,lat:item.lat}"
+          :dragging="false"
+          @click="infoWindowOpen(item)"
+        ></bm-marker>
+      </div>
       <!-- <bm-local-search :keyword="addressKeyword" :auto-viewport="true" style="display: none"></bm-local-search> -->
     </baidu-map>
   </div>
@@ -27,6 +28,7 @@ import BmNavigation from "vue-baidu-map/components/controls/Navigation";
 import BmLocalSearch from "vue-baidu-map/components/search/LocalSearch.vue";
 import BmMarker from "vue-baidu-map/components/overlays/Marker";
 import BmInfoWindow from "vue-baidu-map/components/overlays/InfoWindow";
+import BmMarkerClusterer from "vue-baidu-map/components/extra/MarkerClusterer";
 export default {
   name: "son3MerchartMap",
   components: {
@@ -34,7 +36,8 @@ export default {
     BmNavigation,
     BmLocalSearch,
     BmMarker,
-    BmInfoWindow
+    BmInfoWindow,
+    BmMarkerClusterer
   },
   data() {
     return {
@@ -44,9 +47,11 @@ export default {
           lat: 32.282115
         },
         zoom: 20,
-        show: false,
-        merchartPoint1: { lng: 118.323617, lat: 32.282342 },
-        merchartPoint2: { lng: 118.323757, lat: 32.282674 }
+        show: true,
+        merchartPoint1: [
+          { lng: 118.323617, lat: 32.282342, content: "北京市" },
+          { lng: 118.323757, lat: 32.282674, content: "滁州市" }
+        ]
       }
     };
   },
@@ -54,9 +59,9 @@ export default {
     infoWindowClose() {
       this.map.show = false;
     },
-    infoWindowOpen() {
-      this.map.show = true;
-      console.log(this.map.show);
+    infoWindowOpen(item) {
+      // this.map.show = true;
+      console.log(item);
     }
   }
 };

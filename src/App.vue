@@ -44,20 +44,23 @@
   </div>
 </template>
 <script>
+import { MP } from "./map";
 export default {
   name: "app",
   data() {
     return {
       headFix: false,
-      offsetTop: 0
+      offsetTop: 0,
+      ak: "faARwTpILZCsY9S5GUKe6LL2ILicSoDX"
     };
   },
-  mounted() {
+  async mounted() {
     window.addEventListener("scroll", this.listenerScroll);
     this.$nextTick(() => {
       //获取元素距顶部距离
       this.offsetTop = document.querySelector("#head").offsetTop;
     });
+    await MP(this.ak);
   },
   methods: {
     listenerScroll() {

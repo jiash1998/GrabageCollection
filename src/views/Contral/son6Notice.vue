@@ -119,14 +119,12 @@ export default {
     submitForm(formname) {
       this.$refs[formname].validate(val => {
         if (val) {
-          var data = [];
-          data[0] = this.notice;
-          data[1] = this.dynamicTags;
+          this.notice.inputValue = this.dynamicTags.join(",");
+          var data = this.notice;
+          alert("提交成功");
           console.log(data);
         } else {
-          var data = [];
-          data[0] = this.notice;
-          data[1] = this.dynamicTags;
+          alert("提交失败");
           return false;
         }
       });

@@ -4,13 +4,11 @@
       <!-- zoom必须设置 -->
       <baidu-map class="bm-view" :ak="map.ak" :center="map.center" :zoom="map.zoom">
         <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
-        <bm-driving
-          :start="map.start"
-          :end="map.end"
-          :auto-viewport="true"
-          :panel="false"
-        ></bm-driving>
+        <bm-driving :start="map.start" :end="map.end" :auto-viewport="true" :panel="false"></bm-driving>
       </baidu-map>
+      <div>
+        <el-button type="primary" @click="switchPath">切换路线</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,13 +37,25 @@ export default {
           lat: 32.282115
         },
         zoom: 20,
-        start:'滁州市琅琊区南谯北路苏宁广场',
-        end:'金鹏99广场'
-      }
+        start: "滁州市琅琊区南谯北路苏宁广场",
+        end: "金鹏99广场"
+        //  start: "滁州市琅琊区南谯北路苏宁广场",
+        // end: "滁州学院"
+      },
+      path: [
+        {
+          start: "滁州市琅琊区南谯北路苏宁广场",
+          end: "滁州学院"
+        }
+      ]
     };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    switchPath() {
+      
+    }
+  }
 };
 </script>
 
