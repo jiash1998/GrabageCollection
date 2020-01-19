@@ -4,10 +4,16 @@
       <!-- zoom必须设置 -->
       <baidu-map class="bm-view" :ak="map.ak" :center="map.center" :zoom="map.zoom">
         <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
-        <bm-driving :start="map.start" :end="map.end" :auto-viewport="true" :panel="false"></bm-driving>
+        <bm-driving
+          :start="$store.state.mapStart"
+          :end="$store.state.mapEnd"
+          :auto-viewport="true"
+          :panel="false"
+        ></bm-driving>
       </baidu-map>
       <div>
-        <el-button type="primary" @click="switchPath">切换路线</el-button>
+        <el-button type="primary" @click="switchPath1">苏宁广场--滁州学院线</el-button>
+        <el-button type="primary" @click="switchPath2">滁州学院--金鹏99广场线</el-button>
       </div>
     </div>
   </div>
@@ -36,24 +42,33 @@ export default {
           lng: 118.323509,
           lat: 32.282115
         },
-        zoom: 20,
-        start: "滁州市琅琊区南谯北路苏宁广场",
-        end: "金鹏99广场"
-        //  start: "滁州市琅琊区南谯北路苏宁广场",
-        // end: "滁州学院"
+        zoom: 20
       },
       path: [
         {
           start: "滁州市琅琊区南谯北路苏宁广场",
-          end: "滁州学院"
+          end: "安徽省滁州市丰乐大道1528号"
+        },
+        {
+          start: "安徽省滁州市丰乐大道1528号",
+          end: "金鹏99广场"
         }
       ]
     };
   },
   mounted() {},
   methods: {
-    switchPath() {
-      
+    switchPath1() {
+      var data = this.path[0];
+      console.log(data);
+      this.$store.commit("modifyPathStart", data);
+      this.$store.commit("modifyPathEnd", data);
+    },
+    switchPath2() {
+      var data = this.path[1];
+      console.log(data);
+      this.$store.commit("modifyPathStart", data);
+      this.$store.commit("modifyPathEnd", data);
     }
   }
 };

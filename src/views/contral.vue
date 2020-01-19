@@ -22,18 +22,14 @@
             </span>
           </el-menu-item>
           <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <router-link tag="span" to="/contral/Son4BucketStatus">桶分布及状态</router-link>
-          </el-menu-item>
-          <el-menu-item index="5">
             <i class="el-icon-view"></i>
             <router-link tag="span" to="/contral/Son5Record">记录跟踪</router-link>
           </el-menu-item>
-          <el-menu-item index="6">
+          <el-menu-item index="5">
             <i class="el-icon-document"></i>
             <router-link tag="span" to="/contral/Son6Notice">发布公告</router-link>
           </el-menu-item>
-          <el-menu-item index="7">
+          <el-menu-item index="6">
             <i class="el-icon-chat-line-round"></i>
             <router-link tag="span" to="/contral/Son7Feedback">用户反馈</router-link>
           </el-menu-item>

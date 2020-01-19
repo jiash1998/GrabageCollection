@@ -9,7 +9,9 @@ export default new Vuex.Store({
     //定制页面
     custom: true,
     //登录姓名
-    username:"test"
+    username: "test",
+    mapStart: "滁州市琅琊区南谯北路苏宁广场",
+    mapEnd: "安徽省滁州市丰乐大道1528号"
   },
   mutations: {
     customModify(state) {
@@ -17,6 +19,15 @@ export default new Vuex.Store({
     },
     customModifyToo(state) {
       return (state.custom = true);
+    },
+    modifyPathStart(state, payload) {
+      return (state.mapEnd = payload.end);
+    },
+    modifyPathStart(state, payload) {
+      return (state.mapStart = payload.start);
+    },
+    modifyPathEnd(state, payload) {
+      return (state.mapEnd = payload.end);
     }
   },
   actions: {},
