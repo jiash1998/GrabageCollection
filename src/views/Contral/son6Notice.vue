@@ -122,6 +122,7 @@ export default {
           this.notice.inputValue = this.dynamicTags.join(",");
           var data = this.notice;
           alert("提交成功");
+          console.log();
           console.log(data);
         } else {
           alert("提交失败");
