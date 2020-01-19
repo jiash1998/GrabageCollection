@@ -48,8 +48,8 @@
               <el-form-item label="店铺名称">
                 <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
               </el-form-item>
-              <el-form-item label="经营范围">
-                <el-radio-group v-model="custom.type">
+              <el-form-item label="经营类型">
+                <!-- <el-radio-group v-model="custom.type">
                   <el-radio label="快餐店"></el-radio>
                   <el-radio label="火锅店"></el-radio>
                   <el-radio label="大排档"></el-radio>
@@ -57,7 +57,8 @@
                   <el-radio label="烧烤店"></el-radio>
                   <el-radio label="奶茶店"></el-radio>
                   <el-radio label="理发店"></el-radio>
-                </el-radio-group>
+                </el-radio-group> -->
+                <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
               </el-form-item>
               <el-form-item label="店铺地址">
                 <el-input v-model="custom.address" placeholder="请输入店铺名称"></el-input>

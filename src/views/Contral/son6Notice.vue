@@ -8,7 +8,7 @@
       <el-form-item label="公告内容" prop="content">
         <el-input type="textarea" v-model="notice.content" placeholder="请输入公告内容"></el-input>
       </el-form-item>
-      <el-form-item label="公告标签" >
+      <el-form-item label="公告标签">
         <el-tag
           :key="tag"
           v-for="tag in dynamicTags"
@@ -19,7 +19,7 @@
         <el-input
           class="input-new-tag"
           v-if="inputVisible"
-          v-model="notice.inputValue"
+          v-model="notice.inputvalue"
           ref="saveTagInput"
           size="small"
           @keyup.enter.native="handleInputConfirm"
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "son6Notice",
   data() {
@@ -80,13 +81,13 @@ export default {
       rules: {
         title: [{ validator: validateTitle, trigger: "change" }],
         content: [{ validator: validateContent, trigger: "change" }],
-        inputValue: [{ validator: validateInputvalue, trigger: "change" }],
+        inputvalue: [{ validator: validateInputvalue, trigger: "change" }],
         type: [{ validator: validateType, trigger: "change" }]
       },
       notice: {
         title: "",
         content: "",
-        inputValue: "",
+        inputvalue: "",
         type: ""
       },
       dynamicTags: [],
@@ -106,24 +107,37 @@ export default {
     },
 
     handleInputConfirm() {
-      let inputValue = this.notice.inputValue;
+      let inputValue = this.notice.inputvalue;
       if (inputValue) {
         //添加到展示数组中
         this.dynamicTags.push(inputValue);
       }
       // console.log(this.dynamicTags);
       this.inputVisible = false;
-      this.notice.inputValue = "";
+      this.notice.inputvalue = "";
     },
 
     submitForm(formname) {
       this.$refs[formname].validate(val => {
         if (val) {
-          this.notice.inputValue = this.dynamicTags.join(",");
+          this.notice.inputvalue = this.dynamicTags.join(",");
           var data = this.notice;
-          alert("提交成功");
-          console.log();
+          this.axios
+            .post(
+              "http://" + this.$store.state.path + ":8080/insertNotice",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              alert("post success");
+              // this.notice = "";
+            });
           console.log(data);
+          
         } else {
           alert("提交失败");
           return false;

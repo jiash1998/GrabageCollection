@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="notice_content">
-        <div class="content"></div>
+        <div class="content">
+          <el-button type="primary" @click="getNotice">测试</el-button>
+        </div>
       </div>
     </div>
     <!-- <public-food></public-food> -->
@@ -25,6 +27,18 @@ export default {
   name: "notice",
   components: {
     PublicFood
+  },
+  methods: {
+    getNotice() {
+      this.axios
+        .get("http://" + this.$store.state.path + ":8080/getAllNotice")
+        .then(res => {
+          var data = res.data;
+          console.log(data);
+        }).catch(err=>{
+          console.log(err);
+        });
+    }
   }
 };
 </script>

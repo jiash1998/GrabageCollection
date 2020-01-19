@@ -8,7 +8,7 @@
         :center="map.center"
         :zoom="map.zoom"
       >
-        <!-- <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation> -->
+        <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
         <div v-for="(item,index) in map.merchartPoint1" :key="index">
           <bm-marker
             :position="{lng:item.lng,lat:item.lat}"
@@ -17,7 +17,9 @@
           ></bm-marker>
         </div>
       </baidu-map>
-      <div class="pointContent"></div>
+      <div class="pointContent">
+        店名，地址，定制缩略表，联系人，手机，经营范围
+      </div>
     </div>
   </div>
 </template>
@@ -57,11 +59,7 @@ export default {
           { lng: 118.324318, lat: 32.282672, content: "流连忘返骨汤麻辣烫" },
           { lng: 118.324556, lat: 32.282474, content: "西北拉面" },
           { lng: 118.324273, lat: 32.282279, content: "527烧烤" },
-          {
-            lng: 118.323563,
-            lat: 32.281852,
-            content: "苏果超市（滁州学院店）"
-          },
+          { lng: 118.323563, lat: 32.281852, content: "苏果超市（滁院店）"},
           { lng: 118.323581, lat: 32.281703, content: "西西里猫咖.清吧" },
           { lng: 118.325313, lat: 32.29024, content: "滁州南苑快捷宾馆" },
           { lng: 118.324594, lat: 32.29108, content: "滁香园燕子私房菜" },

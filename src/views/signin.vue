@@ -81,7 +81,7 @@ export default {
       this.$refs[formname].validate(val => {
         if (val) {
           var data = this.signForm;
-          console.log(data);
+          // console.log(data);
           this.axios
             .post(
               "http://" + this.$store.state.path + ":8080/checkLogin",
@@ -93,6 +93,8 @@ export default {
               }
             )
             .then(res => {
+              console.log(res.data);
+              this.$store.commit("viewUsername",res.data.username);
               alert("post success");
             });
         } else {

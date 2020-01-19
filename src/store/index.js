@@ -14,6 +14,9 @@ export default new Vuex.Store({
     mapEnd: "安徽省滁州市丰乐大道1528号"
   },
   mutations: {
+    viewUsername(state,payload){
+      return state.username = payload;
+    },
     customModify(state) {
       return (state.custom = false);
     },
