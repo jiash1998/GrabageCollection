@@ -17,6 +17,7 @@ import qs from "querystring";
 
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
+// axios.defaults.withCredentials = true;
 Vue.config.productionTip = false
 
 new Vue({

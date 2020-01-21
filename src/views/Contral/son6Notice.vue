@@ -129,6 +129,9 @@ export default {
               {
                 headers: {
                   "Content-Type": "application/x-www-form-urlencoded"
+                },
+                xhrFields: {
+                  withCredentials: true
                 }
               }
             )
@@ -137,7 +140,6 @@ export default {
               // this.notice = "";
             });
           console.log(data);
-          
         } else {
           alert("提交失败");
           return false;
