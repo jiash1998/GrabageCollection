@@ -73,7 +73,7 @@
                 <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
               </el-form-item>
               <el-form-item label="上传营业执照">
-                <el-input v-model="custom.photo" type="file" @change="add_img"></el-input>
+                <el-input v-model="custom.photo" name="photo" type="file" @change="add_img"></el-input>
               </el-form-item>
               <el-form-item label>
                 <el-button type="success" v-model="custom.submit" @click="submitForm('custom')">提交</el-button>
@@ -201,8 +201,7 @@ export default {
       }
       var uri = "";
       let form = new FormData();
-      form.append("file", img1, img1.name);
-      // console.log(form.img1);
+      form.append("photo", img1, img1.name);
       this.axios
         .post("http://118.31.12.146:8080/upload", form, {
           headers: { "Content-Type": "multipart/form-data" }
