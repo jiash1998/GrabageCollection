@@ -2,44 +2,53 @@
   width: 100%;
   height: 800px;
   //   background-color: pink;
-  display: flex;
   .notice_tabber {
-    width: 20%;
-    height: 700px;
-    // background-color: black;
-    .tabber {
-      height: 200px;
-      width: 80%;
-      margin-top: 50px;
-      margin-left: 10%;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px gray;
-      background-color: #f7faff;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-left: 2.5%;
+    
+    }
+  
 
-      ul {
-        list-style: none;
+  .notice_content {
+    width: 100%;
+    height: 740px;
+    background-color: #F8FAFF;
+    display: flex;
+    .left{
+      width: 75%;
+      height: 700px;
+      box-shadow: 0 3px 8px gainsboro;
+      background-color: #fff;
+      margin: 10px 2.5% 0 2.5%;
 
-        li {
-          font-size: 1em;
-          margin-left: 15%;
-          line-height: 50px;
+      .content{
+        width: 95%;
+        height: 21%;
+        display: inline-block;
+        border-bottom: 1px solid gainsboro;
+        padding:0 2.5% 0 2.5%;
+        
+        #p1{
+          font-weight: bold;
+        }
+        #p2{
+          font-size: .9em;
+        }
+
+        .el-tag{
+          height: 30px;
         }
       }
     }
-  }
 
-  .notice_content {
-    width: 80%;
-    height: 700px;
-    background-color: #fff;
-
-    .content {
-      width: 90%;
-      height: 600px;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px gray;
-      background-color: #f7faff;
-      margin: 50px 0 0 5%;
+    .right{
+      width: 18%;
+      height: 250px;
+      box-shadow: 0 3px 8px gainsboro;
+      background-color: #fff;
+      margin: 10px 0 0 0;
     }
   }
 }

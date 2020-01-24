@@ -11,7 +11,9 @@ export default new Vuex.Store({
     //登录姓名
     username: "test",
     mapStart: "滁州市琅琊区南谯北路苏宁广场",
-    mapEnd: "安徽省滁州市丰乐大道1528号"
+    mapEnd: "安徽省滁州市丰乐大道1528号",
+    //公告类型
+    noticeType:'普通公告'
   },
   mutations: {
     viewUsername(state,payload){

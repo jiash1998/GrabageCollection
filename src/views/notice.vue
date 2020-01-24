@@ -2,22 +2,27 @@
   <div id="notice">
     <div class="notice_main">
       <div class="notice_tabber">
-        <div class="tabber">
-          <ul>
-            <li>普通通知</li>
-            <li>商户通知</li>
-            <li>用户通知</li>
-            <li>紧急通知</li>
-          </ul>
-        </div>
+        <el-menu default-active="1" mode="horizontal">
+          <el-menu-item index="1">全部公告</el-menu-item>
+          <el-menu-item index="2">紧急公告</el-menu-item>
+          <el-menu-item index="3">商户公告</el-menu-item>
+          <el-menu-item index="4">用户公告</el-menu-item>
+        </el-menu>
       </div>
       <div class="notice_content">
-        <div class="content">
-          <el-button type="primary" @click="getNotice">测试</el-button>
+        <!-- <el-button type="primary" @click="getNotice">测试</el-button> -->
+        <div class="left">
+          <div class="content" v-for="(item,index) in noticeList" :key="index">
+            <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
+            <p id="p2">{{item.content}}</p>
+            <el-tag type="success">{{item.inputvalue}}</el-tag>
+            <span>123</span>
+          </div>
         </div>
+        <div class="right"></div>
       </div>
     </div>
-    <!-- <public-food></public-food> -->
+    <public-food></public-food>
   </div>
 </template>
 
@@ -28,14 +33,24 @@ export default {
   components: {
     PublicFood
   },
+  data() {
+    return {
+      noticeList: []
+    };
+  },
+  mounted() {
+    this.getNotice();
+  },
   methods: {
     getNotice() {
       this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllNotice")
         .then(res => {
           var data = res.data;
+          this.noticeList = res.data;
           console.log(data);
-        }).catch(err=>{
+        })
+        .catch(err => {
           console.log(err);
         });
     }
