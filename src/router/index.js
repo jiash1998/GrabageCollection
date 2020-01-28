@@ -10,10 +10,12 @@ import merchartContral from "../views/merchartContral";
 import Son1Manage from "../views/Contral/son1Manage";
 import Son2CarMap from "../views/Contral/son2CarMap";
 import Son3MerchartMap from "../views/Contral/son3MerchartMap";
-import Son4BucketStatus from "../views/Contral/son4BucketStatus";
+import Son4Custom from "../views/Contral/son4Custom";
 import Son5Record from "../views/Contral/son5Record";
 import Son6Notice from "../views/Contral/son6Notice";
 import Son7Feedback from "../views/Contral/son7Feedback";
+
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -66,11 +68,6 @@ const routes = [
         path: "/contral/Son3MerchartMap"
       },
       {
-        component: Son4BucketStatus,
-        name: "Son4BucketStatus",
-        path: "/contral/Son4BucketStatus"
-      },
-      {
         component: Son5Record,
         name: "Son5Record",
         path: "/contral/Son5Record"
@@ -84,6 +81,11 @@ const routes = [
         component: Son7Feedback,
         name: "Son7Feedback",
         path: "/contral/Son7Feedback"
+      },
+      {
+        component: Son4Custom,
+        name: "Son4Custom",
+        path: "/contral/Son4Custom"
       }
     ]
   },
