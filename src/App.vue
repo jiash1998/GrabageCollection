@@ -51,7 +51,6 @@ export default {
     return {
       headFix: false,
       offsetTop: 0,
-      ak: "faARwTpILZCsY9S5GUKe6LL2ILicSoDX"
     };
   },
   async mounted() {
@@ -60,7 +59,6 @@ export default {
       //获取元素距顶部距离
       this.offsetTop = document.querySelector("#head").offsetTop;
     });
-    await MP(this.ak);
   },
   methods: {
     listenerScroll() {

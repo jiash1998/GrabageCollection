@@ -36,10 +36,7 @@
         <div id="user_con"></div>
       </div>
       <div class="custom_main">
-        <div id="custom_btn" v-if="$store.state.custom">
-          <el-button type="success" plain round @click="customClick">开始定制</el-button>
-        </div>
-        <div id="custom_main_con" v-else>
+        <div id="custom_main_con">
           <div id="custom_main_con_son">
             <h3>商家定制</h3>
             <el-form :model="custom" ref="custom" :rules="rules" label-position="top">
@@ -49,13 +46,20 @@
               <el-form-item label="经营类型" prop="type">
                 <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
               </el-form-item>
+              <div class="map-area" :id="mapId"></div>
               <el-form-item label="店铺地址" prop="address">
                 <el-cascader
                   :options="options"
                   clearable
                   v-model="custom.address"
-                  @change="handleChange"
+                  @change="handleChange1"
+                  placeholder="所在地区"
                 ></el-cascader>
+                <el-input
+                  v-model="custom.addressDetail"
+                  @change="handleChange2"
+                  placeholder="详细信息：街道、门牌号、店名"
+                ></el-input>
               </el-form-item>
               <el-form-item label="店铺负责人" prop="header">
                 <el-input v-model="custom.header" placeholder="请输入负责人姓名"></el-input>
@@ -73,11 +77,11 @@
                 <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
               </el-form-item>
               <el-form-item label="上传营业执照">
-                <el-input v-model="custom.photo"  type="file" @change="add_img"></el-input>
+                <el-input v-model="custom.photo" type="file" @change="add_img"></el-input>
               </el-form-item>
               <el-form-item label>
                 <el-button type="success" v-model="custom.submit" @click="submitForm('custom')">提交</el-button>
-                <el-button type="primary" plain @click="backClick">返回</el-button>
+                <el-button type="primary" plain>返回</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -91,7 +95,9 @@
 
 <script>
 import PublicFood from "../components/publicFood.vue";
-import options from "../country-level3-data.js";
+import options from "../chzu.js";
+import loadBMap from "../map";
+// import options from "../country-level3-data.js";
 export default {
   name: "custom",
   components: {
@@ -151,7 +157,7 @@ export default {
       rules: {
         name: [{ validator: validateName, trigger: "change" }],
         type: [{ validator: validateType, trigger: "change" }],
-        address: [{ validator: validateAddress, trigger: "change" }],
+        address: [{ validator: validateAddress, trigger: "focus" }],
         header: [{ validator: validateHeader, trigger: "change" }],
         sex: [{ validator: validateSex, trigger: "change" }],
         phone: [{ validator: validatePhone, trigger: "change" }],
@@ -161,6 +167,7 @@ export default {
         name: "",
         type: "",
         address: "",
+        addressDetail: "",
         header: "",
         sex: "",
         phone: "",
@@ -168,22 +175,29 @@ export default {
         photo: "",
         submit: ""
       },
+      mapId: "BMap-" + parseInt(Date.now() + Math.random()),
       imgs: [],
       imgData: {
         accept: "image/gif, image/jpeg, image/png, image/jpg"
       },
-      options: options
+      options: options,
+      address1: "",
+      address2:""
     };
   },
+  mounted() {
+    this.initMap();
+  },
   methods: {
-    customClick() {
-      this.$store.commit("customModify");
+    //获取address的值
+    handleChange1(value) {
+      this.address1 = value.join("");
+      console.log(this.address1);
     },
-    backClick() {
-      this.$store.commit("customModifyToo");
-    },
-    handleChange(value) {
-      console.log(value);
+    handleChange2(value) {
+      this.address2 = this.address1+value;
+      this.initMap();
+      console.log(this.address2);
     },
     add_img(e) {
       //兼容多个浏览器
@@ -228,6 +242,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(val => {
         if (val) {
+          this.custom.address = this.address1;
           var data = this.custom;
           console.log(data);
           alert("success");
@@ -236,6 +251,36 @@ export default {
           return false;
         }
       });
+    },
+    initMap() {
+      loadBMap("faARwTpILZCsY9S5GUKe6LL2ILicSoDX")
+        .then(() => {
+          // 百度地图API功能
+          var map = new BMap.Map(this.mapId);
+          var point = new BMap.Point(118.323509, 32.282115);
+          map.centerAndZoom(point, 18);
+          map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+          //地址解析
+          var myGeo = new BMap.Geocoder();
+          // 将地址解析结果显示在地图上,并调整地图视野
+          console.log(this.address2);
+          let address = this.address2;
+          myGeo.getPoint(
+            address,
+            function(point) {
+              if (point) {
+                map.centerAndZoom(point, 19);
+                map.addOverlay(new BMap.Marker(point));
+              } else {
+                alert("您选择地址没有解析到结果!");
+              }
+            },
+            "滁州市"
+          );
+        })
+        .catch(err => {
+          console.log("地图加载失败");
+        });
     }
   }
 };
