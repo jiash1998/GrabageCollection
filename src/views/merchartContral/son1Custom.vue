@@ -33,63 +33,60 @@
       <div class="custom_fill1"></div>
       <div class="custom_fill2"></div>
       <div class="custom_user">
-        <div id="user_con"></div>
+        <!-- <div id="user_con"></div> -->
       </div>
       <div class="custom_main">
         <div id="custom_main_con">
-          <div id="custom_main_con_son">
-            <h3>商家定制</h3>
-            <el-form :model="custom" ref="custom" :rules="rules" label-position="top">
-              <el-form-item label="店铺名称" prop="name">
-                <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
-              </el-form-item>
-              <el-form-item label="经营类型" prop="type">
-                <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
-              </el-form-item>
-              <div class="map-area" :id="mapId"></div>
-              <el-form-item label="店铺地址" prop="address">
-                <el-cascader
-                  :options="options"
-                  clearable
-                  v-model="custom.address"
-                  @change="handleChange1"
-                  placeholder="所在地区"
-                ></el-cascader>
-              </el-form-item>
-              <el-form-item prop="addressDetail">
-                <el-input
-                  v-model="custom.addressDetail"
-                  @change="handleChange2"
-                  placeholder="详细信息：街道、门牌号、店名"
-                ></el-input>
-              </el-form-item>
-              <el-form-item label="店铺负责人" prop="header">
-                <el-input v-model="custom.header" placeholder="请输入负责人姓名"></el-input>
-              </el-form-item>
-              <el-form-item label="性别" prop="sex">
-                <el-radio-group v-model="custom.sex">
-                  <el-radio-button label="男"></el-radio-button>
-                  <el-radio-button label="女"></el-radio-button>
-                </el-radio-group>
-              </el-form-item>
-              <el-form-item label="联系方式（手机）" prop="phone">
-                <el-input v-model="custom.phone" placeholder="请输入手机号"></el-input>
-              </el-form-item>
-              <el-form-item label="社会信用代码" prop="socialCreditCode">
-                <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
-              </el-form-item>
-              <el-form-item label="上传营业执照">
-                <el-input v-model="custom.photo" type="file" @change="add_img"></el-input> 
-              </el-form-item>
-              <el-form-item label>
-                <el-button type="success" v-model="custom.submit" @click="submitForm('custom')">提交</el-button>
-                <el-button type="primary" plain>返回</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
+          <h3>商家定制</h3>
+          <el-form :model="custom" ref="custom" :rules="rules" label-position="top">
+            <el-form-item label="店铺名称" prop="name">
+              <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
+            </el-form-item>
+            <el-form-item label="经营类型" prop="type">
+              <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
+            </el-form-item>
+            <div class="map-area" :id="mapId"></div>
+            <el-form-item label="店铺地址" prop="address">
+              <el-cascader
+                :options="options"
+                clearable
+                v-model="custom.address"
+                @change="handleChange1"
+                placeholder="所在地区"
+              ></el-cascader>
+            </el-form-item>
+            <el-form-item prop="addressDetail">
+              <el-input
+                v-model="custom.addressDetail"
+                @change="handleChange2"
+                placeholder="详细信息：街道、门牌号、店名"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="店铺负责人" prop="header">
+              <el-input v-model="custom.header" placeholder="请输入负责人姓名"></el-input>
+            </el-form-item>
+            <el-form-item label="性别" prop="sex">
+              <el-radio-group v-model="custom.sex">
+                <el-radio-button label="男"></el-radio-button>
+                <el-radio-button label="女"></el-radio-button>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="联系方式（手机）" prop="phone">
+              <el-input v-model="custom.phone" placeholder="请输入手机号"></el-input>
+            </el-form-item>
+            <el-form-item label="社会信用代码" prop="socialCreditCode">
+              <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
+            </el-form-item>
+            <el-form-item label="上传营业执照">
+              <el-input v-model="custom.photo" type="file" @change="add_img"></el-input>
+            </el-form-item>
+            <el-form-item label>
+              <el-button type="success" v-model="custom.submit" @click="submitForm('custom')">提交</el-button>
+              <el-button type="primary" plain>返回</el-button>
+            </el-form-item>
+          </el-form>
         </div>
       </div>
-      <div class="custom_custom"></div>
     </div>
     <public-food></public-food>
   </div>
@@ -126,7 +123,7 @@ export default {
         callback();
       }
     };
-     var validateAddressDetail = (rule, value, callback) => {
+    var validateAddressDetail = (rule, value, callback) => {
       if (!value) {
         return new callback("请填写详细地址");
       } else {
@@ -180,7 +177,7 @@ export default {
         header: "",
         sex: "",
         phone: "",
-        url:"",
+        url: "",
         socialCreditCode: "",
         photo: "",
         submit: ""
@@ -193,7 +190,7 @@ export default {
       options: options,
       address1: "",
       address2: "",
-      customUrl:""
+      customUrl: ""
     };
   },
   mounted() {

@@ -23,9 +23,9 @@
         <div class="contralItems">
           <router-link tag="span" to="/merchartContral">商户控制</router-link>
         </div>
-        <div class="contralItems">
+        <!-- <div class="contralItems">
           <router-link tag="span" to="/Custom">定制服务</router-link>
-        </div>
+        </div> -->
         <div class="contralItems">
           <el-dropdown>
             <el-avatar>{{$store.state.username}}</el-avatar>

@@ -57,7 +57,7 @@ const routes = [
       },
       {
         component: Son2Manager,
-        name: "Son2Manager",
+        name: "Son1Custom",
         path: "/merchartContral/Son2Manager"
       }
     ]
