@@ -96,9 +96,9 @@
 </template>
 
 <script>
-import PublicFood from "../components/publicFood.vue";
-import options from "../chzu.js";
-import loadBMap from "../map";
+import PublicFood from "../../components/publicFood.vue";
+import options from "../../chzu.js";
+import loadBMap from "../../map";
 export default {
   name: "custom",
   components: {
@@ -300,5 +300,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/son1custom.scss";
+@import "../../assets/css/son1custom.scss";
 </style>
