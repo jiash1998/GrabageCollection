@@ -53,6 +53,10 @@ export default {
       offsetTop: 0
     };
   },
+  created() {
+    console.log(sessionStorage.getItem("userName"));
+    this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
+  },
   async mounted() {
     window.addEventListener("scroll", this.listenerScroll);
     this.$nextTick(() => {
@@ -64,7 +68,9 @@ export default {
     handleCommand(command) {
       if (command == "exit") {
         sessionStorage.setItem("token", "false");
+        sessionStorage.removeItem("userName");
         this.$router.push("/signin");
+        this.$store.commit("resertUserName");
       }
     },
     listenerScroll() {

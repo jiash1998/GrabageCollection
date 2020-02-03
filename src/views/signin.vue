@@ -98,7 +98,9 @@ export default {
             )
             .then(res => {
               console.log(res.data);
+              //成功之后将值保存在session
               sessionStorage.setItem("token", "true");
+              sessionStorage.setItem("userName",res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
               alert("post success");

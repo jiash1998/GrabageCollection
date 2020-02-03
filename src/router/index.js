@@ -157,6 +157,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       // 未登录,跳转到登陆页面
+      alert("请先登录");
       next({ path: "/signin" });
     }
   } else {

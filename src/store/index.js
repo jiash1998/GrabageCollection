@@ -11,7 +11,7 @@ export default new Vuex.Store({
     // customAddressDetail: "",
     customUrl:"",
     //登录姓名
-    username: "test",
+    username: "",
     mapStart: "滁州市琅琊区南谯北路苏宁广场",
     mapEnd: "安徽省滁州市丰乐大道1528号",
     //公告类型
@@ -20,6 +20,9 @@ export default new Vuex.Store({
   mutations: {
     viewUsername(state, payload) {
       return (state.username = payload);
+    },
+    resertUserName(state){
+      return (state.username = "");
     },
     // SetCustomAddress(state, payload) {
     //   return (state.customAddress = payload);
