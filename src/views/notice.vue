@@ -16,7 +16,7 @@
             <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
             <p id="p2">{{item.content}}</p>
             <el-tag type="success">{{item.inputvalue}}</el-tag>
-            <span>123</span>
+            <span>&nbsp;&nbsp;{{item.time}}</span>
           </div>
         </div>
         <div class="right"></div>

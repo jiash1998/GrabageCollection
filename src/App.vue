@@ -25,16 +25,16 @@
         </div>
         <!-- <div class="contralItems">
           <router-link tag="span" to="/Custom">定制服务</router-link>
-        </div> -->
+        </div>-->
         <div class="contralItems">
-          <el-dropdown>
+          <el-dropdown @command="handleCommand">
             <el-avatar>{{$store.state.username}}</el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <router-link to="/signin" tag="span">登录/注册</router-link>
               </el-dropdown-item>
               <el-dropdown-item>编辑资料</el-dropdown-item>
-              <el-dropdown-item>退出</el-dropdown-item>
+              <el-dropdown-item command="exit">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       headFix: false,
-      offsetTop: 0,
+      offsetTop: 0
     };
   },
   async mounted() {
@@ -61,6 +61,12 @@ export default {
     });
   },
   methods: {
+    handleCommand(command) {
+      if (command == "exit") {
+        sessionStorage.setItem("token", "false");
+        this.$router.push("/signin");
+      }
+    },
     listenerScroll() {
       var scroll =
         window.pageYOffset ||

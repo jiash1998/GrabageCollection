@@ -96,6 +96,7 @@
 import PublicFood from "../../components/publicFood.vue";
 import options from "../../chzu.js";
 import loadBMap from "../../map";
+import qs from 'querystring';
 export default {
   name: "custom",
   components: {
@@ -175,6 +176,7 @@ export default {
         address: "",
         addressDetail: "",
         header: "",
+        user:"",
         sex: "",
         phone: "",
         url: "",
@@ -253,9 +255,24 @@ export default {
         if (val) {
           this.custom.address = this.address1;
           this.custom.url = this.customUrl;
+          this.custom.user = this.$store.state.username;
           var data = this.custom;
           console.log(data);
-          alert("success");
+          //提交后台
+          this.axios
+            .post(
+              "http://" + this.$store.state.path + ":8080/addCustom",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+              alert("post success");
+            });
         } else {
           alert("error");
           return false;

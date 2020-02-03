@@ -1,31 +1,34 @@
 .notice_main {
   width: 100%;
-  height: 800px;
+  height: 850px;
   //   background-color: pink;
   .notice_tabber {
     width: 100%;
     height: 60px;
     background-color: #fff;
-    padding-left: 2.5%;
+    // padding-left: 2.5%;
     
     }
   
 
   .notice_content {
     width: 100%;
-    height: 740px;
+    height: 800px;
+    
     background-color: #F8FAFF;
     display: flex;
     .left{
       width: 75%;
-      height: 700px;
+      overflow: auto;
+      height: 750px;
       box-shadow: 0 3px 8px gainsboro;
       background-color: #fff;
       margin: 10px 2.5% 0 2.5%;
 
       .content{
         width: 95%;
-        height: 21%;
+        height: 20%;
+        box-sizing: border-box;
         display: inline-block;
         border-bottom: 1px solid gainsboro;
         padding:0 2.5% 0 2.5%;

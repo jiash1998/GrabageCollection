@@ -76,6 +76,10 @@ export default {
       }
     };
   },
+  mounted() {
+    // this.test();
+  },
+
   methods: {
     submitForm(formname) {
       this.$refs[formname].validate(val => {
@@ -94,7 +98,9 @@ export default {
             )
             .then(res => {
               console.log(res.data);
-              this.$store.commit("viewUsername",res.data.username);
+              sessionStorage.setItem("token", "true");
+              this.$router.push("/main");
+              this.$store.commit("viewUsername", res.data.username);
               alert("post success");
             });
         } else {
