@@ -31,9 +31,11 @@
             <el-avatar>{{$store.state.username}}</el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/signin" tag="span">登录/注册</router-link>
+                <router-link to="/signin" tag="div">登录/注册</router-link>
               </el-dropdown-item>
-              <el-dropdown-item>编辑资料</el-dropdown-item>
+              <el-dropdown-item>
+                <router-link to="/Editor" tag="div">编辑资料</router-link>
+              </el-dropdown-item>
               <el-dropdown-item command="exit">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>

@@ -74,11 +74,11 @@
             <el-form-item label="联系方式（手机）" prop="phone">
               <el-input v-model="custom.phone" placeholder="请输入手机号"></el-input>
             </el-form-item>
-            <el-form-item label="社会信用代码" prop="socialCreditCode">
-              <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
-            </el-form-item>
             <el-form-item label="上传营业执照">
               <el-input v-model="custom.photo" type="file" @change="add_img"></el-input>
+            </el-form-item>
+            <el-form-item label="社会信用代码" prop="socialCreditCode">
+              <el-input v-model="custom.socialCreditCode" placeholder="请输入店铺名称"></el-input>
             </el-form-item>
             <el-form-item label>
               <el-button type="success" v-model="custom.submit" @click="submitForm('custom')">提交</el-button>
@@ -96,7 +96,7 @@
 import PublicFood from "../../components/publicFood.vue";
 import options from "../../chzu.js";
 import loadBMap from "../../map";
-import qs from 'querystring';
+import qs from "querystring";
 export default {
   name: "custom",
   components: {
@@ -176,7 +176,7 @@ export default {
         address: "",
         addressDetail: "",
         header: "",
-        user:"",
+        user: "",
         sex: "",
         phone: "",
         url: "",
@@ -190,6 +190,7 @@ export default {
         accept: "image/gif, image/jpeg, image/png, image/jpg"
       },
       options: options,
+      //记录所i在地区和详细地址
       address1: "",
       address2: "",
       customUrl: ""
@@ -209,7 +210,8 @@ export default {
       console.log(this.address2);
       this.initMap();
     },
-    add_img(e) {
+    //异步
+     add_img(e) {
       //兼容多个浏览器
       e = event || e;
       let reader = new FileReader();
@@ -252,7 +254,7 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate(val => {
-        if (val) {
+        if (val && this.customUrl) {
           this.custom.address = this.address1;
           this.custom.url = this.customUrl;
           this.custom.user = this.$store.state.username;
@@ -274,7 +276,7 @@ export default {
               alert("post success");
             });
         } else {
-          alert("error");
+          alert("请等待图片上传。。。");
           return false;
         }
       });

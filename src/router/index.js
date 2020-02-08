@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/main";
 import Signin from "../views/signin";
+import Editor from "../views/editor";
 import Register from "../views/register";
 import Notice from "../views/notice";
 import Custom from "../views/custom";
@@ -135,6 +136,14 @@ const routes = [
     path: "/signin"
   },
   {
+    component: Editor,
+    name: "Editor",
+    path: "/Editor",
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
     component: Register,
     name: "Register",
     path: "/register"
@@ -161,11 +170,6 @@ router.beforeEach((to, from, next) => {
       next({ path: "/signin" });
     }
   } else {
-    // if (sessionStorage.getItem("token") == "true") {
-    //   next("/merchartContral/Son1Custom");
-    //   // next();
-    // } else {
-      next();
-    // }
+    next();
   }
 });

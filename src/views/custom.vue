@@ -235,6 +235,7 @@ export default {
           headers: { "Content-Type": "multipart/form-data" }
         })
         .then(response => {
+          alert("图片上传成功");
           console.log(response.data);
           this.customUrl = response.data.url;
           uri = response.data.url;
