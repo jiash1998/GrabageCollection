@@ -26,7 +26,35 @@
         </div>
       </div>
     </div>
-    <div class="next"></div>
+    <div class="next">
+      <div class="payForm">
+        <el-form :model="garbageCycle" :rules="garbageCycle" refs="garbageCycle">
+          <el-form-item label="回收时间">
+            <el-checkbox-group v-model="garbageCycle.cycleDate">
+              <el-checkbox v-for="(item,index) in date" :key="index" :label="item">{{item}}</el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+          <el-form-item label="回收频率">
+            <el-checkbox-group v-model="garbageCycle.cycleTimes">
+              <el-checkbox v-for="(item,index) in times" :key="index" :label="item">{{item}}</el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+          <el-form-item label="支付方式">
+            <el-radio-group v-model="garbageCycle.payChoose">
+              <el-radio label="zfb">
+                <img style="width:65px;height:35px;" src="../../assets/img/zfb.jpg" />
+              </el-radio>
+              <el-radio label="wx">
+                <img style="width:65px;height:35px;" src="../../assets/img/wx.jpg" />
+              </el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label>
+            <el-button type="primary" plain>提交付款</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
     <public-foot></public-foot>
   </div>
 </template>
@@ -40,9 +68,17 @@ export default {
   },
   data() {
     return {
+      radio: "1",
       custom: [],
       search: {
         name: ""
+      },
+      date: ["6:00-7:30", "11:00-13:30", "17:00-18:30", "22:00-12:30"],
+      times: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+      garbageCycle: {
+        cycleDate: [],
+        cycleTimes: [],
+        payChoose: ""
       }
     };
   },
@@ -50,8 +86,8 @@ export default {
     this.getData();
   },
   methods: {
-   async getData() {
-     await this.axios
+    async getData() {
+      await this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllCustom")
         .then(res => {
           for (const i of res.data) {

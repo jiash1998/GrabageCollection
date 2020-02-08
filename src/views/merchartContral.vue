@@ -8,7 +8,9 @@
         <el-menu-item index="2">
           <router-link to="/merchartContral/Son2Manager" tag="div">定制管理</router-link>
         </el-menu-item>
-        <el-menu-item index="3">反馈信息</el-menu-item>
+        <el-menu-item index="3">
+          <router-link to="/merchartContral/Son3Feedback" tag="div">反馈信息</router-link>
+        </el-menu-item>
       </el-menu>
     </div>
     <div>

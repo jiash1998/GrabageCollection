@@ -109,7 +109,9 @@
           </p>
           <p id="body5_p2">
             这是为客户环境量身定做的垃圾回收方案
-            <el-button type="success" style="margin-left:10px" plain>前往定制</el-button>
+            <router-link to="/merchartContral/Son1Custom" tag="div">
+              <el-button type="success" style="margin-left:10px" plain>前往定制</el-button>
+            </router-link>
           </p>
         </div>
       </div>

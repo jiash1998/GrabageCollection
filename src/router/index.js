@@ -19,6 +19,7 @@ import Son7Feedback from "../views/Contral/son7Feedback";
 import merchartContral from "../views/merchartContral";
 import Son1Custom from "../views/merchartContral/son1Custom";
 import Son2Manager from "../views/merchartContral/son2Manager";
+import Son3Feedback from '../views/merchartContral/son3Feedback';
 
 Vue.use(VueRouter);
 
@@ -72,6 +73,11 @@ const routes = [
         component: Son2Manager,
         name: "Son1Custom",
         path: "/merchartContral/Son2Manager"
+      },
+      {
+        component: Son3Feedback,
+        name: "Son3Feedback",
+        path: "/merchartContral/Son3Feedback"
       }
     ]
   },
