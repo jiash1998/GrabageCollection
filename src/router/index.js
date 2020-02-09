@@ -19,7 +19,9 @@ import Son7Feedback from "../views/Contral/son7Feedback";
 import merchartContral from "../views/merchartContral";
 import Son1Custom from "../views/merchartContral/son1Custom";
 import Son2Manager from "../views/merchartContral/son2Manager";
-import Son3Feedback from '../views/merchartContral/son3Feedback';
+import Son2_1Manager from "../views/merchartContral/son2_1Manager";
+import Son2_2Manager from "../views/merchartContral/son2_2Manager";
+import Son3Feedback from "../views/merchartContral/son3Feedback";
 
 Vue.use(VueRouter);
 
@@ -71,9 +73,26 @@ const routes = [
       },
       {
         component: Son2Manager,
-        name: "Son1Custom",
-        path: "/merchartContral/Son2Manager"
+        name: "Son2Manager",
+        path: "/merchartContral/Son2Manager",
+        children: [
+          {
+            path: "",
+            redirect: "/merchartContral/Son2Manager/Son2_1Manager"
+          },
+          {
+            component: Son2_1Manager,
+            name: "Son2_1Manager",
+            path: "/merchartContral/Son2Manager/Son2_1Manager"
+          },
+          {
+            component: Son2_2Manager,
+            name: "Son2_2Manager",
+            path: "/merchartContral/Son2Manager/Son2_2Manager"
+          }
+        ]
       },
+
       {
         component: Son3Feedback,
         name: "Son3Feedback",
