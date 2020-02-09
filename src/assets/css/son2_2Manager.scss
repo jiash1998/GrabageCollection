@@ -1,5 +1,118 @@
-.body{
-    width: 100%;
-    height: 400px;
-    background-color: pink;
+.body {
+  width: 100%;
+  height: 600px;
+//   background-color: pink;
+  display: flex;
+  .left {
+    width: 18%;
+    height: 600px;
+    background-color: #f8faff;
+
+    .left_head {
+      height: 50px;
+      width: 100%;
+      border-bottom: 1px solid gainsboro;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        font-size: 0.8em;
+      }
+    }
+
+    .left_head:hover {
+      color: #108ee9;
+    }
+
+    .left_body {
+      width: 100%;
+
+      .store {
+        display: flex;
+        margin-top: 30px;
+        justify-content: space-evenly;
+        .imgDiv {
+          width: 50px;
+          height: 50px;
+          img {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+          }
+        }
+
+        .storeName{
+            width: 30%;
+            height: 50px;
+            margin: -6px 0 0 -30px;
+            p{
+                font-size: .8em;
+                line-height: 8px;
+            }
+        }
+      }
+    }
+
+    .info{
+        display: flex;
+        width: 100%;
+        margin-top: 10px;
+        justify-content: space-evenly;
+        .infoId{
+            width: 20%;
+            border: 1px solid gray;
+            text-align: center;
+            border-radius: 10px;
+            color:gray;
+            font-size: .8em;
+            margin-left: 14%;
+        }
+
+        .infoNum{
+            color: gray;
+            font-size: .9em;
+            // margin-left: -30px;
+        }
+    }
+  }
+  .right {
+    width: 82%;
+    height: 600px;
+    // background-color: gray;
+    display: flex;
+    flex-direction: column;
+    .right_head{
+        width: 100%;
+        height: 80px;
+        // background-color: pink;
+
+        .head_p{
+            width: 20%;
+            position:absolute;
+            height: 60px;
+            span{
+                display: inline-block;
+                margin: 25px 0 0 30px;
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    .right_del{
+        width: 100%;
+        height: 80px;
+        background-color: pink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .del{
+            width: 95%;
+            height: 90%;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            border: 1px solid gainsboro ;
+            background-color: #FAFAFA;
+        }
+    }
+  }
 }

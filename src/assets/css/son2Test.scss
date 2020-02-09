@@ -1,0 +1,88 @@
+$pLineheight: 9px;
+.body {
+  width: 100%;
+  height: 400px;
+  background-color: pink;
+
+  .viewDiv {
+    width: 65%;
+    // height: 300px;
+    position: absolute;
+    border-radius: 5px;
+    margin: 20px 0 0 3%;
+    background-color: #fff;
+
+    #p1 {
+      font-size: 1.2em;
+      margin-left: 30px;
+    }
+
+    .storeDiv {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      .store {
+        width: 45%;
+        height: 100px;
+        margin: 0 0 20px 0;
+        border-radius: 5px;
+        box-shadow: 0 0 4px 1px gainsboro;
+        display: flex;
+        align-items: center;
+
+        .storeImg {
+          width: 20%;
+          height: 70%;
+          margin: 0 15px 0 15px;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+          }
+        }
+
+        .storeCon {
+          width: 60%;
+          height: 70%;
+        //   background-color: pink;
+
+          #p2 {
+            font-size: 0.8em;
+            line-height: $pLineheight;
+          }
+
+          #p3 {
+            font-size: 0.8em;
+            color: gray;
+            line-height: $pLineheight;
+          }
+
+          #p4{
+              font-size: .8em;
+              line-height: $pLineheight;
+
+              span{
+                  display: inline-block;
+                  width: 5px;
+                  height: 5px;
+                  margin: 0 5px 0px 0;
+                  border-radius: 100%;
+                  background-color: #FFBA1D;
+              }
+          }
+        }
+      }
+
+      .store:hover{
+          box-shadow: 0 0 4px 3px gainsboro;
+      }
+
+      .test {
+        width: 45%;
+        height: 0px;
+        margin: 0 0 20px 0;
+      }
+    }
+  }
+}

@@ -26,19 +26,21 @@
     </div>
     <div class="next">
       <div class="payForm">
-        <el-form :model="garbageCycle" :rules="garbageCycle" refs="garbageCycle">
-          <el-form-item label="回收时间">
+        <el-form :model="garbageCycle" :rules="rules" ref="garbageCycle">
+          <el-form-item label="回收时间" prop="cycleDate">
             <el-checkbox-group v-model="garbageCycle.cycleDate">
               <el-checkbox v-for="(item,index) in date" :key="index" :label="item">{{item}}</el-checkbox>
+              <!-- <el-checkbox label="1"></el-checkbox>
+              <el-checkbox label="2"></el-checkbox>-->
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="回收频率">
+          <el-form-item label="回收频率" prop="cycleTimes">
             <el-checkbox-group v-model="garbageCycle.cycleTimes">
               <el-checkbox v-for="(item,index) in times" :key="index" :label="item">{{item}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="支付方式">
-            <el-radio-group v-model="garbageCycle.payChoose">
+          <el-form-item label="支付方式" prop="payType">
+            <el-radio-group v-model="garbageCycle.payType">
               <el-radio label="zfb">
                 <img style="width:65px;height:35px;" src="../../assets/img/zfb.jpg" />
               </el-radio>
@@ -48,7 +50,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label>
-            <el-button type="primary" plain>提交付款</el-button>
+            <el-button type="primary" @click="submit('garbageCycle')" plain>提交付款</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -65,6 +67,27 @@ export default {
     PublicFoot
   },
   data() {
+    var validatecycleDate = (rule, value, callback) => {
+      if (value.length < 1) {
+        return callback(new Error("请选择一个"));
+      } else {
+        callback();
+      }
+    };
+    var validatecycleTimes = (rule, value, callback) => {
+      if (value.length < 1) {
+        return callback(new Error("请选择一个"));
+      } else {
+        callback();
+      }
+    };
+    var validatepayType = (rule, value, callback) => {
+      if (!value) {
+        return new callback("请选择支付方式");
+      } else {
+        callback();
+      }
+    };
     return {
       isCustom: true,
       isClick: -1,
@@ -72,12 +95,18 @@ export default {
       search: {
         name: ""
       },
+      rules: {
+        cycleDate: [{ validator: validatecycleDate, trigger: "change" }],
+        cycleTimes: [{ validator: validatecycleTimes, trigger: "change" }],
+        payType: [{ validator: validatepayType, trigger: "change" }]
+      },
       date: ["6:00-7:30", "11:00-13:30", "17:00-18:30", "22:00-12:30"],
       times: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
       garbageCycle: {
         cycleDate: [],
         cycleTimes: [],
-        payChoose: ""
+        payType: "",
+        username:""
       }
     };
   },
@@ -89,6 +118,7 @@ export default {
       await this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllCustom")
         .then(res => {
+          console.log(res.data);
           for (const i of res.data) {
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
@@ -103,6 +133,34 @@ export default {
       console.log(index);
       sessionStorage.setItem("index", index);
       this.isClick = index;
+    },
+    submit(formname) {
+      this.$refs[formname].validate(val => {
+        if (val && this.isClick!= -1) {
+          var data = this.garbageCycle;
+          console.log(data);
+          //   this.axios
+          //     .post(
+          //       "http://" + this.$store.state.path + ":8080/checkLogin",
+          //       qs.stringify(data),
+          //       {
+          //         headers: {
+          //           "Content-Type": "application/x-www-form-urlencoded"
+          //         }
+          //       }
+          //     )
+          //     .then(res => {
+          //       console.log(res.data);
+          //       alert("post success");
+          //     })
+          //     .catch(err => {
+          //       console.log(err);
+          //     });
+        } else {
+          alert("请填写完整");
+          return false;
+        }
+      });
     }
   }
 };

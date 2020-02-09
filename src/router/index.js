@@ -21,6 +21,7 @@ import Son1Custom from "../views/merchartContral/son1Custom";
 import Son2Manager from "../views/merchartContral/son2Manager";
 import Son2_1Manager from "../views/merchartContral/son2_1Manager";
 import Son2_2Manager from "../views/merchartContral/son2_2Manager";
+import Son2Test from "../views/merchartContral/son2Test";
 import Son3Feedback from "../views/merchartContral/son3Feedback";
 
 Vue.use(VueRouter);
@@ -78,7 +79,7 @@ const routes = [
         children: [
           {
             path: "",
-            redirect: "/merchartContral/Son2Manager/Son2_1Manager"
+            redirect: "/merchartContral/Son2Manager/Son2Test"
           },
           {
             component: Son2_1Manager,
@@ -89,6 +90,11 @@ const routes = [
             component: Son2_2Manager,
             name: "Son2_2Manager",
             path: "/merchartContral/Son2Manager/Son2_2Manager"
+          },
+          {
+            component: Son2Test,
+            name: "Son2Test",
+            path: "/merchartContral/Son2Manager/Son2Test"
           }
         ]
       },
