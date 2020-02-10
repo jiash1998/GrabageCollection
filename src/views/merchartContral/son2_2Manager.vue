@@ -1,5 +1,6 @@
 <template>
   <div id="son2_2Manager">
+    <!-- <div v-html=""></div> -->
     <div class="body">
       <div class="left">
         <router-link to="/merchartContral/Son2Manager/Son2Test" tag="div">
@@ -38,7 +39,7 @@
             </p>
             <p style="color:gray;">请及时完成店铺定制计划，提交后次日即可实行</p>
             <div id="btnDiv">
-              <el-button type="primary">提交审核</el-button>
+              <el-button type="primary" @click="submit('garbageCycle')">提交审核</el-button>
               <el-button type>删除</el-button>
             </div>
           </div>
@@ -56,11 +57,15 @@
             </p>
             <p id="imgSpan">
               店铺图片：
-                <img :src="storeInfo.url" />
+              <img :src="storeInfo.url" />
             </p>
             <p>
               店铺负责人：
               <span>{{storeInfo.header}}</span>
+            </p>
+            <p>
+              联系方式：
+              <span>{{storeInfo.phone}}</span>
             </p>
             <P>
               性别：
@@ -112,6 +117,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "son2_2anager",
   data() {
@@ -138,7 +144,6 @@ export default {
     };
     return {
       isCustom: true,
-      isClick: -1,
       custom: [],
       search: {
         name: ""
@@ -154,6 +159,8 @@ export default {
         cycleDate: [],
         cycleTimes: [],
         payType: "",
+        id: "",
+        money: 500,
         username: ""
       },
       //存放定制信息
@@ -165,33 +172,48 @@ export default {
   },
   methods: {
     getInfo() {
-      console.log(sessionStorage.customObj);
+      console.log(JSON.parse(sessionStorage.customObj).id);
       this.storeInfo = JSON.parse(sessionStorage.customObj);
     },
     submit(formname) {
       this.$refs[formname].validate(val => {
-        if (val && this.isClick != -1) {
+        if (val) {
+          //将附属信息加进去
+          this.garbageCycle.id = JSON.parse(sessionStorage.customObj).id;
           var data = this.garbageCycle;
           console.log(data);
-          //   this.axios
-          //     .post(
-          //       "http://" + this.$store.state.path + ":8080/checkLogin",
-          //       qs.stringify(data),
-          //       {
-          //         headers: {
-          //           "Content-Type": "application/x-www-form-urlencoded"
-          //         }
-          //       }
-          //     )
-          //     .then(res => {
-          //       console.log(res.data);
-          //       alert("post success");
-          //     })
-          //     .catch(err => {
-          //       console.log(err);
-          //     });
+          this.axios
+            .post(
+              "http://" + this.$store.state.path + ":8080/payAli",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+              alert("提交成功");
+              //resolve和routerLink/to 一样
+              let routerData = this.$router.resolve({
+                path: "/Pay",
+                query: { htmls: res.data }
+              });
+              this.htmls = res.data;
+              //打开新页面(地址，空白的)
+              window.open(routerData.href, "_ blank");
+              //创造一个节点，并写入返回的html代码
+              const div = document.createElement("div");
+              div.innerHTML = htmls;
+              document.body.appendChild(div);
+              document.forms[0].submit();
+            })
+            .catch(err => {
+              console.log(err);
+            });
         } else {
-          alert("请填写完整");
+          alert("请填写回收定制方案!");
           return false;
         }
       });

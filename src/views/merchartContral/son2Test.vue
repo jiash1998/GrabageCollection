@@ -24,17 +24,18 @@
       <div class="other"></div>
     </div>
     <div class="gap"></div>
-    <public-foot></public-foot>
+    <div class="extend">
+      <div class="content"></div>
+    </div>
+    <div class="foot">
+          <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
+        </div>
   </div>
 </template>
 
 <script>
-import PublicFoot from "../../components/publicFood.vue";
 export default {
   name: "son2Test",
-  components: {
-    PublicFoot
-  },
   data() {
     return {
       custom: []

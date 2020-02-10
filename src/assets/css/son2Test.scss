@@ -102,3 +102,32 @@ $pLineheight: 9px;
     background-color: #fff;
   }
 }
+
+.extend {
+  width: 100%;
+  height: 380px;
+  background-color: #f3f5f6;
+
+  .content{
+    width: 65%;
+    height: 50%;
+    position: absolute;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 20px 0 0 3.5%;
+  }
+}
+.foot {
+  width: 100%;
+  height: 50px;
+  background-color: #f0f3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    display: inline;
+    color: gray;
+    font-size: 0.7em;
+  }
+}

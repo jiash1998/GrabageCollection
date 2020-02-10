@@ -6,7 +6,7 @@ import Editor from "../views/editor";
 import Register from "../views/register";
 import Notice from "../views/notice";
 import Custom from "../views/custom";
-import PaySuccess from "../views/paySuccess";
+import Pay from "../views/pay";
 
 //管理员
 import Contral from "../views/contral";
@@ -44,9 +44,9 @@ const routes = [
     path: "/Notice"
   },
   {
-    component: PaySuccess,
-    name: "PaySuccess",
-    path: "/PaySuccess"
+    component: Pay,
+    name: "Pay",
+    path: "/Pay"
   },
   {
     component: Custom,

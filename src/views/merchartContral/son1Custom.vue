@@ -38,7 +38,7 @@
       <div class="custom_main">
         <div id="custom_main_con">
           <h3>商家定制</h3>
-          <el-form :model="custom" ref="custom" :rules="rules" label-position="top">
+          <el-form :model="custom" ref="custom" :rules="rules" label-position="left">
             <el-form-item label="店铺名称" prop="name">
               <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
             </el-form-item>
