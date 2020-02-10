@@ -1,11 +1,13 @@
+$allHeight: 490px;
+$pLeft: 30px;
 .body {
   width: 100%;
-  height: 600px;
-//   background-color: pink;
+  height: $allHeight;
+  //   background-color: pink;
   display: flex;
   .left {
     width: 18%;
-    height: 600px;
+    // height: $allHeight;
     background-color: #f8faff;
 
     .left_head {
@@ -34,6 +36,7 @@
         .imgDiv {
           width: 50px;
           height: 50px;
+          margin: 0 0 0 -10px;
           img {
             height: 100%;
             width: 100%;
@@ -41,78 +44,162 @@
           }
         }
 
-        .storeName{
-            width: 30%;
-            height: 50px;
-            margin: -6px 0 0 -30px;
-            p{
-                font-size: .8em;
-                line-height: 8px;
-            }
+        .storeName {
+          width: 30%;
+          height: 50px;
+          margin: 0px 0 0 -30px;
+          //过长……
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 0.8em;
+          p {
+            line-height: 8px;
+          }
         }
       }
     }
 
-    .info{
-        display: flex;
-        width: 100%;
-        margin-top: 10px;
-        justify-content: space-evenly;
-        .infoId{
-            width: 20%;
-            border: 1px solid gray;
-            text-align: center;
-            border-radius: 10px;
-            color:gray;
-            font-size: .8em;
-            margin-left: 14%;
-        }
+    .info {
+      display: flex;
+      height: 17px;
+      width: 100%;
+      margin-top: 10px;
+      justify-content: space-evenly;
+      // background-color: pink;
+      .infoId {
+        width: 20%;
+        border: 1px solid gray;
+        text-align: center;
+        border-radius: 10px;
+        color: gray;
+        font-size: 0.8em;
+        margin-left: 14%;
+      }
 
-        .infoNum{
-            color: gray;
-            font-size: .9em;
-            // margin-left: -30px;
-        }
+      .infoNum {
+        color: gray;
+        font-size: 0.7em;
+        line-height: 17px;
+        // margin-left: -30px;
+      }
     }
   }
   .right {
     width: 82%;
-    height: 600px;
+    // height: 800px;
     // background-color: gray;
-    display: flex;
-    flex-direction: column;
-    .right_head{
-        width: 100%;
-        height: 80px;
-        // background-color: pink;
+    overflow: auto;
+    .right_head {
+      width: 100%;
+      height: 80px;
+      // background-color: pink;
 
-        .head_p{
-            width: 20%;
-            position:absolute;
-            height: 60px;
-            span{
-                display: inline-block;
-                margin: 25px 0 0 30px;
-                font-size: 1.2em;
-            }
+      .head_p {
+        width: 20%;
+        height: 60px;
+        span {
+          display: inline-block;
+          margin: 25px 0 0 $pLeft;
+          font-size: 1.2em;
         }
+      }
     }
 
-    .right_del{
-        width: 100%;
-        height: 80px;
-        background-color: pink;
+    .right_del {
+      width: 100%;
+      height: 80px;
+      // background-color: pink;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .del {
         display: flex;
-        justify-content: center;
         align-items: center;
-        .del{
-            width: 95%;
-            height: 90%;
-            border-radius: 5px;
-            box-sizing: border-box; 
-            border: 1px solid gainsboro ;
-            background-color: #FAFAFA;
+        width: 95%;
+        height: 90%;
+        border-radius: 5px;
+        box-sizing: border-box;
+        border: 1px solid gainsboro;
+        background-color: #fafafa;
+
+        p {
+          margin: 0 10px 0 30px;
+          font-size: 0.8em;
         }
+
+        #btnDiv {
+          display: flex;
+          margin: 0 0 0 35%;
+        }
+      }
+    }
+
+    .basic {
+      width: 100%;
+      height: 430px;
+      // background-color: pink;
+
+      #p1 {
+        display: inline-block;
+        padding: 20px 0 10px $pLeft;
+      }
+
+      .infoP {
+        p {
+          font-size: 0.8em;
+          color: gray;
+          padding: 0px 0 15px $pLeft;
+
+          span {
+            color: black;
+          }
+        }
+
+        #imgSpan {
+          font-size: 0.8em;
+          color: gray;
+          padding: 0px 0 15px $pLeft;
+          display: flex;
+          align-items: center;
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+
+    .custom {
+      width: 100%;
+      height: 300px;
+      // background-color: gray;
+
+      #p1 {
+        display: inline-block;
+        padding: 20px 0 10px $pLeft;
+      }
+
+      .next {
+        width: 90%;
+        padding: 0 0 0 $pLeft;
+      }
+    }
+
+    .foot {
+      width: 100%;
+      height: 50px;
+      background-color: #f0f3f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        display: inline;
+        color: gray;
+        font-size: 0.7em;
+      }
     }
   }
 }

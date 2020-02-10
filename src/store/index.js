@@ -10,6 +10,8 @@ export default new Vuex.Store({
     // customAddress: "",
     // customAddressDetail: "",
     customUrl:"",
+    //定制管理
+    // clickStore:[],
     //登录姓名
     username: "",
     mapStart: "滁州市琅琊区南谯北路苏宁广场",
@@ -18,18 +20,18 @@ export default new Vuex.Store({
     noticeType: "普通公告"
   },
   mutations: {
+    //定制信息携带
+    // getCustomInfo(state,payload){
+    //   return (state.clickStore = payload);
+    // },
+    //用户名
     viewUsername(state, payload) {
       return (state.username = payload);
     },
     resertUserName(state){
       return (state.username = "");
     },
-    // SetCustomAddress(state, payload) {
-    //   return (state.customAddress = payload);
-    // },
-    // SetCustomAddressDetail(state, payload) {
-    //   return (state.customAddressDetail = payload);
-    // },
+    //修改路线
     modifyPathStart(state, payload) {
       return (state.mapEnd = payload.end);
     },

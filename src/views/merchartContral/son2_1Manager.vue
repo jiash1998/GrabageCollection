@@ -30,8 +30,6 @@
           <el-form-item label="回收时间" prop="cycleDate">
             <el-checkbox-group v-model="garbageCycle.cycleDate">
               <el-checkbox v-for="(item,index) in date" :key="index" :label="item">{{item}}</el-checkbox>
-              <!-- <el-checkbox label="1"></el-checkbox>
-              <el-checkbox label="2"></el-checkbox>-->
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="回收频率" prop="cycleTimes">

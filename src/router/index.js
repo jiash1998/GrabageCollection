@@ -6,6 +6,8 @@ import Editor from "../views/editor";
 import Register from "../views/register";
 import Notice from "../views/notice";
 import Custom from "../views/custom";
+import PaySuccess from "../views/paySuccess";
+
 //管理员
 import Contral from "../views/contral";
 import Son1Manage from "../views/Contral/son1Manage";
@@ -40,6 +42,11 @@ const routes = [
     component: Notice,
     name: "Notice",
     path: "/Notice"
+  },
+  {
+    component: PaySuccess,
+    name: "PaySuccess",
+    path: "/PaySuccess"
   },
   {
     component: Custom,

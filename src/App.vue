@@ -59,13 +59,13 @@ export default {
     console.log(sessionStorage.getItem("userName"));
     this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
   },
-  async mounted() {
-    window.addEventListener("scroll", this.listenerScroll);
-    this.$nextTick(() => {
-      //获取元素距顶部距离
-      this.offsetTop = document.querySelector("#head").offsetTop;
-    });
-  },
+  // async mounted() {
+  //   window.addEventListener("scroll", this.listenerScroll);
+  //   this.$nextTick(() => {
+  //     //获取元素距顶部距离
+  //     this.offsetTop = document.querySelector("#head").offsetTop;
+  //   });
+  // },
   methods: {
     handleCommand(command) {
       if (command == "exit") {

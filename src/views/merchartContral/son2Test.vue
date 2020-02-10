@@ -1,5 +1,6 @@
 <template>
   <div id="son2Test">
+    <div class="gap"></div>
     <div class="body">
       <div class="viewDiv">
         <p id="p1">我的店铺</p>
@@ -20,7 +21,9 @@
           <div class="test"></div>
         </div>
       </div>
+      <div class="other"></div>
     </div>
+    <div class="gap"></div>
     <public-foot></public-foot>
   </div>
 </template>
@@ -57,6 +60,10 @@ export default {
         });
     },
     choose(index) {
+      console.log(this.custom[index]);
+      //sessionStorage如何存放数组
+      var customObj = JSON.stringify(this.custom[index]);
+      sessionStorage.customObj = customObj;
       this.$router.push("/merchartContral/Son2Manager/Son2_2Manager");
     }
   }
