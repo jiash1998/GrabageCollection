@@ -31,6 +31,13 @@
           <div class="head_p">
             <span>概览</span>
           </div>
+          <div class="head_step">
+            <el-steps :space="200" :active="1" align-center >
+              <el-step title="未定制"></el-step>
+              <el-step title="待付款"></el-step>
+              <el-step title="定制完成"></el-step>
+            </el-steps>
+          </div>
         </div>
         <div class="right_del">
           <div class="del">
@@ -196,18 +203,18 @@ export default {
               console.log(res.data);
               alert("提交成功");
               //resolve和routerLink/to 一样
-              let routerData = this.$router.resolve({
-                path: "/Pay",
-                query: { htmls: res.data }
-              });
-              this.htmls = res.data;
-              //打开新页面(地址，空白的)
-              window.open(routerData.href, "_ blank");
-              //创造一个节点，并写入返回的html代码
-              const div = document.createElement("div");
-              div.innerHTML = htmls;
-              document.body.appendChild(div);
-              document.forms[0].submit();
+              // let routerData = this.$router.resolve({
+              //   path: "/Pay",
+              //   query: { htmls: res.data }
+              // });
+              // this.htmls = res.data;
+              // //打开新页面(地址，空白的)
+              // window.open(routerData.href, "_ blank");
+              // //创造一个节点，并写入返回的html代码
+              // const div = document.createElement("div");
+              // div.innerHTML = htmls;
+              // document.body.appendChild(div);
+              // document.forms[0].submit();
             })
             .catch(err => {
               console.log(err);

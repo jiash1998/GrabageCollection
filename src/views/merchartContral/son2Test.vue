@@ -13,7 +13,7 @@
               <p id="p2">{{item.name}}</p>
               <p id="p3">{{item.socialCreditCode}}</p>
               <p id="p4">
-                <span></span>未定制
+                <span></span>{{isTrue}}
               </p>
             </div>
           </div>
@@ -28,8 +28,8 @@
       <div class="content"></div>
     </div>
     <div class="foot">
-          <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
-        </div>
+      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
+    </div>
   </div>
 </template>
 
@@ -38,7 +38,8 @@ export default {
   name: "son2Test",
   data() {
     return {
-      custom: []
+      custom: [],
+      isTrue:"未定制"
     };
   },
   mounted() {
@@ -53,6 +54,18 @@ export default {
           for (const i of res.data) {
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
+            }
+          }
+          for (const key of this.custom) {
+            if (
+              key.cycleDate != "" &&
+              key.cycleTimes != "" &&
+              key.payType != "" &&
+              key.payType 
+            ) {
+              console.log(key);
+              
+              this.isTrue = "待付款";
             }
           }
         })

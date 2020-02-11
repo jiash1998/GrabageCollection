@@ -173,6 +173,7 @@ export default {
       custom: {
         name: "",
         type: "",
+        //所在地区和详细地址
         address: "",
         addressDetail: "",
         header: "",
@@ -182,7 +183,8 @@ export default {
         url: "",
         socialCreditCode: "",
         photo: "",
-        submit: ""
+        submit: "",
+        isCus:"未定制"
       },
       mapId: "BMap-" + parseInt(Date.now() + Math.random()),
       imgs: [],
