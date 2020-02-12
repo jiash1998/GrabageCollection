@@ -108,7 +108,7 @@ $pLeft: 30px;
 
       .head_step {
         width: 80%;
-        height: 80px;
+        height: 100px;
         // background-color: gray;
         display: flex;
         justify-content: flex-end;
@@ -118,7 +118,6 @@ $pLeft: 30px;
           margin: 0;
           .el-step {
             width: 200px;
-            
           }
         }
       }
@@ -135,7 +134,7 @@ $pLeft: 30px;
         display: flex;
         align-items: center;
         width: 95%;
-        height: 90%;
+        height: 65%;
         border-radius: 5px;
         box-sizing: border-box;
         border: 1px solid gainsboro;
@@ -155,15 +154,35 @@ $pLeft: 30px;
 
     .basic {
       width: 100%;
-      height: 470px;
+      // height: 470px;
       // background-color: pink;
 
-      #p1 {
-        display: inline-block;
-        padding: 20px 0 10px $pLeft;
+      .title {
+        width: 100%;
+        // background-color: gray;
+        #p1 {
+          display: inline-block;
+          padding: 20px 0 10px $pLeft;
+        }
+
+        span {
+          font-size: 0.8em;
+          display: inline-block;
+          margin-left: 85%;
+          color: #66b1ff;
+        }
+
+        .DivChange {
+          display: none;
+        }
       }
 
+      .DivChange {
+        display: none;
+      }
       .infoP {
+        // display: none;
+        // background-color: yellowgreen;
         p {
           font-size: 0.8em;
           color: gray;
@@ -184,6 +203,18 @@ $pLeft: 30px;
             width: 50px;
             height: 50px;
             border-radius: 5px;
+          }
+        }
+      }
+
+      .editor {
+        width: 95%;
+        margin: 0 2% 0 3%;
+        // background-color: gray;
+
+        .el-form {
+          .el-input {
+            width: 98%;
           }
         }
       }

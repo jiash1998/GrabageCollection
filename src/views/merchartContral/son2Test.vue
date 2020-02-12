@@ -13,7 +13,7 @@
               <p id="p2">{{item.name}}</p>
               <p id="p3">{{item.socialCreditCode}}</p>
               <p id="p4">
-                <span></span>{{isTrue}}
+                <span></span>{{item.isCus}}
               </p>
             </div>
           </div>
@@ -56,18 +56,18 @@ export default {
               this.custom.push(i);
             }
           }
-          for (const key of this.custom) {
-            if (
-              key.cycleDate != "" &&
-              key.cycleTimes != "" &&
-              key.payType != "" &&
-              key.payType 
-            ) {
-              console.log(key);
+          // for (const key of this.custom) {
+          //   if (
+          //     key.cycleDate != "" &&
+          //     key.cycleTimes != "" &&
+          //     key.payType != "" &&
+          //     key.payType 
+          //   ) {
+          //     console.log(key);
               
-              this.isTrue = "待付款";
-            }
-          }
+          //     this.isTrue = "待付款";
+          //   }
+          // }
         })
         .catch(err => {
           console.log(err);

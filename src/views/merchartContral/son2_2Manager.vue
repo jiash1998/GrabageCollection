@@ -1,6 +1,5 @@
 <template>
   <div id="son2_2Manager">
-    <!-- <div v-html=""></div> -->
     <div class="body">
       <div class="left">
         <router-link to="/merchartContral/Son2Manager/Son2Test" tag="div">
@@ -32,7 +31,7 @@
             <span>概览</span>
           </div>
           <div class="head_step">
-            <el-steps :space="200" :active="1" align-center >
+            <el-steps :space="200" :active="1" align-center>
               <el-step title="未定制"></el-step>
               <el-step title="待付款"></el-step>
               <el-step title="定制完成"></el-step>
@@ -52,8 +51,11 @@
           </div>
         </div>
         <div class="basic">
-          <p id="p1">基础信息</p>
-          <div class="infoP">
+          <div class="title">
+            <p id="p1">基础信息</p>
+            <span :class="{DivChange:change}" @click="changeDiv">编辑</span>
+          </div>
+          <div class="infoP" :class="{DivChange:change}">
             <P>
               店铺名称:
               <span>{{storeInfo.name}}</span>
@@ -86,6 +88,54 @@
               详细地址：
               <span>{{storeInfo.addressDetail}}</span>
             </p>
+          </div>
+          <div class="editor" :class="{DivChange:!change}">
+            <el-form
+              :model="editorCus"
+              ref="editorCus"
+              label-position="left"
+              label-width="100px"
+              size="small"
+            >
+              <el-form-item label="店铺名称" prop="name">
+                <el-input v-model="editorCus.name" placeholder="请输入店铺名称"></el-input>
+              </el-form-item>
+              <el-form-item label="经营类型" prop="type">
+                <el-input v-model="editorCus.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
+              </el-form-item>
+              <el-form-item label="店铺地址" prop="address">
+                <el-input v-model="editorCus.address" disabled></el-input>
+              </el-form-item>
+              <el-form-item prop="addressDetail">
+                <el-input v-model="editorCus.addressDetail" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="负责人" prop="header">
+                <el-input v-model="editorCus.header" placeholder="请输入负责人姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="性别" prop="sex">
+                <el-radio-group v-model="editorCus.sex">
+                  <el-radio-button label="男"></el-radio-button>
+                  <el-radio-button label="女"></el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+              <el-form-item label="手机号" prop="phone">
+                <el-input v-model="editorCus.phone" placeholder="请输入手机号"></el-input>
+              </el-form-item>
+              <el-form-item label="营业执照">
+                <el-input v-model="editorCus.photo" type="file" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="社会信用代码" prop="socialCreditCode">
+                <el-input v-model="editorCus.socialCreditCode" disabled></el-input>
+              </el-form-item>
+              <el-form-item label>
+                <el-button
+                  type="success"
+                  v-model="editorCus.submit"
+                  @click="submitForm('editorCus')"
+                >保存</el-button>
+                <el-button type="primary" @click="changeDiv" plain>取消</el-button>
+              </el-form-item>
+            </el-form>
           </div>
         </div>
         <div class="custom">
@@ -168,7 +218,26 @@ export default {
         payType: "",
         id: "",
         money: 500,
-        username: ""
+        username: "",
+        isCus: "待付款"
+      },
+      //DIV状态修改
+      change: false,
+      //修改
+      editorCus: {
+        name: "",
+        type: "",
+        //所在地区和详细地址
+        address: "",
+        addressDetail: "",
+        header: "",
+        sex: "",
+        phone: "",
+        url: "",
+        socialCreditCode: "",
+        photo: "",
+        id:"",
+        submit: ""
       },
       //存放定制信息
       storeInfo: {}
@@ -181,7 +250,41 @@ export default {
     getInfo() {
       console.log(JSON.parse(sessionStorage.customObj).id);
       this.storeInfo = JSON.parse(sessionStorage.customObj);
+      this.editorCus = this.storeInfo;
     },
+    //改变状态
+    changeDiv() {
+      this.change = !this.change;
+    },
+    //修改定制
+    submitForm(formName) {
+      this.$refs[formName].validate(val => {
+        if (val) {
+          this.editorCus.id = this.storeInfo.id;
+          var data = this.editorCus;
+          this.axios
+            .post(
+              "http://" + this.$store.state.path + ":8080/updateCustomById",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+              alert("保存成功");
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        } else {
+          alert("啥都没改，别捣乱");
+        }
+      });
+    },
+    //提交回收方案
     submit(formname) {
       this.$refs[formname].validate(val => {
         if (val) {
@@ -203,18 +306,18 @@ export default {
               console.log(res.data);
               alert("提交成功");
               //resolve和routerLink/to 一样
-              // let routerData = this.$router.resolve({
-              //   path: "/Pay",
-              //   query: { htmls: res.data }
-              // });
-              // this.htmls = res.data;
+              let routerData = this.$router.resolve({
+                path: "/Pay",
+                query: { htmls: res.data }
+              });
+              this.htmls = res.data;
               // //打开新页面(地址，空白的)
-              // window.open(routerData.href, "_ blank");
+              window.open(routerData.href, "_ blank");
               // //创造一个节点，并写入返回的html代码
-              // const div = document.createElement("div");
-              // div.innerHTML = htmls;
-              // document.body.appendChild(div);
-              // document.forms[0].submit();
+              const div = document.createElement("div");
+              div.innerHTML = htmls;
+              document.body.appendChild(div);
+              document.forms[0].submit();
             })
             .catch(err => {
               console.log(err);
