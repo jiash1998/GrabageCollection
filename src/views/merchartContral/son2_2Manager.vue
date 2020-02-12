@@ -31,7 +31,7 @@
             <span>概览</span>
           </div>
           <div class="head_step">
-            <el-steps :space="200" :active="1" align-center>
+            <el-steps :space="200" :active="steps" align-center>
               <el-step title="未定制"></el-step>
               <el-step title="待付款"></el-step>
               <el-step title="定制完成"></el-step>
@@ -152,6 +152,9 @@
                   <el-checkbox v-for="(item,index) in times" :key="index" :label="item">{{item}}</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
+              <el-form-item label="服务包月">
+                <el-input-number v-model="garbageCycle.sustainMonth" size="mini" :min="1" :max="12"></el-input-number>
+              </el-form-item>
               <el-form-item label="支付方式" prop="payType">
                 <el-radio-group v-model="garbageCycle.payType">
                   <el-radio label="zfb">
@@ -212,10 +215,12 @@ export default {
       },
       date: ["6:00-7:30", "11:00-13:30", "17:00-18:30", "22:00-12:30"],
       times: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+      //资源回收表单
       garbageCycle: {
         cycleDate: [],
         cycleTimes: [],
         payType: "",
+        sustainMonth: "",
         id: "",
         money: 500,
         username: "",
@@ -223,6 +228,8 @@ export default {
       },
       //DIV状态修改
       change: false,
+      //step状态
+      steps: 1,
       //修改
       editorCus: {
         name: "",
@@ -236,7 +243,7 @@ export default {
         url: "",
         socialCreditCode: "",
         photo: "",
-        id:"",
+        id: "",
         submit: ""
       },
       //存放定制信息
@@ -304,6 +311,7 @@ export default {
             )
             .then(res => {
               console.log(res.data);
+              this.steps += 1;
               alert("提交成功");
               //resolve和routerLink/to 一样
               let routerData = this.$router.resolve({
