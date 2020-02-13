@@ -41,11 +41,19 @@
         <div class="right_del">
           <div class="del">
             <p>
-              <i class="el-icon-warning-outline"></i>&nbsp;开发中
+              <i class="el-icon-warning-outline"></i>
+              &nbsp;{{developStatus}}
             </p>
             <p style="color:gray;">请及时完成店铺定制计划，提交后次日即可实行</p>
             <div id="btnDiv">
-              <el-button type="primary" @click="submit('garbageCycle')">提交审核</el-button>
+              <div id="priDiv" :class="{priStatus:isPri}">
+                <el-button type="primary" :class="{displayChange:isNone}" plain @click="pay">前往付款</el-button>
+                <el-button
+                  type="primary"
+                  :class="{displayChange:!isNone}"
+                  @click="submit('garbageCycle')"
+                >提交审核</el-button>
+              </div>
               <el-button type>删除</el-button>
             </div>
           </div>
@@ -226,8 +234,14 @@ export default {
         username: "",
         isCus: "待付款"
       },
+      //开发状态
+      developStatus: "开发中",
       //DIV状态修改
       change: false,
+      //付款或者删除按钮状态
+      isNone: true,
+      //付款和删除状态
+      isPri: false,
       //step状态
       steps: 1,
       //修改
@@ -254,21 +268,88 @@ export default {
     this.getInfo();
   },
   methods: {
+    //获取对应商铺信息
     getInfo() {
-      console.log(JSON.parse(sessionStorage.customObj).id);
+      console.log(JSON.parse(sessionStorage.customObj));
       this.storeInfo = JSON.parse(sessionStorage.customObj);
       this.editorCus = this.storeInfo;
+      for (const i in this.editorCus) {
+        switch (this.editorCus[i]) {
+          case "已付款":
+            this.developStatus = "已完成";
+            this.steps = 3;
+            console.log("已付款");
+            this.isPri = !this.isPri;
+            break;
+          case "待付款":
+            this.isNone = !this.isNone;
+            console.log("待付款");
+            this.steps = 2;
+            break;
+          case "未定制":
+            console.log("未定制");
+            this.steps = 1;
+            break;
+          default:
+            console.log("别看了");
+            break;
+        }
+        // if (this.editorCus[i] == "已付款") {
+        //   this.developStatus = "已完成";
+        //   this.steps = 3;
+        //   console.log("已付款");
+        //   this.isPri = !this.isPri;
+        //   break;
+        // } else if (this.editorCus[i] == "待付款") {
+        //   this.isNone = !this.isNone;
+        //   console.log("待付款");
+        //   this.steps = 2;
+        //   break;
+        // } else {
+        //   this.steps = 1;
+        //   console.log("未定制");
+        // }
+      }
     },
     //改变状态
     changeDiv() {
       this.change = !this.change;
+    },
+    //前往付款
+    pay() {
+      var data = { money: 500, id: JSON.parse(sessionStorage.customObj).id };
+      this.axios
+        .post(
+          "http://" + this.$store.state.path + ":8080/payAli",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          let routerData = this.$router.resolve({
+            path: "/Pay",
+            query: { htmls: res.data }
+          });
+          this.htmls = res.data;
+          window.open(routerData.href, "_ blank");
+          const div = document.createElement("div");
+          div.innerHTML = this.htmls;
+          document.body.appendChild(div);
+          document.forms[0].submit();
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     //修改定制
     submitForm(formName) {
       this.$refs[formName].validate(val => {
         if (val) {
           this.editorCus.id = this.storeInfo.id;
-          var data = this.editorCus;
+          var data = { money: 500 };
           this.axios
             .post(
               "http://" + this.$store.state.path + ":8080/updateCustomById",
@@ -312,18 +393,24 @@ export default {
             .then(res => {
               console.log(res.data);
               this.steps += 1;
+              // this.isNone = !this.isNone;
+              // localStorage.setItem("btnState", this.isNone);
               alert("提交成功");
-              //resolve和routerLink/to 一样
+              //修改按钮状态
+              // localStorage.setItem("payInfo", res.data);
+              this.editorCus.callback = res.data;
+              console.log(this.editorCus);
+              // //resolve和routerLink/to 一样
               let routerData = this.$router.resolve({
                 path: "/Pay",
                 query: { htmls: res.data }
               });
               this.htmls = res.data;
-              // //打开新页面(地址，空白的)
+              // // //打开新页面(地址，空白的)
               window.open(routerData.href, "_ blank");
-              // //创造一个节点，并写入返回的html代码
+              // // //创造一个节点，并写入返回的html代码
               const div = document.createElement("div");
-              div.innerHTML = htmls;
+              div.innerHTML = this.htmls;
               document.body.appendChild(div);
               document.forms[0].submit();
             })

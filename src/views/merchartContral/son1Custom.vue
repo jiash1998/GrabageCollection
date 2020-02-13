@@ -38,14 +38,21 @@
       <div class="custom_main">
         <div id="custom_main_con">
           <h3>商家定制</h3>
-          <el-form :model="custom" ref="custom" :rules="rules" label-position="left">
+          <el-form
+            :model="custom"
+            ref="custom"
+            :rules="rules"
+            size="small"
+            label-width="120px"
+            label-position="left"
+          >
             <el-form-item label="店铺名称" prop="name">
               <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
             </el-form-item>
             <el-form-item label="经营类型" prop="type">
               <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
             </el-form-item>
-            <div class="map-area" :id="mapId"></div>
+            <!-- <div class="map-area" :id="mapId"></div> -->
             <el-form-item label="店铺地址" prop="address">
               <el-cascader
                 :options="options"
@@ -71,7 +78,7 @@
                 <el-radio-button label="女"></el-radio-button>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="联系方式（手机）" prop="phone">
+            <el-form-item label="联系方式(手机)" prop="phone">
               <el-input v-model="custom.phone" placeholder="请输入手机号"></el-input>
             </el-form-item>
             <el-form-item label="上传营业执照">
@@ -184,7 +191,7 @@ export default {
         socialCreditCode: "",
         photo: "",
         submit: "",
-        isCus:"未定制"
+        isCus: "未定制"
       },
       mapId: "BMap-" + parseInt(Date.now() + Math.random()),
       imgs: [],
@@ -213,7 +220,7 @@ export default {
       this.initMap();
     },
     //异步
-     add_img(e) {
+    add_img(e) {
       //兼容多个浏览器
       e = event || e;
       let reader = new FileReader();

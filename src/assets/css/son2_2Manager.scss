@@ -149,6 +149,16 @@ $pLeft: 30px;
         #btnDiv {
           display: flex;
           margin: 0 0 0 35%;
+
+          #priDiv {
+            margin-right: 10%;
+          }
+          .priStatus {
+            display: none;
+          }
+          .displayChange {
+            display: none;
+          }
         }
       }
     }
