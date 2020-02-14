@@ -6,6 +6,7 @@ import Editor from "../views/editor";
 import Register from "../views/register";
 import Notice from "../views/notice";
 import Custom from "../views/custom";
+import Account from "../views/account";
 import Pay from "../views/pay";
 
 //管理员
@@ -52,6 +53,14 @@ const routes = [
     component: Custom,
     name: "Custom",
     path: "/Custom"
+  },
+  {
+    component: Account,
+    name: "Account",
+    path: "/Account",
+     meta: {
+      requireAuth: true
+    }
   },
   {
     component: merchartContral,

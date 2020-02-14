@@ -18,10 +18,13 @@
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
         <div class="contralItems">
-          <router-link tag="span" to="/contral">站长控制</router-link>
+          <router-link tag="span" to="/contral">站长中心</router-link>
         </div>
         <div class="contralItems">
-          <router-link tag="span" to="/merchartContral">商户控制</router-link>
+          <router-link tag="span" to="/merchartContral">商户中心</router-link>
+        </div>
+        <div class="contralItems">
+          <router-link tag="span" to="/Account">账户中心</router-link>
         </div>
       </div>
       <div class="header_other">
@@ -32,7 +35,8 @@
         </div>
         <div class="contralItems">
           <el-dropdown @command="handleCommand">
-            <el-avatar>{{$store.state.username}}</el-avatar>
+            <!-- //三元运算符添加 -->
+            <el-avatar :class="$store.state.isExit === true?'otherBgc':''">{{$store.state.username}}</el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <router-link to="/signin" tag="div">登录/注册</router-link>
@@ -40,7 +44,7 @@
               <el-dropdown-item>
                 <router-link to="/Editor" tag="div">编辑资料</router-link>
               </el-dropdown-item>
-              <el-dropdown-item command="exit">退出</el-dropdown-item>
+              <el-dropdown-item command="exit" v-show="$store.state.isExit">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -57,12 +61,17 @@ export default {
     return {
       headFix: false,
       offsetTop: 0,
-      isDot:true
+      //提示
+      isDot: true
     };
   },
   created() {
     console.log(sessionStorage.getItem("userName"));
     this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
+    //退出键显示
+    this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
+    console.log(this.isShow);
+    sessionStorage.removeItem("isExit");
   },
   // async mounted() {
   //   window.addEventListener("scroll", this.listenerScroll);
@@ -74,8 +83,10 @@ export default {
   methods: {
     handleCommand(command) {
       if (command == "exit") {
+        //退出
         sessionStorage.setItem("token", "false");
         sessionStorage.removeItem("userName");
+        this.$store.commit("exitChange");
         this.$router.push("/signin");
         this.$store.commit("resertUserName");
       }

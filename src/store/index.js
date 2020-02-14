@@ -12,6 +12,8 @@ export default new Vuex.Store({
     customUrl:"",
     //定制管理
     // clickStore:[],
+    //退出键
+     isExit :false,
     //登录姓名
     username: "",
     mapStart: "滁州市琅琊区南谯北路苏宁广场",
@@ -30,6 +32,10 @@ export default new Vuex.Store({
     },
     resertUserName(state){
       return (state.username = "");
+    },
+    //退出
+    exitChange(state){
+      return (state.isExit = !state.isExit); 
     },
     //修改路线
     modifyPathStart(state, payload) {

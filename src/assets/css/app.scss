@@ -62,7 +62,7 @@ body {
         font-size: 1em;
       }
 
-      .contralItems:hover{
+      .contralItems:hover {
         color: black;
       }
     }
@@ -87,14 +87,24 @@ body {
         margin-right: 25px;
       }
 
-      .prompt:hover{
+      .prompt:hover {
         color: black;
       }
 
       .contralItems {
         // background-color: bisque;
         margin-right: 20px;
-        font-size: .7em;
+        font-size: 0.7em;
+
+        .el-dropdown {
+          .el-avatar {
+            background-color: #f0f9eb;
+          }
+
+          .otherBgc {
+            background-color: #67c23a;
+          }
+        }
       }
     }
   }

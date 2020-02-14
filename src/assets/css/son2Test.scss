@@ -171,20 +171,21 @@ $pLineheight: 9px;
 
       .order {
         width: 86%;
-        // min-height: 270px;
-        height: auto;
+        height: 270px;
+        // height: auto;
         margin: 10px 7% 0 7%;
         // background-color: pink;
-        // overflow: auto;
+        overflow: auto;
 
         .el-table {
-          height: 270px;
-          overflow: auto;
-        //   .table_expand {
-        //     label {
-        //       color: red;
-        //     }
-        //   }
+          // height: 270px;
+          // overflow: auto;
+          
+          .el-form{
+            .el-form-item{
+              height: 18px;
+            }
+          }
         }
 
         .table_expand label {

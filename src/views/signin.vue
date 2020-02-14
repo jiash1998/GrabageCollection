@@ -99,8 +99,11 @@ export default {
             .then(res => {
               console.log(res.data);
               //成功之后将值保存在session
+              //路由拦截
               sessionStorage.setItem("token", "true");
-              sessionStorage.setItem("userName",res.data.username);
+              //退出键
+              this.$store.commit("exitChange");
+              sessionStorage.setItem("userName", res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
               alert("post success");

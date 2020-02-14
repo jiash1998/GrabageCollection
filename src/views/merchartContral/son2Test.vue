@@ -44,12 +44,7 @@
             </div>
           </div>
           <div class="choose">
-            <el-form
-              :model="querySettle"
-              ref="querySettle"
-              :inline="true"
-              size="small"
-            >
+            <el-form :model="querySettle" ref="querySettle" :inline="true" size="small">
               <el-form-item label="支付方式:">
                 <el-radio-group v-model="querySettle.payType">
                   <el-radio-button label="支付宝"></el-radio-button>
@@ -60,7 +55,7 @@
                 <el-date-picker v-model="querySettle.tradeTime" type="month" placeholder="选择月份"></el-date-picker>
               </el-form-item>
               <el-form-item label="状态:">
-                <el-select v-model="querySettle.isCus" placeholder="选择状态">
+                <el-select v-model="querySettle.isCus" @change="manageTrade" placeholder="选择状态">
                   <el-option label="全部" value="all"></el-option>
                   <el-option label="未结算" value="no"></el-option>
                   <el-option label="已结算" value="yes"></el-option>
@@ -69,10 +64,10 @@
             </el-form>
           </div>
           <div class="order">
-            <el-table :data="custom">
+            <el-table :data="trade">
               <el-table-column type="expand">
                 <template slot-scope="props">
-                  <el-form label-position="left" class="table_expand">
+                  <el-form label-position="left">
                     <el-form-item label="店铺">
                       <span>{{ props.row.name }}</span>
                     </el-form-item>
@@ -88,6 +83,9 @@
                     <el-form-item label="订单编号">
                       <span>{{ props.row.tradeNo }}</span>
                     </el-form-item>
+                    <el-form-item label="交易时间">
+                      <span>{{ props.row.tradeTime }}</span>
+                    </el-form-item>
                     <el-form-item label="应付金额">
                       <span>500</span>
                     </el-form-item>
@@ -97,7 +95,7 @@
                   </el-form>
                 </template>
               </el-table-column>
-              <el-table-column label="店铺" prop="name" width="220"></el-table-column>   
+              <el-table-column label="店铺" prop="name" width="220"></el-table-column>
               <el-table-column label="负责人" prop="header"></el-table-column>
               <el-table-column label="应付金额" prop="money"></el-table-column>
               <el-table-column label="实付金额" prop></el-table-column>
@@ -117,7 +115,10 @@ export default {
   name: "son2Test",
   data() {
     return {
+      //定制表
       custom: [],
+      //帐单
+      trade: [],
       querySettle: {
         payType: "",
         isCus: "",
@@ -127,6 +128,7 @@ export default {
   },
   mounted() {
     this.getData();
+    // this.manageTrade();
   },
   methods: {
     async getData() {
@@ -138,31 +140,27 @@ export default {
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
             }
+            if (i.user == sessionStorage.getItem("userName") && i.isCus != "未定制") {
+              this.trade.push(i);
+            }
           }
-          // for (const key of this.custom) {
-          //   if (
-          //     key.cycleDate != "" &&
-          //     key.cycleTimes != "" &&
-          //     key.payType != "" &&
-          //     key.payType
-          //   ) {
-          //     console.log(key);
-
-          //     this.isTrue = "待付款";
-          //   }
-          // }
         })
         .catch(err => {
           console.log(err);
         });
     },
+    //进入各店铺
     choose(index) {
-      this.custom[index].callback = "";
+      // this.custom[index].callback = "";     
       console.log(this.custom[index]);
       //sessionStorage如何存放数组
       var customObj = JSON.stringify(this.custom[index]);
       sessionStorage.customObj = customObj;
       this.$router.push("/merchartContral/Son2Manager/Son2_2Manager");
+    },
+    //帐单管理
+    manageTrade(){      
+      
     }
   }
 };

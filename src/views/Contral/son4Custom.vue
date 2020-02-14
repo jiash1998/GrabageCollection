@@ -1,22 +1,15 @@
 <template>
+  <div id="son4Custom"></div>
 </template>
 <script>
-import loadBMap from "../../map";
 export default {
+  name:"son4Custom",
   data() {
-    return {
-
-    };
+    return {};
   },
-  mounted() {
-    this.initMap();
-  },
-  methods: {
-   
-    
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
 <style scoped>
-
 </style>
