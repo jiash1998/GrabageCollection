@@ -23,9 +23,13 @@
         <div class="contralItems">
           <router-link tag="span" to="/merchartContral">商户控制</router-link>
         </div>
-        <!-- <div class="contralItems">
-          <router-link tag="span" to="/Custom">定制服务</router-link>
-        </div>-->
+      </div>
+      <div class="header_other">
+        <div class="prompt">
+          <el-badge :is-dot="isDot">
+            <i class="el-icon-bell"></i>
+          </el-badge>
+        </div>
         <div class="contralItems">
           <el-dropdown @command="handleCommand">
             <el-avatar>{{$store.state.username}}</el-avatar>
@@ -52,7 +56,8 @@ export default {
   data() {
     return {
       headFix: false,
-      offsetTop: 0
+      offsetTop: 0,
+      isDot:true
     };
   },
   created() {

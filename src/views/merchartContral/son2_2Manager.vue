@@ -292,6 +292,7 @@ export default {
             break;
           default:
             console.log("别看了");
+            // this.steps = 1;
             break;
         }
         // if (this.editorCus[i] == "已付款") {

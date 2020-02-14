@@ -180,14 +180,11 @@ $pLineheight: 9px;
         .el-table {
           height: 270px;
           overflow: auto;
-          .table_expand {
-            label {
-              color: red;
-            }
-            .el-form-item {
-              height: 20px;
-            }
-          }
+        //   .table_expand {
+        //     label {
+        //       color: red;
+        //     }
+        //   }
         }
 
         .table_expand label {

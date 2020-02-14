@@ -52,7 +52,7 @@
             <el-form-item label="经营类型" prop="type">
               <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
             </el-form-item>
-            <!-- <div class="map-area" :id="mapId"></div> -->
+            <div class="map-area" :id="mapId"></div>
             <el-form-item label="店铺地址" prop="address">
               <el-cascader
                 :options="options"
@@ -95,7 +95,10 @@
         </div>
       </div>
     </div>
-    <public-food></public-food>
+    <!-- <public-food></public-food> -->
+    <div class="foot">
+      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
+    </div>
   </div>
 </template>
 

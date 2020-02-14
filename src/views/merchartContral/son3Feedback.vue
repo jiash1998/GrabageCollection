@@ -15,7 +15,10 @@
         <p v-for="(item,index) in instructions" :key="index">{{item}}</p>
       </div>
     </div>
-    <public-foot></public-foot>
+    <!-- <public-foot></public-foot> -->
+    <div class="foot">
+      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
+    </div>
   </div>
 </template>
 
@@ -35,7 +38,7 @@ export default {
         "3.如果情况紧急，请拨打电话：17856006144，负责人：顾一"
       ],
       feedback: {
-        username:"",
+        username: "",
         content: ""
       }
     };
@@ -61,7 +64,6 @@ export default {
         .catch(err => {
           console.log(err);
           alert("发送失败！");
-
         });
     }
   }
