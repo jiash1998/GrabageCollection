@@ -52,13 +52,18 @@
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="订单日期:">
-                <el-date-picker v-model="querySettle.tradeTime" type="month" placeholder="选择月份"></el-date-picker>
+                <el-date-picker
+                  v-model="querySettle.tradeTime"
+                  @change="manageTradeTime"
+                  type="month"
+                  placeholder="选择月份"
+                ></el-date-picker>
               </el-form-item>
               <el-form-item label="状态:">
                 <el-select v-model="querySettle.isCus" @change="manageTrade" placeholder="选择状态">
                   <el-option label="全部" value="all"></el-option>
-                  <el-option label="未结算" value="no"></el-option>
-                  <el-option label="已结算" value="yes"></el-option>
+                  <el-option label="待付款" value="no"></el-option>
+                  <el-option label="已付款" value="yes"></el-option>
                 </el-select>
               </el-form-item>
             </el-form>
@@ -117,8 +122,11 @@ export default {
     return {
       //定制表
       custom: [],
-      //帐单
+      //全部帐单,未付款帐单，已付款帐单
       trade: [],
+      tradeAll: [],
+      tradeNo: [],
+      tradeYes: [],
       querySettle: {
         payType: "",
         isCus: "",
@@ -135,13 +143,32 @@ export default {
       await this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllCustom")
         .then(res => {
-          console.log(res.data);
           for (const i of res.data) {
+            //获取用户全部定制
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
             }
-            if (i.user == sessionStorage.getItem("userName") && i.isCus != "未定制") {
+            //获取除未定制以外的订单
+            if (
+              i.user == sessionStorage.getItem("userName") &&
+              i.isCus != "未定制"
+            ) {
               this.trade.push(i);
+              this.tradeAll.push(i);
+            }
+            //获取未付款的订单
+            if (
+              i.user == sessionStorage.getItem("userName") &&
+              i.isCus == "待付款"
+            ) {
+              this.tradeNo.push(i);
+            }
+            //获取已付款的订单
+            if (
+              i.user == sessionStorage.getItem("userName") &&
+              i.isCus == "已付款"
+            ) {
+              this.tradeYes.push(i);
             }
           }
         })
@@ -151,16 +178,35 @@ export default {
     },
     //进入各店铺
     choose(index) {
-      // this.custom[index].callback = "";     
+      // this.custom[index].callback = "";
       console.log(this.custom[index]);
       //sessionStorage如何存放数组
       var customObj = JSON.stringify(this.custom[index]);
       sessionStorage.customObj = customObj;
       this.$router.push("/merchartContral/Son2Manager/Son2_2Manager");
     },
-    //帐单管理
-    manageTrade(){      
+    //时间获取
+    manageTradeTime(value) {
+      console.log(JSON.stringify(value).split("-")[1]);
+      // console.log(this.trade[1].tradeTime);
       
+    },
+    //帐单状态获取
+    manageTrade(value) {
+      switch (value) {
+        case "all":
+          this.trade = this.tradeAll;
+          break;
+        case "no":
+          this.trade = this.tradeNo;
+          break;
+        case "yes":
+          this.trade = this.tradeYes;
+          break;
+        default:
+          this.trade = this.tradeAll;
+          break;
+      }
     }
   }
 };
