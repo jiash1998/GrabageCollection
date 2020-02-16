@@ -12,6 +12,8 @@ body {
   .head {
     width: 100%;
     display: flex;
+    //禁止左键拉取复制
+    user-select: none;
     // background-color: black;
     .logo {
       width: 6%;

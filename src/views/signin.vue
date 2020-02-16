@@ -102,7 +102,7 @@ export default {
               //路由拦截
               sessionStorage.setItem("token", "true");
               //退出键
-              this.$store.commit("exitChange");
+              sessionStorage.setItem("isExit","true");
               sessionStorage.setItem("userName", res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);

@@ -1,8 +1,65 @@
 <template>
   <div id="account">
     <div class="body">
-      <div class="left"></div>
-      <div class="right"></div>
+      <!-- <div class="left"></div> -->
+      <div class="top">
+        <p>基础资料</p>
+      </div>
+      <div class="right">
+        <div class="info" :class="{displayCha:isCha}">
+          <p>
+            <span>用户名：</span>
+            {{userArr.username}}
+            <span
+              class="editor"
+              :class="{displayCha:isCha}"
+              @click="changeDis"
+            >编辑</span>
+          </p>
+          <p>
+            <span>类型：</span>
+            {{userArr.identity}}
+          </p>
+          <p>
+            <span>密码：</span>
+            {{userArr.password}}
+          </p>
+          <p>
+            <span>邮箱：</span>
+            {{userArr.email}}
+          </p>
+          <p>
+            <span>手机号：</span>
+            {{userArr.phone}}
+          </p>
+        </div>
+        <div class="form" :class="{displayCha:!isCha}">
+          <el-form :model="user" ref="user" label-width="120px" label-position="left" size="small">
+            <el-form-item label="用户名">
+              <el-input v-model="user.username"></el-input>
+            </el-form-item>
+            <el-form-item label="类型">
+              <el-radio-group v-model="user.identity" disabled>
+                <el-radio-button label="沿街商家"></el-radio-button>
+                <el-radio-button label="普通用户"></el-radio-button>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="密码">
+              <el-input v-model="user.password" type="password" show-password></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱">
+              <el-input v-model="user.email"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号">
+              <el-input v-model="user.phone"></el-input>
+            </el-form-item>
+            <el-form-item label>
+              <el-button type="primary" @click="changeUser" plain>保存</el-button>
+              <el-button type="success" @click="changeDis">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
     </div>
     <div class="foot">
       <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
@@ -11,12 +68,73 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "account",
   data() {
-    return {};
+    return {
+      user: {
+        username: "",
+        password: "",
+        email: "",
+        phone: "",
+        identity: ""
+      },
+      userArr: {},
+      //状态改变
+      isCha: false
+    };
   },
-  methods: {}
+  mounted() {
+    this.getInfo();
+  },
+  methods: {
+    getInfo() {
+      var data = { username: sessionStorage.getItem("userName") };
+      this.axios
+        .post(
+          "http://" + this.$store.state.path + ":8080/getUserByUsername",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res.data);
+          this.user = res.data;
+          this.userArr = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    changeUser() {
+      var data = this.user;
+      console.log(data);
+
+      // this.axios
+      //   .post(
+      //     "http://" + this.$store.state.path + ":8080/updateUserByName",
+      //     qs.stringify(data),
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/x-www-form-urlencoded"
+      //       }
+      //     }
+      //   )
+      //   .then(res => {
+      //     console.log(res.data);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
+    },
+    changeDis() {
+      this.isCha = !this.isCha;
+    }
+  }
 };
 </script>
 
