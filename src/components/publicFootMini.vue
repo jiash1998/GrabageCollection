@@ -19,8 +19,9 @@ export default {
   background-color: #f0f3f7;
   display: flex;
   justify-content: center;
-  align-items: center;
-
+  // align-items: center;
+  // position: absolute;
+  // top: 100%;
   p {
     display: inline;
     color: gray;

@@ -3,6 +3,9 @@
     height: 60px;
     background-color: pink;
     display: fixed;
+    position: absolute;
+    top: 55px;
+    z-index: 999;
     .el-menu{
         height: 60px;
         width: 100%;

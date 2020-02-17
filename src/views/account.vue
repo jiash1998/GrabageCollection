@@ -61,16 +61,18 @@
         </div>
       </div>
     </div>
-    <div class="foot">
-      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
-    </div>
+    <public-foot-mini></public-foot-mini>
   </div>
 </template>
 
 <script>
+import publicFootMini from "../components/publicFootMini.vue";
 import qs from "querystring";
 export default {
   name: "account",
+  components: {
+    publicFootMini
+  },
   data() {
     return {
       user: {

@@ -45,12 +45,12 @@
           </div>
           <div class="choose">
             <el-form :model="querySettle" ref="querySettle" :inline="true" size="small">
-              <el-form-item label="支付方式:">
+              <!-- <el-form-item label="支付方式:">
                 <el-radio-group v-model="querySettle.payType">
                   <el-radio-button label="支付宝"></el-radio-button>
                   <el-radio-button label="微信"></el-radio-button>
                 </el-radio-group>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item label="订单日期:">
                 <el-date-picker
                   v-model="querySettle.tradeTime"

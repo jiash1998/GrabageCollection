@@ -1,23 +1,22 @@
 .notice_main {
   width: 100%;
   height: 850px;
+  margin-top: 55px;
   //   background-color: pink;
   .notice_tabber {
     width: 100%;
     height: 60px;
     background-color: #fff;
     // padding-left: 2.5%;
-    
-    }
-  
+  }
 
   .notice_content {
     width: 100%;
     height: 800px;
-    
-    background-color: #F8FAFF;
+
+    background-color: #f8faff;
     display: flex;
-    .left{
+    .left {
       width: 75%;
       overflow: auto;
       height: 750px;
@@ -25,28 +24,28 @@
       background-color: #fff;
       margin: 10px 2.5% 0 2.5%;
 
-      .content{
+      .content {
         width: 95%;
         height: 20%;
         box-sizing: border-box;
         display: inline-block;
         border-bottom: 1px solid gainsboro;
-        padding:0 2.5% 0 2.5%;
-        
-        #p1{
+        padding: 0 2.5% 0 2.5%;
+
+        #p1 {
           font-weight: bold;
         }
-        #p2{
-          font-size: .9em;
+        #p2 {
+          font-size: 0.9em;
         }
 
-        .el-tag{
+        .el-tag {
           height: 30px;
         }
       }
     }
 
-    .right{
+    .right {
       width: 18%;
       height: 250px;
       box-shadow: 0 3px 8px gainsboro;

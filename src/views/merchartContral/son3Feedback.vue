@@ -15,7 +15,6 @@
         <p v-for="(item,index) in instructions" :key="index">{{item}}</p>
       </div>
     </div>
-    <!-- <public-foot></public-foot> -->
     <public-foot-mini></public-foot-mini>
   </div>
 </template>
@@ -31,7 +30,7 @@ export default {
   data() {
     return {
       instructions: [
-        "1.如有意见请如实反馈，请不要出现辱骂性字眼，否则后果自负",
+        "1.如有意见请如实反馈，请不要出现不文明用语，否则后果自负",
         "2.发送反馈之后，一般1-3个工作日内会收到回复邮件",
         "3.如果情况紧急，请拨打电话：17856006144，负责人：顾一"
       ],

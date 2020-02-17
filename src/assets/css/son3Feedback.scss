@@ -1,38 +1,45 @@
-.body {
-  width: 100%;
-  overflow: auto;
+#son3Feedback {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  // background-color:pink;
+  .body {
+    width: 100%;
+    // position: absolute;
+    // top: 115px;
+    // bottom: 0px;
+    // left: 0px;
+    flex: 1;
 
-  .feedbackForm {
-    width: 80%;
-    // height: 20vh;
-    margin: 0px 10% 0 10%;
+    // background-color: pink;
 
-    .el-form {
-      width: 100%;
-      padding: 50px 0 0 0;
+    .feedbackForm {
+      width: 80%;
+      // height: 20vh;
+      margin: 115px 10% 0 10%;
 
-      .el-button {
-        margin: 20px 10px 0 0;
+      .el-form {
+        width: 100%;
+        padding: 50px 0 0 0;
+
+        .el-button {
+          margin: 20px 10px 0 0;
+        }
+      }
+    }
+
+    .instructions {
+      width: 80%;
+      margin: 50px 10% 0 10%;
+      // background-color: goldenrod;
+
+      h4 {
+        color: gray;
+      }
+      p {
+        font-size: 0.8em;
+        color: gray;
       }
     }
   }
 
-  .instructions {
-    width: 80%;
-    // height: 80vh;
-    margin: 0 10% 0 10%;
-    background-color:goldenrod;
-
-    h4 {
-      color: gray;
-    }
-    p {
-      font-size: 0.8em;
-      color: gray;
-    }
-  }
 }

@@ -4,17 +4,20 @@ body {
   padding: 0;
   cursor: pointer;
 
-  .headFixed {
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    top: 0;
-  }
+  // .headFixed {
+  //   position: fixed;
+  //   top: 0;
+  //   z-index: 999;
+  //   top: 0;
+  // }
   .head {
     width: 100%;
     display: flex;
     //禁止左键拉取复制
     user-select: none;
+    position: absolute;
+    top: 0;
+    z-index: 999;
     // background-color: black;
     .logo {
       width: 6%;
