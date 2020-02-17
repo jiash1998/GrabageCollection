@@ -16,19 +16,17 @@
       </div>
     </div>
     <!-- <public-foot></public-foot> -->
-    <div class="foot">
-      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
-    </div>
+    <public-foot-mini></public-foot-mini>
   </div>
 </template>
 
 <script>
-import PublicFoot from "../../components/publicFood.vue";
+import publicFootMini from "../../components/publicFootMini.vue";
 import qs from "querystring";
 export default {
   name: "son3Feedback",
   components: {
-    PublicFoot
+    publicFootMini
   },
   data() {
     return {

@@ -50,6 +50,7 @@
         </div>
       </div>
     </div>
+    <div class="test"></div>
     <router-view />
   </div>
 </template>
@@ -62,11 +63,11 @@ export default {
       headFix: false,
       offsetTop: 0,
       //提示
-      isDot: true
+      isDot: true,
+      isShow: false
     };
   },
   created() {
-    // console.log(sessionStorage.getItem("userName"));
     this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
   },
   // async mounted() {
@@ -80,18 +81,19 @@ export default {
     //退出键显示
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
     console.log(this.isShow);
-    sessionStorage.removeItem("isExit");
   },
   methods: {
     handleCommand(command) {
       if (command == "exit") {
         //退出
-        sessionStorage.setItem("isExit", false);
+        sessionStorage.setItem("isExit", "false");
         sessionStorage.removeItem("isExit");
         sessionStorage.setItem("token", "false");
         sessionStorage.removeItem("userName");
         this.$router.push("/signin");
         this.$store.commit("resertUserName");
+        //路由刷新页面，使得数据搭载
+        this.$router.go(0);
       }
     },
     listenerScroll() {

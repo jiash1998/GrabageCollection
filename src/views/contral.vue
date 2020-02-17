@@ -44,18 +44,18 @@
       </div>
       <div class="body_right">
         <router-view />
+        <public-foot-mini></public-foot-mini>
       </div>
     </div>
-    <public-food></public-food>
   </div>
 </template>
 
 <script>
-import PublicFood from "../components/publicFood.vue";
+import publicFootMini from "../components/publicFootMini.vue";
 export default {
   name: "contral",
   components: {
-    PublicFood
+    publicFootMini
   }
 };
 </script>

@@ -1,8 +1,10 @@
-$allHeight: 490px;
+$allHeight: 460px;
 $pLeft: 30px;
 .body {
   width: 100%;
-  height: $allHeight;
+  // height: $allHeight;
+  height: 100%;
+  // overflow: hidden;
   //   background-color: pink;
   display: flex;
   .left {

@@ -107,6 +107,8 @@ export default {
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
               alert("post success");
+              //路由刷新，搭载数据
+              this.$router.go(0);
             });
         } else {
           alert("error");

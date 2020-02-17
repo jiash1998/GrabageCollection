@@ -1,4 +1,5 @@
 <template>
+<!-- 作废 -->
   <div id="son2Manager">
     <div class="body">
       <div class="viewDiv">

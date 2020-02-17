@@ -6,6 +6,7 @@ body {
 
   .headFixed {
     position: fixed;
+    top: 0;
     z-index: 999;
     top: 0;
   }
@@ -109,5 +110,15 @@ body {
         }
       }
     }
+  }
+
+  .test{
+    position: fixed;
+    width: 100px;
+    // height: 100px;
+    top: 75%;
+    left: 40px;
+    background-color: pink;
+    z-index: 999;
   }
 }

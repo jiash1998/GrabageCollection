@@ -109,15 +109,17 @@
         </div>
       </div>
     </div>
-    <div class="foot">
-      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
-    </div>
+    <public-foot-mini></public-foot-mini>
   </div>
 </template>
 
 <script>
+import publicFootMini from "../../components/publicFootMini.vue";
 export default {
   name: "son2Test",
+  components:{
+    publicFootMini
+  },
   data() {
     return {
       //定制表
@@ -127,6 +129,8 @@ export default {
       tradeAll: [],
       tradeNo: [],
       tradeYes: [],
+      //按照时间帐单
+      tradeTimes:[],
       querySettle: {
         payType: "",
         isCus: "",
@@ -148,6 +152,8 @@ export default {
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
             }
+            //获取时间帐单
+
             //获取除未定制以外的订单
             if (
               i.user == sessionStorage.getItem("userName") &&
@@ -187,8 +193,16 @@ export default {
     },
     //时间获取
     manageTradeTime(value) {
-      console.log(JSON.stringify(value).split("-")[1]);
-      // console.log(this.trade[1].tradeTime);
+      //data转成 字符串 再转成 数字
+      if (JSON.stringify(value).split("-")[1] == 12) {
+        console.log(1);
+      } else {
+        console.log(parseInt(JSON.stringify(value).split("-")[1])+1);
+      }
+      // console.log(this.trade[2].tradeTime);
+      // for (const i of this.trade) {
+        
+      // }
       
     },
     //帐单状态获取
