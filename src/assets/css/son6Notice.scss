@@ -1,32 +1,40 @@
 #son6Notice {
   width: 90%;
-  height: 680px;
+  // height: 680px;
+  min-height: calc(100% - 50px);
+  // min-height: 100%;
+  display: flex;
+  flex-direction: column;
   min-width: 600px;
   margin-left: 5%;
   background-color: #fff;
-  .el-tag {
-    margin-left: 10px;
-  }
+  // background-color: pink;
 
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
+  .body {
+    flex: 1;
+    .el-tag {
+      margin-left: 10px;
+    }
 
-  #tag_p{
+    .button-new-tag {
+      margin-left: 10px;
+      height: 32px;
+      line-height: 30px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .input-new-tag {
+      width: 90px;
+      margin-left: 10px;
+      vertical-align: bottom;
+    }
+
+    #tag_p {
       display: inline;
-    font-size: .8em;
-    color: gray;
-    margin-left: 10px;
-    // background-color: red;
+      font-size: 0.8em;
+      color: gray;
+      margin-left: 10px;
+      // background-color: red;
+    }
   }
-
 }

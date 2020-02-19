@@ -1,46 +1,48 @@
 <template>
   <div id="son6Notice">
-    <h4>公告</h4>
-    <el-form :model="notice" ref="notice" :rules="rules">
-      <el-form-item label="公告标题" prop="title">
-        <el-input v-model="notice.title" placeholder="请输入公告标题"></el-input>
-      </el-form-item>
-      <el-form-item label="公告内容" prop="content">
-        <el-input type="textarea" v-model="notice.content" placeholder="请输入公告内容"></el-input>
-      </el-form-item>
-      <el-form-item label="公告标签">
-        <el-tag
-          :key="tag"
-          v-for="tag in dynamicTags"
-          closable
-          :disable-transitions="false"
-          @close="handleClose(tag)"
-        >{{tag}}</el-tag>
-        <el-input
-          class="input-new-tag"
-          v-if="inputVisible"
-          v-model="notice.inputvalue"
-          ref="saveTagInput"
-          size="small"
-          @keyup.enter.native="handleInputConfirm"
-          @blur="handleInputConfirm"
-        ></el-input>
-        <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-        <p id="tag_p">最多输入三个标签</p>
-      </el-form-item>
-      <el-form-item label="公告形式" prop="type">
-        <el-radio-group v-model="notice.type">
-          <el-radio label="普通通知"></el-radio>
-          <el-radio label="商户通知"></el-radio>
-          <el-radio label="用户通知"></el-radio>
-          <el-radio label="紧急通知"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label>
-        <el-button type="success" @click="submitForm('notice')">发布公告</el-button>
-        <el-button type="primary" plain>返回</el-button>
-      </el-form-item>
-    </el-form>
+    <div class="body">
+      <h4>公告</h4>
+      <el-form :model="notice" ref="notice" :rules="rules">
+        <el-form-item label="公告标题" prop="title">
+          <el-input v-model="notice.title" placeholder="请输入公告标题"></el-input>
+        </el-form-item>
+        <el-form-item label="公告内容" prop="content">
+          <el-input type="textarea" v-model="notice.content" placeholder="请输入公告内容"></el-input>
+        </el-form-item>
+        <el-form-item label="公告标签">
+          <el-tag
+            :key="tag"
+            v-for="tag in dynamicTags"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag)"
+          >{{tag}}</el-tag>
+          <el-input
+            class="input-new-tag"
+            v-if="inputVisible"
+            v-model="notice.inputvalue"
+            ref="saveTagInput"
+            size="small"
+            @keyup.enter.native="handleInputConfirm"
+            @blur="handleInputConfirm"
+          ></el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+          <p id="tag_p">最多输入三个标签</p>
+        </el-form-item>
+        <el-form-item label="公告形式" prop="type">
+          <el-radio-group v-model="notice.type">
+            <el-radio label="普通通知"></el-radio>
+            <el-radio label="商户通知"></el-radio>
+            <el-radio label="用户通知"></el-radio>
+            <el-radio label="紧急通知"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label>
+          <el-button type="success" @click="submitForm('notice')">发布公告</el-button>
+          <el-button type="primary" plain>返回</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 

@@ -18,6 +18,8 @@ import Son4Custom from "../views/Contral/son4Custom";
 import Son5Record from "../views/Contral/son5Record";
 import Son6Notice from "../views/Contral/son6Notice";
 import Son7Feedback from "../views/Contral/son7Feedback";
+import Son7_1Replay from "../views/Contral/son7_1Replay";
+
 //商铺
 import merchartContral from "../views/merchartContral";
 import Son1Custom from "../views/merchartContral/son1Custom";
@@ -58,7 +60,7 @@ const routes = [
     component: Account,
     name: "Account",
     path: "/Account",
-     meta: {
+    meta: {
       requireAuth: true
     }
   },
@@ -169,6 +171,11 @@ const routes = [
         component: Son7Feedback,
         name: "Son7Feedback",
         path: "/contral/Son7Feedback"
+      },
+      {
+        component: Son7_1Replay,
+        name: "Son7_1Replay",
+        path: "/contral/Son7_1Replay"
       },
       {
         component: Son4Custom,
