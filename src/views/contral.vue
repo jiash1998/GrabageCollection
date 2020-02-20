@@ -15,7 +15,7 @@
           </el-menu-item>
           <el-menu-item index="3">
             <span slot="title">
-              <router-link tag="div" to="/contral/Son3MerchartMap">
+              <router-link tag="div" to="/contral/Son3MerchartMapNew">
                 <i class="el-icon-menu"></i>商户分布图
               </router-link>
             </span>

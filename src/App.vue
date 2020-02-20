@@ -39,7 +39,7 @@
             <el-avatar :class="isShow === true?'otherBgc':''">{{$store.state.username}}</el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/signin" tag="div">登录/注册</router-link>
+                <router-link to="/signin" tag="div" v-show="!isShow">登录/注册</router-link>
               </el-dropdown-item>
               <el-dropdown-item>
                 <router-link to="/Account" tag="div">编辑资料</router-link>
@@ -81,8 +81,17 @@ export default {
     //退出键显示
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
     console.log(this.isShow);
+    //滚动条
+    // window.addEventListener("scroll", this.windowScroll);
   },
   methods: {
+    windowScroll() {
+      // let scroll =
+      //   window.scrollTop ||
+      //   document.body.scrollTop ||
+      //   document.documentElement.scrollTop;
+      // console.log(scroll);
+    },
     handleCommand(command) {
       if (command == "exit") {
         //退出

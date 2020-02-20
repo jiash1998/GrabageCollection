@@ -19,11 +19,8 @@ export default {
   background-color: #f0f3f7;
   display: flex;
   justify-content: center;
-  // align-items: center;
-  // position: absolute;
-  // top: 100%;
+  align-items: center;
   p {
-    display: inline;
     color: gray;
     font-size: 0.7em;
   }

@@ -9,14 +9,17 @@
           <el-menu-item index="4">用户公告</el-menu-item>
         </el-menu>
       </div>
+
       <div class="notice_content">
         <!-- <el-button type="primary" @click="getNotice">测试</el-button> -->
-        <div class="left">
-          <div class="content" v-for="(item,index) in noticeList" :key="index">
-            <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
-            <p id="p2">{{item.content}}</p>
-            <el-tag type="success">{{item.inputvalue}}</el-tag>
-            <span>&nbsp;&nbsp;{{item.time}}</span>
+        <div class="scroll">
+          <div class="left" ref="leftDiv" >
+            <div class="content" v-for="(item,index) in noticeList" :key="index">
+              <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
+              <p id="p2">{{item.content}}</p>
+              <el-tag type="success">{{item.inputvalue}}</el-tag>
+              <span>&nbsp;&nbsp;{{item.time}}</span>
+            </div>
           </div>
         </div>
         <div class="right"></div>
@@ -40,8 +43,26 @@ export default {
   },
   mounted() {
     this.getNotice();
+    //滚动条
+    // window.addEventListener("scroll", this.windowScroll, true);
+    // this.$refs.leftDiv.removeEventListener("scroll", this.DivScroll,true);
   },
   methods: {
+    // windowScroll() {
+    //   let scroll =
+    //     window.scrollTop ||
+    //     document.body.scrollTop ||
+    //     document.documentElement.scrollTop;
+    //   console.log(scroll + "win");
+    //   if (scroll >= 120) {
+    //     console.log("到了");
+    //     this.DivScroll();
+    //   }
+    // },
+    // DivScroll() {
+    //   let DivScroll = this.$refs.leftDiv.scrollHeight;
+    //   console.log(DivScroll + "div");
+    // },
     getNotice() {
       this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllNotice")

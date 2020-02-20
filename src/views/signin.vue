@@ -36,17 +36,17 @@
         </el-form>
       </div>
     </div>
-    <public-food></public-food>
+    <public-foot-mini></public-foot-mini>
   </div>
 </template>
 
 <script>
 import qs from "querystring";
-import PublicFood from "../components/publicFood.vue";
+import publicFootMini from "../components/publicFootMini.vue";
 export default {
   name: "signin",
   components: {
-    PublicFood
+    publicFootMini
   },
   data() {
     var validateUsername = (rule, value, callback) => {

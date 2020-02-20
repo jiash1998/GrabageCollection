@@ -14,6 +14,7 @@ import Contral from "../views/contral";
 import Son1Manage from "../views/Contral/son1Manage";
 import Son2CarMap from "../views/Contral/son2CarMap";
 import Son3MerchartMap from "../views/Contral/son3MerchartMap";
+import Son3MerchartMapNew from "../views/Contral/son3MerchartMapNew";
 import Son4Custom from "../views/Contral/son4Custom";
 import Son5Record from "../views/Contral/son5Record";
 import Son6Notice from "../views/Contral/son6Notice";
@@ -80,15 +81,6 @@ const routes = [
         meta: {
           requireAuth: true
         }
-        // beforeEnter: (to, from, next) => {
-        //   if(to.meta.requireAuth){
-        //     // console.log(store.state.username);
-        //     alert("请先登录");
-        //     next("/signin");
-        //   }else{
-        //     next();
-        //   }
-        // }
       },
       {
         component: Son2Manager,
@@ -156,6 +148,11 @@ const routes = [
         component: Son3MerchartMap,
         name: "Son3MerchartMap",
         path: "/contral/Son3MerchartMap"
+      },
+      {
+        component: Son3MerchartMapNew,
+        name: "Son3MerchartMapNew",
+        path: "/contral/Son3MerchartMapNew"
       },
       {
         component: Son5Record,
