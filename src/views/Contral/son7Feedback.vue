@@ -1,25 +1,18 @@
 <template>
   <div id="son7Feedback">
     <div class="body">
-      <div class="view" v-for="(item,index) in feedback" :key="index">
-        <div class="info">
-          <p id="nameP">
-            反馈用户：
-            <span >{{item.username}}&nbsp;|&nbsp;</span>
-            <span>{{item.feedbackDate}}</span>
-          </p>
-          <p>
-            反馈内容：
-            <span>{{item.content}}</span>
-          </p>
-        </div>
-        <div class="state">{{item.state}}</div>
-        <div class="replaybtn">
-          <span>
-            <el-button type="primary" size="small" plain @click="replay(index)">回复</el-button>
-          </span>
-        </div>
-      </div>
+      <el-table :data="feedback">
+        <el-table-column prop="username" label="反馈用户"></el-table-column>
+        <el-table-column prop="content" label="反馈内容"></el-table-column>
+        <el-table-column prop="feedbackDate" sortable label="反馈时间"></el-table-column>
+        <el-table-column prop="state" width="120" label="状态"></el-table-column>
+        <el-table-column label="操作">
+          <!-- <el-button type="primary" v-show="isShow" size="small">已回复</el-button> -->
+          <el-button type="primary" plain v-show="!isShow" size="small">回复</el-button> 
+          <el-button type="danger" size="small">删除</el-button>
+        </el-table-column>
+
+      </el-table>
     </div>
   </div>
 </template>
@@ -29,7 +22,9 @@ export default {
   name: "son7Feedback",
   data() {
     return {
-      feedback: []
+      feedback: [],
+      //回复按钮展示
+      isShow:false,
     };
   },
   mounted() {
