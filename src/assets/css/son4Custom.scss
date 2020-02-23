@@ -8,31 +8,45 @@
     width: 100%;
     height: auto;
     display: flex;
-    flex-wrap: wrap;
-
-
-    .content {
-      width: 90%;
-      height: 150px;
-      min-height: 150px;
-      margin: 20px 5%;
-      border-radius: 5px;
-      background-color: #f8faff;
-      display: flex;
-      .imgInfo{
-        img{
-          height: 100px;
-          width: 150px;
+    flex-direction: column;
+    .operate {
+      width: 100%;
+      background-color: #F5F7FA;
+      .el-form {
+        .el-form-item {
+          margin: 20px 50px;
+          
+          .el-button{
+            margin-left: -80px;
+          }
         }
       }
+    }
 
-      .storeInfo{
-        p{
-          font-size: .9em;
-          color: gray;
+    .table {
+      .el-form {
+        width: 100%;
+        height: 100%;
+        // background-color: pink;
+        display: flex;
+
+        .el-form-item {
+          width: 50%;
+          // background-color: greenyellow;
+          margin: 0;
+        }
+
+        .left {
+          width: 50%;
+          height: auto;
+        }
+
+        .right {
+          width: 50%;
+          height: auto;
+          margin: 0 0 0 -25%;
         }
       }
-    
     }
   }
 }

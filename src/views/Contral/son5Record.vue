@@ -51,6 +51,16 @@ export default {
           name: "admin",
           content: "登录了系统，并进行操作5",
           color: "#67c23a"
+        },
+        {
+          name: "admin",
+          content: "登录了系统，并进行操作4",
+          color: "#67c23a"
+        },
+        {
+          name: "admin",
+          content: "登录了系统，并进行操作5",
+          color: "#67c23a"
         }
       ]
     };
