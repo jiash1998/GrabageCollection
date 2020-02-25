@@ -13,14 +13,26 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" v-if="scope.row.state != '未回复'" size="small" disabled>回复</el-button>
-            <el-button type="primary" v-else plain size="small" @click="replay(scope.row)">回复</el-button>
-            <el-button type="danger" @click.native="delRow(scope.row.id)" size="small">删除</el-button>
+            <el-button type="primary" v-else plain size="small" @click="replayInfo(scope.row)">回复</el-button>
+            <el-button
+              type="danger"
+              :disabled="scope.row.state == '未回复' ? !delBtn :delBtn"
+              @click.native="delRow(scope.row)"
+              size="small"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div>
-        <el-dialog title="回复" :visible.sync="dialogVisible" width="40%">
-          <span>test</span>
+        <el-dialog title :visible.sync="dialogVisible" width="40%">
+          <el-form :model="replay" ref="replay" :rules="rules">
+            <el-form-item label prop="content">
+              <el-input v-model="replay.content" type="textarea" placeholder="请输入内容"></el-input>
+            </el-form-item>
+            <el-form-item label>
+              <el-button type="primary" @click="replayBtn('replay')" plain>发送</el-button>
+            </el-form-item>
+          </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -36,29 +48,111 @@ import qs from "querystring";
 export default {
   name: "son7Feedback",
   data() {
+    var validateContent = (rule, value, callback) => {
+      if (!value) {
+        return new callback("请输入内容");
+      } else {
+        callback();
+      }
+    };
     return {
+      //rules
+      rules: {
+        content: [{ validator: validateContent, trigger: "change" }]
+      },
       feedback: [],
       //回复按钮展示
       isShow: "未回复",
+      //删除键是否有用
+      delBtn: false,
       //存放删除的id
       delId: [],
       //回复框是否开启
-      dialogVisible: false
+      dialogVisible: false,
+      //回复表单，
+      // 需要fbId(反馈id)、username(用户名)、content(内容)、admin(站长)
+      replay: {
+        fbId: "",
+        content: "",
+        username: "",
+        admin: ""
+      }
     };
   },
   mounted() {
     this.getInfo();
   },
   methods: {
-    //回复
-    replay(index) {
+    //回复,遮盖
+    replayInfo(index) {
       this.dialogVisible = !this.dialogVisible;
       console.log(index);
+      //点击回复某个之后，将携带信息
+      this.replay = {
+        fbId: index.id,
+        username: sessionStorage.getItem("userName"),
+        admin: "admin"
+      };
+    },
+    //回复，按钮
+    replayBtn(formname) {
+      var data = this.replay;
+      console.log(data);
+
+      this.$refs[formname].validate(val => {
+        if (val) {
+          this.axios
+            .post(
+              "http://" + this.$store.state.path + ":8080/replayFeedback",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+              if (res.data == "ok") {
+                alert("发送成功");
+              } else {
+                alert("发送失败，请重新发送");
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        } else {
+          alert("请认真填写反馈信息");
+        }
+      });
     },
     //删除某一行
     delRow(index) {
-      // data.splice(index, 1);
-      console.log(index);
+      var id = index.id;
+      console.log(id);
+
+      this.axios
+        .post(
+          "http://" + this.$store.state.path + ":8080/delFeedbackById",
+          qs.stringify(id),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res.data);
+          if (res.data == "ok") {
+            alert("发送成功");
+          } else {
+            alert("发送失败，请重新发送");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     /**
      * get批量逻辑删除
@@ -69,12 +163,13 @@ export default {
       for (const i of this.$refs.feedback.selection) {
         this.delId.push(i.id);
       }
-      console.log(this.delId);
-      var data = this.delId;
+      var ids = this.delId;
+      console.log(qs.stringify(ids));
+
       this.axios
         .post(
           "http://" + this.$store.state.path + ":8080/batchDelFeedback",
-          qs.stringify(data),
+          qs.stringify(ids),
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -98,8 +193,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
-
+    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div id="carMap">
-    <div class="carMap_content">
+  <div id="son2CarMap">
+    <div class="body">
       <!-- zoom必须设置 -->
       <baidu-map class="bm-view" :ak="map.ak" :center="map.center" :zoom="map.zoom">
         <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
@@ -11,7 +11,7 @@
           :panel="false"
         ></bm-driving>
       </baidu-map>
-      <div>
+      <div class="operate">
         <el-button type="primary" @click="switchPath1">苏宁广场--滁州学院线</el-button>
         <el-button type="primary" @click="switchPath2">滁州学院--金鹏99广场线</el-button>
       </div>
@@ -28,7 +28,7 @@ import BmDriving from "vue-baidu-map/components/search/Driving";
 import BmNavigation from "vue-baidu-map/components/controls/Navigation";
 var map;
 export default {
-  name: "carMap",
+  name: "son2CarMap",
   components: {
     BaiduMap,
     BmNavigation,
@@ -75,14 +75,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.carMap_content {
-  width: 100%;
-  height: 600px;
-  overflow: auto;
-  .bm-view {
-    width: 100%;
-    height: 400px;
-    // margin-left: 3%;
-  }
-}
+@import "../../assets/css/son2CarMap.scss";
 </style>

@@ -12,6 +12,7 @@ import Pay from "../views/pay";
 //管理员
 import Contral from "../views/contral";
 import Son1Manage from "../views/Contral/son1Manage";
+import Son1ManageNew from "../views/Contral/son1ManageNew";
 import Son2CarMap from "../views/Contral/son2CarMap";
 import Son3MerchartMap from "../views/Contral/son3MerchartMap";
 import Son3MerchartMapNew from "../views/Contral/son3MerchartMapNew";
@@ -126,7 +127,7 @@ const routes = [
     children: [
       {
         path: "",
-        redirect: "/contral/Son1Manage",
+        redirect: "/contral/Son1ManageNew",
         meta: {
           requireAuth: true
         }
@@ -135,6 +136,14 @@ const routes = [
         component: Son1Manage,
         name: "Son1Manage",
         path: "/contral/Son1Manage",
+        meta: {
+          requireAuth: true
+        }
+      },
+      {
+        component: Son1ManageNew,
+        name: "Son1ManageNew",
+        path: "/contral/Son1ManageNew",
         meta: {
           requireAuth: true
         }

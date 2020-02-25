@@ -2,12 +2,12 @@
   <div id="son4Custom">
     <div class="body">
       <div class="operate">
-        <el-form :model="findStore" ref="findStore" :rules="rules" inline>
+        <el-form :model="findStore" ref="findStore" inline>
           <el-form-item>
-            <el-input v-model="findStore.storename" placeholder="请输入店铺名称"></el-input>
+            <el-input v-model="findStore.name" placeholder="请输入店铺名称"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="success" plain>查询</el-button>
+            <el-button type="success" @click="selStore" plain>查询</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+import qs from 'querystring';
 export default {
   name: "son4Custom",
   data() {
@@ -51,7 +52,7 @@ export default {
       storeInfo: [],
       //搜索商铺表单
       findStore: {
-        storename: ""
+        name: ""
       }
     };
   },
@@ -59,6 +60,27 @@ export default {
     await this.getInfo();
   },
   methods: {
+    selStore() {
+      var data = this.findStore;
+      
+      this.axios
+        .post(
+          "http://" + this.$store.state.path + ":8080/getCustomByName",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res.data);
+          this.storeInfo = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     getInfo() {
       this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllCustom")

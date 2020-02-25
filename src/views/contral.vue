@@ -6,7 +6,7 @@
         <!-- active-text-color="#67c23a" -->
         <el-menu default-active="1">
           <el-menu-item index="1">
-            <router-link tag="div" to="/contral/Son1Manage">
+            <router-link tag="div" to="/contral/Son1ManageNew">
               <i class="el-icon-edit"></i>管理角色
             </router-link>
           </el-menu-item>

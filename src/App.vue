@@ -80,7 +80,7 @@ export default {
   mounted() {
     //退出键显示
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
-    console.log(this.isShow);
+    // console.log(this.isShow);
     //滚动条
     // window.addEventListener("scroll", this.windowScroll);
   },
