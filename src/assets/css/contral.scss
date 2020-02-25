@@ -13,8 +13,15 @@
     right: 0;
 
     .el-menu {
-      min-height: 100vh;
+      height: 100vh;
       text-align: center;
+
+      .el-submenu {
+        // transition: 0.5s ease 0;
+        .el-menu-item{
+          background-color: #fff;
+        }
+      }
     }
   }
 

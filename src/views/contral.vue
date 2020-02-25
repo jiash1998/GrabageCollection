@@ -2,7 +2,9 @@
   <div id="contral">
     <div class="contralBody">
       <div class="body_left">
-        <el-menu default-active="1" background-color="#f7faff" active-text-color="#67c23a">
+        <!-- background-color="#f7faff" -->
+        <!-- active-text-color="#67c23a" -->
+        <el-menu default-active="1">
           <el-menu-item index="1">
             <router-link tag="div" to="/contral/Son1Manage">
               <i class="el-icon-edit"></i>管理角色
@@ -35,11 +37,19 @@
               <i class="el-icon-document"></i>发布公告
             </router-link>
           </el-menu-item>
-          <el-menu-item index="7">
-            <router-link tag="div" to="/contral/Son7Feedback">
+          <el-submenu index="7">
+            <template slot="title">
+              <!-- <router-link tag="div" to="/contral/Son7Feedback"> -->
               <i class="el-icon-chat-line-round"></i>用户反馈
-            </router-link>
-          </el-menu-item>
+              <!-- </router-link> -->
+            </template>
+            <el-menu-item index="7-1">
+              <router-link tag="div" to="/contral/Son7Feedback">待处理</router-link>
+            </el-menu-item>
+            <el-menu-item index="7-2">
+              <router-link tag="div" to="/contral/Son7_1Replay">已处理</router-link>
+            </el-menu-item>
+          </el-submenu>
         </el-menu>
       </div>
       <div class="body_right">
