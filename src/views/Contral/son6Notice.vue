@@ -138,12 +138,20 @@ export default {
               }
             )
             .then(res => {
-              alert("post success");
+              this.$message({
+                message: "发布成功",
+                type: "success",
+                duration: 1500
+              });
               // this.notice = "";
             });
           console.log(data);
         } else {
-          alert("提交失败");
+          this.$message({
+              message: "发布失败",
+              type: "error",
+              duration: 1500
+            });
           return false;
         }
       });

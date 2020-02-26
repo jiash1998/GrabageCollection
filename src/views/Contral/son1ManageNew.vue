@@ -3,7 +3,7 @@
     <div class="body">
       <el-table :data="user">
         <el-table-column label="用户名" prop="username"></el-table-column>
-        <el-table-column label="身份" prop="identity"></el-table-column>
+        <el-table-column sortable label="身份" prop="identity"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
         <el-table-column label="联系方式" prop="phone"></el-table-column>
       </el-table>

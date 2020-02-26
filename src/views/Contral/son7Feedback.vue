@@ -74,8 +74,7 @@ export default {
       replay: {
         fbId: "",
         content: "",
-        username: "",
-        admin: ""
+        username: ""
       }
     };
   },
@@ -90,8 +89,7 @@ export default {
       //点击回复某个之后，将携带信息
       this.replay = {
         fbId: index.id,
-        username: sessionStorage.getItem("userName"),
-        admin: "admin"
+        username: sessionStorage.getItem("userName")
       };
     },
     //回复，按钮
@@ -114,9 +112,18 @@ export default {
             .then(res => {
               console.log(res.data);
               if (res.data == "ok") {
-                alert("发送成功");
+                this.$message({
+                  message: "回复成功",
+                  type: "success",
+                  duration: 1500
+                });
+                this.getInfo();
               } else {
-                alert("发送失败，请重新发送");
+                this.$message({
+                  message: "回复失败",
+                  type: "error",
+                  duration: 1500
+                });
               }
             })
             .catch(err => {
@@ -129,7 +136,7 @@ export default {
     },
     //删除某一行
     delRow(index) {
-      var id = index.id;
+      var id = { id: index.id };
       console.log(id);
 
       this.axios
@@ -145,9 +152,18 @@ export default {
         .then(res => {
           console.log(res.data);
           if (res.data == "ok") {
-            alert("发送成功");
+            this.$message({
+              message: "删除成功",
+              type: "success",
+              duration: 1500
+            });
+            this.getInfo();
           } else {
-            alert("发送失败，请重新发送");
+            this.$message({
+              message: "删除失败",
+              type: "error",
+              duration: 1500
+            });
           }
         })
         .catch(err => {
@@ -160,28 +176,39 @@ export default {
     get() {
       //获取table的选中数据对应数据库id
       // console.log(data);
-      for (const i of this.$refs.feedback.selection) {
-        this.delId.push(i.id);
-      }
-      var ids = this.delId;
-      console.log(qs.stringify(ids));
-
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/batchDelFeedback",
-          qs.stringify(ids),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
+      for (const iterator of this.$refs.feedback.selection) {
+        if (iterator.state == "未回复") {
+          // alert("包含未回复信息，请及时回复");
+          this.$message({
+            message: "包含未回复信息，请及时回复",
+            type: "warning",
+            duration: 1500
+          });
+        } else {
+          for (const i of this.$refs.feedback.selection) {
+            this.delId.push(i.id);
           }
-        )
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+          var ids = { ids: this.delId.toString() };
+          console.log(ids);
+
+          this.axios
+            .post(
+              "http://118.31.12.146:8080/batchDelFeedback",
+              qs.stringify(ids),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      }
     },
     getInfo() {
       this.axios

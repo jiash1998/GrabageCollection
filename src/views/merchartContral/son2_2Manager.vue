@@ -176,7 +176,7 @@
             </el-form>
           </div>
         </div>
-       <public-foot-mini></public-foot-mini>
+        <public-foot-mini></public-foot-mini>
       </div>
     </div>
   </div>
@@ -365,13 +365,21 @@ export default {
             )
             .then(res => {
               console.log(res.data);
-              alert("保存成功");
+              this.$message({
+                message: "保存成功",
+                type: "success",
+                duration: 1500
+              });
             })
             .catch(err => {
               console.log(err);
             });
         } else {
-          alert("啥都没改，别捣乱");
+          this.$message({
+            message: "啥都没改别捣乱!",
+            type: "warning",
+            duration: 1500
+          });
         }
       });
     },
@@ -398,7 +406,11 @@ export default {
               this.steps += 1;
               // this.isNone = !this.isNone;
               // localStorage.setItem("btnState", this.isNone);
-              alert("提交成功");
+              this.$message({
+                message: "提交成功",
+                type: "success",
+                duration: 1500
+              });
               //修改按钮状态
               // localStorage.setItem("payInfo", res.data);
               this.editorCus.callback = res.data;
@@ -421,7 +433,11 @@ export default {
               console.log(err);
             });
         } else {
-          alert("请填写回收定制方案!");
+          this.$message({
+            message: "请填写定制方案",
+            type: "error",
+            duration: 1500
+          });
           return false;
         }
       });

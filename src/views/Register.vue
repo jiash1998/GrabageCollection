@@ -120,9 +120,7 @@ export default {
           console.log(data);
           this.axios
             .post(
-              "http://" +
-                this.$store.state.path +
-                ":8080/insertUser",
+              "http://" + this.$store.state.path + ":8080/insertUser",
               qs.stringify(data),
               {
                 headers: {
@@ -131,10 +129,18 @@ export default {
               }
             )
             .then(res => {
-              alert("post success");
+              this.$message({
+                message: "注册成功",
+                type: "success",
+                duration: 1500
+              });
             });
         } else {
-          alert("请正确填写注册信息");
+          this.$message({
+            message: "请完整填写信息",
+            type: "error",
+            duration: 1500
+          });
           return false;
         }
       });

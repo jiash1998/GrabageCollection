@@ -283,10 +283,18 @@ export default {
             )
             .then(res => {
               console.log(res.data);
-              alert("post success");
+              this.$message({
+                message: "商铺录入成功，请前往定制",
+                type: "success",
+                duration: 1500
+              });
             });
         } else {
-          alert("请等待图片上传。。。");
+          this.$message({
+            message: "请等待照片上传...",
+            type: "warning",
+            duration: 1500
+          });
           return false;
         }
       });
@@ -311,7 +319,11 @@ export default {
                 map.centerAndZoom(point, 19);
                 map.addOverlay(new BMap.Marker(point));
               } else {
-                alert("您选择地址没有解析到结果!");
+                this.$message({
+                  message: "地址未解析成功",
+                  type: "error",
+                  duration: 1500
+                });
               }
             },
             "滁州市"

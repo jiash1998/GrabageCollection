@@ -2,6 +2,10 @@
   <div id="son3MerchartMapNew">
     <div class="body">
       <div class="map" :id="mapId"></div>
+      <div>
+        <el-button type="primary" @click="polygon.hide();">隐藏区域覆盖</el-button>
+        <el-button type="primary" @click="polygon.show();">显示区域覆盖</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +17,10 @@ export default {
   data() {
     return {
       mapId: "BMap-" + parseInt(Date.now() + Math.random()),
-      address: []
+      address: [],
+      //设置覆盖物
+      polygon: {},
+      circle: {}
     };
   },
   mounted() {
@@ -28,6 +35,26 @@ export default {
           var point = new BMap.Point(118.323509, 32.282115);
           map.centerAndZoom(point, 18);
           map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+          //添加多边形覆盖物
+          this.polygon = new BMap.Polygon(
+            [
+              new BMap.Point(118.32455, 32.28246),
+              new BMap.Point(118.323763, 32.282665),
+              new BMap.Point(118.323622, 32.282344),
+              new BMap.Point(118.324242, 32.282074),
+              new BMap.Point(118.324271, 32.282284)
+            ],
+            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 }
+          ); //创建多边形
+          map.addOverlay(this.polygon); //增加多边形
+          // 创建圆 118.324086 32.2823695
+          var pointC = new BMap.Point(118.324086, 32.2823695);
+          this.circle = new BMap.Circle(pointC, 100, {
+            strokeColor: "blue",
+            strokeWeight: 2,
+            strokeOpacity: 0.5
+          });
+          map.addOverlay(this.circle);
           //地址解析
           var myGeo = new BMap.Geocoder();
           this.axios
@@ -43,12 +70,14 @@ export default {
                 });
               }
               //循环添加店铺
-              console.log(this.address);
+              // console.log(this.address);
               for (const i of this.address) {
                 myGeo.getPoint(
                   i.address,
                   function(point) {
                     if (point) {
+                      console.log(point);
+
                       map.centerAndZoom(point, 18);
                       var marker = new BMap.Marker(point);
                       //添加标注
@@ -56,7 +85,8 @@ export default {
                       var opts = {
                         width: 200,
                         height: 230,
-                        title: "<h5 style='line-height:1px;'>" + i.name + "</h5>"
+                        title:
+                          "<h5 style='line-height:1px;'>" + i.name + "</h5>"
                       };
                       var infoWindow = new BMap.InfoWindow(
                         "<div style='font-size:.85em;'><p>地址：</p>" +

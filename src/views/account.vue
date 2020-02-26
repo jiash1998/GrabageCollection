@@ -116,22 +116,32 @@ export default {
       var data = this.user;
       console.log(data);
 
-      // this.axios
-      //   .post(
-      //     "http://" + this.$store.state.path + ":8080/updateUserByName",
-      //     qs.stringify(data),
-      //     {
-      //       headers: {
-      //         "Content-Type": "application/x-www-form-urlencoded"
-      //       }
-      //     }
-      //   )
-      //   .then(res => {
-      //     console.log(res.data);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+      this.axios
+        .post(
+          "http://" + this.$store.state.path + ":8080/updateUserByName",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res.data);
+          this.$message({
+            message: "保存成功",
+            type: "success",
+            duration: 1500
+          });
+        })
+        .catch(err => {
+          this.$message({
+            message: "保存失败",
+            type: "error",
+            duration: 1500
+          });
+          console.log(err);
+        });
     },
     changeDis() {
       this.isCha = !this.isCha;

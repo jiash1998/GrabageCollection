@@ -102,16 +102,24 @@ export default {
               //路由拦截
               sessionStorage.setItem("token", "true");
               //退出键
-              sessionStorage.setItem("isExit","true");
+              sessionStorage.setItem("isExit", "true");
               sessionStorage.setItem("userName", res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
-              alert("post success");
+              this.$message({
+                message: "登录成功",
+                type: "success",
+                duration: 1500
+              });
               //路由刷新，搭载数据
               this.$router.go(0);
             });
         } else {
-          alert("error");
+          this.$message({
+            message: "登录失败，请检查用户名或密码! ",
+            type: "error",
+            duration: 1500
+          });
           return false;
         }
       });
