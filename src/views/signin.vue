@@ -106,6 +106,7 @@ export default {
                 });
                 return false;
               }
+              alert("登录成功");
               //成功之后将值保存在session
               //路由拦截
               sessionStorage.setItem("token", "true");
@@ -114,11 +115,6 @@ export default {
               sessionStorage.setItem("userName", res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
-              // this.$message({
-              //   message: "登录成功",
-              //   type: "success",
-              //   duration: 1500
-              // });
               //路由刷新，搭载数据
               this.$router.go(0);
             });

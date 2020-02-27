@@ -42,7 +42,7 @@ export default {
           lng: 118.323509,
           lat: 32.282115
         },
-        zoom: 20
+        // zoom: 16
       },
       path: [
         {
