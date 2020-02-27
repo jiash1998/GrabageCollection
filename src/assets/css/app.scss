@@ -91,9 +91,17 @@ body {
         display: flex;
         align-items: center;
         //字体大小为图标大小
-        font-size: 25px;
+
         color: gray;
         margin-right: 25px;
+
+        .el-dropdown {
+          font-size: 25px;
+
+          .el-dropdown-item{
+            
+          }
+        }
       }
 
       .prompt:hover {

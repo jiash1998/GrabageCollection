@@ -13,7 +13,7 @@
       <div class="notice_content">
         <!-- <el-button type="primary" @click="getNotice">测试</el-button> -->
         <div class="scroll">
-          <div class="left" ref="leftDiv" >
+          <div class="left" ref="leftDiv">
             <div class="content" v-for="(item,index) in noticeList" :key="index">
               <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
               <p id="p2">{{item.content}}</p>
@@ -67,9 +67,12 @@ export default {
       this.axios
         .get("http://" + this.$store.state.path + ":8080/getAllNotice")
         .then(res => {
-          var data = res.data;
+          //排序
+          res.data.sort((a,b)=> {
+            return Date.parse(b.time) - Date.parse(a.time);
+          });
           this.noticeList = res.data;
-          console.log(data);
+          console.log(res.data);
         })
         .catch(err => {
           console.log(err);

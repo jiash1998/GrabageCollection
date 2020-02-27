@@ -19,13 +19,14 @@
                 <div class="left">
                   <el-form-item label="回收时间：">{{props.row.cycleTimes}}</el-form-item>
                   <el-form-item label="回收频率：">{{props.row.cycleDate}}</el-form-item>
-                  <el-form-item label="包月服务：">{{props.row.sustainMonth}}</el-form-item>
+                  <el-form-item label="服务时长（月）：">{{props.row.sustainMonth}}</el-form-item>
                   <el-form-item label="服务状态：">{{props.row.isCus}}</el-form-item>
                 </div>
                 <div class="right">
                   <el-form-item label="订单金额：">{{props.row.money}}</el-form-item>
-                  <el-form-item label="订单编号：">{{props.row.tradeNo}}</el-form-item>
                   <el-form-item label="支付方式：">{{props.row.payType}}</el-form-item>
+                  <el-form-item label="服务开始时间：">{{props.row.tradeTimeEnd}}</el-form-item>
+                  <el-form-item label="服务截至时间：">{{props.row.tradeTimeEnd}}</el-form-item>
                 </div>
               </el-form>
             </template>

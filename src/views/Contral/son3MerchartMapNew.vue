@@ -3,8 +3,8 @@
     <div class="body">
       <div class="map" :id="mapId"></div>
       <div>
-        <el-button type="primary" @click="polygon.hide();">隐藏区域覆盖</el-button>
-        <el-button type="primary" @click="polygon.show();">显示区域覆盖</el-button>
+        <!-- <el-button type="primary" @click="initMap(118.319736,32.299206)">隐藏区域覆盖</el-button>
+        <el-button type="primary" @click="initMap(118.323509,32.282115)">显示区域覆盖</el-button> -->
       </div>
     </div>
   </div>
@@ -19,8 +19,10 @@ export default {
       mapId: "BMap-" + parseInt(Date.now() + Math.random()),
       address: [],
       //设置覆盖物
-      polygon: {},
-      circle: {}
+      polygon1: {},
+      polygon2: {},
+      x:118.323509,
+      y:32.282115
     };
   },
   mounted() {
@@ -30,31 +32,38 @@ export default {
     initMap() {
       loadBMap("faARwTpILZCsY9S5GUKe6LL2ILicSoDX")
         .then(() => {
-          // 百度地图API功能
+          // 百度地图API功能    
           var map = new BMap.Map(this.mapId);
-          var point = new BMap.Point(118.323509, 32.282115);
-          map.centerAndZoom(point, 18);
+          //118.321478 32.288485
+          // var point = new BMap.Point(118.323509, 32.282115);
+          var point = new BMap.Point(118.321981, 32.286653);
+          map.centerAndZoom(point, 16);
           map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
           //添加多边形覆盖物
-          this.polygon = new BMap.Polygon(
+          this.polygon1 = new BMap.Polygon(
             [
-              new BMap.Point(118.32455, 32.28246),
-              new BMap.Point(118.323763, 32.282665),
-              new BMap.Point(118.323622, 32.282344),
-              new BMap.Point(118.324242, 32.282074),
-              new BMap.Point(118.324271, 32.282284)
+              new BMap.Point(118.321137, 32.284165),
+              new BMap.Point(118.327784, 32.28328),
+              new BMap.Point(118.323868, 32.271496),
+              new BMap.Point(118.320957, 32.260017),
+              new BMap.Point(118.311795, 32.260047),
+              new BMap.Point(118.315819, 32.272626)
             ],
             { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 }
-          ); //创建多边形
-          map.addOverlay(this.polygon); //增加多边形
-          // 创建圆 118.324086 32.2823695
-          var pointC = new BMap.Point(118.324086, 32.2823695);
-          this.circle = new BMap.Circle(pointC, 100, {
-            strokeColor: "blue",
-            strokeWeight: 2,
-            strokeOpacity: 0.5
-          });
-          map.addOverlay(this.circle);
+          );
+          map.addOverlay(this.polygon1);
+          this.polygon2 = new BMap.Polygon(
+            [
+              new BMap.Point(118.328323, 32.29143),
+              new BMap.Point(118.322898, 32.289599),
+              new BMap.Point(118.317616, 32.297016),
+              new BMap.Point(118.313987, 32.307758),
+              new BMap.Point(118.319197, 32.309376),
+              new BMap.Point(118.322323, 32.298969),
+            ],
+            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 }
+          );
+          map.addOverlay(this.polygon2);
           //地址解析
           var myGeo = new BMap.Geocoder();
           this.axios
@@ -77,8 +86,7 @@ export default {
                   function(point) {
                     if (point) {
                       console.log(point);
-
-                      map.centerAndZoom(point, 18);
+                      // map.centerAndZoom(point, 18);
                       var marker = new BMap.Marker(point);
                       //添加标注
                       map.addOverlay(marker);

@@ -141,7 +141,7 @@ export default {
               this.$message({
                 message: "发布成功",
                 type: "success",
-                duration: 1500
+                duration: 2000
               });
               // this.notice = "";
             });

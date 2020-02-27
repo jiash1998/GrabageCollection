@@ -98,6 +98,14 @@ export default {
             )
             .then(res => {
               console.log(res.data);
+              if (res.data.msg == "用户名或密码错误") {
+                this.$message({
+                  message: "登录失败，请检查用户名或密码! ",
+                  type: "error",
+                  duration: 1500
+                });
+                return false;
+              }
               //成功之后将值保存在session
               //路由拦截
               sessionStorage.setItem("token", "true");
@@ -106,11 +114,11 @@ export default {
               sessionStorage.setItem("userName", res.data.username);
               this.$router.push("/main");
               this.$store.commit("viewUsername", res.data.username);
-              this.$message({
-                message: "登录成功",
-                type: "success",
-                duration: 1500
-              });
+              // this.$message({
+              //   message: "登录成功",
+              //   type: "success",
+              //   duration: 1500
+              // });
               //路由刷新，搭载数据
               this.$router.go(0);
             });

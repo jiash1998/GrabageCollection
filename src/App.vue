@@ -29,9 +29,14 @@
       </div>
       <div class="header_other">
         <div class="prompt">
-          <el-badge :is-dot="isDot">
-            <i class="el-icon-bell"></i>
-          </el-badge>
+          <el-dropdown>
+            <el-badge :is-dot="isDot">
+              <i class="el-icon-bell"></i>
+            </el-badge>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>test</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
         <div class="contralItems">
           <el-dropdown @command="handleCommand">
