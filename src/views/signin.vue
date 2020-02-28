@@ -113,8 +113,10 @@ export default {
               //退出键
               sessionStorage.setItem("isExit", "true");
               sessionStorage.setItem("userName", res.data.username);
+              //身份
+              sessionStorage.setItem("identity", res.data.identity);
               this.$router.push("/main");
-              this.$store.commit("viewUsername", res.data.username);
+              // this.$store.commit("viewUsername", res.data.username);
               //路由刷新，搭载数据
               this.$router.go(0);
             });

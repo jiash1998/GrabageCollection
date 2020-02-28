@@ -37,7 +37,7 @@
       </div>
       <div class="custom_main">
         <div id="custom_main_con">
-          <h3>商家定制</h3>
+          <h3>注册店铺</h3>
           <el-form
             :model="custom"
             ref="custom"

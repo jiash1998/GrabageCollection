@@ -22,7 +22,11 @@
             </div>
           </div>
         </div>
-        <div class="right"></div>
+        <div class="right">
+          <h4>Easy Garbage Sort</h4>
+          <p>让日常垃圾分类更简单</p>
+          <img src="../assets/img/easyGS2.jpg"/>
+        </div>
       </div>
     </div>
     <public-food></public-food>

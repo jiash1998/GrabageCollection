@@ -17,10 +17,10 @@
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
-        <div class="contralItems">
-          <router-link tag="span" to="/contral">站长中心</router-link>
+        <div class="contralItems" v-if="identityApp == '管理员'?true:false">
+          <router-link tag="span" to="/contral">管理员中心</router-link>
         </div>
-        <div class="contralItems">
+        <div class="contralItems" v-if="identityApp == '沿街商家'?true:false">
           <router-link tag="span" to="/merchartContral">商户中心</router-link>
         </div>
         <div class="contralItems">
@@ -69,7 +69,8 @@ export default {
       offsetTop: 0,
       //提示
       isDot: true,
-      isShow: false
+      isShow: false,
+      identityApp: ""
     };
   },
   created() {
@@ -85,6 +86,8 @@ export default {
   mounted() {
     //退出键显示
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
+    //身份获取
+    this.identityApp = sessionStorage.getItem("identity");
     // console.log(this.isShow);
     //滚动条
     // window.addEventListener("scroll", this.windowScroll);
@@ -104,8 +107,9 @@ export default {
         sessionStorage.removeItem("isExit");
         sessionStorage.setItem("token", "false");
         sessionStorage.removeItem("userName");
+        sessionStorage.removeItem("identity");
         this.$router.push("/signin");
-        this.$store.commit("resertUserName");
+        // this.$store.commit("resertUserName");
         //路由刷新页面，使得数据搭载
         this.$router.go(0);
       }

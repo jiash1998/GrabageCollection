@@ -23,7 +23,11 @@
             <div class="test"></div>
           </div>
         </div>
-        <div class="other"></div>
+        <div class="other">
+          <h4>Easy Garbage Sort</h4>
+          <p>让日常垃圾分类更简单</p>
+          <img src="../../assets/img/easyGS2.jpg"/>
+        </div>
       </div>
       <div class="gap"></div>
       <div class="extend">
