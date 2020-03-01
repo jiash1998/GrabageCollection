@@ -1,0 +1,56 @@
+<template>
+  <div id="son2_2DriReg">
+    <div class="body">
+    <h4>驾驶员注册</h4>
+      <div class="formDiv">
+        <el-form :model="driver" ref="driver" label-position="left" label-width="100px" size="small">
+          <el-form-item label="工号">
+            <el-input v-model="driver.username" placeholder="请输入工号"></el-input>
+          </el-form-item>
+          <el-form-item label="密码">
+            <el-input v-model="driver.password" show-password placeholder="请输入密码"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱（选填）">
+            <el-input v-model="driver.email" placeholder="请输入邮箱"></el-input>
+          </el-form-item>
+          <el-form-item label="联系方式">
+            <el-input v-model="driver.phone" placeholder="请输入联系方式"></el-input>
+          </el-form-item>
+          <el-form-item label>
+            <el-button type="primary" plain>提交</el-button>
+            <el-button type="success">取消</el-button>
+          </el-form-item>
+        </el-form>
+        <div class="introduce">
+            <h5>须知</h5>
+            <p>1.驾驶员身份由管理员进行注册</p>
+            <p>2.工号由驾驶员姓名首字母缩写和入职年月日组成</p>
+            <p>3.确保手机号能及时联系驾驶员</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "son2_2DriReg",
+  data() {
+    return {
+      driver: {
+        username: "",
+        password: "",
+        email: "",
+        phone: "",
+        identity: "驾驶员"
+      }
+    };
+  },
+  mounted() {},
+  methods: {}
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../assets/css/son2_2DriReg.scss";
+</style>

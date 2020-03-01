@@ -34,7 +34,7 @@
               <i class="el-icon-bell"></i>
             </el-badge>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>test</el-dropdown-item>
+              <el-dropdown-item>新公告</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -68,13 +68,14 @@ export default {
       headFix: false,
       offsetTop: 0,
       //提示
-      isDot: true,
+      isDot: false,
       isShow: false,
       identityApp: ""
     };
   },
   created() {
     this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
+    //
   },
   // async mounted() {
   //   window.addEventListener("scroll", this.listenerScroll);
@@ -88,9 +89,14 @@ export default {
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
     //身份获取
     this.identityApp = sessionStorage.getItem("identity");
-    // console.log(this.isShow);
-    //滚动条
-    // window.addEventListener("scroll", this.windowScroll);
+    //公告提示
+    this.isDot = JSON.parse(localStorage.getItem("isDot"));
+    console.log(this.isDot);
+    var removeDot = setTimeout(() => {
+      localStorage.removeItem("isDot");
+    }, 1000);
+    // localStorage.removeItem("isDot");
+    
   },
   methods: {
     windowScroll() {

@@ -54,7 +54,6 @@
         <div class="body2_con">
           <p id="p1">垃圾分类</p>
           <span id="sp2" v-for="(item,index) in type" :key="index" @click="select(index)">{{item}}</span>
-          <!-- view == item.id ? true : false -->
           <div
             class="body2_con_son2"
             v-for="(item,index) in info"
@@ -74,7 +73,6 @@
       </div>
       <div class="main_body3">
         <span id="body3_span">选择我们</span>
-
         <div class="body3_conall">
           <div class="body3_con1" v-for="(item,index) in advantage" :key="index">
             <div id="imgCon">

@@ -2,10 +2,13 @@
   <div id="son1ManageNew">
     <div class="body">
       <el-table :data="user">
-        <el-table-column label="用户名" prop="username"></el-table-column>
-        <el-table-column sortable label="身份" prop="identity"></el-table-column>
+        <el-table-column label="用户名" width="100" prop="username"></el-table-column>
+        <el-table-column sortable label="身份" width="100" prop="identity"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
         <el-table-column label="联系方式" prop="phone"></el-table-column>
+        <el-table-column label="注册店铺" width="120" prop="registered.count"></el-table-column>
+        <el-table-column label="定制店铺" width="120" prop="hasCustom.count"></el-table-column>
+        <el-table-column label="未付款店铺" width="120" prop="unpaid.count"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button

@@ -7,14 +7,23 @@
         <el-menu default-active="1">
           <el-menu-item index="1">
             <router-link tag="div" to="/contral/Son1ManageNew">
-              <i class="el-icon-edit"></i>管理角色
+              <i class="el-icon-edit"></i>角色管理
             </router-link>
           </el-menu-item>
-          <el-menu-item index="2">
-            <router-link tag="div" to="/contral/Son2CarMap">
-              <i class="el-icon-truck"></i>车辆路径图
-            </router-link>
-          </el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-truck"></i>回收管理
+            </template>
+            <el-menu-item index="2-1">
+              <router-link tag="div" to="/contral/Son2CarMap">回收路线</router-link>
+            </el-menu-item>
+            <el-menu-item index="2-2">
+              <router-link tag="div" to="/contral/Son2_1Driver">驾驶员位置</router-link>
+            </el-menu-item>
+            <el-menu-item index="2-3">
+              <router-link tag="div" to="/contral/Son2_2DriReg">驾驶员注册</router-link>
+            </el-menu-item>
+          </el-submenu>
           <el-menu-item index="3">
             <span slot="title">
               <router-link tag="div" to="/contral/Son3MerchartMapNew">
@@ -39,9 +48,7 @@
           </el-menu-item>
           <el-submenu index="7">
             <template slot="title">
-              <!-- <router-link tag="div" to="/contral/Son7Feedback"> -->
               <i class="el-icon-chat-line-round"></i>用户反馈
-              <!-- </router-link> -->
             </template>
             <el-menu-item index="7-1">
               <router-link tag="div" to="/contral/Son7Feedback">待处理</router-link>

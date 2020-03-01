@@ -14,6 +14,8 @@ import Contral from "../views/contral";
 import Son1Manage from "../views/Contral/son1Manage";
 import Son1ManageNew from "../views/Contral/son1ManageNew";
 import Son2CarMap from "../views/Contral/son2CarMap";
+import Son2_1Driver from "../views/Contral/son2_1Driver";
+import Son2_2DriReg from "../views/Contral/son2_2DriReg";
 import Son3MerchartMap from "../views/Contral/son3MerchartMap";
 import Son3MerchartMapNew from "../views/Contral/son3MerchartMapNew";
 import Son4Custom from "../views/Contral/son4Custom";
@@ -152,6 +154,16 @@ const routes = [
         component: Son2CarMap,
         name: "Son2CarMap",
         path: "/contral/Son2CarMap"
+      },
+      {
+        component: Son2_1Driver,
+        name: "Son2_1Driver",
+        path: "/contral/Son2_1Driver"
+      },
+      {
+        component: Son2_2DriReg,
+        name: "Son2_2DriReg",
+        path: "/contral/Son2_2DriReg"
       },
       {
         component: Son3MerchartMap,

@@ -138,20 +138,21 @@ export default {
               }
             )
             .then(res => {
+              //公告提示
+              localStorage.setItem("isDot", "true");
               this.$message({
                 message: "发布成功",
                 type: "success",
-                duration: 2000
+                duration: 2500
               });
-              // this.notice = "";
             });
           console.log(data);
         } else {
           this.$message({
-              message: "发布失败",
-              type: "error",
-              duration: 1500
-            });
+            message: "发布失败",
+            type: "error",
+            duration: 1500
+          });
           return false;
         }
       });
