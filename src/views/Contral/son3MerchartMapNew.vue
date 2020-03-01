@@ -37,7 +37,7 @@ export default {
           //118.321478 32.288485
           // var point = new BMap.Point(118.323509, 32.282115);
           var point = new BMap.Point(118.321981, 32.286653);
-          map.centerAndZoom(point, 16);
+          map.centerAndZoom(point, 15);
           map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
           //添加多边形覆盖物
           this.polygon1 = new BMap.Polygon(

@@ -12,6 +12,15 @@
 
   .body {
     flex: 1;
+    
+    h4{
+      margin-left:20%;
+    }
+
+    .el-form{
+      width: 60%;
+      margin: 0 20%;
+    }
     .el-tag {
       margin-left: 10px;
     }

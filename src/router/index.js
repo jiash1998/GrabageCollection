@@ -11,12 +11,12 @@ import Pay from "../views/pay";
 
 //管理员
 import Contral from "../views/contral";
-import Son1Manage from "../views/Contral/son1Manage";
+import ContralNew from "../views/contralNew";
+
 import Son1ManageNew from "../views/Contral/son1ManageNew";
 import Son2CarMap from "../views/Contral/son2CarMap";
 import Son2_1Driver from "../views/Contral/son2_1Driver";
 import Son2_2DriReg from "../views/Contral/son2_2DriReg";
-import Son3MerchartMap from "../views/Contral/son3MerchartMap";
 import Son3MerchartMapNew from "../views/Contral/son3MerchartMapNew";
 import Son4Custom from "../views/Contral/son4Custom";
 import Son5Record from "../views/Contral/son5Record";
@@ -120,24 +120,16 @@ const routes = [
     ]
   },
   {
-    component: Contral,
-    name: "Contral",
-    path: "/contral",
+    component: ContralNew,
+    name: "ContralNew",
+    path: "/ContralNew",
     meta: {
       requireAuth: true
     },
     children: [
       {
         path: "",
-        redirect: "/contral/Son1ManageNew",
-        meta: {
-          requireAuth: true
-        }
-      },
-      {
-        component: Son1Manage,
-        name: "Son1Manage",
-        path: "/contral/Son1Manage",
+        redirect: "/ContralNew/Son1ManageNew",
         meta: {
           requireAuth: true
         }
@@ -145,7 +137,7 @@ const routes = [
       {
         component: Son1ManageNew,
         name: "Son1ManageNew",
-        path: "/contral/Son1ManageNew",
+        path: "/ContralNew/Son1ManageNew",
         meta: {
           requireAuth: true
         }
@@ -153,55 +145,120 @@ const routes = [
       {
         component: Son2CarMap,
         name: "Son2CarMap",
-        path: "/contral/Son2CarMap"
+        path: "/ContralNew/Son2CarMap"
       },
       {
         component: Son2_1Driver,
         name: "Son2_1Driver",
-        path: "/contral/Son2_1Driver"
+        path: "/ContralNew/Son2_1Driver"
       },
       {
         component: Son2_2DriReg,
         name: "Son2_2DriReg",
-        path: "/contral/Son2_2DriReg"
-      },
-      {
-        component: Son3MerchartMap,
-        name: "Son3MerchartMap",
-        path: "/contral/Son3MerchartMap"
+        path: "/ContralNew/Son2_2DriReg"
       },
       {
         component: Son3MerchartMapNew,
         name: "Son3MerchartMapNew",
-        path: "/contral/Son3MerchartMapNew"
+        path: "/ContralNew/Son3MerchartMapNew"
       },
       {
         component: Son5Record,
         name: "Son5Record",
-        path: "/contral/Son5Record"
+        path: "/ContralNew/Son5Record"
       },
       {
         component: Son6Notice,
         name: "Son6Notice",
-        path: "/contral/Son6Notice"
+        path: "/ContralNew/Son6Notice"
       },
       {
         component: Son7Feedback,
         name: "Son7Feedback",
-        path: "/contral/Son7Feedback"
+        path: "/ContralNew/Son7Feedback"
       },
       {
         component: Son7_1Replay,
         name: "Son7_1Replay",
-        path: "/contral/Son7_1Replay"
+        path: "/ContralNew/Son7_1Replay"
       },
       {
         component: Son4Custom,
         name: "Son4Custom",
-        path: "/contral/Son4Custom"
+        path: "/ContralNew/Son4Custom"
       }
     ]
   },
+  // {
+  //   component: Contral,
+  //   name: "Contral",
+  //   path: "/contral",
+  //   meta: {
+  //     requireAuth: true
+  //   },
+  //   children: [
+  //     {
+  //       path: "",
+  //       redirect: "/contral/Son1ManageNew",
+  //       meta: {
+  //         requireAuth: true
+  //       }
+  //     },
+  //     {
+  //       component: Son1ManageNew,
+  //       name: "Son1ManageNew",
+  //       path: "/contral/Son1ManageNew",
+  //       meta: {
+  //         requireAuth: true
+  //       }
+  //     },
+  //     {
+  //       component: Son2CarMap,
+  //       name: "Son2CarMap",
+  //       path: "/contral/Son2CarMap"
+  //     },
+  //     {
+  //       component: Son2_1Driver,
+  //       name: "Son2_1Driver",
+  //       path: "/contral/Son2_1Driver"
+  //     },
+  //     {
+  //       component: Son2_2DriReg,
+  //       name: "Son2_2DriReg",
+  //       path: "/contral/Son2_2DriReg"
+  //     },
+  //     {
+  //       component: Son3MerchartMapNew,
+  //       name: "Son3MerchartMapNew",
+  //       path: "/contral/Son3MerchartMapNew"
+  //     },
+  //     {
+  //       component: Son5Record,
+  //       name: "Son5Record",
+  //       path: "/contral/Son5Record"
+  //     },
+  //     {
+  //       component: Son6Notice,
+  //       name: "Son6Notice",
+  //       path: "/contral/Son6Notice"
+  //     },
+  //     {
+  //       component: Son7Feedback,
+  //       name: "Son7Feedback",
+  //       path: "/contral/Son7Feedback"
+  //     },
+  //     {
+  //       component: Son7_1Replay,
+  //       name: "Son7_1Replay",
+  //       path: "/contral/Son7_1Replay"
+  //     },
+  //     {
+  //       component: Son4Custom,
+  //       name: "Son4Custom",
+  //       path: "/contral/Son4Custom"
+  //     }
+  //   ]
+  // },
   {
     component: Signin,
     name: "Signin",

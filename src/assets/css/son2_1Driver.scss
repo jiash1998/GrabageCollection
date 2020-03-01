@@ -1,20 +1,22 @@
-#son2_1Driver{
-    min-height: 90vh;
+#son2_1Driver {
+  min-height: 90vh;
+  display: flex;
+
+  .body {
+    flex: 1;
     display: flex;
 
-    .body{
-        flex: 1;
-
-        .map{
-          height: 70vh;
-        }
-
-        .search{
-            height: 20vh;
-            // background-color: pink;
-            display: flex;
-            align-items: center;
-            padding-left: 5%;
-        }
+    .map {
+      width: 60%;
+      height: 90vh;
     }
+
+    .search {
+      height: 90vh;
+      // background-color: pink;
+      display: flex;
+      align-items: center;
+      padding-left: 5%;
+    }
+  }
 }

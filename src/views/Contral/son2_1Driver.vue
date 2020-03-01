@@ -42,7 +42,7 @@ export default {
           // 百度地图API功能
           var map = new BMap.Map(this.mapId);
           var point = new BMap.Point(118.321981, 32.286653);
-          map.centerAndZoom(point, 16);
+          map.centerAndZoom(point, 14);
           map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
            //添加多边形覆盖物
           this.polygon1 = new BMap.Polygon(

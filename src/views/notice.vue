@@ -69,7 +69,8 @@ export default {
     // },
     getNotice() {
       this.axios
-        .get("http://" + this.$store.state.path + ":8080/getAllNotice")
+        // .get("http://" + this.$store.state.path + ":8080/getAllNotice")
+        .get("/getAllNotice")
         .then(res => {
           //排序
           res.data.sort((a,b)=> {

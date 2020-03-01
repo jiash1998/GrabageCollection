@@ -6,6 +6,8 @@
 
   .body_left {
     width: 180px;
+    // padding-top: 55px;
+    // overflow-y: auto;
     position: fixed;
     top: 55px;
     bottom: 0;
@@ -13,11 +15,9 @@
     right: 0;
 
     .el-menu {
-      // height: 100vh;
       text-align: center;
-
+      max-height: 100vh;
       .el-submenu {
-        // transition: 0.5s ease 0;
         .el-menu-item{
           background-color: #fff;
         }

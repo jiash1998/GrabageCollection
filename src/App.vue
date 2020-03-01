@@ -17,8 +17,11 @@
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
-        <div class="contralItems" v-if="identityApp == '管理员'?true:false">
+        <!-- <div class="contralItems" v-if="identityApp == '管理员'?true:false">
           <router-link tag="span" to="/contral">管理员中心</router-link>
+        </div>-->
+        <div class="contralItems" v-if="identityApp == '管理员'?true:false">
+          <router-link tag="span" to="/ContralNew">管理员中心</router-link>
         </div>
         <div class="contralItems" v-if="identityApp == '沿街商家'?true:false">
           <router-link tag="span" to="/merchartContral">商户中心</router-link>
@@ -96,7 +99,6 @@ export default {
       localStorage.removeItem("isDot");
     }, 1000);
     // localStorage.removeItem("isDot");
-    
   },
   methods: {
     windowScroll() {

@@ -1,9 +1,21 @@
 <template>
   <div id="son2_2DriReg">
     <div class="body">
-    <h4>驾驶员注册</h4>
+      <h4>驾驶员注册</h4>
       <div class="formDiv">
-        <el-form :model="driver" ref="driver" label-position="left" label-width="100px" size="small">
+        <div class="introduce">
+          <h5>须知</h5>
+          <p>1.驾驶员身份由管理员进行注册</p>
+          <p>2.工号由驾驶员姓名首字母缩写和入职年月日组成</p>
+          <p>3.确保手机号能及时联系驾驶员</p>
+        </div>
+        <el-form
+          :model="driver"
+          ref="driver"
+          label-position="left"
+          label-width="100px"
+          size="small"
+        >
           <el-form-item label="工号">
             <el-input v-model="driver.username" placeholder="请输入工号"></el-input>
           </el-form-item>
@@ -21,12 +33,6 @@
             <el-button type="success">取消</el-button>
           </el-form-item>
         </el-form>
-        <div class="introduce">
-            <h5>须知</h5>
-            <p>1.驾驶员身份由管理员进行注册</p>
-            <p>2.工号由驾驶员姓名首字母缩写和入职年月日组成</p>
-            <p>3.确保手机号能及时联系驾驶员</p>
-        </div>
       </div>
     </div>
   </div>
