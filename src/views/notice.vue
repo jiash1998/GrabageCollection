@@ -25,7 +25,7 @@
         <div class="right">
           <h4>Easy Garbage Sort</h4>
           <p>让日常垃圾分类更简单</p>
-          <img src="../assets/img/easyGS2.jpg"/>
+          <img src="../assets/img/easyGS2.jpg" />
         </div>
       </div>
     </div>
@@ -35,6 +35,8 @@
 
 <script>
 import PublicFood from "../components/publicFood.vue";
+//api
+import getNoticeApi from "../api/getRequest.js";
 export default {
   name: "notice",
   components: {
@@ -46,38 +48,20 @@ export default {
     };
   },
   mounted() {
-    this.getNotice();
-    //滚动条
-    // window.addEventListener("scroll", this.windowScroll, true);
-    // this.$refs.leftDiv.removeEventListener("scroll", this.DivScroll,true);
+    this.getInfo();
   },
   methods: {
-    // windowScroll() {
-    //   let scroll =
-    //     window.scrollTop ||
-    //     document.body.scrollTop ||
-    //     document.documentElement.scrollTop;
-    //   console.log(scroll + "win");
-    //   if (scroll >= 120) {
-    //     console.log("到了");
-    //     this.DivScroll();
-    //   }
-    // },
-    // DivScroll() {
-    //   let DivScroll = this.$refs.leftDiv.scrollHeight;
-    //   console.log(DivScroll + "div");
-    // },
-    getNotice() {
-      this.axios
-        // .get("http://" + this.$store.state.path + ":8080/getAllNotice")
-        .get("/getAllNotice")
+    getInfo() {
+      var _this = this;
+      getNoticeApi
+        .getNotice()
         .then(res => {
           //排序
-          res.data.sort((a,b)=> {
+          res.data.sort((a, b) => {
             return Date.parse(b.time) - Date.parse(a.time);
           });
           this.noticeList = res.data;
-          console.log(res.data);
+          console.log(this.noticeList);
         })
         .catch(err => {
           console.log(err);

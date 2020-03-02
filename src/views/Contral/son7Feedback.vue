@@ -45,6 +45,8 @@
 
 <script>
 import qs from "querystring";
+import getAllFeedbackApi from "../../api/getRequest.js";
+
 export default {
   name: "son7Feedback",
   data() {
@@ -211,8 +213,10 @@ export default {
       }
     },
     getInfo() {
-      this.axios
-        .get("http://" + this.$store.state.path + ":8080/getAllFeedBack")
+      // this.axios
+      //   .get("http://" + this.$store.state.path + ":8080/getAllFeedBack")
+      getAllFeedbackApi
+        .getAllFeedBack()
         .then(res => {
           console.log(res.data);
           this.feedback = res.data;

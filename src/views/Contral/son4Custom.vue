@@ -45,7 +45,9 @@
   </div>
 </template>
 <script>
-import qs from 'querystring';
+import qs from "querystring";
+import getAllCustomApi from "../../api/getRequest.js";
+
 export default {
   name: "son4Custom",
   data() {
@@ -63,7 +65,7 @@ export default {
   methods: {
     selStore() {
       var data = this.findStore;
-      
+
       this.axios
         .post(
           "http://" + this.$store.state.path + ":8080/getCustomByName",
@@ -83,8 +85,10 @@ export default {
         });
     },
     getInfo() {
-      this.axios
-        .get("http://" + this.$store.state.path + ":8080/getAllCustom")
+      // this.axios
+      //   .get("http://" + this.$store.state.path + ":8080/getAllCustom")
+      getAllCustomApi
+        .getAllCustom()
         .then(res => {
           console.log(res.data);
           this.storeInfo = res.data;

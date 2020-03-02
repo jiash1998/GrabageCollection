@@ -17,9 +17,6 @@ import qs from "querystring";
 
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
-axios.defaults.timeout = 5000; // 请求超时
-// axios.defaults.baseURL = "/api";
-axios.defaults.baseURL = "http://118.31.12.146:8080";
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 

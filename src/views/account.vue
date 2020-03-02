@@ -68,6 +68,8 @@
 <script>
 import publicFootMini from "../components/publicFootMini.vue";
 import qs from "querystring";
+import getUserByUsernameApi from "../api/postRequest.js";
+
 export default {
   name: "account",
   components: {
@@ -93,16 +95,8 @@ export default {
   methods: {
     getInfo() {
       var data = { username: sessionStorage.getItem("userName") };
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/getUserByUsername",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
-          }
-        )
+      getUserByUsernameApi
+        .getUserByUsername(data)
         .then(res => {
           console.log(res.data);
           this.user = res.data;

@@ -4,7 +4,7 @@
       <div class="map" :id="mapId"></div>
       <div>
         <!-- <el-button type="primary" @click="initMap(118.319736,32.299206)">隐藏区域覆盖</el-button>
-        <el-button type="primary" @click="initMap(118.323509,32.282115)">显示区域覆盖</el-button> -->
+        <el-button type="primary" @click="initMap(118.323509,32.282115)">显示区域覆盖</el-button>-->
       </div>
     </div>
   </div>
@@ -12,6 +12,7 @@
 
 <script>
 import loadBMap from "../../map";
+import getAllCustomApi from "../../api/getRequest.js";
 export default {
   name: "son3MerchartMapNew",
   data() {
@@ -21,8 +22,8 @@ export default {
       //设置覆盖物
       polygon1: {},
       polygon2: {},
-      x:118.323509,
-      y:32.282115
+      x: 118.323509,
+      y: 32.282115
     };
   },
   mounted() {
@@ -32,7 +33,7 @@ export default {
     initMap() {
       loadBMap("faARwTpILZCsY9S5GUKe6LL2ILicSoDX")
         .then(() => {
-          // 百度地图API功能    
+          // 百度地图API功能
           var map = new BMap.Map(this.mapId);
           //118.321478 32.288485
           // var point = new BMap.Point(118.323509, 32.282115);
@@ -59,15 +60,17 @@ export default {
               new BMap.Point(118.317616, 32.297016),
               new BMap.Point(118.313987, 32.307758),
               new BMap.Point(118.319197, 32.309376),
-              new BMap.Point(118.322323, 32.298969),
+              new BMap.Point(118.322323, 32.298969)
             ],
             { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 }
           );
           map.addOverlay(this.polygon2);
           //地址解析
           var myGeo = new BMap.Geocoder();
-          this.axios
-            .get("http://" + this.$store.state.path + ":8080/getAllCustom")
+          // this.axios
+          //   .get("http://" + this.$store.state.path + ":8080/getAllCustom")
+          getAllCustomApi
+            .getAllCustom()
             .then(res => {
               //获取全部定制相关信息，并以对象形式赋值
               for (const i of res.data) {

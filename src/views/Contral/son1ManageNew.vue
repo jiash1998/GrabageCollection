@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import getAllUserApi from "../../api/getRequest.js";
 export default {
   name: "son1ManageNew",
   data() {
@@ -38,8 +39,8 @@ export default {
   },
   methods: {
     getUser() {
-      this.axios
-        .get("http://" + this.$store.state.path + ":8080/getAllUser")
+      getAllUserApi
+        .getAllUser()
         .then(res => {
           console.log(res.data);
           this.user = res.data;
