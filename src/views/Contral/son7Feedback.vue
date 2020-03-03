@@ -44,8 +44,9 @@
 </template>
 
 <script>
-import qs from "querystring";
 import getAllFeedbackApi from "../../api/getRequest.js";
+import replayFeedbackApi from "../../api/postRequest.js";
+import delFeedbackByIdApi from "../../api/postRequest.js";
 
 export default {
   name: "son7Feedback",
@@ -101,16 +102,8 @@ export default {
 
       this.$refs[formname].validate(val => {
         if (val) {
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/replayFeedback",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
+          replayFeedbackApi
+            .replayFeedback(data)
             .then(res => {
               console.log(res.data);
               if (res.data == "ok") {
@@ -141,36 +134,28 @@ export default {
       var id = { id: index.id };
       console.log(id);
 
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/delFeedbackById",
-          qs.stringify(id),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
+      delFeedbackByIdApi,
+        delFeedbackById(id)
+          .then(res => {
+            console.log(res.data);
+            if (res.data == "ok") {
+              this.$message({
+                message: "删除成功",
+                type: "success",
+                duration: 1500
+              });
+              this.getInfo();
+            } else {
+              this.$message({
+                message: "删除失败",
+                type: "error",
+                duration: 1500
+              });
             }
-          }
-        )
-        .then(res => {
-          console.log(res.data);
-          if (res.data == "ok") {
-            this.$message({
-              message: "删除成功",
-              type: "success",
-              duration: 1500
-            });
-            this.getInfo();
-          } else {
-            this.$message({
-              message: "删除失败",
-              type: "error",
-              duration: 1500
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+          })
+          .catch(err => {
+            console.log(err);
+          });
     },
     /**
      * get批量逻辑删除

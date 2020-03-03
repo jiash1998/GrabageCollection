@@ -21,7 +21,8 @@
 
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
-import qs from "querystring";
+import addFeedbackApi from "../../api/postRequest.js";
+
 export default {
   name: "son3Feedback",
   components: {
@@ -44,16 +45,8 @@ export default {
     postFeedback() {
       this.feedback.username = sessionStorage.getItem("userName");
       var data = this.feedback;
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/addFeedback",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
-          }
-        )
+      addFeedbackApi
+        .addFeedback(data)
         .then(res => {
           console.log(res);
           alert("发送成功！");

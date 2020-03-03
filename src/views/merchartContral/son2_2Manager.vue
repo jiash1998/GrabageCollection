@@ -184,7 +184,9 @@
 
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
-import qs from "querystring";
+import payAliApi from "../../api/postRequest.js";
+import updateCustomByIdApi from "../../api/postRequest.js";
+
 export default {
   name: "son2_2anager",
   components: {
@@ -297,21 +299,6 @@ export default {
             // this.steps = 1;
             break;
         }
-        // if (this.editorCus[i] == "已付款") {
-        //   this.developStatus = "已完成";
-        //   this.steps = 3;
-        //   console.log("已付款");
-        //   this.isPri = !this.isPri;
-        //   break;
-        // } else if (this.editorCus[i] == "待付款") {
-        //   this.isNone = !this.isNone;
-        //   console.log("待付款");
-        //   this.steps = 2;
-        //   break;
-        // } else {
-        //   this.steps = 1;
-        //   console.log("未定制");
-        // }
       }
     },
     //改变状态
@@ -321,16 +308,8 @@ export default {
     //前往付款
     pay() {
       var data = { money: 500, id: JSON.parse(sessionStorage.customObj).id };
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/payAli",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
-          }
-        )
+      payAliApi
+        .payAli(data)
         .then(res => {
           let routerData = this.$router.resolve({
             path: "/Pay",
@@ -352,19 +331,13 @@ export default {
       this.$refs[formName].validate(val => {
         if (val) {
           this.editorCus.id = this.storeInfo.id;
-          var data = { money: 500 };
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/updateCustomById",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
+          // var data = { money: 500 };
+          console.log(this.editorCus.id);
+          var id = { id: this.editorCus.id };
+          updateCustomByIdApi
+            .updateCustomById(id)
             .then(res => {
-              console.log(res.data);
+              console.log(res);
               this.$message({
                 message: "保存成功",
                 type: "success",
@@ -390,17 +363,9 @@ export default {
           //将附属信息加进去
           this.garbageCycle.id = JSON.parse(sessionStorage.customObj).id;
           var data = this.garbageCycle;
-          console.log(data);
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/payAli",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
+          // console.log(data);
+          payAliApi
+            .payAli(data)
             .then(res => {
               console.log(res.data);
               this.steps += 1;

@@ -3,7 +3,7 @@
     <div class="body">
       <div class="map" :id="mapId"></div>
       <div class="search">
-        <el-form :model="driver" :inline="true" size="samll" label-position="left" label-width="100px">
+        <el-form :model="driver" :inline="true" size="small" label-position="left" label-width="100px">
           <el-form-item label="驾驶员工号">
             <el-input v-model="driver.username" placeholder="请输入驾驶员工号"></el-input>
           </el-form-item>

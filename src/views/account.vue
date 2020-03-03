@@ -69,6 +69,7 @@
 import publicFootMini from "../components/publicFootMini.vue";
 import qs from "querystring";
 import getUserByUsernameApi from "../api/postRequest.js";
+import updateUserByNameApi from "../api/postRequest.js";
 
 export default {
   name: "account",
@@ -109,17 +110,9 @@ export default {
     changeUser() {
       var data = this.user;
       console.log(data);
-
-      this.axios
-        .post(
-          "http://" + this.$store.state.path + ":8080/updateUserByName",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
-          }
-        )
+      
+      updateUserByNameApi
+        .updateUserByName(data)
         .then(res => {
           console.log(res.data);
           this.$message({

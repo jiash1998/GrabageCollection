@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import qs from "querystring";
+import insertUserApi from "../api/postRequest.js";
 import PublicFood from "../components/publicFood.vue";
 export default {
   name: "register",
@@ -118,23 +118,13 @@ export default {
         if (val) {
           var data = this.register;
           console.log(data);
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/insertUser",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
-            .then(res => {
-              this.$message({
-                message: "注册成功",
-                type: "success",
-                duration: 1500
-              });
+          insertUserApi.insertUser(data).then(res => {
+            this.$message({
+              message: "注册成功",
+              type: "success",
+              duration: 1500
             });
+          });
         } else {
           this.$message({
             message: "请完整填写信息",

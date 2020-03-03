@@ -47,7 +47,8 @@
 </template>
 
 <script>
-import qs from "querystring";
+import insertNoticeApi from "../../api/postRequest.js";
+
 export default {
   name: "son6Notice",
   data() {
@@ -124,28 +125,16 @@ export default {
         if (val) {
           this.notice.inputvalue = this.dynamicTags.join(",");
           var data = this.notice;
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/insertNotice",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                },
-                xhrFields: {
-                  withCredentials: true
-                }
-              }
-            )
-            .then(res => {
-              //公告提示
-              localStorage.setItem("isDot", "true");
-              this.$message({
-                message: "发布成功",
-                type: "success",
-                duration: 2500
-              });
+
+          insertNoticeApi.insertNotice(data).then(res => {
+            //公告提示
+            localStorage.setItem("isDot", "true");
+            this.$message({
+              message: "发布成功",
+              type: "success",
+              duration: 2500
             });
+          });
           console.log(data);
         } else {
           this.$message({

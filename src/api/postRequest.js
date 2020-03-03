@@ -15,10 +15,74 @@ var postString = (urlSelf, methodSelf, dataSelf, headerSelf) => {
   };
 };
 export default {
+  //用户注册
+  insertUser(data) {
+    return interceptor(postString("/insertUser", methodsAll, data, headersAll));
+  },
+  //用户登录
+  checkLogin(data) {
+    return interceptor(postString("/checkLogin", methodsAll, data, headersAll));
+  },
   //提交session保存姓名，获取个人资料
   getUserByUsername(name) {
     return interceptor(
       postString("/getUserByUsername", methodsAll, name, headersAll)
+    );
+  },
+  //修改个人资料
+  updateUserByName(name) {
+    return interceptor(
+      postString("/updateUserByName", methodsAll, name, headersAll)
+    );
+  },
+  //管理员
+  //注册驾驶员
+  addDriver(data) {
+    return interceptor(postString("/addDriver", methodsAll, data, headersAll));
+  },
+  //根据店铺名搜索店铺
+  getCustomByName(data) {
+    return interceptor(
+      postString("/getCustomByName", methodsAll, data, headersAll)
+    );
+  },
+  //发布公告
+  insertNotice(data) {
+    return interceptor(
+      postString("/insertNotice", methodsAll, data, headersAll)
+    );
+  },
+  //回复用户反馈
+  replayFeedback(data) {
+    return interceptor(
+      postString("/replayFeedback", methodsAll, data, headersAll)
+    );
+  },
+  //逻辑删除已回复反馈
+  delFeedbackById(id) {
+    return interceptor(
+      postString("/delFeedbackById", methodsAll, id, headersAll)
+    );
+  },
+  //商家
+  //录入店铺
+  addCustom(data) {
+    return interceptor(postString("/addCustom", methodsAll, data, headersAll));
+  },
+  //支付宝付款
+  payAli(data) {
+    return interceptor(postString("/payAli", methodsAll, data, headersAll));
+  },
+  //修改定制
+  updateCustomById(id) {
+    return interceptor(
+      postString("/updateCustomById", methodsAll, id, headersAll)
+    );
+  },
+  //商户反馈
+  addFeedback(data) {
+    return interceptor(
+      postString("/addFeedback", methodsAll, data, headersAll)
     );
   }
 };

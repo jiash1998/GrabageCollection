@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import qs from "querystring";
+import checkLoginApi from "../api/postRequest.js";
 import publicFootMini from "../components/publicFootMini.vue";
 export default {
   name: "signin",
@@ -86,39 +86,29 @@ export default {
         if (val) {
           var data = this.signForm;
           // console.log(data);
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/checkLogin",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
-            .then(res => {
-              console.log(res.data);
-              if (res.data.msg == "用户名或密码错误") {
-                this.$message({
-                  message: "登录失败，请检查用户名或密码! ",
-                  type: "error",
-                  duration: 1500
-                });
-                return false;
-              }
-              alert("登录成功");
-              //成功之后将值保存在session
-              //路由拦截
-              sessionStorage.setItem("token", "true");
-              //退出键
-              sessionStorage.setItem("isExit", "true");
-              sessionStorage.setItem("userName", res.data.username);
-              //身份
-              sessionStorage.setItem("identity", res.data.identity);
-              this.$router.push("/main");
-              //路由刷新，搭载数据
-              this.$router.go(0);
-            });
+          checkLoginApi.checkLogin(data).then(res => {
+            console.log(res.data);
+            if (res.data.msg == "用户名或密码错误") {
+              this.$message({
+                message: "登录失败，请检查用户名或密码! ",
+                type: "error",
+                duration: 1500
+              });
+              return false;
+            }
+            alert("登录成功");
+            //成功之后将值保存在session
+            //路由拦截
+            sessionStorage.setItem("token", "true");
+            //退出键
+            sessionStorage.setItem("isExit", "true");
+            sessionStorage.setItem("userName", res.data.username);
+            //身份
+            sessionStorage.setItem("identity", res.data.identity);
+            this.$router.push("/main");
+            //路由刷新，搭载数据
+            this.$router.go(0);
+          });
         } else {
           this.$message({
             message: "登录失败，请检查用户名或密码! ",

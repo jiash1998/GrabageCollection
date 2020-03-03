@@ -26,7 +26,7 @@
         <div class="other">
           <h4>Easy Garbage Sort</h4>
           <p>让日常垃圾分类更简单</p>
-          <img src="../../assets/img/easyGS2.jpg"/>
+          <img src="../../assets/img/easyGS2.jpg" />
         </div>
       </div>
       <div class="gap"></div>
@@ -54,7 +54,7 @@
                   <el-radio-button label="支付宝"></el-radio-button>
                   <el-radio-button label="微信"></el-radio-button>
                 </el-radio-group>
-              </el-form-item> -->
+              </el-form-item>-->
               <el-form-item label="订单日期:">
                 <el-date-picker
                   v-model="querySettle.tradeTime"
@@ -119,9 +119,11 @@
 
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
+import getAllCustomApi from "../../api/getRequest.js";
+
 export default {
   name: "son2Test",
-  components:{
+  components: {
     publicFootMini
   },
   data() {
@@ -134,7 +136,7 @@ export default {
       tradeNo: [],
       tradeYes: [],
       //按照时间帐单
-      tradeTimes:[],
+      tradeTimes: [],
       querySettle: {
         payType: "",
         isCus: "",
@@ -148,8 +150,8 @@ export default {
   },
   methods: {
     async getData() {
-      await this.axios
-        .get("http://" + this.$store.state.path + ":8080/getAllCustom")
+      await getAllCustomApi
+        .getAllCustom()
         .then(res => {
           for (const i of res.data) {
             //获取用户全部定制
@@ -188,7 +190,6 @@ export default {
     },
     //进入各店铺
     choose(index) {
-      // this.custom[index].callback = "";
       console.log(this.custom[index]);
       //sessionStorage如何存放数组
       var customObj = JSON.stringify(this.custom[index]);
@@ -201,13 +202,8 @@ export default {
       if (JSON.stringify(value).split("-")[1] == 12) {
         console.log(1);
       } else {
-        console.log(parseInt(JSON.stringify(value).split("-")[1])+1);
+        console.log(parseInt(JSON.stringify(value).split("-")[1]) + 1);
       }
-      // console.log(this.trade[2].tradeTime);
-      // for (const i of this.trade) {
-        
-      // }
-      
     },
     //帐单状态获取
     manageTrade(value) {

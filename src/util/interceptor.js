@@ -15,7 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     //在发送请求之前做点什么
-    console.log(config);
+    // console.log(config);
 
     return config;
   },

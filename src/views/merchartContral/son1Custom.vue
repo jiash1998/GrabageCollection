@@ -104,7 +104,7 @@
 import publicFootMini from "../../components/publicFootMini.vue";
 import options from "../../chzu.js";
 import loadBMap from "../../map";
-import qs from "querystring";
+import addCustomApi from "../../api/postRequest.js";
 export default {
   name: "custom",
   components: {
@@ -271,24 +271,14 @@ export default {
           var data = this.custom;
           console.log(data);
           //提交后台
-          this.axios
-            .post(
-              "http://" + this.$store.state.path + ":8080/addCustom",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
-            .then(res => {
-              console.log(res.data);
-              this.$message({
-                message: "商铺录入成功，请前往定制",
-                type: "success",
-                duration: 1500
-              });
+          addCustomApi.addCustom(data).then(res => {
+            console.log(res.data);
+            this.$message({
+              message: "商铺录入成功，请前往定制",
+              type: "success",
+              duration: 1500
             });
+          });
         } else {
           this.$message({
             message: "请等待照片上传...",
