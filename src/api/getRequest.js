@@ -21,6 +21,10 @@ export default {
   getAllCustom() {
     return interceptor(getString("/getAllCustom", methodAll));
   },
+  //获取于驾驶员通信
+  // getAllDriverNotice(){
+  //   return interceptor(getString("/getAllDriverNotice", methodAll));
+  // },
   //获取用户反馈
   getAllFeedBack() {
     return interceptor(getString("/getAllFeedBack", methodAll));

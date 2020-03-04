@@ -53,7 +53,7 @@
       <div class="main_body2">
         <div class="body2_con">
           <p id="p1">垃圾分类</p>
-          <span id="sp2" v-for="(item,index) in type" :key="index" @click="select(index)">{{item}}</span>
+          <span class="sp2 sp2-border" v-for="(item,index) in type" :key="index" @click="select(index)">{{item}}</span>
           <div
             class="body2_con_son2"
             v-for="(item,index) in info"
@@ -76,7 +76,7 @@
         <div class="body3_conall">
           <div class="body3_con1" v-for="(item,index) in advantage" :key="index">
             <div id="imgCon">
-              <img :src="item.url"/>
+              <img :src="item.url" />
             </div>
             <div id="fontCon">
               <p id="p1">{{item.title}}</p>

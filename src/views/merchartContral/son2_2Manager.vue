@@ -331,11 +331,11 @@ export default {
       this.$refs[formName].validate(val => {
         if (val) {
           this.editorCus.id = this.storeInfo.id;
-          // var data = { money: 500 };
-          console.log(this.editorCus.id);
-          var id = { id: this.editorCus.id };
+          var data = this.editorCus;
+          console.log(data);
+          // var id = { id: this.editorCus.id };
           updateCustomByIdApi
-            .updateCustomById(id)
+            .updateCustomById(data)
             .then(res => {
               console.log(res);
               this.$message({
