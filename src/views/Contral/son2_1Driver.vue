@@ -74,6 +74,7 @@ export default {
       mapId: "BMap-" + parseInt(Date.now() + Math.random()),
       polygon1: {},
       polygon2: {},
+      marker: {},
       driver: {
         username: ""
       },
@@ -167,10 +168,11 @@ export default {
           getLatandlogByDriverApi
             .getLatandlogByDriver(data)
             .then(res => {
-              for (const i of res.data) {
+              for (const i of res.data.latandlogList) {
                 // this.location.push(i);
                 this.location.push({ lng: i.lon, lat: i.lat });
               }
+              // this.location = res.data.latandlogList;
               console.log(this.location);
               this.initMap();
             })
@@ -197,7 +199,7 @@ export default {
           // 百度地图API功能
           var map = new BMap.Map(this.mapId);
           var point = new BMap.Point(118.321981, 32.286653);
-          map.centerAndZoom(point, 14);
+          map.centerAndZoom(point, 13);
           map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
           //添加多边形覆盖物
           this.polygon1 = new BMap.Polygon(
@@ -225,13 +227,10 @@ export default {
           );
           map.addOverlay(this.polygon2);
           //添加驾驶员位置
-
           if (this.location.length > 0) {
             for (const i of this.location) {
-              var point1 = new BMap.point(118.319197,32.309376);
-              // var marker = new BMap.Marker(point);
-              // map.addOverlay(marker);
-              console.log(i);
+              this.marker = new BMap.Marker(new BMap.Point(i.lng, i.lat));
+              map.addOverlay(this.marker);
             }
           } else {
             console.log("没位置");

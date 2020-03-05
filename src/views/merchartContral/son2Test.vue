@@ -36,11 +36,11 @@
           <div class="settlement">
             <div id="s1">
               <p id="settle_p1">历史结算(元)</p>
-              <p>100.00</p>
+              <p>1000.00</p>
             </div>
             <div id="s2">
               <p id="settle_p1">历史未结算(元)</p>
-              <p>0.00</p>
+              <p>500.00</p>
             </div>
             <div id="s3">
               <p id="settle_p1">下月续费(元)</p>

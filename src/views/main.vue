@@ -53,15 +53,23 @@
       <div class="main_body2">
         <div class="body2_con">
           <p id="p1">垃圾分类</p>
-          <span class="sp2 sp2-border" v-for="(item,index) in type" :key="index" @click="select(index)">{{item}}</span>
-          <div
-            class="body2_con_son2"
-            v-for="(item,index) in info"
-            :key="'info' + index"
-            v-show="item.state"
-          >
-            <p>{{item.p1}}</p>
-            <p>{{item.p2}}</p>
+          <div>
+            <span
+              class="sp2"
+              :class="item.state?'sp2-border':''"
+              v-for="(item,index) in type"
+              :key="index"
+              @click="select(index)"
+            >{{item.content}}</span>
+            <div
+              class="body2_con_son2"
+              v-for="(item,index) in info"
+              :key="'info' + index"
+              v-show="item.state"
+            >
+              <p>{{item.p1}}</p>
+              <p>{{item.p2}}</p>
+            </div>
           </div>
           <div class="body2_con_son1"></div>
         </div>
@@ -115,7 +123,12 @@ export default {
   data() {
     return {
       view: 0,
-      type: ["可回收垃圾", "干垃圾", "湿垃圾", "有害垃圾"],
+      type: [
+        { id: 0, state: true, content: "可回收垃圾" },
+        { id: 1, state: false, content: "干垃圾" },
+        { id: 2, state: false, content: "湿垃圾" },
+        { id: 3, state: false, content: "有害垃圾" }
+      ],
       advantage: [
         {
           url: require("../assets/img/test1.png"),
@@ -138,6 +151,7 @@ export default {
         {
           id: 0,
           state: true,
+          content: "可回收垃圾",
           p1:
             "可回收物就是可以再生循环的垃圾。本身或材质可再利用的纸类、硬纸板、玻璃、塑料、金属、塑料包装，与这些材质有关的如：报纸、杂志、广告单及其它干净的纸类等皆可回收。",
           p2:
@@ -146,6 +160,7 @@ export default {
         {
           id: 1,
           state: false,
+          content: "干垃圾",
           p1:
             "干垃圾即其它垃圾，指除可回收物、有害垃圾、厨余垃圾（湿垃圾）以外的其它生活废弃物。干垃圾是对垃圾按照可回收垃圾、厨余垃圾、有害垃圾分类后剩余下来的一种垃圾。生活垃圾的具体分类标准可根据经济社会发展水平、生活垃圾特性和处置利用需要予以调整。",
           p2:
@@ -154,6 +169,7 @@ export default {
         {
           id: 2,
           state: false,
+          content: "湿垃圾",
           p1:
             "湿垃圾又称为厨余垃圾、有机垃圾，即易腐垃圾，指食材废料、剩菜剩饭、过期食品、瓜皮果核、花卉绿植、中药药渣等易腐的生物质生活废弃物。",
           p2:
@@ -162,6 +178,7 @@ export default {
         {
           id: 3,
           state: false,
+          content: "有害垃圾",
           p1:
             "有害垃圾指废电池、废灯管、废药品、废油漆及其容器等对人体健康或者自然环境造成直接或者潜在危害的生活废弃物。常见包括废电池、废荧光灯管、废灯泡、废水银温度计、废油漆桶、过期药品等。",
           p2:
@@ -174,7 +191,13 @@ export default {
     //v-for循环的div展示
     select(type) {
       this.info[type].state = true;
+      this.type[type].state = true;
       for (const i of this.info) {
+        if (i.id != type) {
+          i.state = false;
+        }
+      }
+      for (const i of this.type) {
         if (i.id != type) {
           i.state = false;
         }

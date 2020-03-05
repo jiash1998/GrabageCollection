@@ -2,16 +2,14 @@
   <div id="notice">
     <div class="notice_main">
       <div class="notice_tabber">
-        <el-menu default-active="1" mode="horizontal">
-          <el-menu-item index="1">全部公告</el-menu-item>
-          <el-menu-item index="2">紧急公告</el-menu-item>
-          <el-menu-item index="3">商户公告</el-menu-item>
-          <el-menu-item index="4">用户公告</el-menu-item>
+        <el-menu default-active="0" @select="NoticeType" mode="horizontal">
+          <el-menu-item index="0">全部公告</el-menu-item>
+          <el-menu-item index="1">紧急公告</el-menu-item>
+          <el-menu-item index="2">商户公告</el-menu-item>
         </el-menu>
       </div>
 
       <div class="notice_content">
-        <!-- <el-button type="primary" @click="getNotice">测试</el-button> -->
         <div class="scroll">
           <div class="left" ref="leftDiv">
             <div class="content" v-for="(item,index) in noticeList" :key="index">
@@ -44,13 +42,37 @@ export default {
   },
   data() {
     return {
-      noticeList: []
+      //三个公告类型
+      noticeList: [],
+      allList: [],
+      emergencyList: [],
+      storeList: [],
+      type: 0
     };
   },
   mounted() {
     this.getInfo();
   },
   methods: {
+    //点击展示不同类型
+    NoticeType(key, keypath) {
+      // console.log(key);
+      switch (key) {
+        case "0":
+          this.noticeList = this.allList;
+          break;
+        case "1":
+          this.noticeList = this.emergencyList;
+          break;
+        case "2":
+          this.noticeList = this.storeList;
+          break;
+        default:
+          this.noticeList = this.allList;
+          break;
+      }
+      console.log(this.noticeList);
+    },
     getInfo() {
       var _this = this;
       getNoticeApi
@@ -61,7 +83,16 @@ export default {
             return Date.parse(b.time) - Date.parse(a.time);
           });
           this.noticeList = res.data;
-          console.log(this.noticeList);
+          this.allList = res.data;
+          for (const i of res.data) {
+            if (i.type == "紧急通知") {
+              this.emergencyList.push(i);
+            } else if (i.type == "商户通知") {
+              this.storeList.push(i);
+            } else {
+              console.log("不处理");
+            }
+          }
         })
         .catch(err => {
           console.log(err);
