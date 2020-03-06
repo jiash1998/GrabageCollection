@@ -54,8 +54,8 @@
               <el-input v-model="user.phone"></el-input>
             </el-form-item>
             <el-form-item label>
-              <el-button type="primary" @click="changeUser" plain>保存</el-button>
-              <el-button type="success" @click="changeDis">取消</el-button>
+              <el-button type="primary" @click="changeUser(vm)" plain>保存</el-button>
+              <el-button type="success" @click="changeDis">关闭</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -70,6 +70,7 @@ import publicFootMini from "../components/publicFootMini.vue";
 import qs from "querystring";
 import getUserByUsernameApi from "../api/postRequest.js";
 import updateUserByNameApi from "../api/postRequest.js";
+import { debounce } from "../util/debounce.js";
 
 export default {
   name: "account",
@@ -85,6 +86,7 @@ export default {
         phone: "",
         identity: ""
       },
+      vm: this,
       userArr: {},
       //状态改变
       isCha: false
@@ -107,29 +109,31 @@ export default {
           console.log(err);
         });
     },
-    changeUser() {
-      var data = this.user;
-      console.log(data);
-      
-      updateUserByNameApi
-        .updateUserByName(data)
-        .then(res => {
-          console.log(res.data);
-          this.$message({
-            message: "保存成功",
-            type: "success",
-            duration: 1500
+    changeUser: debounce(
+      vm => {
+        var data = vm.user;
+        updateUserByNameApi
+          .updateUserByName(data)
+          .then(res => {
+            console.log(res.data);
+            vm.$message({
+              message: "保存成功",
+              type: "success",
+              duration: 1500
+            });
+          })
+          .catch(err => {
+            vm.$message({
+              message: "保存失败",
+              type: "error",
+              duration: 1500
+            });
+            console.log(err);
           });
-        })
-        .catch(err => {
-          this.$message({
-            message: "保存失败",
-            type: "error",
-            duration: 1500
-          });
-          console.log(err);
-        });
-    },
+      },
+      3000,
+      true
+    ),
     changeDis() {
       this.isCha = !this.isCha;
     }

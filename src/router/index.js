@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/main";
 import Signin from "../views/signin";
-// import Editor from "../views/editor";
 import Register from "../views/register";
 import Notice from "../views/notice";
 import Custom from "../views/custom";
@@ -188,14 +187,6 @@ const routes = [
     name: "Signin",
     path: "/signin"
   },
-  // {
-  //   component: Editor,
-  //   name: "Editor",
-  //   path: "/Editor",
-  //   meta: {
-  //     requireAuth: true
-  //   }
-  // },
   {
     component: Register,
     name: "Register",

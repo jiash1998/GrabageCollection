@@ -16,7 +16,7 @@
             <el-input v-model="driver.username" placeholder="输入工号查询位置/通知"></el-input>
           </el-form-item>
           <el-form-item label>
-            <el-button type="primary" plain @click="getLocation('driver')">查询</el-button>
+            <el-button type="primary" plain @click="getLocation(vm)">查询</el-button>
             <el-button type="success" @click="openDialog('driver')">发消息</el-button>
             <el-button type="success" native-type="reset">清空</el-button>
             <!-- //弹框 -->
@@ -29,7 +29,7 @@
                   <el-input type="textarea" v-model="notice.content" placeholder="输入通知内容"></el-input>
                 </el-form-item>
                 <el-form-item label>
-                  <el-button type="primary" plain @click="postNotice">发送</el-button>
+                  <el-button type="primary" plain @click="postNotice(vm)">发送</el-button>
                 </el-form-item>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -59,6 +59,7 @@ import getLatandlogByDriverApi from "@/api/postRequest.js";
 import sendDriverNoticeToDriverApi from "@/api/postRequest.js";
 import getDriverNoticeByReceiveTodayApi from "@/api/postRequest.js";
 import getDriverNoticeBySendTodayApi from "@/api/postRequest.js";
+import { debounce } from "../../util/debounce.js";
 
 export default {
   name: "son2_1Driver",
@@ -75,6 +76,7 @@ export default {
       polygon1: {},
       polygon2: {},
       marker: {},
+      vm: this,
       driver: {
         username: ""
       },
@@ -110,89 +112,93 @@ export default {
         }
       });
     },
-    postNotice() {
-      var data = this.notice;
-      sendDriverNoticeToDriverApi
-        .sendDriverNoticeToDriver(data)
-        .then(res => {
-          console.log(res.data);
-          if (res.data == "ok") {
-            this.$message({
-              message: "发送成功",
-              type: "success",
-              duration: 1500
-            });
-          } else {
-            this.$message({
-              message: "发送失败",
-              type: "error",
-              duration: 1800
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
+    postNotice: debounce(
+      vm => {
+        var data = vm.notice;
+        sendDriverNoticeToDriverApi
+          .sendDriverNoticeToDriver(data)
+          .then(res => {
+            console.log(res.data);
+            if (res.data == "ok") {
+              vm.$message({
+                message: "发送成功",
+                type: "success",
+                duration: 1500
+              });
+            } else {
+              vm.$message({
+                message: "发送失败",
+                type: "error",
+                duration: 1800
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+      2000,
+      true
+    ),
     //获取位置和通知
-    getLocation(formName) {
-      this.$refs[formName].validate(val => {
-        if (val) {
-          //拿驾驶员接收的通知 位置
-          var data = { driver: this.driver.username };
-          var data1 = { receiver: this.driver.username };
-          var data2 = { sender: this.driver.username };
+    getLocation: debounce(
+      vm => {
+        vm.$refs['driver'].validate(val => {
+          if (val) {
+            //拿驾驶员接收的通知 位置
+            var data = { driver: vm.driver.username };
+            var data1 = { receiver: vm.driver.username };
+            var data2 = { sender: vm.driver.username };
 
-          getDriverNoticeByReceiveTodayApi
-            .getDriverNoticeByReceiveToday(data1)
-            .then(res => {
-              for (const i of res.data) {
-                this.NoticeData.push(i);
-              }
-              // this.NoticeData.push(res.data);
-            })
-            .catch(err => {
-              console.log(err);
-            });
-          getDriverNoticeBySendTodayApi
-            .getDriverNoticeBySendToday(data2)
-            .then(res => {
-              for (const i of res.data) {
-                this.NoticeData.push(i);
-              }
-              // this.NoticeData.push(res.data);
-            })
-            .catch(err => {
-              console.log(err);
-            });
-          getLatandlogByDriverApi
-            .getLatandlogByDriver(data)
-            .then(res => {
-              for (const i of res.data.latandlogList) {
-                // this.location.push(i);
-                this.location.push({ lng: i.lon, lat: i.lat });
-              }
-              // this.location = res.data.latandlogList;
-              console.log(this.location);
-              this.initMap();
-            })
-            .catch(err => {
-              console.log(err);
-            });
-          // setTimeout(() => {
-          //   console.log(this.NoticeData);
-          // }, 2000);
-        } else {
-          return false;
-        }
-      });
-    },
-    test() {
-      var test = [];
-      for (const i of this.location) {
-        this.test.push({ lng: i.lon, lat: i, lat });
-      }
-    },
+            getDriverNoticeByReceiveTodayApi
+              .getDriverNoticeByReceiveToday(data1)
+              .then(res => {
+                for (const i of res.data) {
+                  vm.NoticeData.push(i);
+                }
+                // this.NoticeData.push(res.data);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+            getDriverNoticeBySendTodayApi
+              .getDriverNoticeBySendToday(data2)
+              .then(res => {
+                for (const i of res.data) {
+                  vm.NoticeData.push(i);
+                }
+                // this.NoticeData.push(res.data);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+            getLatandlogByDriverApi
+              .getLatandlogByDriver(data)
+              .then(res => {
+                if (res.data.msg == "查询数据为空") {
+                  vm.$message({
+                    message: "暂无位置信息",
+                    type: "error",
+                    duration: 2000
+                  });
+                } else {
+                  for (const i of res.data.latandlogList) {
+                    vm.location.push({ lng: i.lon, lat: i.lat });
+                  }
+                  vm.initMap();
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          } else {
+            return false;
+          }
+        });
+      },
+      3000,
+      true
+    ),
     initMap() {
       loadBMap("faARwTpILZCsY9S5GUKe6LL2ILicSoDX")
         .then(() => {

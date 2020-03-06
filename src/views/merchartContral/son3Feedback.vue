@@ -5,7 +5,7 @@
         <el-form :model="feedback" :rules="feedback" refs="feedback">
           <el-form-item label>
             <el-input v-model="feedback.content" type="textarea" placeholder="填写你想反馈的意见或者建议"></el-input>
-            <el-button type="primary" @click="postFeedback" plain>发送</el-button>
+            <el-button type="primary" @click="postFeedback(vm)" plain>发送</el-button>
             <el-button type="success">重置</el-button>
           </el-form-item>
         </el-form>
@@ -22,6 +22,7 @@
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
 import addFeedbackApi from "../../api/postRequest.js";
+import { debounce } from "../../../../csseffects/src/debounce";
 
 export default {
   name: "son3Feedback",
@@ -38,24 +39,37 @@ export default {
       feedback: {
         username: "",
         content: ""
-      }
+      },
+      vm: this
     };
   },
   methods: {
-    postFeedback() {
-      this.feedback.username = sessionStorage.getItem("userName");
-      var data = this.feedback;
-      addFeedbackApi
-        .addFeedback(data)
-        .then(res => {
-          console.log(res);
-          alert("发送成功！");
-        })
-        .catch(err => {
-          console.log(err);
-          alert("发送失败！");
-        });
-    }
+    postFeedback: debounce(
+      vm => {
+        vm.feedback.username = sessionStorage.getItem("userName");
+        var data = vm.feedback;
+        addFeedbackApi
+          .addFeedback(data)
+          .then(res => {
+            console.log(res);
+            vm.$message({
+              message: "发送成功",
+              type: "success",
+              duration: 1800
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            vm.$message({
+              message: "发送失败",
+              type: "error",
+              duration: 1800
+            });
+          });
+      },
+      3000,
+      true
+    )
   }
 };
 </script>

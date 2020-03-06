@@ -35,7 +35,7 @@
             <el-input v-model="driver.phone" placeholder="请输入联系方式"></el-input>
           </el-form-item>
           <el-form-item label>
-            <el-button type="primary" plain @click="regDriver">提交</el-button>
+            <el-button type="primary" plain @click="regDriver(vm)">提交</el-button>
             <el-button type="success">取消</el-button>
           </el-form-item>
         </el-form>
@@ -46,6 +46,7 @@
 
 <script>
 import addDriverApi from "../../api/postRequest.js";
+import { debounce } from "../../../../csseffects/src/debounce";
 export default {
   name: "son2_2DriReg",
   data() {
@@ -57,34 +58,36 @@ export default {
         phone: "",
         routeFlag: "",
         identity: "驾驶员"
-      }
+      },
+      vm: this
     };
   },
   mounted() {},
   methods: {
-    regDriver() {
-      var data = this.driver;
-      console.log(data);
+    regDriver: debounce(
+      vm => {
+        var data = vm.driver;
 
-      addDriverApi
-        .addDriver(data)
-        .then(res => {
-          console.log(res.data);
-          this.$message({
-            message: "注册成功",
-            type: "success",
-            duration: 1500
+        addDriverApi
+          .addDriver(data)
+          .then(res => {
+            vm.$message({
+              message: "注册成功",
+              type: "success",
+              duration: 1500
+            });
+          })
+          .catch(err => {
+            vm.$message({
+              message: "注册失败",
+              type: "error",
+              duration: 1500
+            });
           });
-        })
-        .catch(err => {
-          console.log(err);
-          this.$message({
-            message: "注册失败",
-            type: "error",
-            duration: 1500
-          });
-        });
-    }
+      },
+      2000,
+      true
+    )
   }
 };
 </script>

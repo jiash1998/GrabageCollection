@@ -7,7 +7,7 @@
             <el-input v-model="findStore.name" placeholder="请输入店铺名称"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="success" @click="selStore" plain>查询</el-button>
+            <el-button type="success" @click="selStore(vm)" plain>查询</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -48,6 +48,7 @@
 import qs from "querystring";
 import getAllCustomApi from "../../api/getRequest.js";
 import getCustomByNameApi from "../../api/postRequest.js";
+import { debounce } from "../../util/debounce.js";
 
 export default {
   name: "son4Custom",
@@ -57,26 +58,31 @@ export default {
       //搜索商铺表单
       findStore: {
         name: ""
-      }
+      },
+      vm: this
     };
   },
   async mounted() {
     await this.getInfo();
   },
   methods: {
-    selStore() {
-      var data = this.findStore;
+    selStore: debounce(
+      vm => {
+        var data = vm.findStore;
 
-      getCustomByNameApi
-        .getCustomByName(data)
-        .then(res => {
-          console.log(res.data);
-          this.storeInfo = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
+        getCustomByNameApi
+          .getCustomByName(data)
+          .then(res => {
+            // console.log(res.data);
+            vm.storeInfo = res.data;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+      2000,
+      true
+    ),
     getInfo() {
       getAllCustomApi
         .getAllCustom()

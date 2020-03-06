@@ -27,7 +27,7 @@
               style="margin-left:5%;"
               type="success"
               plain
-              @click="submitForm('signForm')"
+              @click="sub(vm)"
             >登录</el-button>
             <el-button type="success">
               <router-link to="/register" tag="span">注册</router-link>
@@ -43,6 +43,8 @@
 <script>
 import checkLoginApi from "../api/postRequest.js";
 import publicFootMini from "../components/publicFootMini.vue";
+import { debounce } from "../util/debounce.js";
+
 export default {
   name: "signin",
   components: {
@@ -73,7 +75,8 @@ export default {
         username: "",
         password: "",
         submit: ""
-      }
+      },
+      vm: this
     };
   },
   mounted() {
@@ -81,44 +84,48 @@ export default {
   },
 
   methods: {
-    submitForm(formname) {
-      this.$refs[formname].validate(val => {
-        if (val) {
-          var data = this.signForm;
-          // console.log(data);
-          checkLoginApi.checkLogin(data).then(res => {
-            console.log(res.data);
-            if (res.data.msg == "用户名或密码错误") {
-              this.$message({
-                message: "登录失败，请检查用户名或密码! ",
-                type: "error",
-                duration: 1500
-              });
-              return false;
-            }
-            alert("登录成功");
-            //成功之后将值保存在session
-            //路由拦截
-            sessionStorage.setItem("token", "true");
-            //退出键
-            sessionStorage.setItem("isExit", "true");
-            sessionStorage.setItem("userName", res.data.username);
-            //身份
-            sessionStorage.setItem("identity", res.data.identity);
-            this.$router.push("/main");
-            //路由刷新，搭载数据
-            this.$router.go(0);
-          });
-        } else {
-          this.$message({
-            message: "登录失败，请检查用户名或密码! ",
-            type: "error",
-            duration: 1500
-          });
-          return false;
-        }
-      });
-    }
+    sub: debounce(
+      (vm) => {
+        vm.$refs['signForm'].validate(val => {
+          if (val) {
+            var data = vm.signForm;
+            // console.log(data);
+            checkLoginApi.checkLogin(data).then(res => {
+              console.log(res.data);
+              if (res.data.msg == "用户名或密码错误") {
+                vm.$message({
+                  message: "登录失败，请检查用户名或密码! ",
+                  type: "error",
+                  duration: 1500
+                });
+                return false;
+              }
+              alert("登录成功");
+              //成功之后将值保存在session
+              //路由拦截
+              sessionStorage.setItem("token", "true");
+              //退出键
+              sessionStorage.setItem("isExit", "true");
+              sessionStorage.setItem("userName", res.data.username);
+              //身份
+              sessionStorage.setItem("identity", res.data.identity);
+              vm.$router.push("/main");
+              //路由刷新，搭载数据
+              vm.$router.go(0);
+            });
+          } else {
+            vm.$message({
+              message: "登录失败，请检查用户名或密码! ",
+              type: "error",
+              duration: 1500
+            });
+            return false;
+          }
+        });
+      },
+      2000,
+      true
+    )
   }
 };
 </script>
