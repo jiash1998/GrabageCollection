@@ -42,6 +42,7 @@
 
 <script>
 import checkLoginApi from "../api/postRequest.js";
+import qs from "querystring";
 import publicFootMini from "../components/publicFootMini.vue";
 import { debounce } from "../util/debounce.js";
 
@@ -85,34 +86,38 @@ export default {
 
   methods: {
     sub: debounce(
-      (vm) => {
-        vm.$refs['signForm'].validate(val => {
+      vm => {
+        vm.$refs["signForm"].validate(val => {
           if (val) {
             var data = vm.signForm;
-            // console.log(data);
-            checkLoginApi.checkLogin(data).then(res => {
-              console.log(res.data);
-              if (res.data.msg == "用户名或密码错误") {
-                vm.$message({
-                  message: "登录失败，请检查用户名或密码! ",
-                  type: "error",
-                  duration: 1500
-                });
-                return false;
-              }
-              alert("登录成功");
-              //成功之后将值保存在session
-              //路由拦截
-              sessionStorage.setItem("token", "true");
-              //退出键
-              sessionStorage.setItem("isExit", "true");
-              sessionStorage.setItem("userName", res.data.username);
-              //身份
-              sessionStorage.setItem("identity", res.data.identity);
-              vm.$router.push("/main");
-              //路由刷新，搭载数据
-              vm.$router.go(0);
-            });
+            checkLoginApi.checkLogin(data)
+            // vm.axios
+            //   .post("/checkLogin", qs.stringify(data), {
+            //     headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            //   })
+              .then(res => {
+                // console.log(res);
+                if (res.data.msg == "用户名或密码错误") {
+                  vm.$message({
+                    message: "登录失败，请检查用户名或密码! ",
+                    type: "error",
+                    duration: 1500
+                  });
+                  return false;
+                }
+                alert("登录成功");
+                //成功之后将值保存在session
+                //路由拦截
+                sessionStorage.setItem("token", "true");
+                //退出键
+                sessionStorage.setItem("isExit", "true");
+                sessionStorage.setItem("userName", res.data.username);
+                //身份
+                sessionStorage.setItem("identity", res.data.identity);
+                vm.$router.push("/main");
+                //路由刷新，搭载数据
+                vm.$router.go(0);
+              });
           } else {
             vm.$message({
               message: "登录失败，请检查用户名或密码! ",
