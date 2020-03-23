@@ -20,10 +20,7 @@ $pLineheight: 9px;
 
     .viewDiv {
       width: 65%;
-      // height: 300px;
-      // position: absolute;
       border-radius: 5px;
-      // margin: 20px 0 0 3%;
       background-color: #fff;
 
       #p1 {
@@ -93,9 +90,10 @@ $pLineheight: 9px;
           box-shadow: 0 0 4px 3px gainsboro;
         }
 
-        .test {
+        .fillDiv {
           width: 45%;
           height: 0px;
+          background-color: pink;
           margin: 0 0 20px 0;
         }
       }

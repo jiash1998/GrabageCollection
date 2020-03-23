@@ -6,7 +6,9 @@
           <span>让垃圾的回收分类更轻松</span>
           <p>CHZU是全新一代的，为客户生活环境需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
           <p></p>
-          <el-button type="success" round plain>了解更多</el-button>
+          <router-link to="/merchartContral/Son1Custom" tag="div">
+            <el-button type="success" round plain>了解更多</el-button>
+          </router-link>
         </div>
         <div class="head_vedio">
           <video

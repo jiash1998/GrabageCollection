@@ -17,9 +17,6 @@
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
-        <!-- <div class="contralItems" v-if="identityApp == '管理员'?true:false">
-          <router-link tag="span" to="/contral">管理员中心</router-link>
-        </div>-->
         <div class="contralItems" v-if="identityApp == '管理员'?true:false">
           <router-link tag="span" to="/ContralNew">管理员中心</router-link>
         </div>
@@ -29,6 +26,9 @@
         <div class="contralItems">
           <router-link tag="span" to="/Account">账户中心</router-link>
         </div>
+        <!-- <div class="contralItems">
+          <router-link tag="span" to="/PaySuccess">测试</router-link>
+        </div> -->
       </div>
       <div class="header_other">
         <div class="prompt">

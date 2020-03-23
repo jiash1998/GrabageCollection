@@ -20,7 +20,7 @@
               </div>
             </div>
             <!-- 为了奇数块时，单个能左对齐 -->
-            <div class="test"></div>
+            <div class="fillDiv"></div>
           </div>
         </div>
         <div class="other">
@@ -49,12 +49,6 @@
           </div>
           <div class="choose">
             <el-form :model="querySettle" ref="querySettle" :inline="true" size="small">
-              <!-- <el-form-item label="支付方式:">
-                <el-radio-group v-model="querySettle.payType">
-                  <el-radio-button label="支付宝"></el-radio-button>
-                  <el-radio-button label="微信"></el-radio-button>
-                </el-radio-group>
-              </el-form-item>-->
               <el-form-item label="订单日期:">
                 <el-date-picker
                   v-model="querySettle.tradeTime"
@@ -106,8 +100,8 @@
               </el-table-column>
               <el-table-column label="店铺" prop="name" width="220"></el-table-column>
               <el-table-column label="负责人" prop="header"></el-table-column>
-              <el-table-column label="应付金额" prop="money"></el-table-column>
-              <el-table-column label="实付金额" prop></el-table-column>
+              <el-table-column label="应付金额" prop>500</el-table-column>
+              <el-table-column label="实付金额" prop="money"></el-table-column>
             </el-table>
           </div>
         </div>
@@ -195,6 +189,7 @@ export default {
       var customObj = JSON.stringify(this.custom[index]);
       sessionStorage.customObj = customObj;
       this.$router.push("/merchartContral/Son2Manager/Son2_2Manager");
+      this.$router.go(0);
     },
     //时间获取
     manageTradeTime(value) {

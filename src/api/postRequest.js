@@ -2,6 +2,7 @@ import interceptor from "../util/interceptor.js";
 import qs from "querystring";
 
 const headersAll = "application/x-www-form-urlencoded";
+const headersJson = "application/json";
 const methodsAll = "post";
 
 var postString = (urlSelf, methodSelf, dataSelf, headerSelf) => {
@@ -92,6 +93,12 @@ export default {
   //录入店铺
   addCustom(data) {
     return interceptor(postString("/addCustom", methodsAll, data, headersAll));
+  },
+  //删除店铺
+  delCustomBySocialCode(data) {
+    return interceptor(
+      postString("/delCustomBySocialCode", methodsAll, data, headersJson)
+    );
   },
   //支付宝付款
   payAli(data) {
