@@ -149,11 +149,7 @@
         </div>
         <div class="custom">
           <p id="p1">回收定制</p>
-<<<<<<< HEAD
-          <div class="customInfo" v-show="storeInfo.isCus != '未定制'">
-=======
           <div class="customInfo" :class="{DivChange:customCha}">
->>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
             <p>
               回收时间：
               <span>{{storeInfo.cycleDate}}</span>
@@ -175,11 +171,7 @@
               <span>{{ReturnData}}</span>
             </p>
           </div>
-<<<<<<< HEAD
-          <div class="next" v-show="storeInfo.isCus == '未定制'">
-=======
           <div class="next" :class="{DivChange:!customCha}">
->>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
             <el-form :model="garbageCycle" :rules="rules" ref="garbageCycle">
               <el-form-item label="回收时间" prop="cycleDate">
                 <el-checkbox-group v-model="garbageCycle.cycleDate">
@@ -349,22 +341,14 @@ export default {
         type: "warning"
       })
         .then(() => {
-<<<<<<< HEAD
           var data = { code: this.storeInfo.socialCreditCode };
-=======
-          var data = { "code": this.storeInfo.socialCreditCode };
->>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
           console.log(data);
 
           delCustomBySocialCodeApi
             .delCustomBySocialCode(data)
             .then(res => {
               console.log(res);
-<<<<<<< HEAD
               if (res.data.code == 200 && res.data.msg == "删除成功") {
-=======
-              if (res.code == 200 && res.msg == "删除成功") {
->>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
                 this.$message({
                   type: "success",
                   message: "删除成功!"

@@ -109,11 +109,7 @@ export default {
   //删除店铺
   delCustomBySocialCode(data) {
     return interceptor(
-<<<<<<< HEAD
       postStringJson("/delCustomBySocialCode", methodsAll, data, headersJson)
-=======
-      postString("/delCustomBySocialCode", methodsAll, data, headersJson)
->>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
     );
   },
   //支付宝付款
