@@ -14,13 +14,13 @@
                 <p id="p2">{{item.name}}</p>
                 <p id="p3">{{item.socialCreditCode}}</p>
                 <p id="p4">
-                  <span></span>
+                  <span :class="item.isCus == '已付款'?'finished':'unfinished'"></span>
                   {{item.isCus}}
                 </p>
               </div>
             </div>
             <!-- 为了奇数块时，单个能左对齐 -->
-            <div class="test"></div>
+            <div class="fillDiv"></div>
           </div>
         </div>
         <div class="other">
@@ -49,12 +49,6 @@
           </div>
           <div class="choose">
             <el-form :model="querySettle" ref="querySettle" :inline="true" size="small">
-              <!-- <el-form-item label="支付方式:">
-                <el-radio-group v-model="querySettle.payType">
-                  <el-radio-button label="支付宝"></el-radio-button>
-                  <el-radio-button label="微信"></el-radio-button>
-                </el-radio-group>
-              </el-form-item>-->
               <el-form-item label="订单日期:">
                 <el-date-picker
                   v-model="querySettle.tradeTime"
@@ -106,8 +100,8 @@
               </el-table-column>
               <el-table-column label="店铺" prop="name" width="220"></el-table-column>
               <el-table-column label="负责人" prop="header"></el-table-column>
-              <el-table-column label="应付金额" prop="money"></el-table-column>
-              <el-table-column label="实付金额" prop></el-table-column>
+              <el-table-column label="应付金额" prop>500</el-table-column>
+              <el-table-column label="实付金额" prop="money"></el-table-column>
             </el-table>
           </div>
         </div>
@@ -195,14 +189,31 @@ export default {
       var customObj = JSON.stringify(this.custom[index]);
       sessionStorage.customObj = customObj;
       this.$router.push("/merchartContral/Son2Manager/Son2_2Manager");
+      this.$router.go(0);
     },
     //时间获取
     manageTradeTime(value) {
       //data转成 字符串 再转成 数字
-      if (JSON.stringify(value).split("-")[1] == 12) {
-        console.log(1);
+      var date = JSON.stringify(value)
+        .substring(1, 8)
+        .split("-");
+
+      if (date[1] == 12) {
+        date[0] = parseInt(date[0]) + 1;
+        date[1] = 1;
       } else {
-        console.log(parseInt(JSON.stringify(value).split("-")[1]) + 1);
+        date[1] = parseInt(date[1]) + 1;
+      }
+
+      this.trade = [];
+      for (const i of this.tradeAll) {
+        let j = i.tradeTime.substring(0, 7).split("-");
+        if (j[1] <= 9) {
+          j[1] = parseInt(j[1]);
+        }
+        if (j.join("-") == date.join("-")) {
+          this.trade.push(i);
+        }
       }
     },
     //帐单状态获取

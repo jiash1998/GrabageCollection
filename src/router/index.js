@@ -7,9 +7,9 @@ import Notice from "../views/notice";
 import Custom from "../views/custom";
 import Account from "../views/account";
 import Pay from "../views/pay";
+import PaySuccess from "../views/paySuccess";
 
 //管理员
-import Contral from "../views/contral";
 import ContralNew from "../views/contralNew";
 
 import Son1ManageNew from "../views/Contral/son1ManageNew";
@@ -52,6 +52,11 @@ const routes = [
     component: Pay,
     name: "Pay",
     path: "/Pay"
+  },
+  {
+    component: PaySuccess,
+    name: "PaySuccess",
+    path: "/PaySuccess"
   },
   {
     component: Custom,

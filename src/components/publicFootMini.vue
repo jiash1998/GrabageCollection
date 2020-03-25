@@ -1,7 +1,7 @@
 <template>
   <div id="publicFootMini">
     <div class="foot">
-      <p>Copyright © 2020 CHZU（滁州）资源回收有限公司 ｜ ICP证皖B2-20160559</p>
+      <p>Copyright © 2020 ResC（滁州源分）资源回收有限公司 ｜ 皖ICP备20000781号</p>
     </div>
   </div>
 </template>

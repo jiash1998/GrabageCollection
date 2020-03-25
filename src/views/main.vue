@@ -4,13 +4,15 @@
       <div class="main_head">
         <div class="head_intro">
           <span>让垃圾的回收分类更轻松</span>
-          <p>CHZU是全新一代的，为客户生活环境需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
+          <p>ResC是全新一代的，为客户生活环境需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
           <p></p>
-          <el-button type="success" round plain>了解更多</el-button>
+          <router-link to="/merchartContral/Son1Custom" tag="div">
+            <el-button type="success" round plain>了解更多</el-button>
+          </router-link>
         </div>
         <div class="head_vedio">
           <video
-            src="../assets/img/garbageRecycle.mp4"
+            src="../assets/img/garbage.mp4"
             controls="controls"
             poster="../assets/img/black2.jpg"
           ></video>
@@ -75,9 +77,9 @@
         </div>
       </div>
       <div class="main_insert">
-        <span id="insert_sp1">CHZU</span>
+        <span id="insert_sp1">ResC</span>
         <span id="insert_sp2">新一代垃圾回收方案💚</span>
-        <p>CHZU 全新方案，家门口的可定制垃圾回收方案。得益于丰富的业务场景和用户需求挑战，CHZU 经历多年积累与不断打磨，已支撑全国2000+ 业务系统，通过了大量用户的严苛考验后方敢与君见。</p>
+        <p>ResC 全新方案，家门口的可定制垃圾回收方案。得益于丰富的业务场景和用户需求挑战，ResC 经历多年积累与不断打磨，已支撑全国2000+ 业务系统，通过了大量用户的严苛考验后方敢与君见。</p>
       </div>
       <div class="main_body3">
         <span id="body3_span">选择我们</span>
@@ -98,7 +100,7 @@
         <div class="body5_con">
           <p id="body5_p1">
             你来选择，剩下的交给
-            <span id="body5_sp1">CHZU</span>
+            <span id="body5_sp1">ResC</span>
           </p>
           <p id="body5_p2">
             这是为客户环境量身定做的垃圾回收方案

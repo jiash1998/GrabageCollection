@@ -2,7 +2,7 @@
   <div id="contralNew">
     <div class="body">
       <div class="top">
-        <el-menu default-active="1" mode="horizontal">
+        <el-menu :default-active="setIndex" @select="getIndex" mode="horizontal">
           <el-menu-item index="1">
             <router-link tag="div" to="/ContralNew/Son1ManageNew">
               <i class="el-icon-edit"></i>角色管理
@@ -70,8 +70,21 @@ import publicFootMini from "../components/publicFootMini.vue";
 
 export default {
   name: "contralNew",
+  data() {
+    return {
+      setIndex: sessionStorage.getItem("indexAdmin")
+    };
+  },
   components: {
     publicFootMini
+  },
+  methods: {
+    getIndex(key) {
+      sessionStorage.setItem("indexAdmin", key);
+    }
+  },
+  destroyed() {
+    sessionStorage.removeItem("indexAdmin");
   }
 };
 </script>

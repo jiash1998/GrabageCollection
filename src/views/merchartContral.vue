@@ -1,7 +1,7 @@
 <template>
   <div id="merchartContral">
     <div class="contralHead">
-      <el-menu default-active="1" mode="horizontal">
+      <el-menu :default-active="setIndex" mode="horizontal" @select="getIndex">
         <el-menu-item index="1">
           <router-link to="/merchartContral/Son1Custom" tag="div">定制服务</router-link>
         </el-menu-item>
@@ -14,14 +14,32 @@
       </el-menu>
     </div>
     <div>
-      <router-view />  
+      <!-- <keep-alive> -->
+        <router-view />
+      <!-- </keep-alive> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "merchartContral"
+  name: "merchartContral",
+  data() {
+    return {
+      setIndex: sessionStorage.getItem("index")
+    };
+  },
+  mounted() {
+    // this.setIndex = "1";
+  },
+  methods: {
+    getIndex(key) {
+      sessionStorage.setItem("index", key);
+    }
+  },
+  destroyed() {
+    sessionStorage.removeItem("index");
+  }
 };
 </script>
 

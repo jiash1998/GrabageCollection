@@ -16,7 +16,8 @@
             </div>
             <div class="storeName">
               {{storeInfo.name}}
-              <p>定制中</p>
+              <p v-if="storeInfo.isCus == '已付款'">已定制</p>
+              <p v-else>定制中</p>
             </div>
           </div>
           <div class="info">
@@ -54,7 +55,7 @@
                   @click="submit('garbageCycle')"
                 >提交审核</el-button>
               </div>
-              <el-button type>删除</el-button>
+              <el-button @click="deleteStore">删除</el-button>
             </div>
           </div>
         </div>
@@ -148,7 +149,29 @@
         </div>
         <div class="custom">
           <p id="p1">回收定制</p>
-          <div class="next">
+          <div class="customInfo" v-show="storeInfo.isCus != '未定制'">
+            <p>
+              回收时间：
+              <span>{{storeInfo.cycleDate}}</span>
+            </p>
+            <p>
+              回收频率：
+              <span>{{storeInfo.cycleTimes}}</span>
+            </p>
+            <p>
+              包月时长：
+              <span>{{storeInfo.sustainMonth}}</span>
+            </p>
+            <p>
+              支付方式：
+              <span>{{storeInfo.payType}}</span>
+            </p>
+            <p>
+              服务开始时间：
+              <span>{{ReturnData}}</span>
+            </p>
+          </div>
+          <div class="next" v-show="storeInfo.isCus == '未定制'">
             <el-form :model="garbageCycle" :rules="rules" ref="garbageCycle">
               <el-form-item label="回收时间" prop="cycleDate">
                 <el-checkbox-group v-model="garbageCycle.cycleDate">
@@ -165,10 +188,10 @@
               </el-form-item>
               <el-form-item label="支付方式" prop="payType">
                 <el-radio-group v-model="garbageCycle.payType">
-                  <el-radio label="zfb">
+                  <el-radio label="支付宝">
                     <img style="width:65px;height:35px;" src="../../assets/img/zfb.jpg" />
                   </el-radio>
-                  <el-radio label="wx">
+                  <el-radio label="微信">
                     <img style="width:65px;height:35px;" src="../../assets/img/wx.jpg" />
                   </el-radio>
                 </el-radio-group>
@@ -186,11 +209,18 @@
 import publicFootMini from "../../components/publicFootMini.vue";
 import payAliApi from "../../api/postRequest.js";
 import updateCustomByIdApi from "../../api/postRequest.js";
+import delCustomBySocialCodeApi from "../../api/postRequest.js";
 
 export default {
   name: "son2_2anager",
   components: {
     publicFootMini
+  },
+  computed: {
+    //服务开始时间设定
+    ReturnData() {
+      return this.storeInfo.tradeTimeEnd;
+    }
   },
   data() {
     var validatecycleDate = (rule, value, callback) => {
@@ -242,6 +272,8 @@ export default {
       developStatus: "开发中",
       //DIV状态修改
       change: false,
+      //定制div状态
+      customCha: false,
       //付款或者删除按钮状态
       isNone: true,
       //付款和删除状态
@@ -301,7 +333,44 @@ export default {
         }
       }
     },
-    //改变状态
+    //店铺删除
+    deleteStore() {
+      this.$confirm("此操作将永久删除注册店铺, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var data = { code: this.storeInfo.socialCreditCode };
+          console.log(data);
+
+          delCustomBySocialCodeApi
+            .delCustomBySocialCode(data)
+            .then(res => {
+              console.log(res);
+              if (res.data.code == 200 && res.data.msg == "删除成功") {
+                this.$message({
+                  type: "success",
+                  message: "删除成功!"
+                });
+                this.$router.push("/merchartContral/Son2Manager/Son2Test");
+                setTimeout(() => {
+                  this.$router.go(0);
+                }, 500);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "warning",
+            message: "已取消删除"
+          });
+        });
+    },
+    //店铺div改变状态
     changeDiv() {
       this.change = !this.change;
     },

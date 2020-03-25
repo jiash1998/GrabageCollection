@@ -17,6 +17,10 @@ export default {
   getAllUser() {
     return interceptor(getString("/getAllUser", methodAll));
   },
+  //获取跟踪操作
+  getAllOperate() {
+    return interceptor(getString("/getAllOperate", methodAll));
+  },
   //获取店铺所有信息
   getAllCustom() {
     return interceptor(getString("/getAllCustom", methodAll));

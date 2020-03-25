@@ -2,6 +2,7 @@ import interceptor from "../util/interceptor.js";
 import qs from "querystring";
 
 const headersAll = "application/x-www-form-urlencoded";
+const headersJson = "application/json";
 const methodsAll = "post";
 
 var postString = (urlSelf, methodSelf, dataSelf, headerSelf) => {
@@ -14,6 +15,18 @@ var postString = (urlSelf, methodSelf, dataSelf, headerSelf) => {
     }
   };
 };
+
+var postStringJson = (urlSelf, methodSelf, dataSelf, headerSelf) => {
+  return {
+    url: urlSelf,
+    method: methodSelf,
+    data: dataSelf,
+    headers: {
+      "Content-Type": headerSelf
+    }
+  };
+};
+
 export default {
   //用户注册
   insertUser(data) {
@@ -92,6 +105,12 @@ export default {
   //录入店铺
   addCustom(data) {
     return interceptor(postString("/addCustom", methodsAll, data, headersAll));
+  },
+  //删除店铺
+  delCustomBySocialCode(data) {
+    return interceptor(
+      postStringJson("/delCustomBySocialCode", methodsAll, data, headersJson)
+    );
   },
   //支付宝付款
   payAli(data) {

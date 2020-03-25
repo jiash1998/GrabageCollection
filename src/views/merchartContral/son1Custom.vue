@@ -3,7 +3,7 @@
     <div id="custom_body">
       <div class="custom_introduce">
         <div class="intro_div">
-          <span id="intro_span1">CHZU</span>
+          <span id="intro_span1">ResC</span>
           <span id="intro_span2">始终强调</span>
         </div>
         <div class="test_con">
@@ -66,7 +66,7 @@
               <el-input
                 v-model="custom.addressDetail"
                 @change="handleChange2"
-                placeholder="详细信息：街道、门牌号、店名"
+                placeholder="详细内容由街道门牌号店名组成，可参考百度地图"
               ></el-input>
             </el-form-item>
             <el-form-item label="店铺负责人" prop="header">
