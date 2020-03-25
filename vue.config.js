@@ -1,5 +1,8 @@
 module.exports = {
+<<<<<<< HEAD
   //防止打包之后无法访问
+=======
+>>>>>>> 4f25e7f036344c5ea638416a832575428ce819a5
   publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   devServer: {
     port: 8081,
