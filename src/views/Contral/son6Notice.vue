@@ -39,6 +39,7 @@
         </el-form-item>
         <el-form-item label>
           <el-button type="success" @click="submitForm(vm)">发布公告</el-button>
+          <el-button type="reset" @click="resetForm('notice')">重置</el-button>
           <el-button type="primary" plain>返回</el-button>
         </el-form-item>
       </el-form>
@@ -120,6 +121,11 @@ export default {
       // console.log(this.dynamicTags);
       this.inputVisible = false;
       this.notice.inputvalue = "";
+    },
+
+    //重置表单
+    resetForm(FormName){
+      this.$refs[FormName].resetFields();
     },
 
     submitForm: debounce(

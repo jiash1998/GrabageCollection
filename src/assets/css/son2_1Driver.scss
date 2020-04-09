@@ -26,7 +26,11 @@
         width: 100%;
         min-height: 40vh;
         height: auto;
-        // background-color: gray;
+        
+        .el-card{
+          width: 95%;
+          margin: 5px 2.5%;
+        }
       }
     }
   }

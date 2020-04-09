@@ -17,9 +17,14 @@
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      .el-form {
+
+      .el-card{
         width: 40%;
+        padding: 0px 20px;
       }
+      // .el-form {
+      //   width: 40%;
+      // }
 
       .introduce {
         font-size: 0.8em;

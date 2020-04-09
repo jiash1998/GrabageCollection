@@ -4,12 +4,13 @@ $wdith: 80%;
 
 #account {
   min-height: 100vh;
+  // min-width: 1000px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   .body {
     flex: 1;
-    width: 100%;
+    // width: 100%;
     background-color: #f8faff;
     margin-top: 55px;
     display: flex;
@@ -33,7 +34,7 @@ $wdith: 80%;
 
       p {
         color: gray;
-        width: 8.5%;
+        width: 65px;
         padding-bottom: 10px;
         border-bottom: 4px solid #67c23a;
       }
@@ -50,6 +51,7 @@ $wdith: 80%;
 
       .info {
         width: $wdith;
+        min-width: 520px;
         height: 300px;
         // background-color: pink;
         margin: 0 $mLR 0 $mLR;
@@ -73,6 +75,7 @@ $wdith: 80%;
         .el-form {
           width: $wdith;
           margin: $mTop $mLR 0 $mLR;
+          // min-width: 1100px;
 
           .el-form-item {
             width: 95%;

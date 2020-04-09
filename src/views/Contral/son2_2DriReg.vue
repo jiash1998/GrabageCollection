@@ -9,6 +9,7 @@
           <p>2.工号由驾驶员姓名首字母缩写和入职年月日组成</p>
           <p>3.确保手机号能及时联系驾驶员</p>
         </div>
+        <el-card shadow="hover">
         <el-form
           :model="driver"
           ref="driver"
@@ -39,6 +40,7 @@
             <el-button type="success">取消</el-button>
           </el-form-item>
         </el-form>
+        </el-card>
       </div>
     </div>
   </div>
@@ -46,7 +48,8 @@
 
 <script>
 import addDriverApi from "../../api/postRequest.js";
-import { debounce } from "../../../../csseffects/src/debounce";
+import { debounce } from "../../util/debounce";
+
 export default {
   name: "son2_2DriReg",
   data() {

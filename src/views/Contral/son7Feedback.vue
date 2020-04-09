@@ -1,28 +1,30 @@
 <template>
   <div id="son7Feedback">
     <div class="body">
+      <el-card shadow="hover">
+        <el-table ref="feedback" :data="feedback">
+          <el-table-column type="selection"></el-table-column>
+          <el-table-column prop="username" label="反馈用户"></el-table-column>
+          <el-table-column prop="content" label="反馈内容"></el-table-column>
+          <el-table-column prop="feedbackDate" sortable label="反馈时间"></el-table-column>
+          <el-table-column prop="state" width="120" label="状态"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button type="primary" v-if="scope.row.state != '未回复'" size="small" disabled>回复</el-button>
+              <el-button type="primary" v-else plain size="small" @click="replayInfo(scope.row)">回复</el-button>
+              <el-button
+                type="danger"
+                :disabled="scope.row.state == '未回复' ? !delBtn :delBtn"
+                @click.native="delRow(scope.row)"
+                size="small"
+              >删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-card>
       <div class="operate">
         <el-button type="primary" @click="get">选中删除</el-button>
       </div>
-      <el-table ref="feedback" :data="feedback">
-        <el-table-column type="selection"></el-table-column>
-        <el-table-column prop="username" label="反馈用户"></el-table-column>
-        <el-table-column prop="content" label="反馈内容"></el-table-column>
-        <el-table-column prop="feedbackDate" sortable label="反馈时间"></el-table-column>
-        <el-table-column prop="state" width="120" label="状态"></el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button type="primary" v-if="scope.row.state != '未回复'" size="small" disabled>回复</el-button>
-            <el-button type="primary" v-else plain size="small" @click="replayInfo(scope.row)">回复</el-button>
-            <el-button
-              type="danger"
-              :disabled="scope.row.state == '未回复' ? !delBtn :delBtn"
-              @click.native="delRow(scope.row)"
-              size="small"
-            >删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
       <div>
         <el-dialog title :visible.sync="dialogVisible" width="40%">
           <el-form :model="replay" ref="replay" :rules="rules">

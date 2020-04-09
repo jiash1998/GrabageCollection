@@ -5,7 +5,7 @@ body {
   cursor: pointer;
   width: 100%;
   height: 100%;
-  // overflow: hidden;
+  min-width: 1000px;
 
   // .headFixed {
   //   position: fixed;
@@ -15,6 +15,7 @@ body {
   // }
   .head {
     width: 100%;
+    min-width: 1000px;
     display: flex;
     //禁止左键拉取复制
     user-select: none;
@@ -97,7 +98,6 @@ body {
 
         .el-dropdown {
           font-size: 25px;
-
         }
       }
 

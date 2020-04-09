@@ -22,7 +22,7 @@
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
 import addFeedbackApi from "../../api/postRequest.js";
-import { debounce } from "../../../../csseffects/src/debounce";
+import { debounce } from "../../util/debounce";
 
 export default {
   name: "son3Feedback",

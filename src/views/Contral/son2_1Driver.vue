@@ -40,13 +40,15 @@
           </el-form-item>
         </el-form>
         <div class="showInfo">
-          <el-table :data="NoticeData">
-            <el-table-column label="发送方" prop="sender"></el-table-column>
-            <el-table-column label="接收方" prop="receiver"></el-table-column>
-            <el-table-column label="发送标题" prop="title"></el-table-column>
-            <el-table-column label="发送内容" prop="content"></el-table-column>
-            <el-table-column label="发送时间" prop="time"></el-table-column>
-          </el-table>
+          <el-card shadow="hover">
+            <el-table :data="NoticeData">
+              <el-table-column label="发送方" prop="sender"></el-table-column>
+              <el-table-column label="接收方" prop="receiver"></el-table-column>
+              <el-table-column label="发送标题" prop="title"></el-table-column>
+              <el-table-column label="发送内容" prop="content"></el-table-column>
+              <el-table-column label="发送时间" prop="time"></el-table-column>
+            </el-table>
+          </el-card>
         </div>
       </div>
     </div>
@@ -143,7 +145,7 @@ export default {
     //获取位置和通知
     getLocation: debounce(
       vm => {
-        vm.$refs['driver'].validate(val => {
+        vm.$refs["driver"].validate(val => {
           if (val) {
             //拿驾驶员接收的通知 位置
             var data = { driver: vm.driver.username };

@@ -16,8 +16,13 @@
       min-height: 260px;
       height: 260px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px gray;
+      transition: .4s;
       background-color: #fff;
+
+      &:hover {
+        box-shadow: 0 4px 5px gainsboro;
+        transform: translateY(-4px);
+      }
 
       .el-form {
         margin-top: 50px;

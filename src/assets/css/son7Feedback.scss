@@ -1,10 +1,17 @@
 .body {
   width: 100%;
   min-height: 800px;
+  // min-width: 1000px;
   height: auto;
   // background-color: #f3f5f6;
-  
-  .operate{
-    margin:10px 2%;
+
+  .el-card {
+    width: 95%;
+    margin: 15px 2.5%;
+  }
+
+  .operate {
+    margin: 10px 2.5%;
+    float: right;
   }
 }
