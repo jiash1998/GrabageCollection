@@ -1,0 +1,541 @@
+{
+    "node": [
+        {
+            "name": "可回收垃圾"
+        },
+        {
+            "name": "有害垃圾"
+        },
+        {
+            "name": "干垃圾"
+        },
+        {
+            "name": "湿垃圾"
+        },
+        {
+            "name": "中小型饭店"
+        },
+        {
+            "name": "奶茶店"
+        },
+        {
+            "name": "快餐店"
+        },
+        {
+            "name": "烧烤店"
+        },
+        {
+            "name": "办公楼"
+        },
+        {
+            "name": "面包店"
+        },
+        {
+            "name": "理发店"
+        },
+        {
+            "name": "药店"
+        },
+        {
+            "name": "废旧编织物"
+        },
+        {
+            "name": "废旧塑料"
+        },
+        {
+            "name": "易拉罐"
+        },
+        {
+            "name": "玻璃类"
+        },
+        {
+            "name": "废纸类"
+        },
+        {
+            "name": "饮料盒(纸塑铝复合包装)"
+        },
+        {
+            "name": "废旧电池"
+        },
+        {
+            "name": "废旧灯管"
+        },
+        {
+            "name": "废药类"
+        },
+        {
+            "name": "油漆类"
+        },
+        {
+            "name": "头发"
+        },
+        {
+            "name": "卫生间用纸"
+        },
+        {
+            "name": "一次性餐具"
+        },
+        {
+            "name": "烟蒂"
+        },
+        {
+            "name": "大骨头"
+        },
+        {
+            "name": "硬果壳"
+        },
+        {
+            "name": "硬贝壳"
+        },
+        {
+            "name": "瓷器碎片"
+        },
+        {
+            "name": "剩饭剩菜"
+        },
+        {
+            "name": "花卉植物"
+        },
+        {
+            "name": "过期食物"
+        },
+        {
+            "name": "食物加工废料"
+        },
+        {
+            "name": "瓜皮果核"
+        }
+    ],
+    "data": [
+        {
+            "source": "可回收垃圾",
+            "target": "中小型饭店",
+            "value": 60
+        },
+        {
+            "source": "中小型饭店",
+            "target": "废旧编织物",
+            "value": 10
+        },
+        {
+            "source": "中小型饭店",
+            "target": "废旧塑料",
+            "value": 10
+        },
+        {
+            "source": "中小型饭店",
+            "target": "易拉罐",
+            "value": 10
+        },
+        {
+            "source": "中小型饭店",
+            "target": "玻璃类",
+            "value": 10
+        },
+        {
+            "source": "中小型饭店",
+            "target": "废纸类",
+            "value": 10
+        },
+        {
+            "source": "中小型饭店",
+            "target": "饮料盒(纸塑铝复合包装)",
+            "value": 10
+        },
+        {
+            "source": "可回收垃圾",
+            "target": "奶茶店",
+            "value": 30
+        },
+        {
+            "source": "奶茶店",
+            "target": "废纸类",
+            "value": 10
+        },
+        {
+            "source": "奶茶店",
+            "target": "废旧塑料",
+            "value": 10
+        },
+        {
+            "source": "奶茶店",
+            "target": "废旧编织物",
+            "value": 10
+        },
+        {
+            "source": "可回收垃圾",
+            "target": "快餐店",
+            "value": 60
+        },
+        {
+            "source": "快餐店",
+            "target": "废旧编织物",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "废旧塑料",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "易拉罐",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "玻璃类",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "废纸类",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "饮料盒(纸塑铝复合包装)",
+            "value": 10
+        },
+        {
+            "source": "可回收垃圾",
+            "target": "办公楼",
+            "value": 120
+        },
+        {
+            "source": "办公楼",
+            "target": "废旧编织物",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "废旧塑料",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "易拉罐",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "玻璃类",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "废纸类",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "饮料盒(纸塑铝复合包装)",
+            "value": 10
+        },
+        {
+            "source": "可回收垃圾",
+            "target": "药店",
+            "value": 30
+        },
+        {
+            "source": "药店",
+            "target": "废纸类",
+            "value": 10
+        },
+        {
+            "source": "药店",
+            "target": "废旧塑料",
+            "value": 10
+        },
+        {
+            "source": "有害垃圾",
+            "target": "中小型饭店",
+            "value": 40
+        },
+        {
+            "source": "中小型店",
+            "target": "废旧电池",
+            "value": 5
+        },
+        {
+            "source": "中小型店",
+            "target": "废旧灯管",
+            "value": 5
+        },
+        {
+            "source": "中小型店",
+            "target": "油漆类",
+            "value": 5
+        },
+        {
+            "source": "有害垃圾",
+            "target": "办公楼",
+            "value": 20
+        },
+        {
+            "source": "办公楼",
+            "target": "废旧电池",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "废旧灯管",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "油漆类",
+            "value": 5
+        },
+        {
+            "source": "有害垃圾",
+            "target": "药店",
+            "value": 5
+        },
+        {
+            "source": "药店",
+            "target": "废药类",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "中小型饭店",
+            "value": 30
+        },
+        {
+            "source": "中小型饭店",
+            "target": "卫生间用纸",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "一次性餐具",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "烟蒂",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "大骨头",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "硬果壳",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "硬贝壳",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "瓷器碎片",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "奶茶店",
+            "value": 20
+        },
+        {
+            "source": "奶茶店",
+            "target": "一次性餐具",
+            "value": 5
+        },
+        {
+            "source": "奶茶店",
+            "target": "烟蒂",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "办公楼",
+            "value": 10
+        },
+        {
+            "source": "办公楼",
+            "target": "一次性餐具",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "烟蒂",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "烧烤店",
+            "value": 10
+        },
+        {
+            "source": "烧烤店",
+            "target": "一次性餐具",
+            "value": 5
+        },
+        {
+            "source": "烧烤店",
+            "target": "烟蒂",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "快餐店",
+            "value": 10
+        },
+        {
+            "source": "快餐店",
+            "target": "一次性餐具",
+            "value": 5
+        },
+        {
+            "source": "快餐店",
+            "target": "烟蒂",
+            "value": 5
+        },
+        {
+            "source": "干垃圾",
+            "target": "理发店",
+            "value": 6
+        },
+        {
+            "source": "理发店",
+            "target": "头发",
+            "value": 6
+        },
+        {
+            "source": "湿垃圾",
+            "target": "中小型饭店",
+            "value": 25
+        },
+        {
+            "source": "中小型饭店",
+            "target": "剩饭剩菜",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "过期食物",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "花卉植物",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "食物加工废料",
+            "value": 5
+        },
+        {
+            "source": "中小型饭店",
+            "target": "瓜皮果核",
+            "value": 5
+        },
+        {
+            "source": "湿垃圾",
+            "target": "面包店",
+            "value": 30
+        },
+        {
+            "source": "面包店",
+            "target": "过期食物",
+            "value": 30
+        },
+        {
+            "source": "湿垃圾",
+            "target": "奶茶店",
+            "value": 15
+        },
+        {
+            "source": "奶茶店",
+            "target": "过期食物",
+            "value": 5
+        },
+        {
+            "source": "奶茶店",
+            "target": "食物加工废料",
+            "value": 5
+        },
+        {
+            "source": "奶茶店",
+            "target": "瓜皮果核",
+            "value": 5
+        },
+        {
+            "source": "湿垃圾",
+            "target": "快餐店",
+            "value": 20
+        },
+        {
+            "source": "快餐店",
+            "target": "过期食物",
+            "value": 5
+        },
+        {
+            "source": "快餐店",
+            "target": "食物加工废料",
+            "value": 5
+        },
+        {
+            "source": "快餐店",
+            "target": "瓜皮果核",
+            "value": 5
+        },
+        {
+            "source": "快餐店",
+            "target": "剩饭剩菜",
+            "value": 5
+        },
+        {
+            "source": "湿垃圾",
+            "target": "烧烤店",
+            "value": 15
+        },
+        {
+            "source": "烧烤店",
+            "target": "过期食物",
+            "value": 5
+        },
+        {
+            "source": "烧烤店",
+            "target": "食物加工废料",
+            "value": 5
+        },
+        {
+            "source": "烧烤店",
+            "target": "剩饭剩菜",
+            "value": 5
+        },
+        {
+            "source": "湿垃圾",
+            "target": "办公楼",
+            "value": 20
+        },
+        {
+            "source": "办公楼",
+            "target": "剩饭剩菜",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "过期食物",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "花卉植物",
+            "value": 5
+        },
+        {
+            "source": "办公楼",
+            "target": "瓜皮果核",
+            "value": 5
+        }
+    ]
+}
