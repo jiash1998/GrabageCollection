@@ -11,14 +11,15 @@
       width: 95%;
       margin: 10px 2.5%;
       #mycharts {
-        //   width: 90%;
+        width: 95%;
+        margin: 0 1%;
         height: 600px;
       }
     }
   }
 
   .secondItem {
-    height: 600px;
+    height: 1000px;
 
     p {
       font-size: 1.1em;
@@ -26,6 +27,16 @@
       width: 124px;
       padding-bottom: 10px;
       border-bottom: 4px solid #67c23a;
+    }
+
+    .el-card {
+      width: 95%;
+      margin: 40px 2.5% 20px;
+      #mycharts2 {
+        width: 95%;
+        margin: 0 1%;
+        height: 600px;
+      }
     }
   }
 }
