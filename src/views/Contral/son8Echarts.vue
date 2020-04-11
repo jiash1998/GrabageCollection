@@ -18,13 +18,81 @@
 <script>
 import echarts from "../../util/echarts";
 import garbageJson from "../../util/garbage.json";
+import getAllCustomApi from "../../api/getRequest.js";
+
 export default {
   name: "son8Echarts",
+  data() {
+    return {
+      source2: [
+        [
+          "months",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ],
+      series: [
+        {
+          type: "pie",
+          id: "pie",
+          radius: "25%",
+          roseType: "radius",
+          center: ["50%", "30%"],
+          label: {
+            formatter: "{b}: {@1}({d}%)"
+          },
+          encode: {
+            itemName: "months",
+            value: "1",
+            tooltip: "1"
+          }
+        }
+      ],
+      insertLine: { type: "line", smooth: true, seriesLayoutBy: "row" },
+      arr: []
+    };
+  },
   mounted() {
+    this.getInfo();
     this.draw();
-    this.draw2();
   },
   methods: {
+    async getInfo() {
+      await getAllCustomApi
+        .getAllCustom()
+        .then(res => {
+          this.storeInfo = res.data;
+          //添加店铺信息
+          for (const i of res.data) {
+            for (let j = 0; j < 12; j++) {
+              this.arr.push((Math.random() * 100).toFixed(2));
+            }
+            let insert = [i.name].concat(this.arr);
+            this.source2.push(insert);
+            this.arr = [];
+          }
+          // console.log(this.source2);
+          //增加折线
+          for (let i = 0; i < res.data.length; i++) {
+            this.series.unshift(this.insertLine);
+          }
+          this.draw2();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
     draw() {
       var mycharts = echarts.init(this.$refs.mycharts);
       mycharts.setOption({
@@ -81,37 +149,12 @@ export default {
           showContent: false
         },
         dataset: {
-          source: [
-            ["product", "2012", "2013", "2014", "2015", "2016", "2017"],
-            ["Matcha Latte", 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
-            ["Milk Tea", 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
-            ["Cheese Cocoa", 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
-            ["Walnut Brownie", 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
-          ]
+          source: this.source2
         },
-        xAxis: { type: "category" },
-        yAxis: { gridIndex: 0 },
+        xAxis: { type: "category", name: "月份" },
+        yAxis: { gridIndex: 0, name: "垃圾生产量(kg)" },
         grid: { top: "60%" },
-        series: [
-          { type: "line", smooth: true, seriesLayoutBy: "row" },
-          { type: "line", smooth: true, seriesLayoutBy: "row" },
-          { type: "line", smooth: true, seriesLayoutBy: "row" },
-          { type: "line", smooth: true, seriesLayoutBy: "row" },
-          {
-            type: "pie",
-            id: "pie",
-            radius: "25%",
-            center: ["50%", "30%"],
-            label: {
-              formatter: "{b}: {@2012} ({d}%)"
-            },
-            encode: {
-              itemName: "product",
-              value: "2012",
-              tooltip: "2012"
-            }
-          }
-        ]
+        series: this.series
       };
 
       myCharts2.on("updateAxisPointer", function(event) {
@@ -122,6 +165,7 @@ export default {
             series: {
               id: "pie",
               label: {
+                // formatter: "{b}: {@[" + dimension + "]}"
                 formatter: "{b}: {@[" + dimension + "]} ({d}%)"
               },
               encode: {

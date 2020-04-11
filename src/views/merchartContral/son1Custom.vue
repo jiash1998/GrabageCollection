@@ -50,7 +50,19 @@
               <el-input v-model="custom.name" placeholder="请输入店铺名称"></el-input>
             </el-form-item>
             <el-form-item label="经营类型" prop="type">
-              <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input>
+              <!-- <el-input v-model="custom.type" placeholder="输入店铺类型，如：奶茶店、网咖、烧烤店等"></el-input> -->
+              <el-radio-group v-model="custom.type" size="mini">
+                <el-radio label="中小型饭店" border>中小型饭店</el-radio>
+                <el-radio label="快餐汉堡店" border>快餐汉堡店</el-radio>
+                <el-radio label="烧烤店" border>烧烤店</el-radio>
+                <el-radio label="奶茶店" border>奶茶店</el-radio>
+                <el-radio label="办公楼" border>办公楼</el-radio>
+                <el-radio label="火锅店" border>火锅店</el-radio>
+                <el-radio label="理发店" border>理发店</el-radio>
+                <el-radio label="药店" border>药店</el-radio>
+                <el-radio label="宾馆" border>宾馆</el-radio>
+                <el-radio label="其他类型" border>其他类型</el-radio>
+              </el-radio-group>
             </el-form-item>
             <div class="map-area" :id="mapId"></div>
             <el-form-item label="店铺地址" prop="address">
@@ -247,6 +259,11 @@ export default {
         })
         .then(response => {
           console.log(response.data);
+          this.$message({
+            message: "图片上传成功",
+            type: "success",
+            duration: 2000
+          });
           this.customUrl = response.data.url;
           uri = response.data.url;
           reader.readAsDataURL(img1);
@@ -256,7 +273,11 @@ export default {
           };
         })
         .catch(error => {
-          alert("上传图片出错！");
+          this.$message({
+            message: "图片上传失败",
+            type: "error",
+            duration: 2500
+          });
         });
     },
     submitUpload() {
@@ -276,14 +297,14 @@ export default {
             this.$message({
               message: "商铺录入成功，请前往定制",
               type: "success",
-              duration: 1500
+              duration: 2500
             });
           });
         } else {
           this.$message({
             message: "请等待照片上传...",
             type: "warning",
-            duration: 1500
+            duration: 2000
           });
           return false;
         }
@@ -312,7 +333,7 @@ export default {
                 this.$message({
                   message: "地址未解析成功",
                   type: "error",
-                  duration: 1500
+                  duration: 2000
                 });
               }
             },

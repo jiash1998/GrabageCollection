@@ -31,7 +31,12 @@
           </el-menu-item>
           <el-menu-item index="4">
             <router-link tag="div" to="/ContralNew/Son4Custom">
-              <i class="el-icon-star-off"></i>商铺定制
+              <i class="el-icon-star-off"></i>商铺信息
+            </router-link>
+          </el-menu-item>
+          <el-menu-item index="9">
+            <router-link tag="div" to="/ContralNew/Son9Enter">
+              <i class="el-icon-star-off"></i>录入
             </router-link>
           </el-menu-item>
           <el-menu-item index="5">
