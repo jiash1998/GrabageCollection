@@ -29,16 +29,20 @@
               </router-link>
             </span>
           </el-menu-item>
-          <el-menu-item index="4">
-            <router-link tag="div" to="/ContralNew/Son4Custom">
-              <i class="el-icon-star-off"></i>商铺信息
-            </router-link>
-          </el-menu-item>
-          <el-menu-item index="9">
-            <router-link tag="div" to="/ContralNew/Son9Enter">
-              <i class="el-icon-star-off"></i>录入
-            </router-link>
-          </el-menu-item>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-office-building"></i>回收管理
+            </template>
+            <el-menu-item index="4-1">
+              <router-link tag="div" to="/ContralNew/Son4Custom">商铺信息</router-link>
+            </el-menu-item>
+            <el-menu-item index="4-2">
+              <router-link tag="div" to="/ContralNew/Son9Enter">资源回收详情</router-link>
+            </el-menu-item>
+            <el-menu-item index="4-3">
+              <router-link tag="div" to="/ContralNew/Son9Enter">资源回收录入</router-link>
+            </el-menu-item>
+          </el-submenu>
           <el-menu-item index="5">
             <router-link tag="div" to="/ContralNew/Son8Echarts">
               <i class="el-icon-data-line"></i>数据分析

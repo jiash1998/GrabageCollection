@@ -1,8 +1,11 @@
 #contralNew {
   .body {
     .top {
+      min-width: 1000px;
       .el-menu {
         padding-top: 55px;
+        min-width: 1000px;
+
         display: flex;
         justify-content: center;
       }
