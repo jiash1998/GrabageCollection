@@ -24,6 +24,7 @@ import Son7Feedback from "../views/Contral/son7Feedback";
 import Son7_1Replay from "../views/Contral/son7_1Replay";
 import Son8Echarts from "../views/Contral/son8Echarts";
 import Son9Enter from "../views/Contral/son9Enter";
+import Son10Detail from "../views/Contral/son10Detail";
 
 //商铺
 import merchartContral from "../views/merchartContral";
@@ -196,6 +197,11 @@ const routes = [
         component: Son9Enter,
         name: "Son9Enter",
         path: "/ContralNew/Son9Enter"
+      },
+      {
+        component: Son10Detail,
+        name: "Son10Detail",
+        path: "/ContralNew/Son10Detail"
       }
     ]
   },

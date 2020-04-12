@@ -1,14 +1,12 @@
-$switchDemoHeight: 50px;
+// $switchDemoHeight: 50px;
 #son9Enter {
-  // min-height: 780px;
-  // height: auto;
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  user-select: none;
 
   .body {
     flex: 1;
-
     .select {
       .el-card {
         width: 95%;
@@ -57,73 +55,15 @@ $switchDemoHeight: 50px;
       }
     }
 
-    .switchDemo {
+    .insertDiv {
       width: 95%;
-      height: $switchDemoHeight;
-      margin: 0px 2.5%;
-      // background-color: pink;
+      margin: 10px 2.5%;
 
-      .imgBorder {
-        width: 130px;
-        padding-bottom: 5px;
-        border-bottom: 4px solid #74b9ff;
-        margin: 20px 0;
-
-        img {
-          height: 35px;
-          filter: grayscale(100%);
-          width: $switchDemoHeight - 5px;
-          margin: 5px 10px;
-          user-select: none;
-          transition: 0.2s;
-
-          &:hover {
-            filter: grayscale(0%);
-            transform: translateY(-2px);
-          }
+      .operate {
+        .el-button {
+          float: right;
+          margin: 10px 0;
         }
-
-        .fil {
-          filter: grayscale(0%);
-        }
-      }
-    }
-
-    .viewData {
-      width: 95%;
-      height: 500px;
-      margin: 30px 2.5% 50px;
-      position: relative;
-
-      .view1 {
-        transition: 0.8s;
-        margin-bottom: 40px;
-        #mycharts2 {
-          width: 95%;
-          height: 460px;
-        }
-      }
-
-      .view2 {
-        transition: 1s;
-        visibility: hidden;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-
-      .change {
-        visibility: visible;
-        position: relative;
-        opacity: 1;
-      }
-
-      .change2 {
-        visibility: hidden;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
       }
     }
   }

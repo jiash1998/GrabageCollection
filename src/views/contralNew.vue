@@ -37,10 +37,10 @@
               <router-link tag="div" to="/ContralNew/Son4Custom">商铺信息</router-link>
             </el-menu-item>
             <el-menu-item index="4-2">
-              <router-link tag="div" to="/ContralNew/Son9Enter">资源回收详情</router-link>
+              <router-link tag="div" to="/ContralNew/Son9Enter">资源回收录入</router-link>
             </el-menu-item>
             <el-menu-item index="4-3">
-              <router-link tag="div" to="/ContralNew/Son9Enter">资源回收录入</router-link>
+              <router-link tag="div" to="/ContralNew/Son10Detail">资源回收详情</router-link>
             </el-menu-item>
           </el-submenu>
           <el-menu-item index="5">
