@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Main from "../views/main";
+import MainI from "../views/main";
 import Signin from "../views/signin";
 import Register from "../views/register";
 import Notice from "../views/notice";
@@ -39,12 +39,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "",
-    redirect: "/main"
+    redirect: "/mainI"
   },
   {
-    component: Main,
-    name: "main",
-    path: "/main"
+    component: MainI,
+    name: "mainI",
+    path: "/mainI"
   },
   {
     component: Notice,

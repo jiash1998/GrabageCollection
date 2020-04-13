@@ -83,6 +83,17 @@ export default {
       postString("/getCustomByName", methodsAll, data, headersAll)
     );
   },
+  //垃圾量录入
+  insertGarbageBatch(data) {
+    return interceptor(
+      postStringJson("/production/add/batch", methodsAll, data, headersJson)
+    );
+  },
+  insertGarbage(data) {
+    return interceptor(
+      postStringJson("/production/add", methodsAll, data, headersJson)
+    );
+  },
   //发布公告
   insertNotice(data) {
     return interceptor(

@@ -48,8 +48,9 @@
         }
 
         .operate {
+          margin: 5px 80px;
           .el-button {
-            margin: 5px 80px 0px;
+            margin-right: 10px;
           }
         }
       }
@@ -58,13 +59,6 @@
     .insertDiv {
       width: 95%;
       margin: 10px 2.5%;
-
-      .operate {
-        .el-button {
-          float: right;
-          margin: 10px 0;
-        }
-      }
     }
   }
 }

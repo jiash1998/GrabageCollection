@@ -24,6 +24,7 @@
           </div>
           <div class="operate">
             <el-button type="primary" size="small" @click="start" plain>查询</el-button>
+            <el-button type="success" size="small" @click="insertNew(storeForm)" plain>插入</el-button>
           </div>
         </el-card>
       </div>
@@ -51,10 +52,13 @@
               </el-table-column>
               <el-table-column label="垃圾量" width="80px">
                 <template slot-scope="scope">
-                  <el-form-item style="margin:0;" v-if="!scope.row.production">
+                  <!-- <el-form-item style="margin:0;" v-if="!scope.row.production">
+                    <el-input v-model="scope.row.production" placeholder></el-input>
+                  </el-form-item>-->
+                  <!-- {{scope.row.production}} -->
+                  <el-form-item style="margin:0;">
                     <el-input v-model="scope.row.production" placeholder></el-input>
                   </el-form-item>
-                  {{scope.row.production}}
                 </template>
               </el-table-column>
               <el-table-column
@@ -64,7 +68,10 @@
                 width="100px"
               >
                 <template slot-scope="scope">
-                  <el-tag type="primary" disable-transitions>{{scope.row.tag}}</el-tag>
+                  <el-tag
+                    :type="scope.row.tag =='未录' ? 'warning':'primary'"
+                    disable-transitions
+                  >{{scope.row.tag}}</el-tag>
                 </template>
               </el-table-column>
               <el-table-column label="操作" width="100px">
@@ -73,9 +80,6 @@
             </el-table>
           </el-form>
         </el-card>
-        <div class="operate">
-          <el-button type="success" @click="insert(storeForm)" plain>批量插入</el-button>
-        </div>
       </div>
     </div>
   </div>
@@ -84,6 +88,8 @@
 <script>
 import getAllCustomApi from "../../api/getRequest";
 import getAllStoreGarbageApi from "../../api/getRequest";
+import insertGarbageBatchApi from "../../api/postRequest";
+import insertGarbageApi from "../../api/postRequest";
 
 export default {
   name: "son9Enter",
@@ -101,9 +107,12 @@ export default {
       },
       radio1: "全部",
       radio2: "2020",
-      radio3: 1,
+      radio3: "1",
       store: [],
       selectAll: { type: "", years: "" },
+      //暂存数据
+      stage: [],
+      stageAllStore: [],
       storeForm: {
         data: []
       },
@@ -144,18 +153,18 @@ export default {
         }
       ],
       month: [
-        { month: 1 },
-        { month: 2 },
-        { month: 3 },
-        { month: 4 },
-        { month: 5 },
-        { month: 6 },
-        { month: 7 },
-        { month: 8 },
-        { month: 9 },
-        { month: 10 },
-        { month: 11 },
-        { month: 12 }
+        { month: "1" },
+        { month: "2" },
+        { month: "3" },
+        { month: "4 " },
+        { month: "5 " },
+        { month: "6" },
+        { month: "7" },
+        { month: "8" },
+        { month: "9" },
+        { month: "10" },
+        { month: "11" },
+        { month: "12" }
       ]
     };
   },
@@ -167,13 +176,84 @@ export default {
     this.selectAll.month = this.radio3;
   },
   methods: {
+    //按照选择类型批量插入下月店铺
+    insertNew() {
+      var radioGroup = this.selectAll;
+      var arr = [];
+      if (radioGroup.type == "全部") {
+        for (const i of this.stageAllStore) {
+          let obj = {
+            customId: i.customId,
+            monthNum: radioGroup.month,
+            production: "",
+            yearNum: radioGroup.years
+          };
+          arr.push(obj);
+        }
+      } else {
+        for (const i of this.stageAllStore) {
+          if (i.type == radioGroup.type) {
+            let obj = {
+              customId: i.customId,
+              monthNum: radioGroup.month,
+              production: "",
+              yearNum: radioGroup.years
+            };
+            arr.push(obj);
+          }
+        }
+      }
+      // console.log(arr);
+      var postData = {
+        productions: arr
+      };
+      insertGarbageBatchApi
+        .insertGarbageBatch(postData)
+        .then(res => {
+          console.log(res);
+          alert("success");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     insert(form) {
       // this.$refs[form].validate(val =>{
       //   if(val){
 
       //   }
       // })
-      console.log(this.storeForm);
+      this.stage = [];
+      for (const i of this.storeForm.data) {
+        if (i.tag === "未录" && i.production) {
+          this.stage.push(i);
+        }
+      }
+      var data = this.stage;
+
+      var productions = [];
+      for (const i of data) {
+        let obj = {
+          customId: i.customId,
+          monthNum: i.monthNum,
+          production: i.production,
+          yearNum: i.yearNum
+        };
+        productions.push(obj);
+      }
+      var postData = {
+        productions: productions
+      };
+      console.log(postData);
+      insertGarbageBatchApi
+        .insertGarbageBatch(postData)
+        .then(res => {
+          console.log(res);
+          alert("success");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     //表格筛选
     filterTag(value, row) {
@@ -181,15 +261,15 @@ export default {
     },
     //店铺类型筛选
     selecType(value1) {
-      console.log(value1);
+      // console.log(value1);
       this.selectAll.type = value1;
     },
     selectYear(value2) {
-      console.log(value2);
+      // console.log(value2);
       this.selectAll.years = value2;
     },
     selectMonth(value3) {
-      console.log(value3);
+      // console.log(value3);
       this.selectAll.month = value3;
     },
     //开始查询
@@ -224,17 +304,14 @@ export default {
         .then(res => {
           for (const i of res.data) {
             let obj = {
+              customId: i.id,
               name: i.name,
               type: i.type,
               header: i.header,
-              phone: i.phone,
-              tag: "已录",
-              monthNum: 1,
-              yearNum: "2020"
+              phone: i.phone
             };
-            // this.storeForm.data.push(obj);
+            this.stageAllStore.push(obj);
           }
-          // console.log(this.storeForm.data);
         })
         .catch(err => {
           console.log(err);
@@ -247,16 +324,15 @@ export default {
         .then(res => {
           this.storeGar = res.data;
           for (const i of this.storeGar) {
-            if (this.radio2 == i.yearNum && this.radio3 == i.monthNum) {
-              if (i.production) {
-                i.tag = "已录";
-                this.storeForm.data.push(i);
-              } else {
-                i.tag = "未录";
-                this.storeForm.data.push(i);
-              }
+            // if (this.radio2 == i.yearNum && this.radio3 == i.monthNum) {
+            if (i.production) {
+              i.tag = "已录";
+            } else {
+              i.tag = "未录";
             }
+            // }
           }
+          // console.log(this.storeGar);
         })
         .catch(err => {
           console.log(err);

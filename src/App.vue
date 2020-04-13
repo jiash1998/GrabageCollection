@@ -3,7 +3,7 @@
     <!-- :xs="24" :sm="24" :md="24" :lg="24" :xl="24" -->
     <div class="head" id="head" :class="{'headFixed':headFix}">
       <div class="logo">
-        <router-link to="/main">
+        <router-link to="/mainI">
           <img src="./assets/img/logo2.png" />
         </router-link>
       </div>
@@ -12,7 +12,7 @@
       </div>
       <div class="head-contral">
         <div class="contralItems">
-          <router-link tag="span" to="/main">首页</router-link>
+          <router-link tag="span" to="/mainI">首页</router-link>
         </div>
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
