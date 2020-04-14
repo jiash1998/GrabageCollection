@@ -5,19 +5,19 @@
         <el-card shadow="hover">
           <div class="storeType">
             <span>店铺类型：</span>
-            <el-radio-group v-model="radio1" size="small" @change="getData">
+            <el-radio-group v-model="radioAll.radio1" size="small">
               <el-radio v-for="(item, index) in storeType" :key="index" :label="item.label" border></el-radio>
             </el-radio-group>
           </div>
           <div class="years">
             <span>年份：</span>
-            <el-radio-group v-model="radio2" size="small" @change="getData">
+            <el-radio-group v-model="radioAll.radio2" size="small">
               <el-radio label="2020" border></el-radio>
               <el-radio label="2019" border></el-radio>
             </el-radio-group>
           </div>
           <div class="operate">
-            <el-button type="primary" size="small" plain>查询</el-button>
+            <el-button type="primary" size="small" @click="selectData" plain>查询</el-button>
           </div>
         </el-card>
       </div>
@@ -48,11 +48,11 @@
             <el-table :data="store" border>
               <el-table-column label="店铺名称" prop="name"></el-table-column>
               <el-table-column label="店铺类型" prop="type"></el-table-column>
-              <el-table-column label="负责人" prop="header"></el-table-column>
+              <el-table-column label="负责人" prop="header" width="140px"></el-table-column>
               <el-table-column label="联系方式" prop="phone"></el-table-column>
               <!-- <el-table-column label="月份"></el-table-column> -->
               <el-table-column label="年份" width="100px"></el-table-column>
-              <el-table-column label="垃圾产生量" width="100px"></el-table-column>
+              <el-table-column label="垃圾产生量(t)" width="130px"></el-table-column>
               <!-- <el-table-column label="操作">
                 <el-button type="primary" size="mini" plain>录入</el-button>
                 <el-button type="success" size="mini">编辑</el-button>
@@ -74,12 +74,17 @@ export default {
   name: "son9Enter",
   data() {
     return {
-      radio1: "全部",
-      radio2: "2020",
-      radio3: 1,
+      radioAll: {
+        radio1: "全部",
+        radio2: ""
+      },
+      //存放店铺id数组
+      storeId: [],
+      //存放店铺对应垃圾
+      storeGarMon: [],
       select: "",
       dataPicker: "",
-      allStore: [],
+      // allStore: [],
       store: [],
       //view 显示
       view: true,
@@ -117,20 +122,6 @@ export default {
         {
           label: "其他类型"
         }
-      ],
-      month: [
-        { month: 1 },
-        { month: 2 },
-        { month: 3 },
-        { month: 4 },
-        { month: 5 },
-        { month: 6 },
-        { month: 7 },
-        { month: 8 },
-        { month: 9 },
-        { month: 10 },
-        { month: 11 },
-        { month: 12 }
       ],
       //echarts
       source2: [
@@ -175,30 +166,37 @@ export default {
     this.getCustom();
     this.getInfo();
     this.getAll();
-    // var date = new Date();
-    // console.log(date.getFullYear());
+    this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
   },
   methods: {
     //单选选择
-    getData() {
-      this.store = [];
-      if (this.radio1 === "全部") {
-        this.store = this.allStore;
-      }
-      for (const i of this.allStore) {
-        if (i.type == this.radio1) {
-          this.store.push(i);
-        }
-      }
+    selectData() {
+      // this.store = [];
+      // if (this.radio1 === "全部") {
+      //   this.store = this.allStore;
+      // }
+      // for (const i of this.allStore) {
+      //   if (i.type == this.radio1) {
+      //     this.store.push(i);
+      //   }
+      // }
+      console.log(this.radioAll);
     },
+    //获取全部店铺custom表
     getCustom() {
       getAllCustomApi.getAllCustom().then(res => {
-        this.allStore = res.data;
-        // for (const i of res.data) {
-
-        // }
-        this.store = res.data;
+        // this.allStore = res.data;
+        // this.store = res.data;
+        for (const i of res.data) {
+          let obj = {
+            customId: i.id,
+            name: i.name,
+            type: i.type
+          };
+          this.storeId.push(obj);
+        }
       });
+      // console.log(this.storeId);
     },
 
     //切换显示
@@ -212,7 +210,43 @@ export default {
     //动态获取
     getAll() {
       getAllStoreGarbageApi.getAllStoreGarbage().then(res => {
-        console.log(res.data);
+        // console.log(res.data);
+        let arr1 = [];
+        for (const i of res.data) {
+          if (i.yearNum == this.radioAll.radio2) {
+            arr1.push(i);
+          }
+        }
+        let arr2 = [];
+        for (const i of this.storeId) {
+          arr2 = [];
+          for (const j of arr1) {
+            if (i.customId == j.customId) {
+              arr2.push(j);
+            }
+          }
+          // console.log(arr2);
+          let res = [arr2[0].name];
+          for (const m of arr2) {
+            res.push(m.production);
+          }
+          // console.log(res);
+          this.storeGarMon.push(res);
+          res = [];
+        }
+        // let arr3 = [];
+        console.log(this.storeGarMon);
+        // this.source2.concat(this.storeGarMon);
+        // console.log(this.source2);
+        for (let i = 0; i < this.storeGarMon.length; i++) {
+          this.source2.push(this.storeGarMon[i]);
+        }
+        console.log(this.source2);
+        //
+        for (let i = 0; i < this.storeId.length; i++) {
+          this.series.unshift(this.insertLine);
+        }
+        this.draw2();
       });
     },
     //获取渲染图
@@ -222,15 +256,19 @@ export default {
         .then(res => {
           this.storeInfo = res.data;
           //添加店铺信息
-          for (const i of res.data) {
-            for (let j = 0; j < 12; j++) {
-              this.arr.push((Math.random() * 100).toFixed(2));
-            }
-            let insert = [i.name].concat(this.arr);
-            this.source2.push(insert);
-            this.arr = [];
-          }
+          // for (const i of res.data) {
+          //   for (let j = 0; j < 12; j++) {
+          //     this.arr.push((Math.random() * 1200).toFixed(2));
+          //   }
+          //   let insert = [i.name].concat(this.arr);
+          // this.source2.push(insert);
+          // this.arr = [];
+          // }
+          // this.getAll();
+          // this.source2.push(this.storeGarMon);
           // console.log(this.source2);
+          // console.log(this.storeGarMon);
+
           //增加折线
           for (let i = 0; i < res.data.length; i++) {
             this.series.unshift(this.insertLine);
@@ -255,7 +293,7 @@ export default {
           source: this.source2
         },
         xAxis: { type: "category", name: "月份" },
-        yAxis: { gridIndex: 0, name: "垃圾生产量(kg)" },
+        yAxis: { name: "垃圾生产量(t)" },
         grid: { top: "60%" },
         series: this.series
       };

@@ -24,7 +24,7 @@
           </div>
           <div class="operate">
             <el-button type="primary" size="small" @click="start" plain>查询</el-button>
-            <el-button type="success" size="small" @click="insertNew(storeForm)" plain>插入</el-button>
+            <el-button type="success" size="small" @click="insertNew(storeForm)" plain>插入店铺</el-button>
           </div>
         </el-card>
       </div>
@@ -50,15 +50,12 @@
               <el-table-column label="年份" width="80px">
                 <template slot-scope="scope">{{scope.row.yearNum}}</template>
               </el-table-column>
-              <el-table-column label="垃圾量" width="80px">
+              <el-table-column label="垃圾量(kg)" width="90px">
                 <template slot-scope="scope">
-                  <!-- <el-form-item style="margin:0;" v-if="!scope.row.production">
-                    <el-input v-model="scope.row.production" placeholder></el-input>
-                  </el-form-item>-->
-                  <!-- {{scope.row.production}} -->
-                  <el-form-item style="margin:0;">
+                  <el-form-item style="margin:0;" v-if="scope.row.tag == '未录'">
                     <el-input v-model="scope.row.production" placeholder></el-input>
                   </el-form-item>
+                  <span v-else>{{scope.row.production}}</span>
                 </template>
               </el-table-column>
               <el-table-column
@@ -75,7 +72,7 @@
                 </template>
               </el-table-column>
               <el-table-column label="操作" width="100px">
-                <el-button type="success" size="mini" @click="insert(storeForm)" plain>插入</el-button>
+                <el-button type="success" size="mini" @click="insert(storeForm)" plain>录入数据</el-button>
               </el-table-column>
             </el-table>
           </el-form>
@@ -113,6 +110,7 @@ export default {
       //暂存数据
       stage: [],
       stageAllStore: [],
+      //表单中表格数据
       storeForm: {
         data: []
       },
@@ -152,34 +150,55 @@ export default {
           label: "其他类型"
         }
       ],
-      month: [
-        { month: "1" },
-        { month: "2" },
-        { month: "3" },
-        { month: "4 " },
-        { month: "5 " },
-        { month: "6" },
-        { month: "7" },
-        { month: "8" },
-        { month: "9" },
-        { month: "10" },
-        { month: "11" },
-        { month: "12" }
-      ]
+      month: []
     };
   },
   mounted() {
     this.getAllCustomInfo();
     this.getAllStoreGarbage();
-    this.selectAll.type = this.radio1;
-    this.selectAll.years = this.radio2;
-    this.selectAll.month = this.radio3;
+    this.selectAll = {
+      type: this.radio1,
+      years: this.radio2,
+      month: this.radio3
+    };
+    this.initRadio();
   },
   methods: {
+    //店铺类型筛选
+    selecType(value1) {
+      this.selectAll.type = value1;
+    },
+    selectYear(value2) {
+      this.selectAll.years = value2;
+      if (this.selectAll.years == new Date().getUTCFullYear()) {
+        this.month = [];
+        for (let i = 0; i < new Date().getUTCMonth() + 2; i++) {
+          this.month.push({ month: i + 1 + "" });
+        }
+      } else {
+        this.month = [];
+        for (let i = 0; i < 12; i++) {
+          this.month.push({ month: i + 1 + "" });
+        }
+      }
+    },
+    selectMonth(value3) {
+      this.selectAll.month = value3;
+    },
+    //准备单选数据
+    initRadio() {
+      if (this.selectAll.years == new Date().getUTCFullYear()) {
+        this.month = [];
+        for (let i = 0; i < new Date().getUTCMonth() + 2; i++) {
+          this.month.push({ month: i + 1 + "" });
+        }
+      }
+    },
     //按照选择类型批量插入下月店铺
     insertNew() {
       var radioGroup = this.selectAll;
       var arr = [];
+      //全部插入
       if (radioGroup.type == "全部") {
         for (const i of this.stageAllStore) {
           let obj = {
@@ -190,7 +209,9 @@ export default {
           };
           arr.push(obj);
         }
-      } else {
+      }
+      //按选择类型插入 
+      else {
         for (const i of this.stageAllStore) {
           if (i.type == radioGroup.type) {
             let obj = {
@@ -203,20 +224,26 @@ export default {
           }
         }
       }
-      // console.log(arr);
       var postData = {
         productions: arr
       };
       insertGarbageBatchApi
         .insertGarbageBatch(postData)
         .then(res => {
-          console.log(res);
-          alert("success");
+          if (res.status == 200 && res.statusText == "OK") {
+            this.$message({
+              type: "success",
+              message: "插入店铺数据成功",
+               duration: 1500
+            });
+            this.getAllStoreGarbage();
+          }
         })
         .catch(err => {
           console.log(err);
         });
     },
+    //店铺垃圾量录入
     insert(form) {
       // this.$refs[form].validate(val =>{
       //   if(val){
@@ -244,12 +271,16 @@ export default {
       var postData = {
         productions: productions
       };
-      console.log(postData);
       insertGarbageBatchApi
         .insertGarbageBatch(postData)
         .then(res => {
-          console.log(res);
-          alert("success");
+          console.log(res.data);
+          // alert("success");
+          this.$message({
+            type: "success",
+            message: "插入店铺数据成功",
+             duration: 1500
+          });
         })
         .catch(err => {
           console.log(err);
@@ -258,19 +289,6 @@ export default {
     //表格筛选
     filterTag(value, row) {
       return row.tag === value;
-    },
-    //店铺类型筛选
-    selecType(value1) {
-      // console.log(value1);
-      this.selectAll.type = value1;
-    },
-    selectYear(value2) {
-      // console.log(value2);
-      this.selectAll.years = value2;
-    },
-    selectMonth(value3) {
-      // console.log(value3);
-      this.selectAll.month = value3;
     },
     //开始查询
     start() {
@@ -324,15 +342,12 @@ export default {
         .then(res => {
           this.storeGar = res.data;
           for (const i of this.storeGar) {
-            // if (this.radio2 == i.yearNum && this.radio3 == i.monthNum) {
             if (i.production) {
               i.tag = "已录";
             } else {
               i.tag = "未录";
             }
-            // }
           }
-          // console.log(this.storeGar);
         })
         .catch(err => {
           console.log(err);

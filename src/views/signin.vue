@@ -114,7 +114,7 @@ export default {
                 sessionStorage.setItem("userName", res.data.username);
                 //身份
                 sessionStorage.setItem("identity", res.data.identity);
-                vm.$router.push("/main");
+                vm.$router.push("/mainI");
                 //路由刷新，搭载数据
                 vm.$router.go(0);
               });
