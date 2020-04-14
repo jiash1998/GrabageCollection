@@ -59,6 +59,13 @@
     .insertDiv {
       width: 95%;
       margin: 10px 2.5% 50px;
+
+      .insertOpr {
+        .el-button {
+          float: right;
+          margin: 20px;
+        }
+      }
     }
   }
 }

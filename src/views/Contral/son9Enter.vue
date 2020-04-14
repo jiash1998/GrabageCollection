@@ -44,13 +44,13 @@
               <el-table-column label="联系方式">
                 <template slot-scope="scope">{{scope.row.phone}}</template>
               </el-table-column>
-              <el-table-column label="月份" width="80px">
+              <el-table-column label="月份" width="100px">
                 <template slot-scope="scope">{{scope.row.monthNum}}</template>
               </el-table-column>
-              <el-table-column label="年份" width="80px">
+              <el-table-column label="年份" width="100px">
                 <template slot-scope="scope">{{scope.row.yearNum}}</template>
               </el-table-column>
-              <el-table-column label="垃圾量(kg)" width="90px">
+              <el-table-column label="垃圾量(kg)" width="100px">
                 <template slot-scope="scope">
                   <el-form-item style="margin:0;" v-if="scope.row.tag == '未录'">
                     <el-input v-model="scope.row.production" placeholder></el-input>
@@ -71,12 +71,15 @@
                   >{{scope.row.tag}}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="100px">
+              <!-- <el-table-column label="操作" width="100px">
                 <el-button type="success" size="mini" @click="insert(storeForm)" plain>录入数据</el-button>
-              </el-table-column>
+              </el-table-column>-->
             </el-table>
           </el-form>
         </el-card>
+        <div class="insertOpr">
+          <el-button type="success" :disabled="insertBtn" size @click="insert(storeForm)" plain>录入数据</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -106,6 +109,8 @@ export default {
       radio2: "2020",
       radio3: "1",
       store: [],
+      //录入数据按钮
+      insertBtn: true,
       selectAll: { type: "", years: "" },
       //暂存数据
       stage: [],
@@ -210,7 +215,7 @@ export default {
           arr.push(obj);
         }
       }
-      //按选择类型插入 
+      //按选择类型插入
       else {
         for (const i of this.stageAllStore) {
           if (i.type == radioGroup.type) {
@@ -224,24 +229,35 @@ export default {
           }
         }
       }
-      var postData = {
-        productions: arr
-      };
-      insertGarbageBatchApi
-        .insertGarbageBatch(postData)
-        .then(res => {
-          if (res.status == 200 && res.statusText == "OK") {
-            this.$message({
-              type: "success",
-              message: "插入店铺数据成功",
-               duration: 1500
-            });
-            this.getAllStoreGarbage();
-          }
-        })
-        .catch(err => {
-          console.log(err);
+      // console.log(this.stageAllStore);
+      // console.log(this.storeForm.data);
+      if (this.storeForm.data.length === this.stageAllStore.length) {
+        console.log("all");
+        this.$message({
+          type: "warning",
+          message: "已插入全部店铺数据",
+          duration: 1800
         });
+      } else {
+        var postData = {
+          productions: arr
+        };
+        insertGarbageBatchApi
+          .insertGarbageBatch(postData)
+          .then(res => {
+            if (res.status == 200 && res.statusText == "OK") {
+              this.$message({
+                type: "success",
+                message: "插入店铺数据成功",
+                duration: 1500
+              });
+              this.getAllStoreGarbage();
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     },
     //店铺垃圾量录入
     insert(form) {
@@ -257,7 +273,6 @@ export default {
         }
       }
       var data = this.stage;
-
       var productions = [];
       for (const i of data) {
         let obj = {
@@ -275,11 +290,11 @@ export default {
         .insertGarbageBatch(postData)
         .then(res => {
           console.log(res.data);
-          // alert("success");
+          this.getAllStoreGarbage();
           this.$message({
             type: "success",
             message: "插入店铺数据成功",
-             duration: 1500
+            duration: 1500
           });
         })
         .catch(err => {
@@ -314,6 +329,12 @@ export default {
           }
         }
       }
+      // console.log(this.storeForm.data);
+      if (this.storeForm.data.length === 0) {
+        this.insertBtn = true;
+      } else {
+        this.insertBtn = false;
+      }
     },
     //获取全部店铺
     async getAllCustomInfo() {
@@ -342,12 +363,14 @@ export default {
         .then(res => {
           this.storeGar = res.data;
           for (const i of this.storeGar) {
-            if (i.production) {
+            if (i.production != null) {
               i.tag = "已录";
             } else {
               i.tag = "未录";
             }
           }
+          console.log(this.storeGar);
+          this.start();
         })
         .catch(err => {
           console.log(err);

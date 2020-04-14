@@ -6,6 +6,7 @@
           <el-menu-item index="0">全部公告</el-menu-item>
           <el-menu-item index="1">紧急公告</el-menu-item>
           <el-menu-item index="2">商户公告</el-menu-item>
+          <el-menu-item index="3">个人通知</el-menu-item>
         </el-menu>
       </div>
 
@@ -67,9 +68,9 @@ export default {
         case "2":
           this.noticeList = this.storeList;
           break;
-        default:
-          this.noticeList = this.allList;
-          break;
+        // default:
+        //   this.noticeList = this.allList;
+        //   break;
       }
       console.log(this.noticeList);
     },

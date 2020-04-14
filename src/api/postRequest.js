@@ -49,6 +49,13 @@ export default {
     );
   },
   //管理员
+
+  //根据用户 id 发生通知
+  addPersonalNotice(data) {
+    return interceptor(
+      postString("/addPersonalNotice", methodsAll, data, headersAll)
+    );
+  },
   //注册驾驶员
   addDriver(data) {
     return interceptor(postString("/addDriver", methodsAll, data, headersAll));
@@ -113,6 +120,18 @@ export default {
     );
   },
   //商家
+  //根据用户名获取通知
+  getByPNoticeUsername(data) {
+    return interceptor(
+      postString("/getByPNoticeUsername", methodsAll, data, headersAll)
+    );
+  },
+  //根据通知 id 设为已读
+  changToRead(data) {
+    return interceptor(
+      postString("/changToRead", methodsAll, data, headersAll)
+    );
+  },
   //录入店铺
   addCustom(data) {
     return interceptor(postString("/addCustom", methodsAll, data, headersAll));

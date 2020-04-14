@@ -80,6 +80,7 @@ export default {
       },
       //存放店铺id数组
       storeId: [],
+      storeId2: [],
       //存放店铺对应垃圾
       storeGarMon: [],
       select: "",
@@ -162,9 +163,15 @@ export default {
       arr: []
     };
   },
-  mounted() {
+  // mounted() {
+  //   this.getCustom();
+  //   this.getInfo();
+  //   this.getAll();
+  //   this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
+  // },
+  created() {
     this.getCustom();
-    this.getInfo();
+    // this.getInfo();
     this.getAll();
     this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
   },
@@ -180,13 +187,18 @@ export default {
       //     this.store.push(i);
       //   }
       // }
-      console.log(this.radioAll);
+      // console.log(this.radioAll);
+      // if(this.radioAll.typ){
+
+      // }
+      this.getAll();
     },
     //获取全部店铺custom表
     getCustom() {
       getAllCustomApi.getAllCustom().then(res => {
         // this.allStore = res.data;
         // this.store = res.data;
+        var storeId2 = [];
         for (const i of res.data) {
           let obj = {
             customId: i.id,
@@ -194,9 +206,12 @@ export default {
             type: i.type
           };
           this.storeId.push(obj);
+          this.storeId2[i.id] = obj;
         }
+        console.log(this.storeId2);
+        // this.storeId2 = storeId2;
       });
-      // console.log(this.storeId);
+      console.log(this.storeId2);
     },
 
     //切换显示
@@ -207,47 +222,98 @@ export default {
       this.view = false;
     },
 
-    //动态获取
+    //动态获取并渲染
     getAll() {
       getAllStoreGarbageApi.getAllStoreGarbage().then(res => {
-        // console.log(res.data);
-        let arr1 = [];
-        for (const i of res.data) {
-          if (i.yearNum == this.radioAll.radio2) {
-            arr1.push(i);
-          }
-        }
-        let arr2 = [];
-        for (const i of this.storeId) {
-          arr2 = [];
-          for (const j of arr1) {
-            if (i.customId == j.customId) {
-              arr2.push(j);
-            }
-          }
-          // console.log(arr2);
-          let res = [arr2[0].name];
-          for (const m of arr2) {
-            res.push(m.production);
-          }
-          // console.log(res);
-          this.storeGarMon.push(res);
-          res = [];
-        }
-        // let arr3 = [];
-        console.log(this.storeGarMon);
-        // this.source2.concat(this.storeGarMon);
-        // console.log(this.source2);
-        for (let i = 0; i < this.storeGarMon.length; i++) {
-          this.source2.push(this.storeGarMon[i]);
-        }
-        console.log(this.source2);
-        //
-        for (let i = 0; i < this.storeId.length; i++) {
-          this.series.unshift(this.insertLine);
-        }
-        this.draw2();
+        this.test(res);
+        // const s1 = new Date().getTime();
+        // console.log(s1);
+        // //First 取出选择的年份-对应的所有数据放入 arr1
+        // let arr1 = [];
+        // for (const i of res.data) {
+        //   if (i.yearNum == this.radioAll.radio2) {
+        //     arr1.push(i);
+        //   }
+        // }
+        // // console.log(arr1);
+        // //Second 按照店铺id  把相同店铺 同一年的数据 放入暂存数组 arr2
+        // let arr2 = [];
+        // for (const i of this.storeId) {
+        //   arr2 = [];
+        //   for (const j of arr1) {
+        //     if (i.customId == j.customId) {
+        //       arr2.push(j);
+        //     }
+        //   }
+        //   // console.log(arr2);
+        //   //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
+        //   let rest = [arr2[0].name];
+        //   for (const m of arr2) {
+        //     rest.push(m.production);
+        //   }
+        //   // console.log(rest);
+        //   this.storeGarMon.push(rest);
+        //   rest = [];
+        // }
+        // //Fourth 最后和 scoure2 数组结合
+        // for (let i = 0; i < this.storeGarMon.length; i++) {
+        //   this.source2.push(this.storeGarMon[i]);
+        // }
+        // // console.log(this.source2);
+        // //增加折线并绘制
+        // for (let i = 0; i < this.storeId.length; i++) {
+        //   this.series.unshift(this.insertLine);
+        // }
+        // this.draw2();
+        // const s2 = new Date().getTime();
+        // console.log(s2);
+        // console.log(s2 - s1);
       });
+    },
+    //测试
+    test(res) {
+      const s1 = new Date().getTime();
+      console.log(s1);
+      //First 取出选择的年份-对应的所有数据放入 arr1
+      let arr1 = [];
+      for (const i of res.data) {
+        if (i.yearNum == this.radioAll.radio2) {
+          arr1.push(i);
+        }
+      }
+      // console.log(arr1);
+      //Second 按照店铺id  把相同店铺 同一年的数据 放入暂存数组 arr2
+      let arr2 = [];
+      for (const i of this.storeId) {
+        arr2 = [];
+        for (const j of arr1) {
+          if (i.customId == j.customId) {
+            arr2.push(j);
+          }
+        }
+        // console.log(arr2);
+        //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
+        let rest = [arr2[0].name];
+        for (const m of arr2) {
+          rest.push(m.production);
+        }
+        // console.log(rest);
+        this.storeGarMon.push(rest);
+        rest = [];
+      }
+      //Fourth 最后和 scoure2 数组结合
+      for (let i = 0; i < this.storeGarMon.length; i++) {
+        this.source2.push(this.storeGarMon[i]);
+      }
+      // console.log(this.source2);
+      //增加折线并绘制
+      for (let i = 0; i < this.storeId.length; i++) {
+        this.series.unshift(this.insertLine);
+      }
+      this.draw2();
+      const s2 = new Date().getTime();
+      console.log(s2);
+      console.log(s2 - s1);
     },
     //获取渲染图
     async getInfo() {
@@ -255,25 +321,6 @@ export default {
         .getAllCustom()
         .then(res => {
           this.storeInfo = res.data;
-          //添加店铺信息
-          // for (const i of res.data) {
-          //   for (let j = 0; j < 12; j++) {
-          //     this.arr.push((Math.random() * 1200).toFixed(2));
-          //   }
-          //   let insert = [i.name].concat(this.arr);
-          // this.source2.push(insert);
-          // this.arr = [];
-          // }
-          // this.getAll();
-          // this.source2.push(this.storeGarMon);
-          // console.log(this.source2);
-          // console.log(this.storeGarMon);
-
-          //增加折线
-          for (let i = 0; i < res.data.length; i++) {
-            this.series.unshift(this.insertLine);
-          }
-          this.draw2();
         })
         .catch(err => {
           console.log(err);
@@ -282,6 +329,7 @@ export default {
     //echarts
     draw2() {
       var myCharts2 = echarts.init(this.$refs.mycharts2);
+      console.log("e");
 
       var option = {
         legend: {},
@@ -319,6 +367,7 @@ export default {
       });
 
       myCharts2.setOption(option);
+      console.log("chart");
     }
   }
 };
