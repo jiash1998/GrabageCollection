@@ -11,12 +11,12 @@
     flex-direction: column;
     .operate {
       width: 100%;
-      background-color: #F5F7FA;
+      background-color: #f5f7fa;
       .el-form {
         .el-form-item {
           margin: 20px 50px;
-          
-          .el-button{
+
+          .el-button {
             margin-left: -80px;
           }
         }
@@ -24,6 +24,7 @@
     }
 
     .table {
+      margin-bottom: 80px;
       .el-form {
         width: 100%;
         height: 100%;

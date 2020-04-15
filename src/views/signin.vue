@@ -91,10 +91,6 @@ export default {
           if (val) {
             var data = vm.signForm;
             checkLoginApi.checkLogin(data)
-            // vm.axios
-            //   .post("/checkLogin", qs.stringify(data), {
-            //     headers: { "Content-Type": "application/x-www-form-urlencoded" }
-            //   })
               .then(res => {
                 // console.log(res);
                 if (res.data.msg == "用户名或密码错误") {

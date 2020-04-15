@@ -16,7 +16,7 @@
                 type="primary"
                 :disabled="scope.row.identity == '管理员' ? true :false"
                 size="small"
-                @click="postNotSelf"
+                @click="postNotSelf(scope.row)"
                 plain
               >发送通知</el-button>
               <!-- <el-button type="danger" size="small" plain>设置黑名单</el-button> -->
@@ -25,18 +25,22 @@
         </el-table>
       </el-card>
       <el-dialog title :visible.sync="dialogVisible">
-        <el-form :model="notice">
-          <el-form-item label="标题">
+        <el-form :model="notice" ref="notice" :rules="rules">
+          <el-form-item label="标题" prop="title">
             <el-input v-model="notice.title" placeholder="输入标题"></el-input>
           </el-form-item>
-          <el-form-item label="内容">
+          <el-form-item label="内容" prop="content">
             <el-input v-model="notice.content" placeholder="输入内容"></el-input>
           </el-form-item>
+          <el-form-item label>
+            <el-button type="primary" @click="postNotice('notice')">发送</el-button>
+            <el-button @click="dialogVisible = false" plain>关闭</el-button>
+          </el-form-item>
         </el-form>
-        <span slot="footer" class="dialog-footer">
+        <!-- <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
+        </span>-->
       </el-dialog>
     </div>
   </div>
@@ -44,9 +48,25 @@
 
 <script>
 import getAllUserApi from "../../api/getRequest.js";
+import addPersonalNoticeApi from "../../api/postRequest.js";
+
 export default {
   name: "son1ManageNew",
   data() {
+    var valTitle = (ruel, value, callback) => {
+      if (!value) {
+        return new callback("请输入内容");
+      } else {
+        callback();
+      }
+    };
+    var valContent = (ruel, value, callback) => {
+      if (!value) {
+        return new callback("请输入内容");
+      } else {
+        callback();
+      }
+    };
     return {
       user: [],
       //展示
@@ -56,6 +76,10 @@ export default {
         userId: "",
         title: "",
         content: ""
+      },
+      rules: {
+        title: [{ validator: valTitle, trigger: "change" }],
+        content: [{ validator: valContent, trigger: "change" }]
       }
     };
   },
@@ -67,15 +91,56 @@ export default {
       getAllUserApi
         .getAllUser()
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
+          for (const i of res.data) {
+            if (i.email == "") {
+              i.email = "暂无";
+            }
+          }
           this.user = res.data;
         })
         .catch(err => {
           console.log(err);
         });
     },
-    postNotSelf() {
+    postNotSelf(index) {
       this.dialogVisible = true;
+      // console.log(index);
+      this.notice.userId = index.userId;
+    },
+    //发送
+    postNotice(form) {
+      // console.log(this.notice);
+      this.$refs[form].validate(val => {
+        if (val) {
+          var data = this.notice;
+          addPersonalNoticeApi
+            .addPersonalNotice(data)
+            .then(res => {
+              console.log(res.data);
+              if (res.data === "ok") {
+                this.$message({
+                  message: "发送成功",
+                  type: "success",
+                  duration: 1500
+                });
+                localStorage.setItem("isDot", "true");
+                this.dialogVisible = false;
+                this.$refs[form].resetFields();
+              }
+            })
+            .catch(err => {
+              console.log(err);
+              this.$message({
+                message: "发送失败",
+                type: "error",
+                duration: 1500
+              });
+            });
+        } else {
+          console.log("err");
+        }
+      });
     }
   }
 };

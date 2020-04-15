@@ -1,7 +1,11 @@
 <template>
   <div id="son8Echarts">
     <div class="firstItem">
-      <p>常见店铺垃圾分析</p>
+      <p class="p1">往年店铺资源分析</p>
+      <div class="introduce">
+        <p class="p2">2019 年各类型店铺的垃圾回收及分类情况</p>
+        <p class="p3">从可回收垃圾、有害垃圾、干垃圾和湿垃圾四个方面，结合了街道两旁常见店铺类型及常见产生垃圾类型，制作以下分析图。</p>
+      </div>
       <el-card shadow="hover">
         <div id="mycharts" ref="mycharts"></div>
       </el-card>

@@ -332,6 +332,11 @@ export default {
       // console.log(this.storeForm.data);
       if (this.storeForm.data.length === 0) {
         this.insertBtn = true;
+        this.$message({
+          type: "error",
+          message: "暂无任何店铺信息，可选择插入",
+          duration: 1800
+        });
       } else {
         this.insertBtn = false;
       }

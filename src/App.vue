@@ -28,7 +28,7 @@
         </div>
         <!-- <div class="contralItems">
           <router-link tag="span" to="/PaySuccess">测试</router-link>
-        </div> -->
+        </div>-->
       </div>
       <div class="header_other">
         <div class="prompt">
@@ -38,9 +38,7 @@
             </el-badge>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link to="/Notice" tag="span">
-                  新公告
-                </router-link>
+                <router-link to="/Notice" tag="span">新公告</router-link>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -97,12 +95,13 @@ export default {
     //身份获取
     this.identityApp = sessionStorage.getItem("identity");
     //公告提示
-    this.isDot = JSON.parse(localStorage.getItem("isDot"));
-    console.log(this.isDot);
-    var removeDot = setTimeout(() => {
-      localStorage.removeItem("isDot");
-    }, 1000);
-    // localStorage.removeItem("isDot");
+    // if (this.identityApp && this.identityApp != "管理员") {
+    //   this.isDot = JSON.parse(localStorage.getItem("isDot"));
+    //   console.log(this.isDot);
+    // }
+    // var removeDot = setTimeout(() => {
+    //   localStorage.removeItem("isDot");
+    // }, 1000);
   },
   methods: {
     windowScroll() {

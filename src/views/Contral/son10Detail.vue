@@ -78,6 +78,10 @@ export default {
         radio1: "全部",
         radio2: ""
       },
+      index: 0,
+      //暂存 年份
+      timeYear: "",
+      chart: {},
       //存放店铺id数组
       storeId: [],
       storeId2: [],
@@ -163,17 +167,12 @@ export default {
       arr: []
     };
   },
-  // mounted() {
-  //   this.getCustom();
-  //   this.getInfo();
-  //   this.getAll();
-  //   this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
-  // },
   created() {
     this.getCustom();
     // this.getInfo();
     this.getAll();
     this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
+    // this.radioAll.radio2 = new Date().getUTCFullYear() + "";
   },
   methods: {
     //单选选择
@@ -191,6 +190,14 @@ export default {
       // if(this.radioAll.typ){
 
       // }
+      // console.log(this.timeYear);
+      // if (this.timeYear == this.radioAll.radio2) {
+      //   console.log("no");
+      // } else {
+      //   // this.getAll();
+      // }
+      // this.draw2(this.source2, this.series);
+      // this.chart.dispose();
       this.getAll();
     },
     //获取全部店铺custom表
@@ -208,10 +215,10 @@ export default {
           this.storeId.push(obj);
           this.storeId2[i.id] = obj;
         }
-        console.log(this.storeId2);
+        // console.log(this.storeId2);
         // this.storeId2 = storeId2;
       });
-      console.log(this.storeId2);
+      // console.log(this.storeId2);
     },
 
     //切换显示
@@ -225,60 +232,28 @@ export default {
     //动态获取并渲染
     getAll() {
       getAllStoreGarbageApi.getAllStoreGarbage().then(res => {
-        this.test(res);
-        // const s1 = new Date().getTime();
-        // console.log(s1);
-        // //First 取出选择的年份-对应的所有数据放入 arr1
-        // let arr1 = [];
-        // for (const i of res.data) {
-        //   if (i.yearNum == this.radioAll.radio2) {
-        //     arr1.push(i);
-        //   }
-        // }
-        // // console.log(arr1);
-        // //Second 按照店铺id  把相同店铺 同一年的数据 放入暂存数组 arr2
-        // let arr2 = [];
-        // for (const i of this.storeId) {
-        //   arr2 = [];
-        //   for (const j of arr1) {
-        //     if (i.customId == j.customId) {
-        //       arr2.push(j);
-        //     }
-        //   }
-        //   // console.log(arr2);
-        //   //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
-        //   let rest = [arr2[0].name];
-        //   for (const m of arr2) {
-        //     rest.push(m.production);
-        //   }
-        //   // console.log(rest);
-        //   this.storeGarMon.push(rest);
-        //   rest = [];
-        // }
-        // //Fourth 最后和 scoure2 数组结合
-        // for (let i = 0; i < this.storeGarMon.length; i++) {
-        //   this.source2.push(this.storeGarMon[i]);
-        // }
-        // // console.log(this.source2);
-        // //增加折线并绘制
-        // for (let i = 0; i < this.storeId.length; i++) {
-        //   this.series.unshift(this.insertLine);
-        // }
-        // this.draw2();
-        // const s2 = new Date().getTime();
-        // console.log(s2);
-        // console.log(s2 - s1);
+        this.timeYear = this.test(res);
       });
     },
     //测试
     test(res) {
-      const s1 = new Date().getTime();
-      console.log(s1);
+      this.index += 1;
       //First 取出选择的年份-对应的所有数据放入 arr1
       let arr1 = [];
-      for (const i of res.data) {
-        if (i.yearNum == this.radioAll.radio2) {
-          arr1.push(i);
+      if (this.radioAll.radio1 == "全部") {
+        for (const i of res.data) {
+          if (i.yearNum == this.radioAll.radio2) {
+            arr1.push(i);
+          }
+        }
+      } else {
+        for (const i of res.data) {
+          if (
+            i.yearNum == this.radioAll.radio2 &&
+            i.type == this.radioAll.radio1
+          ) {
+            arr1.push(i);
+          }
         }
       }
       // console.log(arr1);
@@ -310,10 +285,11 @@ export default {
       for (let i = 0; i < this.storeId.length; i++) {
         this.series.unshift(this.insertLine);
       }
-      this.draw2();
-      const s2 = new Date().getTime();
-      console.log(s2);
-      console.log(s2 - s1);
+      console.log("first", this.source2);
+      this.draw2(this.source2, this.series);
+
+      console.log("Second", this.source2);
+      return this.radioAll.radio2;
     },
     //获取渲染图
     async getInfo() {
@@ -327,10 +303,12 @@ export default {
         });
     },
     //echarts
-    draw2() {
+    draw2(source2, series) {
       var myCharts2 = echarts.init(this.$refs.mycharts2);
-      console.log("e");
-
+      this.chart = myCharts2;
+      this.clean();
+      // var myCharts2 = echarts.init(this.$refs.mycharts2);
+      // echarts.init(this.$refs.mycharts2).dispose();
       var option = {
         legend: {},
         tooltip: {
@@ -338,12 +316,12 @@ export default {
           showContent: false
         },
         dataset: {
-          source: this.source2
+          source: source2
         },
         xAxis: { type: "category", name: "月份" },
-        yAxis: { name: "垃圾生产量(t)" },
+        yAxis: { name: "垃圾生产量(kg)" },
         grid: { top: "60%" },
-        series: this.series
+        series: series
       };
 
       myCharts2.on("updateAxisPointer", function(event) {
@@ -367,7 +345,44 @@ export default {
       });
 
       myCharts2.setOption(option);
-      console.log("chart");
+      console.log("结束：", this.source2);
+    },
+    clean() {
+      console.log("clean");
+      this.source2 = [
+        [
+          "months",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ];
+      this.series = [
+        {
+          type: "pie",
+          id: "pie",
+          radius: "25%",
+          roseType: "radius",
+          center: ["50%", "30%"],
+          label: {
+            formatter: "{b}: {@1}({d}%)"
+          },
+          encode: {
+            itemName: "months",
+            value: "1",
+            tooltip: "1"
+          }
+        }
+      ];
     }
   }
 };

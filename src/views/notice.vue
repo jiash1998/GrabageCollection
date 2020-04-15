@@ -6,18 +6,29 @@
           <el-menu-item index="0">全部公告</el-menu-item>
           <el-menu-item index="1">紧急公告</el-menu-item>
           <el-menu-item index="2">商户公告</el-menu-item>
-          <el-menu-item index="3">个人通知</el-menu-item>
+          <el-menu-item index="3" v-if="noticeSelf">个人通知</el-menu-item>
         </el-menu>
       </div>
 
       <div class="notice_content">
         <div class="scroll">
           <div class="left" ref="leftDiv">
-            <div class="content" v-for="(item,index) in noticeList" :key="index">
-              <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
-              <p id="p2">{{item.content}}</p>
-              <el-tag type="success">{{item.inputvalue}}</el-tag>
-              <span>&nbsp;&nbsp;{{item.time}}</span>
+            <div v-if="index != '3'">
+              <div class="content" v-for="(item,index) in noticeList" :key="index">
+                <p id="p1">{{item.title}}&nbsp;-&nbsp;{{item.type}}</p>
+                <p id="p2">{{item.content}}</p>
+                <el-tag type="warning" v-if="item.type =='商户通知'">{{item.inputvalue}}</el-tag>
+                <el-tag type="danger" v-else-if="item.type =='紧急通知'">{{item.inputvalue}}</el-tag>
+                <el-tag type="success" v-else>{{item.inputvalue}}</el-tag>
+                <span>&nbsp;&nbsp;{{item.time}}</span>
+              </div>
+            </div>
+            <div v-else>
+              <div class="content" v-for="(item,index) in noticeList" :key="index">
+                <p id="p1">{{item.title}}</p>
+                <p id="p2">{{item.content}}</p>
+                <el-tag type="primary">个人通知</el-tag>
+              </div>
             </div>
           </div>
         </div>
@@ -34,6 +45,7 @@
 
 <script>
 import PublicFood from "../components/publicFood.vue";
+import getByPNoticeUsernameApi from "../api/postRequest.js";
 //api
 import getNoticeApi from "../api/getRequest.js";
 export default {
@@ -43,21 +55,35 @@ export default {
   },
   data() {
     return {
-      //三个公告类型
+      //4 个公告类型
       noticeList: [],
       allList: [],
       emergencyList: [],
       storeList: [],
+      selfList: [],
+      //是否展示个人通知
+      noticeSelf: false,
+      userName: "",
+      index: "",
       type: 0
     };
   },
   mounted() {
     this.getInfo();
+    if (
+      sessionStorage.getItem("userName") &&
+      sessionStorage.getItem("identity") != "管理员"
+    ) {
+      this.noticeSelf = true;
+    }
+    this.userName = sessionStorage.getItem("userName");
+    this.getSelfNotice();
   },
   methods: {
     //点击展示不同类型
     NoticeType(key, keypath) {
       // console.log(key);
+      this.index = key;
       switch (key) {
         case "0":
           this.noticeList = this.allList;
@@ -67,6 +93,10 @@ export default {
           break;
         case "2":
           this.noticeList = this.storeList;
+          break;
+        case "3":
+          this.noticeList = this.selfList;
+          localStorage.removeItem("isDot");
           break;
         // default:
         //   this.noticeList = this.allList;
@@ -94,6 +124,21 @@ export default {
               console.log("不处理");
             }
           }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    //获取个人通知
+    getSelfNotice() {
+      var data = { username: this.userName };
+      console.log(data);
+
+      getByPNoticeUsernameApi
+        .getByPNoticeUsername(data)
+        .then(res => {
+          // console.log(res.data);
+          this.selfList = res.data;
         })
         .catch(err => {
           console.log(err);

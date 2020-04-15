@@ -1,15 +1,35 @@
 #son8Echarts {
   .firstItem {
-    p {
+    .p1 {
       font-size: 1.1em;
       margin: 35px 2.5%;
       width: 142px;
       padding-bottom: 10px;
       border-bottom: 4px solid #67c23a;
     }
+
+    .introduce {
+      width: 95%;
+      height: 90px;
+      border-radius: 5px;
+      border: 2px solid #67c23a;
+      margin: 10px 2.5% 20px;
+      color: rgb(100, 99, 99);
+      .p2 {
+        font-size: 1.1em;
+        margin: 15px 2.5% 5px;
+        padding-bottom: 10px;
+      }
+      .p3 {
+        font-size: 1em;
+        margin: 0px 2.5%;
+        padding-bottom: 10px;
+      }
+    }
+
     .el-card {
       width: 95%;
-      margin: 10px 2.5%;
+      margin: 10px 2.5% 100px;
       #mycharts {
         width: 95%;
         margin: 0 0 0 4%;

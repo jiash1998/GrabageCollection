@@ -124,7 +124,7 @@ export default {
     },
 
     //重置表单
-    resetForm(FormName){
+    resetForm(FormName) {
       this.$refs[FormName].resetFields();
     },
 
@@ -137,7 +137,7 @@ export default {
 
             insertNoticeApi.insertNotice(data).then(res => {
               //公告提示
-              localStorage.setItem("isDot", "true");
+              // localStorage.setItem("isDot", "true");
               vm.$message({
                 message: "发布成功",
                 type: "success",
