@@ -79,9 +79,8 @@ export default {
         radio2: ""
       },
       index: 0,
-      //暂存 年份
-      timeYear: "",
-      chart: {},
+      //暂存
+      timeData: "",
       //存放店铺id数组
       storeId: [],
       storeId2: [],
@@ -154,7 +153,8 @@ export default {
           roseType: "radius",
           center: ["50%", "30%"],
           label: {
-            formatter: "{b}: {@1}({d}%)"
+            formatter: "{b}: {@1}" + "kg" + "({d}%)"
+            // formatter: "{b}: {@[" + dimension + "]}" + "kg"
           },
           encode: {
             itemName: "months",
@@ -172,39 +172,15 @@ export default {
     // this.getInfo();
     this.getAll();
     this.radioAll.radio2 = new Date().getUTCFullYear() - 1 + "";
-    // this.radioAll.radio2 = new Date().getUTCFullYear() + "";
   },
   methods: {
     //单选选择
     selectData() {
-      // this.store = [];
-      // if (this.radio1 === "全部") {
-      //   this.store = this.allStore;
-      // }
-      // for (const i of this.allStore) {
-      //   if (i.type == this.radio1) {
-      //     this.store.push(i);
-      //   }
-      // }
-      // console.log(this.radioAll);
-      // if(this.radioAll.typ){
-
-      // }
-      // console.log(this.timeYear);
-      // if (this.timeYear == this.radioAll.radio2) {
-      //   console.log("no");
-      // } else {
-      //   // this.getAll();
-      // }
-      // this.draw2(this.source2, this.series);
-      // this.chart.dispose();
       this.getAll();
     },
     //获取全部店铺custom表
     getCustom() {
       getAllCustomApi.getAllCustom().then(res => {
-        // this.allStore = res.data;
-        // this.store = res.data;
         var storeId2 = [];
         for (const i of res.data) {
           let obj = {
@@ -215,10 +191,7 @@ export default {
           this.storeId.push(obj);
           this.storeId2[i.id] = obj;
         }
-        // console.log(this.storeId2);
-        // this.storeId2 = storeId2;
       });
-      // console.log(this.storeId2);
     },
 
     //切换显示
@@ -232,12 +205,13 @@ export default {
     //动态获取并渲染
     getAll() {
       getAllStoreGarbageApi.getAllStoreGarbage().then(res => {
-        this.timeYear = this.test(res);
+        this.firstSort(res);
       });
     },
-    //测试
-    test(res) {
-      this.index += 1;
+    //第一步 分离数据
+    firstSort(res) {
+      this.clean();
+      let timeId = [];
       //First 取出选择的年份-对应的所有数据放入 arr1
       let arr1 = [];
       if (this.radioAll.radio1 == "全部") {
@@ -246,6 +220,7 @@ export default {
             arr1.push(i);
           }
         }
+        timeId = this.storeId;
       } else {
         for (const i of res.data) {
           if (
@@ -255,13 +230,22 @@ export default {
             arr1.push(i);
           }
         }
+        for (const i of this.storeId) {
+          if (i.type == this.radioAll.radio1) {
+            timeId.push({ customId: i.customId });
+          }
+        }
       }
       // console.log(arr1);
-      //Second 按照店铺id  把相同店铺 同一年的数据 放入暂存数组 arr2
+      this.secondSort(timeId, arr1);
+    },
+    //第二步 分离
+    secondSort(timeId, arr1) {
+      //Second 按照店铺 id  把相同店铺 同一年的数据 放入暂存数组 arr2
       let arr2 = [];
-      for (const i of this.storeId) {
+      for (let i of timeId) {
         arr2 = [];
-        for (const j of arr1) {
+        for (let j of arr1) {
           if (i.customId == j.customId) {
             arr2.push(j);
           }
@@ -276,20 +260,25 @@ export default {
         this.storeGarMon.push(rest);
         rest = [];
       }
+      // console.log(this.storeGarMon);
       //Fourth 最后和 scoure2 数组结合
       for (let i = 0; i < this.storeGarMon.length; i++) {
         this.source2.push(this.storeGarMon[i]);
       }
-      // console.log(this.source2);
       //增加折线并绘制
       for (let i = 0; i < this.storeId.length; i++) {
         this.series.unshift(this.insertLine);
       }
-      console.log("first", this.source2);
+      if (this.source2.length == 1) {
+        this.$message({
+          message: "暂无数据",
+          type: "warn",
+          duration: 1600
+        });
+      }
+      //绘制
       this.draw2(this.source2, this.series);
-
-      console.log("Second", this.source2);
-      return this.radioAll.radio2;
+      this.storeGarMon = [];
     },
     //获取渲染图
     async getInfo() {
@@ -304,11 +293,9 @@ export default {
     },
     //echarts
     draw2(source2, series) {
+      echarts.init(this.$refs.mycharts2).dispose();
       var myCharts2 = echarts.init(this.$refs.mycharts2);
-      this.chart = myCharts2;
-      this.clean();
-      // var myCharts2 = echarts.init(this.$refs.mycharts2);
-      // echarts.init(this.$refs.mycharts2).dispose();
+
       var option = {
         legend: {},
         tooltip: {
@@ -332,8 +319,7 @@ export default {
             series: {
               id: "pie",
               label: {
-                // formatter: "{b}: {@[" + dimension + "]}"
-                formatter: "{b}: {@[" + dimension + "]} ({d}%)"
+                formatter: "{b}: {@[" + dimension + "]}" + "kg"
               },
               encode: {
                 value: dimension,
@@ -345,7 +331,6 @@ export default {
       });
 
       myCharts2.setOption(option);
-      console.log("结束：", this.source2);
     },
     clean() {
       console.log("clean");
