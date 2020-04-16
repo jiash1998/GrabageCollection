@@ -17,7 +17,7 @@
             </el-radio-group>
           </div>
           <div class="operate">
-            <el-button type="primary" size="small" @click="selectData" plain>查询</el-button>
+            <el-button type="primary" :disabled="!view" size="small" @click="selectData" plain>查询</el-button>
           </div>
         </el-card>
       </div>
@@ -45,14 +45,13 @@
         </div>
         <div class="view2" :class="view ? 'change2' : 'change'">
           <el-card shadow="hover">
-            <el-table :data="store" border>
+            <el-table :data="GarbageAll" border>
               <el-table-column label="店铺名称" prop="name"></el-table-column>
               <el-table-column label="店铺类型" prop="type"></el-table-column>
               <el-table-column label="负责人" prop="header" width="140px"></el-table-column>
               <el-table-column label="联系方式" prop="phone"></el-table-column>
-              <!-- <el-table-column label="月份"></el-table-column> -->
-              <el-table-column label="年份" width="100px"></el-table-column>
-              <el-table-column label="垃圾产生量(t)" width="130px"></el-table-column>
+              <el-table-column label="年份" prop="yearNum" width="100px"></el-table-column>
+              <el-table-column label="垃圾产生量(t)" prop="production" width="130px"></el-table-column>
               <!-- <el-table-column label="操作">
                 <el-button type="primary" size="mini" plain>录入</el-button>
                 <el-button type="success" size="mini">编辑</el-button>
@@ -78,9 +77,8 @@ export default {
         radio1: "全部",
         radio2: ""
       },
-      index: 0,
-      //暂存
-      timeData: "",
+      //存放表格 全年数据
+      GarbageAll: [],
       //存放店铺id数组
       storeId: [],
       storeId2: [],
@@ -88,8 +86,6 @@ export default {
       storeGarMon: [],
       select: "",
       dataPicker: "",
-      // allStore: [],
-      store: [],
       //view 显示
       view: true,
       storeType: [
@@ -201,6 +197,26 @@ export default {
     changeView2() {
       this.view = false;
     },
+    //渲染表格
+    viewTable(res) {
+      console.log(this.GarbageAll);
+    },
+    //获取总垃圾年
+    test(data) {
+      let num = 0;
+      for (const i of data) {
+        num += i.production;
+      }
+      let obj = {
+        name: data[0].name,
+        type: data[0].type,
+        header: data[0].header,
+        phone: data[0].phone,
+        yearNum: data[0].yearNum,
+        production: num
+      };
+      return obj;
+    },
 
     //动态获取并渲染
     getAll() {
@@ -241,6 +257,7 @@ export default {
     },
     //第二步 分离
     secondSort(timeId, arr1) {
+      this.GarbageAll = [];
       //Second 按照店铺 id  把相同店铺 同一年的数据 放入暂存数组 arr2
       let arr2 = [];
       for (let i of timeId) {
@@ -250,7 +267,9 @@ export default {
             arr2.push(j);
           }
         }
-        // console.log(arr2);
+        console.log(arr2);
+        //填充表格数据
+        this.GarbageAll.push(this.test(arr2));
         //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
         let rest = [arr2[0].name];
         for (const m of arr2) {
@@ -272,10 +291,11 @@ export default {
       if (this.source2.length == 1) {
         this.$message({
           message: "暂无数据",
-          type: "warn",
+          type: "warning",
           duration: 1600
         });
       }
+      // console.log(this.source2);
       //绘制
       this.draw2(this.source2, this.series);
       this.storeGarMon = [];
@@ -286,6 +306,7 @@ export default {
         .getAllCustom()
         .then(res => {
           this.storeInfo = res.data;
+          this.viewTable(res.data);
         })
         .catch(err => {
           console.log(err);

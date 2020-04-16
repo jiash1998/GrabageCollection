@@ -290,12 +290,23 @@ export default {
         .insertGarbageBatch(postData)
         .then(res => {
           console.log(res.data);
-          this.getAllStoreGarbage();
-          this.$message({
-            type: "success",
-            message: "插入店铺数据成功",
-            duration: 1500
-          });
+          if (
+            res.data.code == 400 &&
+            res.data.msg == "添加失败,没有正确的店铺id"
+          ) {
+            this.$message({
+              type: "warning",
+              message: "无需录入",
+              duration: 1600
+            });
+          } else {
+            this.getAllStoreGarbage();
+            this.$message({
+              type: "success",
+              message: "录入店铺数据成功",
+              duration: 1500
+            });
+          }
         })
         .catch(err => {
           console.log(err);
@@ -374,7 +385,7 @@ export default {
               i.tag = "未录";
             }
           }
-          console.log(this.storeGar);
+          // console.log(this.storeGar);
           this.start();
         })
         .catch(err => {
