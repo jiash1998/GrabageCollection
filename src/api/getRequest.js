@@ -4,7 +4,19 @@ const methodAll = "get";
 var getString = (urlSelf, methodSelf) => {
   return {
     url: urlSelf,
-    method: methodSelf
+    method: methodSelf,
+  };
+};
+
+//excel 请求头
+var getStringExcel = (urlSelf, methodSelf) => {
+  return {
+    url: urlSelf,
+    headers: {
+      "Content-Type": "application/json; application/octet-stream"
+    },
+    responseType: "arraybuffer",
+    method: methodSelf,
   };
 };
 export default {
@@ -45,5 +57,14 @@ export default {
   //获取店铺垃圾
   getAllStoreGarbage() {
     return interceptor(getString("/production/getAll", methodAll));
-  }
+  },
+  //excel 导出接口
+  //垃圾表
+  exPortAll() {
+    return interceptor(getStringExcel("/production/excel", methodAll));
+  },
+  //custom表
+  exPortCustAll() {
+    return interceptor(getStringExcel("/custom/excel", methodAll));
+  },
 };

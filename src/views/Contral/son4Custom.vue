@@ -7,7 +7,10 @@
             <el-input v-model="findStore.name" placeholder="请输入店铺名称"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="success" @click="selStore(vm)" plain>查询</el-button>
+            <el-button class="btn" type="success" @click="selStore(vm)" plain>查询</el-button>
+            <el-button type="primary" @click="exportEx">
+              <i class="el-icon-download"></i>
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -26,7 +29,7 @@
                   <el-form-item label="订单金额：">{{props.row.money}}</el-form-item>
                   <el-form-item label="支付方式：">{{props.row.payType}}</el-form-item>
                   <el-form-item label="服务开始时间：">{{props.row.tradeTimeEnd}}</el-form-item>
-                  <el-form-item label="服务截至时间：">{{props.row.tradeTimeEnd}}</el-form-item>
+                  <!-- <el-form-item label="服务截至时间：">{{props.row.tradeTimeEnd}}</el-form-item> -->
                 </div>
               </el-form>
             </template>
@@ -47,6 +50,7 @@
 <script>
 import qs from "querystring";
 import getAllCustomApi from "../../api/getRequest.js";
+import exPortCustAllApi from "../../api/getRequest.js";
 import getCustomByNameApi from "../../api/postRequest.js";
 import { debounce } from "../../util/debounce.js";
 
@@ -66,6 +70,24 @@ export default {
     await this.getInfo();
   },
   methods: {
+    //导出excel
+    exportEx() {
+      exPortCustAllApi
+        .exPortCustAll()
+        .then(res => {
+          console.log(res.data);
+          let b = new Blob([res.data], { type: "application/vnd.ms-excel" });
+          let url = URL.createObjectURL(b);
+          let link = document.createElement("a");
+          link.download = "注册店铺细则.xlsx";
+          link.href = url;
+          link.click();
+          window.URL.revokeObjectURL(url);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     selStore: debounce(
       vm => {
         var data = vm.findStore;

@@ -79,6 +79,9 @@
         </el-card>
         <div class="insertOpr">
           <el-button type="success" :disabled="insertBtn" size @click="insert(storeForm)" plain>录入数据</el-button>
+          <el-button type="primary" @click="test">
+            <i class="el-icon-download"></i>
+          </el-button>
         </div>
       </div>
     </div>
@@ -88,6 +91,7 @@
 <script>
 import getAllCustomApi from "../../api/getRequest";
 import getAllStoreGarbageApi from "../../api/getRequest";
+import exPortAllApi from "../../api/getRequest";
 import insertGarbageBatchApi from "../../api/postRequest";
 import insertGarbageApi from "../../api/postRequest";
 
@@ -169,6 +173,24 @@ export default {
     this.initRadio();
   },
   methods: {
+    //excel导出
+    test() {
+      exPortAllApi
+        .exPortAll()
+        .then(res => {
+          console.log(res.data);
+          let b = new Blob([res.data], { type: "application/vnd.ms-excel" });
+          let url = URL.createObjectURL(b);
+          let link = document.createElement("a");
+          link.download = "全年店铺资源回收情况.xlsx";
+          link.href = url;
+          link.click();
+          window.URL.revokeObjectURL(url);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     //店铺类型筛选
     selecType(value1) {
       this.selectAll.type = value1;
