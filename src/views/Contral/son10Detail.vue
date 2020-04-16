@@ -51,7 +51,7 @@
               <el-table-column label="负责人" prop="header" width="140px"></el-table-column>
               <el-table-column label="联系方式" prop="phone"></el-table-column>
               <el-table-column label="年份" prop="yearNum" width="100px"></el-table-column>
-              <el-table-column label="垃圾产生量(t)" prop="production" width="130px"></el-table-column>
+              <el-table-column label="垃圾产生量(kg)" prop="production" width="130px"></el-table-column>
               <!-- <el-table-column label="操作">
                 <el-button type="primary" size="mini" plain>录入</el-button>
                 <el-button type="success" size="mini">编辑</el-button>

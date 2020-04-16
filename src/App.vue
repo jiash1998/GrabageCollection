@@ -11,9 +11,9 @@
         <span>ResC</span>
       </div>
       <div class="head-contral">
-        <div class="contralItems">
+        <!-- <div class="contralItems">
           <router-link tag="span" to="/mainI">首页</router-link>
-        </div>
+        </div> -->
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
