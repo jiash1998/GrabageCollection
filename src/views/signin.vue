@@ -90,30 +90,32 @@ export default {
         vm.$refs["signForm"].validate(val => {
           if (val) {
             var data = vm.signForm;
-            checkLoginApi.checkLogin(data)
-              .then(res => {
-                // console.log(res);
-                if (res.data.msg == "用户名或密码错误") {
-                  vm.$message({
-                    message: "登录失败，请检查用户名或密码! ",
-                    type: "error",
-                    duration: 1500
-                  });
-                  return false;
-                }
-                alert("登录成功");
-                //成功之后将值保存在session
-                //路由拦截
-                sessionStorage.setItem("token", "true");
-                //退出键
-                sessionStorage.setItem("isExit", "true");
-                sessionStorage.setItem("userName", res.data.username);
-                //身份
-                sessionStorage.setItem("identity", res.data.identity);
-                vm.$router.push("/mainI");
-                //路由刷新，搭载数据
-                vm.$router.go(0);
-              });
+            checkLoginApi.checkLogin(data).then(res => {
+              // console.log(res);
+              if (res.data.msg == "用户名或密码错误") {
+                vm.$message({
+                  message: "登录失败，请检查用户名或密码! ",
+                  type: "error",
+                  duration: 1500
+                });
+                return false;
+              }
+              alert("登录成功");
+              //成功之后将值保存在session
+              //路由拦截
+              sessionStorage.setItem("token", "true");
+              //退出键
+              sessionStorage.setItem("isExit", "true");
+              //身份
+              sessionStorage.setItem("userName", res.data.username);
+              sessionStorage.setItem("identity", res.data.identity);
+              //持久化
+              // localStorage.setItem("userName", res.data.username);
+              // localStorage.setItem("identity", res.data.identity);
+              vm.$router.push("/mainI");
+              //路由刷新，搭载数据
+              vm.$router.go(0);
+            });
           } else {
             vm.$message({
               message: "登录失败，请检查用户名或密码! ",

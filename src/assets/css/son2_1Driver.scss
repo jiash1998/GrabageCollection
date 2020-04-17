@@ -22,14 +22,31 @@
         padding-top: 20px;
       }
 
+      .el-dialog {
+        .el-form {
+          // background-color: pink;
+          display: flex;
+          flex-direction: column;
+
+          .el-form-item {
+            width: 50%;
+            // background-color: black;
+            padding: 0 25%;
+            .el-button {
+              margin-left: 70%;
+            }
+          }
+        }
+      }
+
       .showInfo {
         width: 100%;
         min-height: 40vh;
         height: auto;
-        
-        .el-card{
+
+        .el-card {
           width: 95%;
-          margin: 5px 2.5%;
+          margin: 10px 2.5% 50px;
         }
       }
     }

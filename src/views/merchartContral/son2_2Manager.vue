@@ -325,6 +325,7 @@ export default {
           case "未定制":
             console.log("未定制");
             this.steps = 1;
+            this.customCha = true;
             break;
           default:
             console.log("别看了");

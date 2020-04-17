@@ -21,7 +21,7 @@
             <el-button type="success" native-type="reset">清空</el-button>
             <!-- //弹框 -->
             <el-dialog title="发送通知" :visible.sync="showDialog">
-              <el-form :model="notice" size="small">
+              <el-form label-position="left" label-width="40px" :model="notice" size="small">
                 <el-form-item label="标题">
                   <el-input v-model="notice.title" placeholder="输入通知标题"></el-input>
                 </el-form-item>
@@ -32,10 +32,6 @@
                   <el-button type="primary" plain @click="postNotice(vm)">发送</el-button>
                 </el-form-item>
               </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button @click="showDialog = false">取 消</el-button>
-                <el-button type="primary" @click="showDialog = false">确 定</el-button>
-              </div>
             </el-dialog>
           </el-form-item>
         </el-form>
@@ -122,6 +118,7 @@ export default {
           .then(res => {
             console.log(res.data);
             if (res.data == "ok") {
+              vm.showDialog = false;
               vm.$message({
                 message: "发送成功",
                 type: "success",
@@ -147,6 +144,7 @@ export default {
       vm => {
         vm.$refs["driver"].validate(val => {
           if (val) {
+            vm.NoticeData = [];
             //拿驾驶员接收的通知 位置
             var data = { driver: vm.driver.username };
             var data1 = { receiver: vm.driver.username };

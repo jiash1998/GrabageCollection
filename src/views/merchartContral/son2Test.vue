@@ -142,6 +142,10 @@ export default {
     this.getData();
     // this.manageTrade();
   },
+  created() {
+    console.log(localStorage.getItem("userName"));
+    console.log(localStorage.getItem("identity"));
+  },
   methods: {
     async getData() {
       await getAllCustomApi

@@ -268,16 +268,21 @@ export default {
           }
         }
         console.log(arr2);
-        //填充表格数据
-        this.GarbageAll.push(this.test(arr2));
-        //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
-        let rest = [arr2[0].name];
-        for (const m of arr2) {
-          rest.push(m.production);
+        if (arr2.length === 0) {
+          // return "none";
+          console.log("none");
+        } else {
+          //填充表格数据
+          this.GarbageAll.push(this.test(arr2));
+          //Third 将 店铺名 和 每个月的数据取出，放入数组 rest
+          let rest = [arr2[0].name];
+          for (const m of arr2) {
+            rest.push(m.production);
+          }
+          // console.log(rest);
+          this.storeGarMon.push(rest);
+          rest = [];
         }
-        // console.log(rest);
-        this.storeGarMon.push(rest);
-        rest = [];
       }
       // console.log(this.storeGarMon);
       //Fourth 最后和 scoure2 数组结合

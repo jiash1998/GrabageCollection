@@ -13,7 +13,7 @@
       <div class="head-contral">
         <!-- <div class="contralItems">
           <router-link tag="span" to="/mainI">首页</router-link>
-        </div> -->
+        </div>-->
         <div class="contralItems">
           <router-link tag="span" to="/Notice">最新公告</router-link>
         </div>
@@ -28,7 +28,7 @@
         </div>
         <!-- <div class="contralItems">
           <router-link tag="span" to="/PaySuccess">测试</router-link>
-        </div>-->
+        </div> -->
       </div>
       <div class="header_other">
         <div class="prompt">
@@ -80,7 +80,7 @@ export default {
   },
   created() {
     this.$store.commit("viewUsername", sessionStorage.getItem("userName"));
-    //
+    // this.$store.commit("viewUsername", localStorage.getItem("userName"));
   },
   // async mounted() {
   //   window.addEventListener("scroll", this.listenerScroll);
@@ -92,8 +92,12 @@ export default {
   mounted() {
     //退出键显示
     this.isShow = JSON.parse(sessionStorage.getItem("isExit"));
+    // this.isShow = JSON.parse(localStorage.getItem("isExit"));
+
     //身份获取
     this.identityApp = sessionStorage.getItem("identity");
+    // this.identityApp = localStorage.getItem("identity");
+
     //公告提示
     // if (this.identityApp && this.identityApp != "管理员") {
     //   this.isDot = JSON.parse(localStorage.getItem("isDot"));
@@ -119,6 +123,8 @@ export default {
         sessionStorage.setItem("token", "false");
         sessionStorage.removeItem("userName");
         sessionStorage.removeItem("identity");
+        // localStorage.removeItem("userName");
+        // localStorage.removeItem("identity");
         this.$router.push("/signin");
         // this.$store.commit("resertUserName");
         //路由刷新页面，使得数据搭载
