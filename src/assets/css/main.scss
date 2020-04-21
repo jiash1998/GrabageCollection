@@ -149,8 +149,14 @@ $AllWidth: 100%;
       font-size: 1.5em;
       // background-color: pink;
       margin: 20px 0 30px 5%;
+      transition: all .7s;
 
       &-border {
+        border-bottom: 4px solid #67c23a;
+        padding-bottom: 20px;
+      }
+
+      &:hover {
         border-bottom: 4px solid #67c23a;
         padding-bottom: 20px;
       }

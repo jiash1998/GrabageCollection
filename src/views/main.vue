@@ -27,24 +27,32 @@
           <div class="body_main_intro">
             <span>沿街商铺</span>
             <p>沿街各种商铺,餐饮店、理发店、五金店等均可定制。</p>
-            <a href="#">前往定制</a>
+            <router-link to="/Signin" tag="div">
+              <a href="#">前往定制</a>
+            </router-link>
           </div>
           <div class="body_main_intro">
             <span>大型商场</span>
             <p>CHZU有处理大型商场产生垃圾的丰富经验。</p>
-            <a href="#">前往定制</a>
+            <router-link to="/Signin" tag="div">
+              <a href="#">前往定制</a>
+            </router-link>
           </div>
           <div class="body_main_fill"></div>
           <div class="body_main_fill"></div>
           <div class="body_main_intro">
             <span>居民住宅</span>
             <p>对于各种类型的小区、别墅或者居民楼，有着多种处理方案。</p>
-            <a href="#">前往定制</a>
+            <router-link to="/Signin" tag="div">
+              <a href="#">前往定制</a>
+            </router-link>
           </div>
           <div class="body_main_intro">
             <span>写字楼</span>
             <p>写字楼垃圾相对固定，有利于垃圾的便捷回收。</p>
-            <a href="#">前往定制</a>
+            <router-link to="/Signin" tag="div">
+              <a href="#">前往定制</a>
+            </router-link>
           </div>
           <div class="body_main_fill"></div>
           <div class="body_main_fill3"></div>
@@ -104,9 +112,15 @@
           </p>
           <p id="body5_p2">
             这是为客户环境量身定做的垃圾回收方案
-            <router-link to="/merchartContral/Son1Custom" tag="div">
-              <el-button type="success" style="margin-left:10px" plain>前往定制</el-button>
-            </router-link>
+            <!-- <router-link to="/merchartContral/Son1Custom" tag="div"> -->
+            <el-button
+              type="success"
+              :disabled="identity"
+              @click="goCus"
+              style="margin-left:10px"
+              plain
+            >前往定制</el-button>
+            <!-- </router-link> -->
           </p>
         </div>
       </div>
@@ -125,6 +139,7 @@ export default {
   data() {
     return {
       view: 0,
+      identity: false,
       type: [
         { id: 0, state: true, content: "可回收垃圾" },
         { id: 1, state: false, content: "干垃圾" },
@@ -189,7 +204,17 @@ export default {
       ]
     };
   },
+  created() {
+    var i = sessionStorage.getItem("identity");
+    if(i !== "沿街商家"){
+      this.identity = true;
+    }
+  },
   methods: {
+    //跳转
+    goCus() {
+      this.$router.push("/merchartContral/Son1Custom");
+    },
     //v-for循环的div展示
     select(type) {
       this.info[type].state = true;
