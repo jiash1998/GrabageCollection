@@ -35,10 +35,10 @@
               <el-button type="primary" @click="replayBtn('replay')" plain>发送</el-button>
             </el-form-item>
           </el-form>
-          <span slot="footer" class="dialog-footer">
+          <!-- <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-          </span>
+          </span> -->
         </el-dialog>
       </div>
     </div>
@@ -115,6 +115,7 @@ export default {
                   duration: 1500
                 });
                 this.getInfo();
+                this.dialogVisible = false;
               } else {
                 this.$message({
                   message: "回复失败",
@@ -136,7 +137,7 @@ export default {
       var id = { id: index.id };
       console.log(id);
 
-      delFeedbackByIdApi,
+      delFeedbackByIdApi.
         delFeedbackById(id)
           .then(res => {
             console.log(res.data);
