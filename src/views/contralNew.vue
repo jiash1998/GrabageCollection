@@ -8,6 +8,22 @@
               <i class="el-icon-edit"></i>角色管理
             </router-link>
           </el-menu-item>
+          <el-submenu index="8">
+            <template slot="title">
+              <i class="el-icon-chat-line-round"></i>用户反馈
+            </template>
+            <el-menu-item index="8-1">
+              <router-link tag="div" to="/ContralNew/Son7Feedback">待处理</router-link>
+            </el-menu-item>
+            <el-menu-item index="8-2">
+              <router-link tag="div" to="/ContralNew/Son7_1Replay">已处理</router-link>
+            </el-menu-item>
+          </el-submenu>
+          <el-menu-item index="7">
+            <router-link tag="div" to="/ContralNew/Son6Notice">
+              <i class="el-icon-document"></i>发布公告
+            </router-link>
+          </el-menu-item>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-truck"></i>回收管理
@@ -31,7 +47,7 @@
           </el-menu-item>
           <el-submenu index="4">
             <template slot="title">
-              <i class="el-icon-office-building"></i>回收管理
+              <i class="el-icon-office-building"></i>店铺管理
             </template>
             <el-menu-item index="4-1">
               <router-link tag="div" to="/ContralNew/Son4Custom">商铺信息</router-link>
@@ -53,22 +69,6 @@
               <i class="el-icon-view"></i>记录跟踪
             </router-link>
           </el-menu-item>
-          <el-menu-item index="7">
-            <router-link tag="div" to="/ContralNew/Son6Notice">
-              <i class="el-icon-document"></i>发布公告
-            </router-link>
-          </el-menu-item>
-          <el-submenu index="8">
-            <template slot="title">
-              <i class="el-icon-chat-line-round"></i>用户反馈
-            </template>
-            <el-menu-item index="8-1">
-              <router-link tag="div" to="/ContralNew/Son7Feedback">待处理</router-link>
-            </el-menu-item>
-            <el-menu-item index="8-2">
-              <router-link tag="div" to="/ContralNew/Son7_1Replay">已处理</router-link>
-            </el-menu-item>
-          </el-submenu>
         </el-menu>
       </div>
       <div class="bottom">

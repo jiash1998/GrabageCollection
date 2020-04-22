@@ -5,8 +5,8 @@
         <el-form :model="feedback" :rules="feedback" refs="feedback">
           <el-form-item label>
             <el-input v-model="feedback.content" type="textarea" placeholder="填写你想反馈的意见或者建议"></el-input>
-            <el-button type="primary" @click="postFeedback(vm)" plain>发送</el-button>
-            <el-button type="success">重置</el-button>
+            <el-button type="primary" size="small" @click="postFeedback(vm)" plain>发送</el-button>
+            <el-button type="success" size="small">重置</el-button>
           </el-form-item>
         </el-form>
       </div>

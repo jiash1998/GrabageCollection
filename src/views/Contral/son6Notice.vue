@@ -38,9 +38,9 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label>
-          <el-button type="success" @click="submitForm(vm)">发布公告</el-button>
-          <el-button type="reset" @click="resetForm('notice')">重置</el-button>
-          <el-button type="primary" plain>返回</el-button>
+          <el-button type="success" size="small" @click="submitForm(vm)">发布公告</el-button>
+          <el-button type="reset" size="small" @click="resetForm('notice')">重置</el-button>
+          <el-button type="primary" size="small" plain>返回</el-button>
         </el-form-item>
       </el-form>
     </div>
