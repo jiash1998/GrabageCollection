@@ -3,7 +3,7 @@ module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   devServer: {
     port: 8081,
-    open: true,
+    open: false,
     proxy: {
       "/": {
         target: "http://118.31.12.146:8080",
