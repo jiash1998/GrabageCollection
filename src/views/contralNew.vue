@@ -61,7 +61,7 @@
           </el-submenu>
           <el-menu-item index="5">
             <router-link tag="div" to="/ContralNew/Son8Echarts">
-              <i class="el-icon-data-line"></i>数据分析
+              <i class="el-icon-data-line"></i>资源分析及回收
             </router-link>
           </el-menu-item>
           <el-menu-item index="6">

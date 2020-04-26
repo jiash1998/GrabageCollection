@@ -3,7 +3,7 @@
     .p1 {
       font-size: 1.1em;
       margin: 35px 2.5%;
-      width: 142px;
+      width: 71px;
       padding-bottom: 10px;
       border-bottom: 4px solid #67c23a;
     }
@@ -13,7 +13,7 @@
       height: 90px;
       border-radius: 5px;
       // border: 2px solid #67c23a;
-      margin: 0px 0 20px ;
+      margin: 0px 0 20px;
       color: rgb(83, 82, 82);
       .p2 {
         font-size: 1.1em;
@@ -39,23 +39,111 @@
   }
 
   .secondItem {
-    height: 800px;
-
-    p {
+    // height: 600px;
+    position: relative;
+    padding-bottom: 80px;
+    .p1 {
       font-size: 1.1em;
       margin: 80px 2.5% 10px;
-      width: 124px;
+      width: 71px;
       padding-bottom: 10px;
       border-bottom: 4px solid #67c23a;
     }
 
-    .el-card {
-      width: 95%;
-      margin: 40px 2.5% 20px;
-      #mycharts2 {
-        width: 95%;
-        margin: 0 1%;
-        height: 600px;
+    .cover {
+      position: absolute;
+      border-radius: 50%;
+      height: 65px;
+      width: 65px;
+      top: 50%;
+      left: 49.8%;
+      transform: translate(-50%, -50%);
+      background-color: grey;
+      transition: 0.6s;
+      z-index: 99;
+    }
+
+    .cover0 {
+      background-color: #2ecc71;
+      box-shadow: 0 0 8px 3px gainsboro;
+      filter: saturate(80%) grayscale(20%);
+    }
+    .cover1 {
+      background-color: #596275;
+      box-shadow: 0 0 12px 1px gray;
+      filter: saturate(80%) grayscale(20%);
+    }
+    .cover2 {
+      background-color: #2980b9;
+      box-shadow: 0 0 12px 1px gray;
+      filter: saturate(80%) grayscale(20%);
+    }
+    .cover3 {
+      background-color: #c0392b;
+      box-shadow: 0 0 12px 1px gray;
+      filter: saturate(80%) grayscale(20%);
+    }
+    .outer {
+      display: flex;
+      flex-wrap: wrap;
+      // justify-content: space-evenly;
+      align-content: space-between;
+
+      .garbage1 {
+        width: 35%;
+        height: 230px;
+        border: 2px solid gainsboro;
+        box-sizing: border-box;
+        transition: 0.6s;
+        margin: 30px -11% -5px 13.5%;
+        padding: 20px;
+        border-radius: 5px;
+        color: #485460;
+
+        .test0 {
+          color: #2ecc71;
+        }
+
+        .test1 {
+          color: #596275;
+        }
+        .test2 {
+          color: #2980b9;
+        }
+        .test3 {
+          color: #c0392b;
+        }
+
+        p:nth-child(1) {
+          font-size: 1.1em;
+          font-weight: bold;
+        }
+
+        p:nth-child(2) {
+          font-size: 1em;
+          // font-weight: bold;
+        }
+      }
+
+      .border0 {
+        border: 2px solid #2ecc71;
+        box-shadow: 0 0 10px 5px gainsboro;
+        transform: translateY(-5px);
+      }
+      .border1 {
+        border: 2px solid #596275;
+        box-shadow: 0 0 10px 5px gainsboro;
+        transform: translateY(-5px);
+      }
+      .border2 {
+        border: 2px solid #2980b9;
+        box-shadow: 0 0 10px 5px gainsboro;
+        transform: translateY(5px);
+      }
+      .border3 {
+        border: 2px solid #c0392b;
+        box-shadow: 0 0 10px 5px gainsboro;
+        transform: translateY(5px);
       }
     }
   }
