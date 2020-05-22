@@ -199,7 +199,17 @@
             </el-form>
           </div>
           <!-- 付款解释 -->
-          <div class="tips"></div>
+          <div class="tips">
+            <p>提示</p>
+            <ul>
+              <li>1.考虑到店铺类型的不同及产生的垃圾量，源分会收取不同的基础服务费用。</li>
+              <li>2.包月更加优惠呦 ! 次月服务费直降<span> 30%</span> !</li>
+              <li>3.每月免费回收的垃圾量由店铺类型和包月时长决定，最多免费回收垃圾高达<span> 300 Kg</span>。</li>
+              <li>
+                <router-link tag="a" to="/Son4ServiceDet">了解详情↩</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
         <public-foot-mini></public-foot-mini>
       </div>

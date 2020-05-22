@@ -33,6 +33,7 @@ import Son2Manager from "../views/merchartContral/son2Manager";
 import Son2_2ManageInner from "../views/merchartContral/son2_2ManageInner";
 import Son2_1ManageOuter from "../views/merchartContral/son2_1ManageOuter";
 import Son3Feedback from "../views/merchartContral/son3Feedback";
+import Son4ServiceDet from "../views/merchartContral/son4ServiceDet";
 
 Vue.use(VueRouter);
 
@@ -75,6 +76,11 @@ const routes = [
     },
   },
   {
+    component: Son4ServiceDet,
+    name: "Son4ServiceDet",
+    path: "/Son4ServiceDet",
+  },
+  {
     component: merchartContral,
     name: "merchartContral",
     path: "/merchartContral",
@@ -112,12 +118,16 @@ const routes = [
           },
         ],
       },
-
       {
         component: Son3Feedback,
         name: "Son3Feedback",
         path: "/merchartContral/Son3Feedback",
       },
+      // {
+      //   component: Son4ServiceDet,
+      //   name: "Son4ServiceDet",
+      //   path: "/merchartContral/Son4ServiceDet",
+      // },
     ],
   },
   {

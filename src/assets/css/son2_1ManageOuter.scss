@@ -28,6 +28,15 @@ $pLineheight: 9px;
         margin-left: 30px;
       }
 
+      // 骨架屏
+      .skeleton {
+        width: 94%;
+        // background-color: pink;
+        min-height: 100px;
+
+        margin: 0px auto;
+      }
+
       .storeDiv {
         display: flex;
         justify-content: space-evenly;

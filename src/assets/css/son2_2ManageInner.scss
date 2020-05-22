@@ -238,7 +238,7 @@ $pLeft: 30px;
 
     .custom {
       width: 100%;
-      height: 370px;
+      height: 530px;
       // background-color: gray;
 
       .customInfo {
@@ -262,6 +262,36 @@ $pLeft: 30px;
       .next {
         width: 90%;
         padding: 0 0 0 $pLeft;
+      }
+
+      .tips {
+        height: 180px;
+        // border: 1px solid #108ee9;
+        padding-left: $pLeft;
+
+        p:nth-child(1) {
+          font-size: 0.9em;
+          color: gray;
+        }
+
+        p:nth-child(1)::after {
+          content: "*";
+          color: red;
+        }
+
+        ul {
+          list-style: none;
+          font-size: 0.8em;
+          color: gray;
+
+          li {
+            margin: 10px 0 ;
+
+            span {
+              color: red;
+            }
+          }
+        }
       }
     }
 

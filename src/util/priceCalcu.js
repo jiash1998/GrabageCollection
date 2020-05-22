@@ -38,11 +38,20 @@ function getStoreType(type) {
 }
 
 export function setStorePrice(type, store) {
+  let basePrice = getStoreType(typeIn);
   let typeIn = type;
   let storeIn = store;
   let dateLen = storeIn.cycleDate.length;
   let timesLen = storeIn.cycleTimes.length;
   let month = storeIn.sustainMonth;
-  return (endPrice =
-    getStoreType(typeIn) + dateLen * 10 + timesLen * 15 + month * 100);
+  if (month > 1) {
+    return (endPrice =
+      basePrice +
+      dateLen * 10 +
+      timesLen * 15 +
+      basePrice * (1 + (month - 1) * 0.7));
+  } else {
+    return (endPrice =
+      basePrice + dateLen * 10 + timesLen * 15 + month * basePrice);
+  }
 }

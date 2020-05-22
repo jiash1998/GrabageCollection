@@ -1,0 +1,24 @@
+#serviceDet {
+  min-height: 100vh;
+  background-color: #f3f5f6;
+  margin-top: 55px;
+
+  display: flex;
+  justify-content: center;
+
+}
+
+#serviceDet .body {
+  width: 66%;
+  height: 1000px;
+  margin: 30px 0 50px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.body .title {
+    h3{
+        margin: 0;
+        padding: 0;
+    }
+}

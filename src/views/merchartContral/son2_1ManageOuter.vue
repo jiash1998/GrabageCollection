@@ -5,7 +5,11 @@
       <div class="body">
         <div class="viewDiv">
           <p id="p1">我的店铺</p>
-          <div class="storeDiv">
+          <!-- 骨架屏 -->
+          <div class="skeleton" v-if="skl == true">
+            <skeleton-screen></skeleton-screen>
+          </div>
+          <div class="storeDiv" v-else>
             <div class="store" @click="choose(index)" v-for="(item,index) in custom" :key="index">
               <div class="storeImg">
                 <img :src="item.url" />
@@ -19,7 +23,6 @@
                 </p>
               </div>
             </div>
-            <!-- 为了奇数块时，单个能左对齐 -->
             <div class="fillDiv"></div>
           </div>
           <!-- <div class="tip">暂无店铺</div> -->
@@ -115,16 +118,20 @@
 <script>
 import publicFootMini from "../../components/publicFootMini.vue";
 import getAllCustomApi from "../../api/getRequest.js";
+import SkeletonScreen from "../../components/skeletonScreen.vue";
 
 export default {
   name: "son2Test",
   components: {
-    publicFootMini
+    publicFootMini,
+    SkeletonScreen
   },
   data() {
     return {
       //定制表
       custom: [],
+      //骨架屏
+      skl: true,
       //全部帐单,未付款帐单，已付款帐单
       trade: [],
       tradeAll: [],
@@ -182,6 +189,8 @@ export default {
               this.tradeYes.push(i);
             }
           }
+          console.log("len", this.custom.length);
+          this.custom.length > 0 ? (this.skl = !this.skl) : this.skl;
         })
         .catch(err => {
           console.log(err);
