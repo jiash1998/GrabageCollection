@@ -3,7 +3,7 @@
     <!-- :xs="24" :sm="24" :md="24" :lg="24" :xl="24" -->
     <div class="head" id="head" :class="{'headFixed':headFix}">
       <div class="logo">
-        <router-link to="/mainI">
+        <router-link to="/main">
           <img src="./assets/img/logo2.png" />
         </router-link>
       </div>

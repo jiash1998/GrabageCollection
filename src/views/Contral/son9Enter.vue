@@ -155,6 +155,9 @@ export default {
         {
           label: "宾馆"
         },
+          {
+          label: "超市"
+        },
         {
           label: "其他类型"
         }

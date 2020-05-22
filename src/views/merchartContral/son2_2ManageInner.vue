@@ -2,7 +2,7 @@
   <div id="son2_2Manager">
     <div class="body">
       <div class="left">
-        <router-link to="/merchartContral/Son2Manager/Son2Test" tag="div">
+        <router-link to="/merchartContral/Son2Manager/Son2_1ManageOuter" tag="div">
           <div class="left_head">
             <p>
               <i class="el-icon-arrow-left"></i>返回店铺列表
@@ -198,6 +198,8 @@
               </el-form-item>
             </el-form>
           </div>
+          <!-- 付款解释 -->
+          <div class="tips"></div>
         </div>
         <public-foot-mini></public-foot-mini>
       </div>
@@ -210,6 +212,7 @@ import publicFootMini from "../../components/publicFootMini.vue";
 import payAliApi from "../../api/postRequest.js";
 import updateCustomByIdApi from "../../api/postRequest.js";
 import delCustomBySocialCodeApi from "../../api/postRequest.js";
+import * as calcu from "../../util/priceCalcu.js";
 
 export default {
   name: "son2_2anager",
@@ -264,7 +267,7 @@ export default {
         payType: "",
         sustainMonth: "",
         id: "",
-        money: 500,
+        money: 150,
         username: "",
         isCus: "待付款"
       },
@@ -308,27 +311,28 @@ export default {
     getInfo() {
       console.log(JSON.parse(sessionStorage.customObj));
       this.storeInfo = JSON.parse(sessionStorage.customObj);
+
       this.editorCus = this.storeInfo;
       for (const i in this.editorCus) {
         switch (this.editorCus[i]) {
           case "已付款":
             this.developStatus = "已完成";
             this.steps = 3;
-            console.log("已付款");
+            // console.log("已付款");
             this.isPri = !this.isPri;
             break;
           case "待付款":
             this.isNone = !this.isNone;
-            console.log("待付款");
+            // console.log("待付款");
             this.steps = 2;
             break;
           case "未定制":
-            console.log("未定制");
+            // console.log("未定制");
             this.steps = 1;
             this.customCha = true;
             break;
           default:
-            console.log("别看了");
+            // console.log("别看了");
             // this.steps = 1;
             break;
         }
@@ -354,7 +358,9 @@ export default {
                   type: "success",
                   message: "删除成功!"
                 });
-                this.$router.push("/merchartContral/Son2Manager/Son2Test");
+                this.$router.push(
+                  "/merchartContral/Son2Manager/Son2_1ManageOuter"
+                );
                 setTimeout(() => {
                   this.$router.go(0);
                 }, 500);
@@ -375,26 +381,28 @@ export default {
     changeDiv() {
       this.change = !this.change;
     },
-    //前往付款
+    //待付款的第二次付款
     pay() {
       var data = { money: 500, id: JSON.parse(sessionStorage.customObj).id };
-      payAliApi
-        .payAli(data)
-        .then(res => {
-          let routerData = this.$router.resolve({
-            path: "/Pay",
-            query: { htmls: res.data }
-          });
-          this.htmls = res.data;
-          window.open(routerData.href, "_ blank");
-          const div = document.createElement("div");
-          div.innerHTML = this.htmls;
-          document.body.appendChild(div);
-          document.forms[0].submit();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      console.log(data);
+
+      // payAliApi
+      //   .payAli(data)
+      //   .then(res => {
+      //     let routerData = this.$router.resolve({
+      //       path: "/Pay",
+      //       query: { htmls: res.data }
+      //     });
+      //     this.htmls = res.data;
+      //     window.open(routerData.href, "_ blank");
+      //     const div = document.createElement("div");
+      //     div.innerHTML = this.htmls;
+      //     document.body.appendChild(div);
+      //     document.forms[0].submit();
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     },
     //修改定制
     submitForm(formName) {
@@ -432,8 +440,9 @@ export default {
         if (val) {
           //将附属信息加进去
           this.garbageCycle.id = JSON.parse(sessionStorage.customObj).id;
-          var data = this.garbageCycle;
-          // console.log(data);
+          let data = this.garbageCycle;
+          data.money = calcu.setStorePrice(this.storeInfo.type, data);
+          console.log(data);
           payAliApi
             .payAli(data)
             .then(res => {
@@ -482,5 +491,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/css/son2_2Manager.scss";
+@import "../../assets/css/son2_2ManageInner.scss";
 </style>

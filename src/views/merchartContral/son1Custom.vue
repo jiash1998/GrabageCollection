@@ -61,6 +61,7 @@
                 <el-radio label="理发店" border>理发店</el-radio>
                 <el-radio label="药店" border>药店</el-radio>
                 <el-radio label="宾馆" border>宾馆</el-radio>
+                <el-radio label="超市" border>超市</el-radio>
                 <el-radio label="其他类型" border>其他类型</el-radio>
               </el-radio-group>
             </el-form-item>
@@ -295,10 +296,12 @@ export default {
           addCustomApi.addCustom(data).then(res => {
             console.log(res.data);
             this.$message({
-              message: "商铺录入成功，请前往定制",
+              message: "商铺录入成功",
               type: "success",
-              duration: 2500
+              duration: 1500
             });
+            // this.$router.push("/merchartContral/Son2Manager");
+            // this.$router.go(0);
           });
         } else {
           this.$message({

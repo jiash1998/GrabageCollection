@@ -3,7 +3,7 @@
     <div class="main_all">
       <div class="main_head">
         <div class="head_intro">
-          <span>让垃圾的回收分类更轻松</span>
+          <span>让生活垃圾的回收更轻松</span>
           <p>ResC是全新一代的，为客户生活环境需求量身定制的垃圾回收方案，致力于提供一套合适的、便利的回收系统。</p>
           <p></p>
           <router-link to="/merchartContral/Son1Custom" tag="div">

@@ -3,7 +3,7 @@ import { Message } from "element-ui";
 
 const service = axios.create({
   baseURL: "/",
-  timeout: 5000 // 默认请求超时时间
+  timeout: 5000, // 默认请求超时时间
 });
 
 /**
@@ -13,18 +13,18 @@ const service = axios.create({
  * 对请求参数进行统一加密
  */
 service.interceptors.request.use(
-  config => {
+  (config) => {
     //在发送请求之前做点什么
     // console.log(config);
 
     return config;
   },
-  error => {
+  (error) => {
     //请求异常
     // 请求报错的情况下, http请求异常，不是数据异常，是系统异常
     Message({
       type: "error",
-      message: "系统异常，请及时联系管理员"
+      message: "系统异常，请及时联系管理员",
     });
     return Promise.reject(error);
   }
@@ -37,7 +37,7 @@ service.interceptors.request.use(
  * 如：对返回结果进行解密
  */
 service.interceptors.response.use(
-  response => {
+  (response) => {
     if (response.status === 200) {
       //status是两百的情况下，表示接口正常通信，直接返回res
       return response;
@@ -45,16 +45,17 @@ service.interceptors.response.use(
       //status不是两百的情况下，表示接口异常
       Message({
         type: "error",
-        message: response.status + "error"
+        message: response.status + "error",
       });
     }
   },
-  error => {
+  (error) => {
     // 请求报错的情况下, http请求异常，不是数据异常，是系统异常
     Message({
       type: "error",
-      message: "响应出错1"
+      message: "响应出错1",
     });
+    return Promise.reject(error);
   }
 );
 

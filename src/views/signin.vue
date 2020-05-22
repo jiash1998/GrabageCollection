@@ -112,7 +112,7 @@ export default {
               //持久化
               // localStorage.setItem("userName", res.data.username);
               // localStorage.setItem("identity", res.data.identity);
-              vm.$router.push("/mainI");
+              vm.$router.push("/main");
               //路由刷新，搭载数据
               vm.$router.go(0);
             });

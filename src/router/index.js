@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import MainI from "../views/main";
+import Main from "../views/main";
 import Signin from "../views/signin";
 import Register from "../views/register";
 import Notice from "../views/notice";
@@ -30,8 +30,8 @@ import Son10Detail from "../views/Contral/son10Detail";
 import merchartContral from "../views/merchartContral";
 import Son1Custom from "../views/merchartContral/son1Custom";
 import Son2Manager from "../views/merchartContral/son2Manager";
-import Son2_2Manager from "../views/merchartContral/son2_2Manager";
-import Son2Test from "../views/merchartContral/son2Test";
+import Son2_2ManageInner from "../views/merchartContral/son2_2ManageInner";
+import Son2_1ManageOuter from "../views/merchartContral/son2_1ManageOuter";
 import Son3Feedback from "../views/merchartContral/son3Feedback";
 
 Vue.use(VueRouter);
@@ -39,40 +39,40 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "",
-    redirect: "/mainI"
+    redirect: "/main",
   },
   {
-    component: MainI,
-    name: "mainI",
-    path: "/mainI"
+    component: Main,
+    name: "main",
+    path: "/main",
   },
   {
     component: Notice,
     name: "Notice",
-    path: "/Notice"
+    path: "/Notice",
   },
   {
     component: Pay,
     name: "Pay",
-    path: "/Pay"
+    path: "/Pay",
   },
   {
     component: PaySuccess,
     name: "PaySuccess",
-    path: "/PaySuccess"
+    path: "/PaySuccess",
   },
   {
     component: Custom,
     name: "Custom",
-    path: "/Custom"
+    path: "/Custom",
   },
   {
     component: Account,
     name: "Account",
     path: "/Account",
     meta: {
-      requireAuth: true
-    }
+      requireAuth: true,
+    },
   },
   {
     component: merchartContral,
@@ -81,15 +81,15 @@ const routes = [
     children: [
       {
         path: "",
-        redirect: "/merchartContral/Son1Custom"
+        redirect: "/merchartContral/Son1Custom",
       },
       {
         component: Son1Custom,
         name: "Son1Custom",
         path: "/merchartContral/Son1Custom",
         meta: {
-          requireAuth: true
-        }
+          requireAuth: true,
+        },
       },
       {
         component: Son2Manager,
@@ -98,123 +98,123 @@ const routes = [
         children: [
           {
             path: "",
-            redirect: "/merchartContral/Son2Manager/Son2Test"
+            redirect: "/merchartContral/Son2Manager/Son2_1ManageOuter",
           },
           {
-            component: Son2_2Manager,
-            name: "Son2_2Manager",
-            path: "/merchartContral/Son2Manager/Son2_2Manager"
+            component: Son2_2ManageInner,
+            name: "Son2_2ManageInner",
+            path: "/merchartContral/Son2Manager/Son2_2ManageInner",
           },
           {
-            component: Son2Test,
-            name: "Son2Test",
-            path: "/merchartContral/Son2Manager/Son2Test"
-          }
-        ]
+            component: Son2_1ManageOuter,
+            name: "Son2_1ManageOuter",
+            path: "/merchartContral/Son2Manager/Son2_1ManageOuter",
+          },
+        ],
       },
 
       {
         component: Son3Feedback,
         name: "Son3Feedback",
-        path: "/merchartContral/Son3Feedback"
-      }
-    ]
+        path: "/merchartContral/Son3Feedback",
+      },
+    ],
   },
   {
     component: ContralNew,
     name: "ContralNew",
     path: "/ContralNew",
     meta: {
-      requireAuth: true
+      requireAuth: true,
     },
     children: [
       {
         path: "",
         redirect: "/ContralNew/Son1ManageNew",
         meta: {
-          requireAuth: true
-        }
+          requireAuth: true,
+        },
       },
       {
         component: Son1ManageNew,
         name: "Son1ManageNew",
         path: "/ContralNew/Son1ManageNew",
         meta: {
-          requireAuth: true
-        }
+          requireAuth: true,
+        },
       },
       {
         component: Son2CarMap,
         name: "Son2CarMap",
-        path: "/ContralNew/Son2CarMap"
+        path: "/ContralNew/Son2CarMap",
       },
       {
         component: Son2_1Driver,
         name: "Son2_1Driver",
-        path: "/ContralNew/Son2_1Driver"
+        path: "/ContralNew/Son2_1Driver",
       },
       {
         component: Son2_2DriReg,
         name: "Son2_2DriReg",
-        path: "/ContralNew/Son2_2DriReg"
+        path: "/ContralNew/Son2_2DriReg",
       },
       {
         component: Son3MerchartMapNew,
         name: "Son3MerchartMapNew",
-        path: "/ContralNew/Son3MerchartMapNew"
+        path: "/ContralNew/Son3MerchartMapNew",
       },
       {
         component: Son5Record,
         name: "Son5Record",
-        path: "/ContralNew/Son5Record"
+        path: "/ContralNew/Son5Record",
       },
       {
         component: Son6Notice,
         name: "Son6Notice",
-        path: "/ContralNew/Son6Notice"
+        path: "/ContralNew/Son6Notice",
       },
       {
         component: Son7Feedback,
         name: "Son7Feedback",
-        path: "/ContralNew/Son7Feedback"
+        path: "/ContralNew/Son7Feedback",
       },
       {
         component: Son7_1Replay,
         name: "Son7_1Replay",
-        path: "/ContralNew/Son7_1Replay"
+        path: "/ContralNew/Son7_1Replay",
       },
       {
         component: Son4Custom,
         name: "Son4Custom",
-        path: "/ContralNew/Son4Custom"
+        path: "/ContralNew/Son4Custom",
       },
       {
         component: Son8Echarts,
         name: "Son8Echarts",
-        path: "/ContralNew/Son8Echarts"
+        path: "/ContralNew/Son8Echarts",
       },
       {
         component: Son9Enter,
         name: "Son9Enter",
-        path: "/ContralNew/Son9Enter"
+        path: "/ContralNew/Son9Enter",
       },
       {
         component: Son10Detail,
         name: "Son10Detail",
-        path: "/ContralNew/Son10Detail"
-      }
-    ]
+        path: "/ContralNew/Son10Detail",
+      },
+    ],
   },
   {
     component: Signin,
     name: "Signin",
-    path: "/signin"
+    path: "/signin",
   },
   {
     component: Register,
     name: "Register",
-    path: "/register"
-  }
+    path: "/register",
+  },
 ];
 
 const router = new VueRouter({
