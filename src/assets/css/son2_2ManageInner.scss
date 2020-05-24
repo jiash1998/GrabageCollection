@@ -181,7 +181,7 @@ $pLeft: 30px;
         // background-color: gray;
         #p1 {
           display: inline-block;
-          padding: 20px 0 10px $pLeft;
+          padding: 20px 0 10px 0;
         }
 
         span {
@@ -238,7 +238,7 @@ $pLeft: 30px;
 
     .custom {
       width: 100%;
-      height: 530px;
+      height: 560px;
       // background-color: gray;
 
       .customInfo {
@@ -264,6 +264,22 @@ $pLeft: 30px;
         padding: 0 0 0 $pLeft;
       }
 
+      .priceP {
+        color: gray;
+        font-size: 0.9em;
+        margin: 20px $pLeft 30px;
+
+        span:nth-child(1) {
+          color: #3498db;
+          font-size: 1em;
+        }
+
+        span:nth-child(2) {
+          color: #3498db;
+          font-size: 1.8em;
+        }
+      }
+
       .tips {
         height: 180px;
         // border: 1px solid #108ee9;
@@ -285,7 +301,7 @@ $pLeft: 30px;
           color: gray;
 
           li {
-            margin: 10px 0 ;
+            margin: 10px 0;
 
             span {
               color: red;

@@ -184,7 +184,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-form-item label="服务包月">
-                <el-input-number v-model="garbageCycle.sustainMonth" size="mini" :min="1" :max="12"></el-input-number>
+                <el-input-number v-model="garbageCycle.sustainMonth" size="mini" :min="0" :max="12"></el-input-number>
               </el-form-item>
               <el-form-item label="支付方式" prop="payType">
                 <el-radio-group v-model="garbageCycle.payType">
@@ -198,13 +198,25 @@
               </el-form-item>
             </el-form>
           </div>
+          <!-- 价格 -->
+          <p class="priceP" v-if="this.storeInfo.isCus === '已付款'?false:true">
+            价格：
+            <span>￥</span>
+            <span>{{price}}</span>
+          </p>
           <!-- 付款解释 -->
           <div class="tips">
             <p>提示</p>
             <ul>
               <li>1.考虑到店铺类型的不同及产生的垃圾量，源分会收取不同的基础服务费用。</li>
-              <li>2.包月更加优惠呦 ! 次月服务费直降<span> 30%</span> !</li>
-              <li>3.每月免费回收的垃圾量由店铺类型和包月时长决定，最多免费回收垃圾高达<span> 300 Kg</span>。</li>
+              <li>
+                2.包月更加优惠呦 ! 次月服务费直降
+                <span>30%</span> !
+              </li>
+              <li>
+                3.每月免费回收的垃圾量由店铺类型和包月时长决定，最多免费回收垃圾高达
+                <span>300 Kg</span>。
+              </li>
               <li>
                 <router-link tag="a" to="/Son4ServiceDet">了解详情↩</router-link>
               </li>
@@ -291,6 +303,8 @@ export default {
       isNone: true,
       //付款和删除状态
       isPri: false,
+      //价钱
+      price: 0,
       //step状态
       steps: 1,
       //修改
@@ -316,10 +330,43 @@ export default {
   mounted() {
     this.getInfo();
   },
+  watch: {
+    price: {
+      handler() {
+        console.log("change");
+      }
+    },
+    "garbageCycle.cycleDate": {
+      handler(newVal, oldVal) {
+        if (newVal.length > oldVal.length) {
+          this.price += 10 * (newVal.length - oldVal.length);
+        } else {
+          this.price -= 10 * (oldVal.length - newVal.length);
+        }
+      },
+      //是否首次执行
+      immediate: false
+    },
+    "garbageCycle.cycleTimes": {
+      handler(newVal, oldVal) {
+        if (newVal.length > oldVal.length) {
+          this.price += 15 * (newVal.length - oldVal.length);
+        } else {
+          this.price -= 15 * (oldVal.length - newVal.length);
+        }
+      }
+    },
+    "garbageCycle.sustainMonth": {
+      handler(newVal, oldVal) {
+        console.log("old", oldVal, "new", newVal);
+        this.tempPrice(newVal, oldVal);
+      }
+    }
+  },
   methods: {
     //获取对应商铺信息
     getInfo() {
-      console.log(JSON.parse(sessionStorage.customObj));
+      // console.log(JSON.parse(sessionStorage.customObj));
       this.storeInfo = JSON.parse(sessionStorage.customObj);
 
       this.editorCus = this.storeInfo;
@@ -390,6 +437,30 @@ export default {
     //店铺div改变状态
     changeDiv() {
       this.change = !this.change;
+    },
+    //计算价格
+    tempPrice(newVal, oldVal) {
+      //+
+      if (newVal > oldVal) {
+        if (newVal === 1) {
+          this.price += 150 * newVal;
+        } else if (newVal > 1 && newVal < 12) {
+          this.price += 130 * (newVal - oldVal);
+        } else if (newVal === 12) {
+          this.price = 105 * 12;
+        } else {
+          this.price = 0;
+        }
+      } else {
+        //-
+        if (newVal === 1) {
+          this.price = 150;
+        } else if (newVal > 1 && newVal < 12) {
+          this.price -= 130 * (oldVal - newVal);
+        } else {
+          this.price = 0;
+        }
+      }
     },
     //待付款的第二次付款
     pay() {
