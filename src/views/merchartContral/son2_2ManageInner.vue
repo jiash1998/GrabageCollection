@@ -359,7 +359,12 @@ export default {
     "garbageCycle.sustainMonth": {
       handler(newVal, oldVal) {
         console.log("old", oldVal, "new", newVal);
-        this.tempPrice(newVal, oldVal);
+        //1
+        this.tempPrice1(newVal, oldVal, this.price);
+        // 2-11
+        // this.tempPrice2(newVal, oldVal);
+        // //12
+        // this.tempPrice3(newVal, oldVal);
       }
     }
   },
@@ -411,16 +416,16 @@ export default {
             .then(res => {
               console.log(res);
               if (res.data.code == 200 && res.data.msg == "删除成功") {
-                this.$message({
-                  type: "success",
-                  message: "删除成功!"
-                });
                 this.$router.push(
                   "/merchartContral/Son2Manager/Son2_1ManageOuter"
                 );
-                setTimeout(() => {
-                  this.$router.go(0);
-                }, 500);
+                this.$router.go(0);
+                // setTimeout(() => {
+                //   this.$message({
+                //     type: "success",
+                //     message: "删除成功!"
+                //   });
+                // }, 500);
               }
             })
             .catch(err => {
@@ -439,28 +444,34 @@ export default {
       this.change = !this.change;
     },
     //计算价格
-    tempPrice(newVal, oldVal) {
+    tempPrice1(newVal, oldVal, price) {
+      let t1 = price,
+        t2 = price;
       //+
       if (newVal > oldVal) {
         if (newVal === 1) {
-          this.price += 150 * newVal;
+          t1 = 150 * newVal;
         } else if (newVal > 1 && newVal < 12) {
-          this.price += 130 * (newVal - oldVal);
+          t1 = 150 * newVal * 0.9;
         } else if (newVal === 12) {
-          this.price = 105 * 12;
+          t1 = 150 * newVal * 0.7;
         } else {
           this.price = 0;
         }
       } else {
         //-
-        if (newVal === 1) {
-          this.price = 150;
+        if (Val === 1) {
+          t2 = 150;
         } else if (newVal > 1 && newVal < 12) {
-          this.price -= 130 * (oldVal - newVal);
-        } else {
+          t2 = 150 * (oldVal - newVal) * 0.9;
+        } else if(oldVal === 12){
+          this.price = 0;
+        }else {
           this.price = 0;
         }
       }
+      console.log(t1, t2);
+      this.price = this.price + t1 - t2;
     },
     //待付款的第二次付款
     pay() {

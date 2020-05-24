@@ -7,12 +7,6 @@
   justify-content: center;
 }
 
-h3,
-h4 {
-  margin: 0;
-  padding: 0;
-}
-
 #serviceDet .body {
   width: 66%;
   height: 980px;
@@ -24,35 +18,42 @@ h4 {
 .body .title {
   text-align: center;
   margin: 10px 0 0;
+
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
 }
 
-.content {
+.content_S {
   width: 85%;
   margin: 0 auto;
   color: gray;
 }
 
-.content h4 {
+.content_S h4 {
+  margin: 0;
+  padding: 0;
   display: inline-block;
   margin: 20px 0 0;
   padding-bottom: 5px;
   border-bottom: 3px solid #67c23a;
 }
 
-.content p {
+.content_S p {
   font-size: 0.9em;
   // text-indent: 2em;
 }
 
-.content p span {
+.content_S p span {
   color: red;
 }
 
-.content .el-table {
+.content_S .el-table {
   margin: 0 auto;
 }
 
-.content .con4{
+.content_S .con4 {
   .el-button {
     margin: 50px 0 0;
   }

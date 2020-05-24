@@ -92,14 +92,14 @@ export default {
     #title1 {
       ul {
         margin: 0;
-        margin-left: -26%;
+        // margin-left: -26%;
       }
     }
     #title2 {
       margin-left: 20%;
       ul {
         margin: 0;
-        margin-left: -32%;
+        // margin-left: -32%;
       }
     }
   }

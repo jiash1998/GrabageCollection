@@ -4,7 +4,7 @@
       <div class="title">
         <h3>源分回收服务收费细则</h3>
       </div>
-      <div class="content">
+      <div class="content_S">
         <div class="con1">
           <h4>1. 基础服务费</h4>
           <p>店铺类型对应的基础服务费用如下表。</p>
@@ -99,6 +99,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../assets/css/son4ServiceDet.scss";
 </style>

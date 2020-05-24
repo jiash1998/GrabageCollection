@@ -23,12 +23,14 @@ $AllWidth: 100%;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      span {
+
+      .intro_span {
         display: inline-block;
         width: 8em;
         font-weight: bold;
         font-size: 2.5em;
       }
+      
       p {
         font-size: 0.9em;
         width: 27em;
@@ -149,7 +151,7 @@ $AllWidth: 100%;
       font-size: 1.5em;
       // background-color: pink;
       margin: 20px 0 30px 5%;
-      transition: all .7s;
+      transition: all 0.7s;
 
       &-border {
         border-bottom: 4px solid #67c23a;

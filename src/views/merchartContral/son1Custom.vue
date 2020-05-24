@@ -263,7 +263,7 @@ export default {
           this.$message({
             message: "图片上传成功",
             type: "success",
-            duration: 2000
+            duration: 1500
           });
           this.customUrl = response.data.url;
           uri = response.data.url;
@@ -277,7 +277,7 @@ export default {
           this.$message({
             message: "图片上传失败",
             type: "error",
-            duration: 2500
+            duration: 2000
           });
         });
     },
@@ -296,12 +296,11 @@ export default {
           addCustomApi.addCustom(data).then(res => {
             console.log(res.data);
             this.$message({
-              message: "商铺录入成功",
+              message: "商铺录入成功,可继续定制",
               type: "success",
-              duration: 1500
+              duration: 1800
             });
-            // this.$router.push("/merchartContral/Son2Manager");
-            // this.$router.go(0);
+            this.$router.push("/merchartContral/Son2Manager");
           });
         } else {
           this.$message({
