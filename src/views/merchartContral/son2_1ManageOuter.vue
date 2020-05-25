@@ -9,6 +9,7 @@
           <div class="skeleton" v-if="skl == true">
             <skeleton-screen></skeleton-screen>
           </div>
+          <!-- 店铺展示 -->
           <div class="storeDiv" v-else>
             <div class="store" @click="choose(index)" v-for="(item,index) in custom" :key="index">
               <div class="storeImg">
@@ -64,7 +65,7 @@
               <el-form-item label="状态:">
                 <el-select v-model="querySettle.isCus" @change="manageTrade" placeholder="选择状态">
                   <el-option label="全部" value="all"></el-option>
-                  <el-option label="待付款" value="no"></el-option>
+                  <!-- <el-option label="待付款" value="no"></el-option> -->
                   <el-option label="已付款" value="yes"></el-option>
                 </el-select>
               </el-form-item>
@@ -94,7 +95,7 @@
                       <span>{{ props.row.tradeTime }}</span>
                     </el-form-item>
                     <el-form-item label="应付金额">
-                      <span>500</span>
+                      <span>{{ props.row.money }}</span>
                     </el-form-item>
                     <el-form-item label="实付金额">
                       <span>{{props.row.money}}</span>
@@ -104,7 +105,7 @@
               </el-table-column>
               <el-table-column label="店铺" prop="name" width="220"></el-table-column>
               <el-table-column label="负责人" prop="header"></el-table-column>
-              <el-table-column label="应付金额" prop>500</el-table-column>
+              <el-table-column label="应付金额" prop="money"></el-table-column>
               <el-table-column label="实付金额" prop="money"></el-table-column>
             </el-table>
           </div>
@@ -172,6 +173,8 @@ export default {
               i.isCus != "未定制"
             ) {
               this.trade.push(i);
+              console.log(this.trade);
+              
               this.tradeAll.push(i);
             }
             //获取未付款的订单

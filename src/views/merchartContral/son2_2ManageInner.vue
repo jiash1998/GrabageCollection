@@ -31,13 +31,6 @@
           <div class="head_p">
             <span>概览</span>
           </div>
-          <div class="head_step">
-            <el-steps :space="200" :active="steps" align-center>
-              <el-step title="未定制"></el-step>
-              <el-step title="待付款"></el-step>
-              <el-step title="定制完成"></el-step>
-            </el-steps>
-          </div>
         </div>
         <div class="right_del">
           <div class="del">
@@ -48,7 +41,7 @@
             <p style="color:gray;">请及时完成店铺定制计划，提交后次日即可实行</p>
             <div id="btnDiv">
               <div id="priDiv" :class="{priStatus:isPri}">
-                <el-button type="primary" :class="{displayChange:isNone}" plain @click="pay">前往付款</el-button>
+                <!-- <el-button type="primary" :class="{displayChange:isNone}" plain @click="pay">前往付款</el-button> -->
                 <el-button
                   type="primary"
                   :class="{displayChange:!isNone}"
@@ -175,16 +168,26 @@
             <el-form :model="garbageCycle" :rules="rules" ref="garbageCycle">
               <el-form-item label="回收时间" prop="cycleDate">
                 <el-checkbox-group v-model="garbageCycle.cycleDate">
-                  <el-checkbox v-for="(item,index) in date" :key="index" :label="item">{{item}}</el-checkbox>
+                  <el-checkbox
+                    v-for="(item,index) in date"
+                    :checked="index == 0?true:false"
+                    :key="index"
+                    :label="item"
+                  >{{item}}</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-form-item label="回收频率" prop="cycleTimes">
                 <el-checkbox-group v-model="garbageCycle.cycleTimes">
-                  <el-checkbox v-for="(item,index) in times" :key="index" :label="item">{{item}}</el-checkbox>
+                  <el-checkbox
+                    v-for="(item,index) in times"
+                    :checked="index == 0?true:false"
+                    :key="index"
+                    :label="item"
+                  >{{item}}</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-form-item label="服务包月">
-                <el-input-number v-model="garbageCycle.sustainMonth" size="mini" :min="0" :max="12"></el-input-number>
+                <el-input-number v-model="garbageCycle.sustainMonth" size="mini" :min="1" :max="12"></el-input-number>
               </el-form-item>
               <el-form-item label="支付方式" prop="payType">
                 <el-radio-group v-model="garbageCycle.payType">
@@ -210,7 +213,7 @@
             <ul>
               <li>1.考虑到店铺类型的不同及产生的垃圾量，源分会收取不同的基础服务费用。</li>
               <li>
-                2.包月更加优惠呦 ! 次月服务费直降
+                2.包年更加优惠呦 ! 服务费直降
                 <span>30%</span> !
               </li>
               <li>
@@ -333,45 +336,30 @@ export default {
   watch: {
     price: {
       handler() {
-        console.log("change");
+        // console.log("change");
       }
     },
-    "garbageCycle.cycleDate": {
-      handler(newVal, oldVal) {
-        if (newVal.length > oldVal.length) {
-          this.price += 10 * (newVal.length - oldVal.length);
+    garbageCycle: {
+      handler(val) {
+        // console.log(val);
+        if (val.cycleDate.length != 0 && val.cycleTimes.length != 0) {
+          this.price = calcu.setStorePrice(
+            this.storeInfo.type,
+            val.cycleDate,
+            val.cycleTimes,
+            val.sustainMonth
+          );
         } else {
-          this.price -= 10 * (oldVal.length - newVal.length);
+          this.price = "正在计算中,请选择完整！";
         }
       },
-      //是否首次执行
-      immediate: false
-    },
-    "garbageCycle.cycleTimes": {
-      handler(newVal, oldVal) {
-        if (newVal.length > oldVal.length) {
-          this.price += 15 * (newVal.length - oldVal.length);
-        } else {
-          this.price -= 15 * (oldVal.length - newVal.length);
-        }
-      }
-    },
-    "garbageCycle.sustainMonth": {
-      handler(newVal, oldVal) {
-        console.log("old", oldVal, "new", newVal);
-        //1
-        this.tempPrice1(newVal, oldVal, this.price);
-        // 2-11
-        // this.tempPrice2(newVal, oldVal);
-        // //12
-        // this.tempPrice3(newVal, oldVal);
-      }
+      deep: true
     }
   },
   methods: {
     //获取对应商铺信息
     getInfo() {
-      // console.log(JSON.parse(sessionStorage.customObj));
+      console.log(JSON.parse(sessionStorage.customObj));
       this.storeInfo = JSON.parse(sessionStorage.customObj);
 
       this.editorCus = this.storeInfo;
@@ -379,23 +367,14 @@ export default {
         switch (this.editorCus[i]) {
           case "已付款":
             this.developStatus = "已完成";
-            this.steps = 3;
             // console.log("已付款");
             this.isPri = !this.isPri;
             break;
-          case "待付款":
-            this.isNone = !this.isNone;
-            // console.log("待付款");
-            this.steps = 2;
-            break;
           case "未定制":
-            // console.log("未定制");
-            this.steps = 1;
+            // console.log("未定制");;
             this.customCha = true;
             break;
           default:
-            // console.log("别看了");
-            // this.steps = 1;
             break;
         }
       }
@@ -443,39 +422,9 @@ export default {
     changeDiv() {
       this.change = !this.change;
     },
-    //计算价格
-    tempPrice1(newVal, oldVal, price) {
-      let t1 = price,
-        t2 = price;
-      //+
-      if (newVal > oldVal) {
-        if (newVal === 1) {
-          t1 = 150 * newVal;
-        } else if (newVal > 1 && newVal < 12) {
-          t1 = 150 * newVal * 0.9;
-        } else if (newVal === 12) {
-          t1 = 150 * newVal * 0.7;
-        } else {
-          this.price = 0;
-        }
-      } else {
-        //-
-        if (Val === 1) {
-          t2 = 150;
-        } else if (newVal > 1 && newVal < 12) {
-          t2 = 150 * (oldVal - newVal) * 0.9;
-        } else if(oldVal === 12){
-          this.price = 0;
-        }else {
-          this.price = 0;
-        }
-      }
-      console.log(t1, t2);
-      this.price = this.price + t1 - t2;
-    },
     //待付款的第二次付款
     pay() {
-      var data = { money: 500, id: JSON.parse(sessionStorage.customObj).id };
+      var data = { money: this.price, id: JSON.parse(sessionStorage.customObj).id };
       console.log(data);
 
       // payAliApi
@@ -533,15 +482,19 @@ export default {
           //将附属信息加进去
           this.garbageCycle.id = JSON.parse(sessionStorage.customObj).id;
           let data = this.garbageCycle;
-          data.money = calcu.setStorePrice(this.storeInfo.type, data);
+          data.money = calcu.setStorePrice(
+            this.storeInfo.type,
+            data.cycleDate,
+            data.cycleTimes,
+            data.sustainMonth
+          );
           console.log(data);
+
           payAliApi
             .payAli(data)
             .then(res => {
               console.log(res.data);
               this.steps += 1;
-              // this.isNone = !this.isNone;
-              // localStorage.setItem("btnState", this.isNone);
               this.$message({
                 message: "提交成功",
                 type: "success",

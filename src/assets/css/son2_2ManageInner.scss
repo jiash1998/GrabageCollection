@@ -267,6 +267,8 @@ $pLeft: 30px;
       .priceP {
         color: gray;
         font-size: 0.9em;
+        // background-color: gray;
+        height: 35px;
         margin: 20px $pLeft 30px;
 
         span:nth-child(1) {
@@ -276,7 +278,7 @@ $pLeft: 30px;
 
         span:nth-child(2) {
           color: #3498db;
-          font-size: 1.8em;
+          font-size: 1.6em;
         }
       }
 

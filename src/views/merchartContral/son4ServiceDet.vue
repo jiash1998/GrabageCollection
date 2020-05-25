@@ -25,8 +25,7 @@
         <div class="con3">
           <h4>3. 包月优惠</h4>
           <p>
-            单月服务费 150 元，连续包月服务费尽享
-            <span>85折！</span>选择包年服务，每月服务费直降
+            单月服务费 150 元，选择包年服务，每月服务费直降
             <span>30%</span>哦！
           </p>
           <el-table :data="susMonth" size="small" border>
@@ -84,10 +83,6 @@ export default {
         {
           month: "1个月",
           money: "150"
-        },
-        {
-          month: "2 - 11个月",
-          money: "130"
         },
         {
           month: "全年",

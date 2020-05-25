@@ -11,11 +11,9 @@
           </router-link>
         </div>
         <div class="head_vedio">
-          <video
-            src="../assets/img/garbage.mp4"
-            controls="controls"
-            poster="../assets/img/black2.jpg"
-          ></video>
+          <video poster="../assets/img/black2.jpg" controls>
+            <source src="../assets/img/garbage.mp4" type="video/mp4"/>
+          </video>
         </div>
       </div>
       <div class="main_body1">
@@ -206,7 +204,7 @@ export default {
   },
   created() {
     var i = sessionStorage.getItem("identity");
-    if(i !== "沿街商家"){
+    if (i !== "沿街商家") {
       this.identity = true;
     }
   },

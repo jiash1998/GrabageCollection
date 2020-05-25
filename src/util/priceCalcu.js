@@ -30,6 +30,7 @@ let typeBase = {
 
 function getStoreType(type) {
   let typeIn = type;
+
   return typeBase[
     typeArr.find((i) => {
       return i === typeIn;
@@ -37,21 +38,28 @@ function getStoreType(type) {
   ];
 }
 
-export function setStorePrice(type, store) {
-  let basePrice = getStoreType(typeIn);
-  let typeIn = type;
-  let storeIn = store;
-  let dateLen = storeIn.cycleDate.length;
-  let timesLen = storeIn.cycleTimes.length;
-  let month = storeIn.sustainMonth;
-  if (month > 1) {
-    return (endPrice =
-      basePrice +
-      dateLen * 10 +
-      timesLen * 15 +
-      basePrice * (1 + (month - 1) * 0.7));
+export function setStorePrice(type, Date, times, months) {
+  let basePrice = getStoreType(type);
+  let dateLen = 0,
+    timesLen = 0,
+    month = 0;
+
+  if (Date !== null) {
+    dateLen = Date.length;
+  }
+  if (times !== null) {
+    timesLen = times.length;
+  }
+  if (months !== null) {
+    month = months;
+  }
+
+  console.log(Date, times);
+  console.log(dateLen, timesLen);
+
+  if (month === 12) {
+    return (endPrice = Date * 10 + timesLen * 15 + basePrice * month * 0.7);
   } else {
-    return (endPrice =
-      basePrice + dateLen * 10 + timesLen * 15 + month * basePrice);
+    return (endPrice = dateLen * 10 + timesLen * 15 + month * basePrice);
   }
 }
