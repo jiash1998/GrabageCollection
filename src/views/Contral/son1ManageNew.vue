@@ -9,7 +9,7 @@
           <el-table-column label="联系方式" prop="phone"></el-table-column>
           <el-table-column label="注册店铺" prop="registered.count"></el-table-column>
           <el-table-column label="定制店铺" prop="hasCustom.count"></el-table-column>
-          <el-table-column label="未付款店铺" prop="unpaid.count"></el-table-column>
+          <!-- <el-table-column label="未付款店铺" prop="unpaid.count"></el-table-column> -->
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button
@@ -91,7 +91,7 @@ export default {
       getAllUserApi
         .getAllUser()
         .then(res => {
-          // console.log(res.data);
+          console.log(res.data);
           for (const i of res.data) {
             if (i.email == "") {
               i.email = "暂无";

@@ -11,9 +11,25 @@
           </router-link>
         </div>
         <div class="head_vedio">
-          <video poster="../assets/img/black2.jpg" controls>
+          <!-- <video poster="../assets/img/black2.jpg" controls>
             <source src="../assets/img/garbage.mp4" type="video/mp4"/>
-          </video>
+          </video>-->
+          <div class="an1all">
+            <div class="animation1">
+              <img class="an1_img " src="../assets/img/logo2.png"/>
+            </div>
+            <div class="animation2"></div>
+            <div class="animation3"></div>
+          </div>
+          <div class="an2all">
+            <div class="animation4">
+              <!-- <img src="../assets/img/chart.png"/> -->
+            </div>
+            <div class="animation5">
+                <img class="an5_img imgAdd" src="../assets/img/chart.png"/>
+            </div>
+            <div class="animation6"></div>
+          </div>
         </div>
       </div>
       <div class="main_body1">

@@ -30,7 +30,7 @@ $AllWidth: 100%;
         font-weight: bold;
         font-size: 2.5em;
       }
-      
+
       p {
         font-size: 0.9em;
         width: 27em;
@@ -39,12 +39,102 @@ $AllWidth: 100%;
     }
     .head_vedio {
       width: 45%;
-      height: 350px;
+      height: 400px;
       background-color: #f7faff;
+      // background-color: pink;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
 
-      video {
-        height: 360px;
-        width: 100%;
+      @keyframes an1 {
+        0% {
+          transform: rotateZ(0deg);
+        }
+
+        100% {
+          transform: rotateZ(120deg);
+        }
+      }
+      .an1all {
+        display: flex;
+        align-items: flex-end;
+
+        .imgAdd {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .animation1 {
+          width: 120px;
+          height: 120px;
+          margin: 0 0 0 128px;
+          background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+          position: relative;
+
+          .an1_img {
+            width: 100px;
+
+            animation-name: an1;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+          }
+        }
+        .animation2 {
+          width: 100px;
+          height: 100px;
+          background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+        }
+        .animation3 {
+          width: 160px;
+          height: 160px;
+          background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        }
+      }
+
+      @keyframes an5 {
+        0% {
+          transform: translate(20%, 45%);
+        }
+
+        100% {
+          transform: translate(20%, 50%);
+        }
+      }
+      .an2all {
+        display: flex;
+        .animation4 {
+          width: 130px;
+          height: 130px;
+          background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+        }
+
+        .animation5 {
+          width: 160px;
+          height: 160px;
+          background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+          .an5_img {
+            width: 120px;
+            // transform: translate(20%, 50%);
+
+            animation-name: an5;
+            animation-duration: 1s; //规定完成动画所花费的时间，以秒或毫秒计
+            animation-timing-function: ease-in-out; //规定动画的速度曲线
+            animation-delay: 0; //规定在动画开始之前的延迟
+            animation-iteration-count: infinite; //规定动画应该播放的次数
+            animation-direction: alternate; //规定是否应该轮流反向播放动画。
+          }
+        }
+
+        .animation6 {
+          width: 100px;
+          height: 100px;
+          background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+        }
       }
     }
   }
