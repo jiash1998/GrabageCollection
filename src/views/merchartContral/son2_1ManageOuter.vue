@@ -41,7 +41,7 @@
           <div class="settlement">
             <div id="s1">
               <p id="settle_p1">历史结算(元)</p>
-              <p>500.00</p>
+              <span>{{historyPrice}}</span>
             </div>
             <div id="s2">
               <p id="settle_p1">历史未结算(元)</p>
@@ -49,7 +49,7 @@
             </div>
             <div id="s3">
               <p id="settle_p1">下月续费(元)</p>
-              <p>500.00</p>
+              <p>0.00</p>
             </div>
           </div>
           <div class="choose">
@@ -65,8 +65,7 @@
               <el-form-item label="状态:">
                 <el-select v-model="querySettle.isCus" @change="manageTrade" placeholder="选择状态">
                   <el-option label="全部" value="all"></el-option>
-                  <!-- <el-option label="待付款" value="no"></el-option> -->
-                  <el-option label="已付款" value="yes"></el-option>
+                  <!-- <el-option label="已付款" value="yes"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-form>
@@ -85,20 +84,23 @@
                     <el-form-item label="负责人">
                       <span>{{ props.row.header }}</span>
                     </el-form-item>
+                    <el-form-item label="回收频率">
+                      <span>{{ props.row.cycleDate }}</span>
+                    </el-form-item>
+                    <el-form-item label="回收时间">
+                      <span>{{ props.row.cycleTimes }}</span>
+                    </el-form-item>
                     <el-form-item label="支付方式">
                       <span>{{ props.row.payType }}</span>
                     </el-form-item>
                     <el-form-item label="订单编号">
                       <span>{{ props.row.tradeNo }}</span>
                     </el-form-item>
+                    <el-form-item label="付款金额">
+                      <span>{{props.row.money}}</span>
+                    </el-form-item>
                     <el-form-item label="交易时间">
                       <span>{{ props.row.tradeTime }}</span>
-                    </el-form-item>
-                    <el-form-item label="应付金额">
-                      <span>{{ props.row.money }}</span>
-                    </el-form-item>
-                    <el-form-item label="实付金额">
-                      <span>{{props.row.money}}</span>
                     </el-form-item>
                   </el-form>
                 </template>
@@ -136,8 +138,9 @@ export default {
       //全部帐单,未付款帐单，已付款帐单
       trade: [],
       tradeAll: [],
-      tradeNo: [],
       tradeYes: [],
+      //获取金额
+      historyPrice: 0,
       //按照时间帐单
       tradeTimes: [],
       querySettle: {
@@ -149,11 +152,12 @@ export default {
   },
   mounted() {
     this.getData();
+    console.log(this.tradeYes);
     // this.manageTrade();
   },
   created() {
-    console.log(localStorage.getItem("userName"));
-    console.log(localStorage.getItem("identity"));
+    // console.log(localStorage.getItem("userName"));
+    // console.log(localStorage.getItem("identity"));
   },
   methods: {
     async getData() {
@@ -165,7 +169,6 @@ export default {
             if (i.user == sessionStorage.getItem("userName")) {
               this.custom.push(i);
             }
-            //获取时间帐单
 
             //获取除未定制以外的订单
             if (
@@ -174,15 +177,7 @@ export default {
             ) {
               this.trade.push(i);
               console.log(this.trade);
-              
               this.tradeAll.push(i);
-            }
-            //获取未付款的订单
-            if (
-              i.user == sessionStorage.getItem("userName") &&
-              i.isCus == "待付款"
-            ) {
-              this.tradeNo.push(i);
             }
             //获取已付款的订单
             if (
@@ -192,12 +187,24 @@ export default {
               this.tradeYes.push(i);
             }
           }
-          console.log("len", this.custom.length);
+          this.getHistoryPrice(this.tradeYes);
           this.custom.length > 0 ? (this.skl = !this.skl) : this.skl;
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    //获取历史金额
+    getHistoryPrice(arr) {
+      let num = 0;
+      if (arr.length === 0) {
+        this.historyPrice.toFixed(2);
+      } else {
+        for (const i of arr) {
+          num += i.money;
+        }
+        this.historyPrice = parseFloat(num).toFixed(2);
+      }
     },
     //进入各店铺
     choose(index) {

@@ -38,10 +38,10 @@
               <i class="el-icon-warning-outline"></i>
               &nbsp;{{developStatus}}
             </p>
-            <p style="color:gray;">请及时完成店铺定制计划，提交后次日即可实行</p>
+            <p style="color:gray;" v-if="customCha">请及时完成店铺定制计划，提交后次日即可实行 🚨</p>
+            <p style="color:gray;" v-else>已定制完成，即日起可享受源分的优质服务 💕</p>
             <div id="btnDiv">
               <div id="priDiv" :class="{priStatus:isPri}">
-                <!-- <el-button type="primary" :class="{displayChange:isNone}" plain @click="pay">前往付款</el-button> -->
                 <el-button
                   type="primary"
                   :class="{displayChange:!isNone}"
@@ -422,29 +422,6 @@ export default {
     changeDiv() {
       this.change = !this.change;
     },
-    //待付款的第二次付款
-    pay() {
-      var data = { money: this.price, id: JSON.parse(sessionStorage.customObj).id };
-      console.log(data);
-
-      // payAliApi
-      //   .payAli(data)
-      //   .then(res => {
-      //     let routerData = this.$router.resolve({
-      //       path: "/Pay",
-      //       query: { htmls: res.data }
-      //     });
-      //     this.htmls = res.data;
-      //     window.open(routerData.href, "_ blank");
-      //     const div = document.createElement("div");
-      //     div.innerHTML = this.htmls;
-      //     document.body.appendChild(div);
-      //     document.forms[0].submit();
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-    },
     //修改定制
     submitForm(formName) {
       this.$refs[formName].validate(val => {
@@ -523,7 +500,7 @@ export default {
             });
         } else {
           this.$message({
-            message: "请填写定制方案",
+            message: "请完整填写定制方案",
             type: "error",
             duration: 1500
           });
