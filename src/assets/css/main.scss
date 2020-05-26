@@ -46,25 +46,31 @@ $AllWidth: 100%;
       justify-content: center;
       flex-wrap: wrap;
 
+      // .imgAdd {
+      //   position: absolute;
+      //   top: 50%;
+      //   left: 50%;
+      //   transform: translate(-50%, -50%);
+      // }
+
       @keyframes an1 {
-        0% {
-          transform: rotateZ(0deg);
+        0%,
+        25%,
+        50% {
+          transform: rotateY(0deg);
+        }
+
+        75% {
+          transform: rotateY(-90deg);
         }
 
         100% {
-          transform: rotateZ(120deg);
+          transform: rotateY(-180deg);
         }
       }
       .an1all {
         display: flex;
         align-items: flex-end;
-
-        .imgAdd {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
 
         .animation1 {
           width: 120px;
@@ -75,10 +81,12 @@ $AllWidth: 100%;
 
           .an1_img {
             width: 100px;
+            margin: 10px 10px 0;
 
             animation-name: an1;
-            animation-duration: 1s;
+            animation-duration: 1.5s;
             animation-timing-function: linear;
+            animation-delay: 1s;
             animation-iteration-count: infinite;
             animation-direction: alternate;
           }
@@ -92,6 +100,10 @@ $AllWidth: 100%;
           width: 160px;
           height: 160px;
           background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+
+          svg {
+            margin: 10px 15px 0;
+          }
         }
       }
 
@@ -106,6 +118,8 @@ $AllWidth: 100%;
       }
       .an2all {
         display: flex;
+        position: relative;
+
         .animation4 {
           width: 130px;
           height: 130px;
