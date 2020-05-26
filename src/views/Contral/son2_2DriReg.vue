@@ -1,13 +1,13 @@
 <template>
   <div id="son2_2DriReg">
     <div class="body">
-      <h4>驾驶员注册</h4>
+      <h4>回收员注册</h4>
       <div class="formDiv">
         <div class="introduce">
           <h5>须知</h5>
-          <p>1.驾驶员身份由管理员进行注册</p>
-          <p>2.工号由驾驶员姓名首字母缩写和入职年月日组成</p>
-          <p>3.确保手机号能及时联系驾驶员</p>
+          <p>1.回收员身份由管理员进行注册</p>
+          <p>2.工号由回收员姓名首字母缩写和入职年月日组成</p>
+          <p>3.确保手机号能及时联系回收员</p>
         </div>
         <el-card shadow="hover">
         <el-form

@@ -155,7 +155,7 @@ export default {
         {
           label: "宾馆"
         },
-          {
+        {
           label: "超市"
         },
         {
@@ -270,13 +270,24 @@ export default {
         insertGarbageBatchApi
           .insertGarbageBatch(postData)
           .then(res => {
-            if (res.status == 200 && res.statusText == "OK") {
+            console.log(res);
+
+            if (
+              res.data.code !== 200 &&
+              res.data.msg !== "添加失败,没有正确的店铺id"
+            ) {
               this.$message({
                 type: "success",
                 message: "插入店铺数据成功",
                 duration: 1500
               });
               this.getAllStoreGarbage();
+            } else {
+              this.$message({
+                type: "warning",
+                message: "暂无店铺可插入",
+                duration: 1500
+              });
             }
           })
           .catch(err => {
@@ -390,7 +401,9 @@ export default {
               header: i.header,
               phone: i.phone
             };
-            this.stageAllStore.push(obj);
+            if (i.isCus === "已付款") {
+              this.stageAllStore.push(obj);
+            }
           }
         })
         .catch(err => {

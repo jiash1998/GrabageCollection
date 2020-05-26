@@ -32,10 +32,10 @@
               <router-link tag="div" to="/ContralNew/Son2CarMap">回收路线</router-link>
             </el-menu-item>
             <el-menu-item index="2-2">
-              <router-link tag="div" to="/ContralNew/Son2_1Driver">驾驶员位置</router-link>
+              <router-link tag="div" to="/ContralNew/Son2_1Driver">回收员位置</router-link>
             </el-menu-item>
             <el-menu-item index="2-3">
-              <router-link tag="div" to="/ContralNew/Son2_2DriReg">驾驶员注册</router-link>
+              <router-link tag="div" to="/ContralNew/Son2_2DriReg">回收员注册</router-link>
             </el-menu-item>
           </el-submenu>
           <el-menu-item index="3">

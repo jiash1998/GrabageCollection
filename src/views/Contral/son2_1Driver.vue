@@ -12,7 +12,7 @@
           label-width="100px"
           :rules="rules1"
         >
-          <el-form-item label="驾驶员工号" prop="username">
+          <el-form-item label="回收员工号" prop="username">
             <el-input v-model="driver.username" placeholder="输入工号查询位置/通知"></el-input>
           </el-form-item>
           <el-form-item label>

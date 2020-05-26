@@ -4,7 +4,7 @@
       <div class="gap"></div>
       <div class="body">
         <div class="viewDiv">
-          <p id="p1">我的店铺</p>
+          <p id="p1">定制细则</p>
           <!-- 骨架屏 -->
           <div class="skeleton" v-if="skl == true">
             <skeleton-screen></skeleton-screen>
