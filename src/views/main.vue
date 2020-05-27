@@ -13,7 +13,7 @@
         <div class="head_vedio">
           <div class="an1all">
             <div class="animation1">
-              <img class="an1_img imgAdd" src="../assets/img/logo2.png" />
+              <img class="an1_img" src="../assets/img/logo2.png" />
             </div>
             <div class="animation2"></div>
             <div class="animation3">
@@ -104,7 +104,7 @@
               <!-- <img src="../assets/img/chart.png"/> -->
             </div>
             <div class="animation5">
-              <img class="an5_img imgAdd" src="../assets/img/chart.png" />
+              <img class="an5_img" src="../assets/img/chart.png" />
             </div>
             <div class="animation6"></div>
           </div>
