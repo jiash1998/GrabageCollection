@@ -9,7 +9,6 @@
           <el-menu-item index="3" v-if="noticeSelf">个人通知</el-menu-item>
         </el-menu>
       </div>
-
       <div class="notice_content">
         <div class="scroll">
           <div class="left" ref="leftDiv">
@@ -24,7 +23,17 @@
               </div>
             </div>
             <div v-else>
-              <div class="content" v-for="(item,index) in noticeList" :key="index">
+              <!-- 没消息时展示 -->
+              <!-- <div class="conNull" v-if="!selfNull">
+                <div class="contain">
+                  <img src="../assets/img/info.png" />
+                  <p>暂无消息</p>
+                </div>
+              </div>-->
+              <div v-if="!selfNull">
+                <public-info-null></public-info-null>
+              </div>
+              <div class="content" v-for="(item,index) in noticeList" :key="index" v-else>
                 <p id="p1">{{item.title}}</p>
                 <p id="p2">{{item.content}}</p>
                 <el-tag type="primary">个人通知</el-tag>
@@ -45,13 +54,15 @@
 
 <script>
 import PublicFood from "../components/publicFood.vue";
+import PublicInfoNull from "../components/publicInfoNull.vue";
 import getByPNoticeUsernameApi from "../api/postRequest.js";
 //api
 import getNoticeApi from "../api/getRequest.js";
 export default {
   name: "notice",
   components: {
-    PublicFood
+    PublicFood,
+    PublicInfoNull
   },
   data() {
     return {
@@ -63,6 +74,10 @@ export default {
       selfList: [],
       //是否展示个人通知
       noticeSelf: false,
+      //无信息时，展示图片
+      emergencyNull: false,
+      storeNull: false,
+      selfNull: false,
       userName: "",
       index: "",
       type: 0
@@ -104,6 +119,15 @@ export default {
       }
       console.log(this.noticeList);
     },
+    //判断信息是否为空
+    infoIsNull(arr, bool) {
+      if (Array.isArray(arr)) {
+        if (arr.length !== 0) {
+          return !bool;
+        }
+      }
+      return bool;
+    },
     getInfo() {
       var _this = this;
       getNoticeApi
@@ -121,9 +145,16 @@ export default {
             } else if (i.type == "商户通知") {
               this.storeList.push(i);
             } else {
-              console.log("不处理");
+              // console.log("不处理");
             }
           }
+          this.emergencyNull = this.infoIsNull(
+            this.emergencyList,
+            this.emergencyNull
+          );
+          this.storeNull = this.infoIsNull(this.storeList, this.storeNull);
+          // console.log(this.emergencyList);
+          // console.log(this.storeList);
         })
         .catch(err => {
           console.log(err);
@@ -132,12 +163,12 @@ export default {
     //获取个人通知
     getSelfNotice() {
       var data = { username: this.userName };
-      console.log(data);
+      // console.log(data);
 
       getByPNoticeUsernameApi
         .getByPNoticeUsername(data)
         .then(res => {
-          // console.log(res.data);
+          this.selfNull = this.infoIsNull(res.data, this.selfNull);
           this.selfList = res.data;
         })
         .catch(err => {

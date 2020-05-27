@@ -101,7 +101,7 @@ export default {
       getUserByUsernameApi
         .getUserByUsername(data)
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           this.user = res.data;
           this.userArr = res.data;
         })
