@@ -49,9 +49,7 @@
                 >提交审核</el-button>
               </div>
               <div id="detailDiv" :class="{priStatus:!isPri}">
-                <router-link to="/Son5GarDetail">
-                  <el-button type="success" plain>回收详情</el-button>
-                </router-link>
+                <el-button type="success" @click="toDetail" plain>回收详情</el-button>
               </div>
               <el-button @click="deleteStore">删除</el-button>
             </div>
@@ -362,6 +360,14 @@ export default {
     }
   },
   methods: {
+    //去详情页面
+    toDetail() {
+      let data = JSON.parse(sessionStorage.customObj);
+      this.$router.push({
+        path: "/Son5GarDetail",
+        query: { id: data.id, type: data.type }
+      });
+    },
     //获取对应商铺信息
     getInfo() {
       console.log(JSON.parse(sessionStorage.customObj));

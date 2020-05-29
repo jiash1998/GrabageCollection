@@ -97,6 +97,8 @@ import getAllStoreGarbageApi from "../../api/getRequest";
 import exPortAllApi from "../../api/getRequest";
 import insertGarbageBatchApi from "../../api/postRequest";
 import insertGarbageApi from "../../api/postRequest";
+import dealWithExcess from "../../util/dealExcess";
+
 
 export default {
   name: "son9Enter",
@@ -300,19 +302,19 @@ export default {
     },
     //店铺垃圾量录入
     insert(form) {
-      // this.$refs[form].validate(val =>{
-      //   if(val){
-
-      //   }
-      // })
       this.stage = [];
+      dealWithExcess.dealArr(this.storeForm.data);
       for (const i of this.storeForm.data) {
         if (i.tag === "未录" && i.production) {
           this.stage.push(i);
         }
       }
+      // console.log(this.storeForm.data);
+      
       var data = this.stage;
       var productions = [];
+      // console.log(data);
+      
       for (const i of data) {
         let obj = {
           customId: i.customId,
@@ -325,31 +327,31 @@ export default {
       var postData = {
         productions: productions
       };
-      insertGarbageBatchApi
-        .insertGarbageBatch(postData)
-        .then(res => {
-          console.log(res.data);
-          if (
-            res.data.code == 400 &&
-            res.data.msg == "添加失败,没有正确的店铺id"
-          ) {
-            this.$message({
-              type: "warning",
-              message: "无需录入",
-              duration: 1600
-            });
-          } else {
-            this.getAllStoreGarbage();
-            this.$message({
-              type: "success",
-              message: "录入店铺数据成功",
-              duration: 1500
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // insertGarbageBatchApi
+      //   .insertGarbageBatch(postData)
+      //   .then(res => {
+      //     console.log(res.data);
+      //     if (
+      //       res.data.code == 400 &&
+      //       res.data.msg == "添加失败,没有正确的店铺id"
+      //     ) {
+      //       this.$message({
+      //         type: "warning",
+      //         message: "无需录入",
+      //         duration: 1600
+      //       });
+      //     } else {
+      //       this.getAllStoreGarbage();
+      //       this.$message({
+      //         type: "success",
+      //         message: "录入店铺数据成功",
+      //         duration: 1500
+      //       });
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     },
     //表格筛选
     filterTag(value, row) {

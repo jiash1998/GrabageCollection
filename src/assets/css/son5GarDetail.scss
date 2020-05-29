@@ -11,12 +11,46 @@
 
     .content {
       width: 66%;
-      height: 800px;
+      min-height: 400px;
+      padding: 0 0 30px;
       border-radius: 3px;
       margin: 50px 17% 50px;
       background-color: #fff;
 
       box-shadow: 0 3px 8px 5px gainsboro;
+
+      .con_title {
+        // background-color: pink;
+
+        h3 {
+          text-align: center;
+          padding: 10px 0;
+        }
+      }
+      .con_body {
+        // background-color: violet;
+        padding: 0px 10px;
+        p {
+          font-size: 0.9em;
+          color: gray;
+        }
+
+        .selYear {
+          padding: 0 0 10px 0;
+
+          .el-radio-group {
+            .el-radio {
+              margin: 0 10px 0px 0;
+            }
+          }
+        }
+      }
+
+      .con_foot {
+        .el-button {
+          margin: 30px 0px 0px 10px;
+        }
+      }
     }
   }
 }

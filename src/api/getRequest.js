@@ -8,12 +8,21 @@ var getString = (urlSelf, methodSelf) => {
   };
 };
 
+//get携带参数
+var getString_P = (urlSelf, data, methodSelf) => {
+  return {
+    url: urlSelf,
+    params: { customId: data },
+    method: methodSelf,
+  };
+};
+
 //excel 请求头
 var getStringExcel = (urlSelf, methodSelf) => {
   return {
     url: urlSelf,
     headers: {
-      "Content-Type": "application/json; application/octet-stream"
+      "Content-Type": "application/json; application/octet-stream",
     },
     responseType: "arraybuffer",
     method: methodSelf,
@@ -57,6 +66,10 @@ export default {
   //获取店铺垃圾
   getAllStoreGarbage() {
     return interceptor(getString("/production/getAll", methodAll));
+  },
+  //根据id，获取店铺垃
+  getByCustomId(id) {
+    return interceptor(getString_P("/production/getByCustomId", id, methodAll));
   },
   //excel 导出接口
   //垃圾表
