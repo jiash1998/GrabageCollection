@@ -48,6 +48,11 @@
                   @click="submit('garbageCycle')"
                 >提交审核</el-button>
               </div>
+              <div id="detailDiv" :class="{priStatus:!isPri}">
+                <router-link to="/Son5GarDetail">
+                  <el-button type="success" plain>回收详情</el-button>
+                </router-link>
+              </div>
               <el-button @click="deleteStore">删除</el-button>
             </div>
           </div>

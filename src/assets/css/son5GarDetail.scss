@@ -1,0 +1,22 @@
+#gardetail {
+  min-width: 1200px;
+  min-height: 100vh;
+  margin-top: 55px;
+
+  background-color: #eaeaea;
+
+  .body {
+    background-color: #eaeaea;
+    overflow: hidden;
+
+    .content {
+      width: 66%;
+      height: 800px;
+      border-radius: 3px;
+      margin: 50px 17% 50px;
+      background-color: #fff;
+
+      box-shadow: 0 3px 8px 5px gainsboro;
+    }
+  }
+}

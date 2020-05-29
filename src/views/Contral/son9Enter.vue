@@ -50,6 +50,9 @@
               <el-table-column label="年份" width="100px">
                 <template slot-scope="scope">{{scope.row.yearNum}}</template>
               </el-table-column>
+              <el-table-column label="参考值" width="100px">
+                <template slot-scope="scope">{{scope.row.reference}}</template>
+              </el-table-column>
               <el-table-column label="垃圾量(kg)" width="100px">
                 <template slot-scope="scope">
                   <el-form-item style="margin:0;" v-if="scope.row.tag == '未录'">
@@ -422,8 +425,12 @@ export default {
             } else {
               i.tag = "未录";
             }
+
+            if (i.reference === null) {
+              i.reference = "暂无";
+            }
           }
-          // console.log(this.storeGar);
+          console.log(this.storeGar);
           this.start();
         })
         .catch(err => {
