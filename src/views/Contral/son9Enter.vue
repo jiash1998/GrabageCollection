@@ -99,7 +99,6 @@ import insertGarbageBatchApi from "../../api/postRequest";
 import insertGarbageApi from "../../api/postRequest";
 import dealWithExcess from "../../util/dealExcess";
 
-
 export default {
   name: "son9Enter",
   data() {
@@ -303,55 +302,68 @@ export default {
     //店铺垃圾量录入
     insert(form) {
       this.stage = [];
-      dealWithExcess.dealArr(this.storeForm.data);
+      // console.log(this.storeForm.data);
+      //计算超出量
       for (const i of this.storeForm.data) {
-        if (i.tag === "未录" && i.production) {
+        if (i.tag === "未录" && i.reference != null && i.production != null) {
+          // this.stage.push(i);
+          let item = dealWithExcess.calcAll(i);
+          i.excessGar = item.excessGar;
+          i.excessMoney = item.excessMoney;
           this.stage.push(i);
         }
       }
-      // console.log(this.storeForm.data);
-      
+
       var data = this.stage;
       var productions = [];
       // console.log(data);
-      
+
       for (const i of data) {
         let obj = {
           customId: i.customId,
+          excess: i.excessGar,
+          money: i.excessMoney,
           monthNum: i.monthNum,
           production: i.production,
           yearNum: i.yearNum
         };
         productions.push(obj);
       }
+      // console.log(productions);
+      //检查页面是否有要录入的内容
       var postData = {
         productions: productions
       };
-      // insertGarbageBatchApi
-      //   .insertGarbageBatch(postData)
-      //   .then(res => {
-      //     console.log(res.data);
-      //     if (
-      //       res.data.code == 400 &&
-      //       res.data.msg == "添加失败,没有正确的店铺id"
-      //     ) {
-      //       this.$message({
-      //         type: "warning",
-      //         message: "无需录入",
-      //         duration: 1600
-      //       });
-      //     } else {
-      //       this.getAllStoreGarbage();
-      //       this.$message({
-      //         type: "success",
-      //         message: "录入店铺数据成功",
-      //         duration: 1500
-      //       });
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+      if (productions.length > 0) {
+        insertGarbageBatchApi
+          .insertGarbageBatch(postData)
+          .then(res => {
+            console.log(res.data);
+            if (res.data.code == 400) {
+              this.$message({
+                type: "error",
+                message: "录入异常",
+                duration: 1600
+              });
+            } else {
+              this.getAllStoreGarbage();
+              this.$message({
+                type: "success",
+                message: "录入店铺数据成功",
+                duration: 1500
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        this.$message({
+          type: "warning",
+          message: "无可录入内容",
+          duration: 1500
+        });
+      }
     },
     //表格筛选
     filterTag(value, row) {

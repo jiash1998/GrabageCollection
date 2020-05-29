@@ -20,7 +20,14 @@
             <el-table-column label="服务内垃圾量(Kg)" prop="type"></el-table-column>
             <el-table-column label="实际垃圾量(Kg)" prop="production"></el-table-column>
             <el-table-column label="超出垃圾量(Kg)" prop="excess"></el-table-column>
-            <el-table-column label="支付"></el-table-column>
+            <el-table-column label="超出金额" prop="money"></el-table-column>
+            <el-table-column label="前往支付">
+              <template slot-scope="scope">
+                <el-tag
+                  :type="scope.row.payState == '前往支付' ? 'error':'success'"
+                >{{scope.row.payState}}</el-tag>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
         <div class="con_foot">
@@ -73,7 +80,8 @@ export default {
           console.log(res.data);
           this.garbageAll = res.data;
           for (const i of res.data) {
-            if (i.yearNum == 2019) {
+            if (i.yearNum == 2019 && i.payState != null) {
+              i.payState = "前往支付";
               this.garbageYear.push(i);
             }
           }

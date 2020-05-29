@@ -1,7 +1,7 @@
-let falseArr = [];
-
-let excessGar = 0;
-let excessMoney = 0;
+let excessObj = {
+  excessGar: 0,
+  excessMoney: 0,
+};
 
 let typeBase = {
   中小型饭店: { kg: 300, price: 1 },
@@ -17,38 +17,23 @@ let typeBase = {
   其他类型: { kg: 200, price: 0.6 },
 };
 
-//计算超出量和价钱
-function calcAll(item) {
-  //基础量
-  let defMoney = typeBase[item.type].price;
-  let defGar = typeBase[item.type].kg;
-  //參考量
-  let GarPro = item.reference;
-
-  //垃圾超出量和价格
-  if (GarPro >= defGar) {
-    excessGar = GarPro - defGar;
-    excessMoney = (GarPro - defGar) * defMoney;
-  } else {
-    excessGar = 0;
-  }
-
-  console.log(excessGar, excessMoney);
-}
-
 export default {
-  dealArr(arr) {
-    // console.log(arr);
-    for (const i of arr) {
-      if (i.tag === "未录") {
-        falseArr.push(i);
-      }
+  calcAll(item) {
+    //基础量
+    let defMoney = typeBase[item.type].price;
+    let defGar = typeBase[item.type].kg;
+    //參考量
+    let GarPro = item.reference;
+
+    //垃圾超出量和价格
+    if (GarPro >= defGar) {
+      excessObj.excessGar = GarPro - defGar;
+      excessObj.excessMoney = ((GarPro - defGar) * defMoney).toFixed(2);
+    } else {
+      excessObj.excessGar = 0;
+      excessObj.excessMoney = 0;
     }
-    // console.log(falseArr);
-    if (falseArr.length > 0) {
-      for (const i of falseArr) {
-        calcAll(i);
-      }
-    }
+    //   console.log(excessObj);
+    return excessObj;
   },
 };
