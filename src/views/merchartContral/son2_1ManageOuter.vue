@@ -153,6 +153,8 @@ export default {
   mounted() {
     this.getData();
     console.log(this.tradeYes);
+    sessionStorage.setItem("index", "2");
+    sessionStorage.removeItem("index");
     // this.manageTrade();
   },
   created() {
@@ -197,13 +199,18 @@ export default {
     //获取历史金额
     getHistoryPrice(arr) {
       let num = 0;
+      console.log(arr);
+
       if (arr.length === 0) {
         this.historyPrice.toFixed(2);
       } else {
         for (const i of arr) {
-          num += i.money;
+          num += parseInt(i.money);
         }
+        console.log(num);
+        
         this.historyPrice = parseFloat(num).toFixed(2);
+        console.log(this.historyPrice);
       }
     },
     //进入各店铺

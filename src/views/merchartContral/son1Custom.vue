@@ -285,6 +285,7 @@ export default {
       this.$refs.upload.submit();
     },
     submitForm(formName) {
+      this.$router.push("/merchartContral/Son2Manager");
       this.$refs[formName].validate(val => {
         if (val && this.customUrl) {
           this.custom.address = this.address1;
@@ -294,13 +295,13 @@ export default {
           console.log(data);
           //提交后台
           addCustomApi.addCustom(data).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             this.$message({
               message: "商铺录入成功,可继续定制",
               type: "success",
               duration: 1800
             });
-            this.$router.push("/merchartContral/Son2Manager");
+            this.$refs[formName].resetFields();
           });
         } else {
           this.$message({

@@ -142,9 +142,15 @@ export default {
       postStringJson("/delCustomBySocialCode", methodsAll, data, headersJson)
     );
   },
-  //支付宝付款
+  //支付宝付款店铺
   payAli(data) {
     return interceptor(postString("/payAli", methodsAll, data, headersAll));
+  },
+  //支付宝付款超出
+  payForExcess(data) {
+    return interceptor(
+      postString("/payForExcess", methodsAll, data, headersAll)
+    );
   },
   //修改定制
   updateCustomById(id) {
@@ -157,5 +163,5 @@ export default {
     return interceptor(
       postString("/addFeedback", methodsAll, data, headersAll)
     );
-  }
+  },
 };

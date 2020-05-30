@@ -81,7 +81,13 @@
           </el-form>
         </el-card>
         <div class="insertOpr">
-          <el-button type="success" :disabled="insertBtn" size @click="insert(storeForm)" plain>录入数据</el-button>
+          <el-button
+            type="success"
+            :disabled="insertBtn"
+            size
+            @click="insertBef(storeForm)"
+            plain
+          >录入数据</el-button>
           <el-button type="primary" @click="test">
             <i class="el-icon-download"></i>
           </el-button>
@@ -238,11 +244,14 @@ export default {
           let obj = {
             customId: i.customId,
             monthNum: radioGroup.month,
+            excess: null,
+            money: null,
             production: "",
             yearNum: radioGroup.years
           };
           arr.push(obj);
         }
+        // console.log(arr);
       }
       //按选择类型插入
       else {
@@ -251,6 +260,8 @@ export default {
             let obj = {
               customId: i.customId,
               monthNum: radioGroup.month,
+              excess: null,
+              money: null,
               production: "",
               yearNum: radioGroup.years
             };
@@ -271,15 +282,14 @@ export default {
         var postData = {
           productions: arr
         };
+        console.log(postData);
+
         insertGarbageBatchApi
           .insertGarbageBatch(postData)
           .then(res => {
             console.log(res);
 
-            if (
-              res.data.code !== 200 &&
-              res.data.msg !== "添加失败,没有正确的店铺id"
-            ) {
+            if (res.data.code === 200) {
               this.$message({
                 type: "success",
                 message: "插入店铺数据成功",
@@ -299,12 +309,11 @@ export default {
           });
       }
     },
-    //店铺垃圾量录入
-    insert(form) {
+    //录入前处理
+    insertBef(form) {
       this.stage = [];
-      // console.log(this.storeForm.data);
       //计算超出量
-      for (const i of this.storeForm.data) {
+      for (const i of form.data) {
         if (i.tag === "未录" && i.reference != null && i.production != null) {
           // this.stage.push(i);
           let item = dealWithExcess.calcAll(i);
@@ -313,8 +322,43 @@ export default {
           this.stage.push(i);
         }
       }
+      let res = this.stage.every(item => {
+        return item.reference == "暂无";
+      });
+      if (res) {
+        this.$message({
+          type: "error",
+          message: "暂无参考量，无法录入",
+          duration: 1600
+        });
+        return;
+      } else {
+        this.insert(this.stage);
+      }
+    },
+    //店铺垃圾量录入
+    insert(val) {
+      // this.stage = [];
+      // console.log(this.storeForm.data);
+      //计算超出量
+      // for (const i of form.data) {
+      //   if (i.tag === "未录" && i.reference != null && i.production != null) {
+      //     // this.stage.push(i);
+      //     let item = dealWithExcess.calcAll(i);
+      //     i.excessGar = item.excessGar;
+      //     i.excessMoney = item.excessMoney;
+      //     this.stage.push(i);
+      //   }
+      //   if (i.reference == null) {
+      //     this.$message({
+      //       type: "error",
+      //       message: "暂无参考量，无法录入",
+      //       duration: 1600
+      //     });
+      //   }
+      // }
 
-      var data = this.stage;
+      var data = val;
       var productions = [];
       // console.log(data);
 

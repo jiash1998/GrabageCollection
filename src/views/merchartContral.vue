@@ -30,7 +30,8 @@ export default {
     };
   },
   mounted() {
-    // this.setIndex = "1";
+    // this.setIndex = sessionStorage.getItem("index");
+    // console.log(this.setIndex,"index");
   },
   methods: {
     getIndex(key) {
