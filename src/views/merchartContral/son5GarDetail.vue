@@ -9,7 +9,8 @@
           <div class="explain">
             <p>解释 🌠</p>
             <div class="exp_div">
-              <p>1. 服务内回收量会根据店铺类型和服务费的不同而有所差别。
+              <p>
+                1. 服务内回收量会根据店铺类型和服务费的不同而有所差别。
                 <router-link to="/Son4ServiceDet">详情点击查看↩</router-link>
               </p>
               <p>2. 店铺每月的回收情况会在次月月初展示，如果有需要支付的超出金额，请及时支付。</p>
@@ -114,13 +115,7 @@ export default {
       this.garbageYear = [];
       for (const i of this.garbageAll) {
         if (i.yearNum == val) {
-          i.defGar = this.storeDefGar;
-          if (i.payState === null) {
-            i.payState = "goPay";
-            this.garbageYear.push(i);
-          } else {
-            this.garbageYear.push(i);
-          }
+          this.garbageYear.push(i);
         }
       }
       // console.log(this.garbageYear);
@@ -131,26 +126,36 @@ export default {
       getGarbageByIdApi
         .getByCustomId(id)
         .then(res => {
-          this.garbageAll = res.data;
+
           for (const i of res.data) {
-            //选出当年
-            if (i.yearNum == this.years) {
-              i.defGar = this.storeDefGar;
-              //选出没超出的
-              if (i.excess == 0 && i.money == 0) {
-                i.payState = "dontNeed";
-              }
-              //选出没支付
-              if (i.payState === null) {
-                i.payState = "goPay";
-                this.garbageYear.push(i);
-              } else {
-                this.garbageYear.push(i);
-              }
+            i.defGar = this.storeDefGar;
+            //选出没超出的 无需支付的
+            if (i.excess == 0 && i.money == 0) {
+              i.payState = "dontNeed";
+            }
+            if (i.payState == "无需支付") {
+              i.payState = "dontNeed";
+              i.excess = "暂无";
+              i.money = "暂无";
+            }
+            if (i.production == null) {
+              i.production = "暂无";
+            }
+            //选出没支付
+            if (i.payState === null) {
+              i.payState = "goPay";
+              this.garbageAll.push(i);
+            } else {
+              this.garbageAll.push(i);
             }
           }
           // console.log(this.garbageAll);
-          // console.log(this.garbageYear);
+          //选出当年
+          for (const i of this.garbageAll) {
+            if (i.yearNum == this.years) {
+              this.garbageYear.push(i);
+            }
+          }
         })
         .catch(err => {
           console.log(err);
