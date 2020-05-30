@@ -14,7 +14,7 @@
                 <router-link to="/Son4ServiceDet">详情点击查看↩</router-link>
               </p>
               <p>2. 店铺每月的回收情况会在次月月初展示，如果有需要支付的超出金额，请及时支付。</p>
-              <p>3. 如果对回收情况有异议，可以致电联系人：王先生，电话：17845042312.</p>
+              <p>3. 如果对回收情况有异议，可以致电联系人：王先生，电话：17845042312。</p>
             </div>
           </div>
           <div class="selYear">
@@ -71,7 +71,7 @@ export default {
       storeType: "",
       storeDefGar: 0,
       //年份对应表格
-      years: "2020",
+      years: "2019",
       garbageAll: [],
       garbageYear: []
     };
@@ -80,7 +80,7 @@ export default {
     this.storeId = this.$route.query.id;
     this.storeType = this.$route.query.type;
     this.years = new Date().getFullYear() + "";
-    this.getAllGarbage(this.storeId);
+    this.getAllGarbage(this.storeId, this.years);
     this.storeDefGar = defaultGar.backGar(this.storeType);
   },
   methods: {
@@ -113,16 +113,12 @@ export default {
     //获取单选按钮
     select(val) {
       this.garbageYear = [];
-      for (const i of this.garbageAll) {
-        if (i.yearNum == val) {
-          this.garbageYear.push(i);
-        }
-      }
-      // console.log(this.garbageYear);
+      this.garbageAll = [];
+      this.getAllGarbage(this.storeId, val);
     },
 
     //获取店铺相关全部回收数据
-    getAllGarbage(id) {
+    getAllGarbage(id, val) {
       getGarbageByIdApi
         .getByCustomId(id)
         .then(res => {
@@ -142,17 +138,17 @@ export default {
               i.production = "暂无";
             }
             //选出没支付
-            if (i.payState === null) {
+            if (i.payState === null || i.payState == "待支付") {
               i.payState = "goPay";
               this.garbageAll.push(i);
             } else {
               this.garbageAll.push(i);
             }
           }
-          // console.log(this.garbageAll);
+          console.log(this.garbageAll, val);
           //选出当年
           for (const i of this.garbageAll) {
-            if (i.yearNum == this.years) {
+            if (i.yearNum == val) {
               this.garbageYear.push(i);
             }
           }
