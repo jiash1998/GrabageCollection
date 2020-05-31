@@ -6,7 +6,7 @@
         <p>尊敬的用户，您已经支付成功。</p>
         <p>可点击按钮返回定制页面。</p>
         <div>
-          <router-link tag="div" to="/merchartContral/Son2Manager/Son2Test">
+          <router-link tag="div" to="/merchartContral/Son2Manager/Son2_1ManageOuter">
             <el-button type="primary" plain size="small">返回</el-button>
           </router-link>
         </div>
